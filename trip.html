@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Viaggio di nozze — Charlotte & Gianluca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{--lavender:#7a78b3;--lavender-600:#6a68a3;--olive:#8a9a5b;--beige:#f7f4ef;--ink:#242424;--muted:#6b6b6b}
+*{box-sizing:border-box}html,body{height:100%}
+body{margin:0;font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;color:var(--ink);background:var(--beige);
+  background-image:radial-gradient(1200px 700px at 100% -10%, rgba(122,120,179,.12), transparent 60%),
+                   radial-gradient(900px 500px at -10% 10%, rgba(183,181,217,.18), transparent 55%),
+                   radial-gradient(700px 400px at 60% 110%, rgba(138,154,91,.08), transparent 60%);background-attachment:fixed}
+header{width:100%;position:sticky;top:0;z-index:20;backdrop-filter:blur(6px);background:rgba(247,244,239,.7);border-bottom:1px solid rgba(0,0,0,.05)}
+.nav{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:baseline;gap:12px}
+.brand .names{font-family:"Great Vibes","Brush Script MT",cursive;font-size:30px;letter-spacing:.3px;color:var(--lavender-600)}
+.brand .dot{color:rgba(0,0,0,.35)}
+nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}
+nav a{text-decoration:none;color:var(--ink);opacity:.85} nav a:hover{opacity:1;border-bottom:1px solid var(--lavender-600)}
+.lang{display:flex;gap:8px;align-items:center}
+.lang button{border:1px solid rgba(0,0,0,.08);background:white;border-radius:10px;padding:6px 10px;font-size:14px;cursor:pointer}
+.hamburger{display:none;border:1px solid rgba(0,0,0,.1);background:white;border-radius:10px;padding:8px 10px;cursor:pointer}
+.hamburger span{display:block;width:20px;height:2px;background:#444;margin:4px 0}
+.mobile-menu{display:none;position:fixed;top:60px;right:14px;background:rgba(255,255,255,.98);border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.12);padding:14px;z-index:40}
+.mobile-menu a{display:block;padding:10px 12px;border-radius:10px;color:var(--ink);text-decoration:none}
+.mobile-menu a:hover{background:rgba(106,104,163,.08)}
+.section{max-width:900px;margin:0 auto;padding:120px 20px 60px}
+.section h2{font-weight:600;letter-spacing:.5px;color:var(--lavender-600);margin-bottom:10px}
+.card{background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.06);border-radius:18px;padding:18px;box-shadow:0 8px 30px rgba(106,104,163,.06)}
+footer{color:var(--muted);text-align:center;padding:60px 20px}
+@media (max-width:700px){nav ul{display:none}.hamburger{display:block}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand">
+      <button id="hambBtn" class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <div class="names">Charlotte &amp; Gianluca</div><div class="dot">·</div><div class="date">20 Giugno 2026</div>
+    </div>
+    <nav><ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="story.html">La nostra storia</a></li>
+      <li><a href="stay.html">Dove alloggiare</a></li>
+      <li><a href="trip.html">Viaggio di nozze</a></li>
+      <li><a href="rsvp.html">RSVP</a></li>
+    </ul></nav>
+    <div class="lang"><button>🇮🇹 IT</button><button>🇬🇧 EN</button><button>🇫🇷 FR</button></div>
+  </div>
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="home.html">Home</a><a href="story.html">La nostra storia</a><a href="stay.html">Dove alloggiare</a><a href="trip.html">Viaggio di nozze</a><a href="rsvp.html">RSVP</a>
+  </div>
+</header>
+
+<main class="section">
+  <h2>Viaggio di nozze</h2>
+  <div class="card">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae suscipit lectus. Phasellus a bibendum arcu. Integer pretium dapibus libero, quis tempor augue gravida ac. Dettagli in arrivo ❤︎</p>
+  </div>
+</main>
+
+<footer><small>© Charlotte &amp; Gianluca — 2026</small></footer>
+<script>
+const btn=document.getElementById('hambBtn'), menu=document.getElementById('mobileMenu');
+if(btn&&menu){btn.addEventListener('click',()=>{menu.style.display=(menu.style.display==='block')?'none':'block';});
+document.addEventListener('click',e=>{if(!menu.contains(e.target)&&e.target!==btn) menu.style.display='none';});}
+</script>
+</body>
+</html>
