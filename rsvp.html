@@ -71,97 +71,10 @@ footer{color:var(--muted);text-align:center;padding:60px 20px}
   <h2 id="rsvpTitle">RSVP</h2>
   <p id="rsvpIntro" style="color:var(--muted);margin-bottom:12px;">Conferma la tua presenza. Il modulo è personalizzato per te.</p>
 
-  <!-- ✅ Netlify Forms -->
-  <form name="rsvp" method="POST" data-netlify="true" netlify-honeypot="bot-field"
-        action="/success.html" class="card" id="rsvpForm">
-    <input type="hidden" name="form-name" value="rsvp" />
-    <input type="hidden" name="invite_flags" id="inviteFlags" value="wedding" />
-    <input type="hidden" name="guest_code" id="guestCode" value="" />
-    <input type="hidden" name="lang" id="langField" value="it" />
-    <input type="hidden" name="page" value="/rsvp.html" />
-    <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+// ===== google form =====
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSch-IIVOjsbcQOGh7nsRIPOQoUoEgjWxc73-QmQC9ZA4gvO7A/viewform?embedded=true" width="640" height="926" frameborder="0" marginheight="0" marginwidth="0">Caricamento…</iframe>
 
-    <div class="grid-2">
-      <p><label for="name"><span data-i18n="rsvp.name">Nome e cognome</span><br>
-        <input id="name" name="name" type="text" required
-               style="width:100%;padding:10px;border-radius:12px;border:1px solid rgba(0,0,0,.15);background:white;">
-      </label></p>
-      <p><label for="email"><span data-i18n="rsvp.email">Email</span><br>
-        <input id="email" name="email" type="email" required
-               style="width:100%;padding:10px;border-radius:12px;border:1px solid rgba(0,0,0,.15);background:white;">
-      </label></p>
-    </div>
-
-    <p id="attendingLabel" style="margin-top:6px;font-weight:600;">Parteciperai al matrimonio di Charlotte &amp; Gianluca?</p>
-    <div class="grid-2" style="margin-bottom:8px">
-      <label for="yes" class="card" style="display:flex;align-items:center;gap:10px;">
-        <input id="yes" type="radio" name="attending" value="yes" required> <span id="yesText">Sì, con gioia</span>
-      </label>
-      <label for="no" class="card" style="display:flex;align-items:center;gap:10px;">
-        <input id="no" type="radio" name="attending" value="no"> <span id="noText">Mi dispiace, non potrò</span>
-      </label>
-    </div>
-
-    <div id="attendingBlock" style="display:none">
-      <div id="rowDinner" class="card" style="margin-top:12px;">
-        <label for="dinner" style="display:flex;align-items:center;gap:10px;">
-          <input id="dinner" type="checkbox" name="welcome_dinner" value="yes">
-          <span id="dinnerText">Parteciperai alla cena di benvenuto (venerdì sera)?</span>
-        </label>
-      </div>
-
-      <div id="rowBrunch" class="card" style="margin-top:12px;">
-        <label for="brunch" style="display:flex;align-items:center;gap:10px;">
-          <input id="brunch" type="checkbox" name="sunday_brunch" value="yes">
-          <span id="brunchText">Parteciperai al brunch della domenica?</span>
-        </label>
-      </div>
-
-      <div class="grid-2" style="margin-top:12px;">
-        <p><label for="guests"><span id="guestsText">Numero totale di persone (incluso te)</span><br>
-          <input id="guests" name="guests" type="number" min="1" max="10" value="1"
-                 style="width:100%;padding:10px;border-radius:12px;border:1px solid rgba(0,0,0,.15);background:white;">
-        </label></p>
-
-        <p><label for="dietary"><span id="dietaryText">Allergie o esigenze alimentari</span><br>
-          <input id="dietary" name="dietary" type="text" placeholder="es. vegetariano, senza glutine"
-                 style="width:100%;padding:10px;border-radius:12px;border:1px solid rgba(0,0,0,.15);background:white;">
-        </label></p>
-      </div>
-
-      <div id="guestNamesWrap" class="card" style="display:none; margin-top:12px;">
-        <strong id="guestNamesTitle">Nome degli ospiti</strong>
-        <div id="guestNames" style="margin-top:8px; display:grid; gap:8px;"></div>
-      </div>
-    </div>
-
-    <p style="margin-top:12px;">
-      <label for="message"><span id="messageText">Messaggio (opzionale)</span><br>
-        <textarea id="message" name="message" rows="4"
-                  style="width:100%;padding:10px;border-radius:12px;border:1px solid rgba(0,0,0,.15);background:white;"></textarea>
-      </label>
-    </p>
-
-    <!-- Mirroring: prima di inviare, copiamo i valori (radio/checkbox) qui per sicurezza email -->
-    <div style="display:none" aria-hidden="true">
-      <input type="hidden" name="attending_copy" id="attending_copy">
-      <input type="hidden" name="welcome_dinner_copy" id="welcome_dinner_copy">
-      <input type="hidden" name="sunday_brunch_copy" id="sunday_brunch_copy">
-      <!-- campi ospiti creati via JS: pre-dichiarazione -->
-      <input type="hidden" name="guest_2_name">
-      <input type="hidden" name="guest_3_name">
-      <input type="hidden" name="guest_4_name">
-      <input type="hidden" name="guest_5_name">
-      <input type="hidden" name="guest_6_name">
-      <input type="hidden" name="guest_7_name">
-      <input type="hidden" name="guest_8_name">
-      <input type="hidden" name="guest_9_name">
-      <input type="hidden" name="guest_10_name">
-    </div>
-
-    <p><button type="submit" class="btn" id="submitBtn">Invia RSVP</button></p>
-  </form>
-
+  
   <p style="margin-top:10px;color:var(--muted);font-size:14px">
     <span id="testLinkLabel">Link di test:</span> <a href="/rsvp.html?guest=demo&inv=all">versione “tutti gli eventi”</a>
   </p>
