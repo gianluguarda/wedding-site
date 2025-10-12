@@ -22,7 +22,8 @@ header{width:100%;position:sticky;top:0;z-index:20;backdrop-filter:blur(6px);bac
 nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}
 nav a{text-decoration:none;color:var(--ink);opacity:.85} nav a:hover{opacity:1;border-bottom:1px solid var(--lavender-600)}
 .lang{display:flex;gap:8px;align-items:center}
-.lang button{border:1px solid rgba(0,0,0,.08);background:white;border-radius:10px;padding:6px 10px;font-size:14px;cursor:pointer}
+.lang button{border:1px solid rgba(0,0,0,.08);background:white;border-radius:10px;padding:6px 10px;font-size:14px;cursor:pointer;white-space:nowrap}
+.lang button.active{border-color:var(--lavender-600);color:var(--lavender-600)}
 .hamburger{display:none;border:1px solid rgba(0,0,0,.1);background:white;border-radius:10px;padding:8px 10px;cursor:pointer}
 .hamburger span{display:block;width:20px;height:2px;background:#444;margin:4px 0}
 .mobile-menu{display:none;position:fixed;top:60px;right:14px;background:rgba(255,255,255,.98);border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.12);padding:14px;z-index:40}
@@ -42,30 +43,37 @@ footer{color:var(--muted);text-align:center;padding:60px 20px}
   <div class="nav">
     <div class="brand">
       <button id="hambBtn" class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
-      <div class="names">Charlotte &amp; Gianluca</div><div class="dot">·</div><div class="date">20 Giugno 2026</div>
+      <div class="names">Charlotte &amp; Gianluca</div><div class="dot">·</div><div class="date" id="navDate">20 Giugno 2026</div>
     </div>
     <nav><ul>
-      <li><a href="home.html">Home</a></li>
-      <li><a href="story.html">La nostra storia</a></li>
-      <li><a href="stay.html">Dove alloggiare</a></li>
-      <li><a href="trip.html">Viaggio di nozze</a></li>
-      <li><a href="rsvp.html">RSVP</a></li>
+      <li><a href="home.html" data-i18n="nav.home">Home</a></li>
+      <li><a href="story.html" data-i18n="nav.story">La nostra storia</a></li>
+      <li><a href="stay.html" data-i18n="nav.stay">Dove alloggiare</a></li>
+      <li><a href="trip.html" data-i18n="nav.trip">Viaggio di nozze</a></li>
+      <li><a href="rsvp.html" data-i18n="nav.rsvp">RSVP</a></li>
     </ul></nav>
-    <div class="lang"><button>🇮🇹 IT</button><button>🇬🇧 EN</button><button>🇫🇷 FR</button></div>
+    <div class="lang" aria-label="Language switcher">
+      <button data-lang="it">🇮🇹 IT</button>
+      <button data-lang="en">🇬🇧 EN</button>
+      <button data-lang="fr">🇫🇷 FR</button>
+    </div>
   </div>
   <div id="mobileMenu" class="mobile-menu">
-    <a href="home.html">Home</a><a href="story.html">La nostra storia</a><a href="stay.html">Dove alloggiare</a><a href="trip.html">Viaggio di nozze</a><a href="rsvp.html">RSVP</a>
+    <a href="home.html" data-i18n="nav.home">Home</a>
+    <a href="story.html" data-i18n="nav.story">La nostra storia</a>
+    <a href="stay.html" data-i18n="nav.stay">Dove alloggiare</a>
+    <a href="trip.html" data-i18n="nav.trip">Viaggio di nozze</a>
+    <a href="rsvp.html" data-i18n="nav.rsvp">RSVP</a>
   </div>
 </header>
 
 <main class="section">
-  <h2>RSVP</h2>
-  <p style="color:var(--muted);margin-bottom:12px;">Conferma la tua presenza. Il modulo è personalizzato per te.</p>
+  <h2 id="rsvpTitle">RSVP</h2>
+  <p id="rsvpIntro" style="color:var(--muted);margin-bottom:12px;">Conferma la tua presenza. Il modulo è personalizzato per te.</p>
 
   <!-- ✅ Netlify Forms -->
-  <form name="rsvp" method="POST" netlify netlify-honeypot="bot-field"
+  <form name="rsvp" method="POST" data-netlify="true" netlify-honeypot="bot-field"
         action="/success.html" class="card" id="rsvpForm">
-    <!-- alternativa equivalente: data-netlify="true" + hidden form-name -->
     <input type="hidden" name="form-name" value="rsvp" />
     <input type="hidden" name="invite_flags" id="inviteFlags" value="wedding" />
     <input type="hidden" name="guest_code" id="guestCode" value="" />
@@ -74,11 +82,11 @@ footer{color:var(--muted);text-align:center;padding:60px 20px}
     <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
 
     <div class="grid-2">
-      <p><label for="name">Nome e cognome<br>
+      <p><label for="name"><span data-i18n="rsvp.name">Nome e cognome</span><br>
         <input id="name" name="name" type="text" required
                style="width:100%;padding:10px;border-radius:12px;border:1px solid rgba(0,0,0,.15);background:white;">
       </label></p>
-      <p><label for="email">Email<br>
+      <p><label for="email"><span data-i18n="rsvp.email">Email</span><br>
         <input id="email" name="email" type="email" required
                style="width:100%;padding:10px;border-radius:12px;border:1px solid rgba(0,0,0,.15);background:white;">
       </label></p>
@@ -87,77 +95,122 @@ footer{color:var(--muted);text-align:center;padding:60px 20px}
     <p id="attendingLabel" style="margin-top:6px;font-weight:600;">Parteciperai al matrimonio di Charlotte &amp; Gianluca?</p>
     <div class="grid-2" style="margin-bottom:8px">
       <label for="yes" class="card" style="display:flex;align-items:center;gap:10px;">
-        <input id="yes" type="radio" name="attending" value="yes" required> <span>Sì, con gioia</span>
+        <input id="yes" type="radio" name="attending" value="yes" required> <span id="yesText">Sì, con gioia</span>
       </label>
       <label for="no" class="card" style="display:flex;align-items:center;gap:10px;">
-        <input id="no" type="radio" name="attending" value="no"> <span>Mi dispiace, non potrò</span>
+        <input id="no" type="radio" name="attending" value="no"> <span id="noText">Mi dispiace, non potrò</span>
       </label>
     </div>
 
-    <!-- Queste righe compaiono SOLO se attending=yes -->
     <div id="attendingBlock" style="display:none">
       <div id="rowDinner" class="card" style="margin-top:12px;">
         <label for="dinner" style="display:flex;align-items:center;gap:10px;">
           <input id="dinner" type="checkbox" name="welcome_dinner" value="yes">
-          <span>Parteciperai alla cena di benvenuto (venerdì sera)?</span>
+          <span id="dinnerText">Parteciperai alla cena di benvenuto (venerdì sera)?</span>
         </label>
       </div>
 
       <div id="rowBrunch" class="card" style="margin-top:12px;">
         <label for="brunch" style="display:flex;align-items:center;gap:10px;">
           <input id="brunch" type="checkbox" name="sunday_brunch" value="yes">
-          <span>Parteciperai al brunch della domenica?</span>
+          <span id="brunchText">Parteciperai al brunch della domenica?</span>
         </label>
       </div>
 
       <div class="grid-2" style="margin-top:12px;">
-        <p><label for="guests"><span>Numero totale di persone (incluso te)</span><br>
+        <p><label for="guests"><span id="guestsText">Numero totale di persone (incluso te)</span><br>
           <input id="guests" name="guests" type="number" min="1" max="10" value="1"
                  style="width:100%;padding:10px;border-radius:12px;border:1px solid rgba(0,0,0,.15);background:white;">
         </label></p>
 
-        <p><label for="dietary"><span>Allergie o esigenze alimentari</span><br>
+        <p><label for="dietary"><span id="dietaryText">Allergie o esigenze alimentari</span><br>
           <input id="dietary" name="dietary" type="text" placeholder="es. vegetariano, senza glutine"
                  style="width:100%;padding:10px;border-radius:12px;border:1px solid rgba(0,0,0,.15);background:white;">
         </label></p>
       </div>
 
-      <!-- Nomi ospiti generati in base al numero -->
       <div id="guestNamesWrap" class="card" style="display:none; margin-top:12px;">
-        <strong>Nome degli ospiti</strong>
+        <strong id="guestNamesTitle">Nome degli ospiti</strong>
         <div id="guestNames" style="margin-top:8px; display:grid; gap:8px;"></div>
       </div>
     </div>
 
     <p style="margin-top:12px;">
-      <label for="message"><span>Messaggio (opzionale)</span><br>
+      <label for="message"><span id="messageText">Messaggio (opzionale)</span><br>
         <textarea id="message" name="message" rows="4"
                   style="width:100%;padding:10px;border-radius:12px;border:1px solid rgba(0,0,0,.15);background:white;"></textarea>
       </label>
     </p>
-<!-- Netlify: dichiara SOLO i campi creati via JS (per il rilevamento) -->
-<div style="display:none" aria-hidden="true">
-  <input type="hidden" name="guest_2_name">
-  <input type="hidden" name="guest_3_name">
-  <input type="hidden" name="guest_4_name">
-  <input type="hidden" name="guest_5_name">
-  <input type="hidden" name="guest_6_name">
-  <input type="hidden" name="guest_7_name">
-  <input type="hidden" name="guest_8_name">
-  <input type="hidden" name="guest_9_name">
-  <input type="hidden" name="guest_10_name">
-</div>
+
+    <!-- Mirroring: prima di inviare, copiamo i valori (radio/checkbox) qui per sicurezza email -->
+    <div style="display:none" aria-hidden="true">
+      <input type="hidden" name="attending_copy" id="attending_copy">
+      <input type="hidden" name="welcome_dinner_copy" id="welcome_dinner_copy">
+      <input type="hidden" name="sunday_brunch_copy" id="sunday_brunch_copy">
+      <!-- campi ospiti creati via JS: pre-dichiarazione -->
+      <input type="hidden" name="guest_2_name">
+      <input type="hidden" name="guest_3_name">
+      <input type="hidden" name="guest_4_name">
+      <input type="hidden" name="guest_5_name">
+      <input type="hidden" name="guest_6_name">
+      <input type="hidden" name="guest_7_name">
+      <input type="hidden" name="guest_8_name">
+      <input type="hidden" name="guest_9_name">
+      <input type="hidden" name="guest_10_name">
+    </div>
 
     <p><button type="submit" class="btn" id="submitBtn">Invia RSVP</button></p>
   </form>
 
   <p style="margin-top:10px;color:var(--muted);font-size:14px">
-    Link di test: <a href="/rsvp.html?guest=demo&inv=all">versione “tutti gli eventi”</a>
+    <span id="testLinkLabel">Link di test:</span> <a href="/rsvp.html?guest=demo&inv=all">versione “tutti gli eventi”</a>
   </p>
 </main>
 
-<footer><small>© Charlotte &amp; Gianluca — 2026</small></footer>
+<footer><small id="footNote">© Charlotte &amp; Gianluca — 2026</small></footer>
+
 <script>
+// ===== i18n mini =====
+const STRINGS={
+  it:{nav:{home:'Home',story:'La nostra storia',stay:'Dove alloggiare',trip:'Viaggio di nozze',rsvp:'RSVP'},
+      rsvpTitle:'RSVP', rsvpIntro:'Conferma la tua presenza. Il modulo è personalizzato per te.',
+      attending:'Parteciperai al matrimonio di Charlotte & Gianluca?', yes:'Sì, con gioia', no:'Mi dispiace, non potrò',
+      dinner:'Parteciperai alla cena di benvenuto (venerdì sera)?', brunch:'Parteciperai al brunch della domenica?',
+      guests:'Numero totale di persone (incluso te)', dietary:'Allergie o esigenze alimentari', msg:'Messaggio (opzionale)', guestNames:'Nome degli ospiti', submit:'Invia RSVP', test:'Link di test:'},
+  en:{nav:{home:'Home',story:'Our story',stay:'Where to stay',trip:'Honeymoon',rsvp:'RSVP'},
+      rsvpTitle:'RSVP', rsvpIntro:'Please confirm your attendance. This form is tailored to you.',
+      attending:\"Will you attend Charlotte & Gianluca's wedding?\", yes:'Yes, with joy', no:\"Sadly, I can't\",
+      dinner:'Will you join the welcome dinner (Friday evening)?', brunch:'Will you join the Sunday brunch?',
+      guests:'Total number of guests (including you)', dietary:'Dietary needs or allergies', msg:'Message (optional)', guestNames:'Guests names', submit:'Send RSVP', test:'Test link:'},
+  fr:{nav:{home:'Accueil',story:'Notre histoire',stay:'Où loger',trip:'Voyage de noces',rsvp:'RSVP'},
+      rsvpTitle:'RSVP', rsvpIntro:'Merci de confirmer votre présence. Ce formulaire est personnalisé pour vous.',
+      attending:\"Serez-vous présent au mariage de Charlotte & Gianluca ?\", yes:'Oui, avec joie', no:\"Désolé, je ne pourrai pas\",
+      dinner:'Participerez-vous au dîner de bienvenue (vendredi soir) ?', brunch:'Participerez-vous au brunch du dimanche ?',
+      guests:'Nombre total de personnes (vous inclus)', dietary:'Régimes / allergies', msg:'Message (facultatif)', guestNames:'Noms des invités', submit:'Envoyer le RSVP', test:'Lien de test :'}
+};
+function pickLang(){const s=localStorage.getItem('lang'); if(s&&STRINGS[s]) return s; const n=(navigator.language||'it').toLowerCase(); if(n.startsWith('it')) return 'it'; if(n.startsWith('fr')) return 'fr'; return 'en';}
+function applyLang(lang){
+  const T=STRINGS[lang]||STRINGS.it;
+  document.querySelectorAll('[data-i18n]').forEach(a=>{const path=a.dataset.i18n.split('.'); let v=T; path.forEach(k=>v=v?.[k]); if(typeof v==='string') a.textContent=v;});
+  document.getElementById('rsvpTitle').textContent=T.rsvpTitle;
+  document.getElementById('rsvpIntro').textContent=T.rsvpIntro;
+  document.getElementById('attendingLabel').textContent=T.attending;
+  document.getElementById('yesText').textContent=T.yes;
+  document.getElementById('noText').textContent=T.no;
+  document.getElementById('dinnerText').textContent=T.dinner;
+  document.getElementById('brunchText').textContent=T.brunch;
+  document.getElementById('guestsText').textContent=T.guests;
+  document.getElementById('dietaryText').textContent=T.dietary;
+  document.getElementById('messageText').textContent=T.msg;
+  document.getElementById('guestNamesTitle').textContent=T.guestNames;
+  document.getElementById('submitBtn').textContent=T.submit;
+  document.getElementById('testLinkLabel').textContent=T.test;
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.getElementById('langField').value=lang;
+  localStorage.setItem('lang',lang);
+}
+(function(){ const lang=pickLang(); applyLang(lang); document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));})();
+
 // menu mobile
 const btn=document.getElementById('hambBtn'), menu=document.getElementById('mobileMenu');
 if(btn&&menu){btn.addEventListener('click',()=>{menu.style.display=(menu.style.display==='block')?'none':'block';});
@@ -171,7 +224,6 @@ document.addEventListener('click',e=>{if(!menu.contains(e.target)&&e.target!==bt
   const showBrunch=inv==='all'||inv.includes('brunch');
   document.getElementById('inviteFlags').value=inv;
   const g=p.get('guest')||''; document.getElementById('guestCode').value=g;
-
   const dinner=document.getElementById('rowDinner');
   const brunch=document.getElementById('rowBrunch');
   if(dinner) dinner.style.display=showDinner?'block':'none';
@@ -211,6 +263,16 @@ document.addEventListener('click',e=>{if(!menu.contains(e.target)&&e.target!==bt
   }
   if(guests){ guests.addEventListener('input',render); render(); }
 })();
+
+// Mirroring valori per email certa (riempie gli hidden *_copy al submit)
+document.getElementById('rsvpForm').addEventListener('submit',function(){
+  const yes=document.getElementById('yes');
+  const dinner=document.getElementById('dinner');
+  const brunch=document.getElementById('brunch');
+  document.getElementById('attending_copy').value = yes && yes.checked ? 'yes' : 'no';
+  document.getElementById('welcome_dinner_copy').value = dinner && dinner.checked ? 'yes' : 'no';
+  document.getElementById('sunday_brunch_copy').value = brunch && brunch.checked ? 'yes' : 'no';
+});
 </script>
 </body>
 </html>
