@@ -4,196 +4,164 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>RSVP — Charlotte & Gianluca</title>
+
+<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<!-- Stile minimale coerente con il resto -->
 <style>
-:root{--lavender:#7a78b3;--lavender-600:#6a68a3;--olive:#8a9a5b;--beige:#f7f4ef;--ink:#242424;--muted:#6b6b6b}
-*{box-sizing:border-box}html,body{height:100%}
-body{margin:0;font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;color:var(--ink);background:var(--beige);
-  background-image:radial-gradient(1200px 700px at 100% -10%, rgba(122,120,179,.12), transparent 60%),
-                   radial-gradient(900px 500px at -10% 10%, rgba(183,181,217,.18), transparent 55%),
-                   radial-gradient(700px 400px at 60% 110%, rgba(138,154,91,.08), transparent 60%);background-attachment:fixed}
-header{width:100%;position:sticky;top:0;z-index:20;backdrop-filter:blur(6px);background:rgba(247,244,239,.7);border-bottom:1px solid rgba(0,0,0,.05)}
+:root{
+  --lavender-600:#6a68a3; /* IT */
+  --blue-600:#4b6cb7;     /* EN */
+  --wine-600:#b84b62;     /* FR */
+  --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+  color:var(--ink);
+  background:var(--beige);
+}
+
+/* Header / Nav */
+header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.8);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
 .nav{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:baseline;gap:12px}
-.brand .names{font-family:"Great Vibes","Brush Script MT",cursive;font-size:30px;letter-spacing:.3px;color:var(--lavender-600)}
-.brand .dot{color:rgba(0,0,0,.35)}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand .names{font-family:"Great Vibes", cursive; font-size:30px; color:var(--lavender-600)}
 nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}
-nav a{text-decoration:none;color:var(--ink);opacity:.85} nav a:hover{opacity:1;border-bottom:1px solid var(--lavender-600)}
-.lang{display:flex;gap:8px;align-items:center}
-.lang button{border:1px solid rgba(0,0,0,.08);background:white;border-radius:10px;padding:6px 10px;font-size:14px;cursor:pointer;white-space:nowrap}
-.lang button.active{border-color:var(--lavender-600);color:var(--lavender-600)}
-.hamburger{display:none;border:1px solid rgba(0,0,0,.1);background:white;border-radius:10px;padding:8px 10px;cursor:pointer}
-.hamburger span{display:block;width:20px;height:2px;background:#444;margin:4px 0}
-.mobile-menu{display:none;position:fixed;top:60px;right:14px;background:rgba(255,255,255,.98);border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.12);padding:14px;z-index:40}
-.mobile-menu a{display:block;padding:10px 12px;border-radius:10px;color:var(--ink);text-decoration:none}
-.mobile-menu a:hover{background:rgba(106,104,163,.08)}
-.section{max-width:900px;margin:0 auto;padding:120px 20px 60px}
-.section h2{font-weight:600;letter-spacing:.5px;color:var(--lavender-600);margin-bottom:10px}
-.card{background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.06);border-radius:18px;padding:18px;box-shadow:0 8px 30px rgba(106,104,163,.06)}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.btn{display:inline-block;background:var(--lavender-600);color:#fff;padding:10px 16px;border-radius:14px;text-decoration:none;font-weight:600}
-footer{color:var(--muted);text-align:center;padding:60px 20px}
-@media (max-width:700px){nav ul{display:none}.hamburger{display:block}.grid-2{grid-template-columns:1fr}}
+nav a{text-decoration:none;color:var(--ink);opacity:.9}
+nav a:hover{opacity:1;border-bottom:1px solid var(--lavender-600)}
+.langstrip{max-width:1100px;margin:0 auto;padding:12px 20px;display:flex;gap:10px;flex-wrap:wrap}
+
+/* Main */
+.section{max-width:1100px;margin:0 auto;padding:80px 20px 60px}
+.h1{font-family:"Great Vibes",cursive;font-size:56px;color:var(--lavender-600);text-align:center;margin:0 0 8px 0}
+.lead{color:var(--muted);text-align:center;margin:0 0 16px 0}
+
+/* Sezioni lingue */
+.box{
+  background:#fff; border:1px solid #eee; border-radius:20px; padding:24px;
+  margin:26px 0;
+}
+.box-it{border-left:6px solid var(--lavender-600)}
+.box-en{border-left:6px solid var(--blue-600)}
+.box-fr{border-left:6px solid var(--wine-600)}
+
+.tag{
+  display:flex; align-items:center; gap:10px; margin:0 0 8px 0;
+  font-size:26px; font-weight:600; color:var(--ink);
+}
+.h2{
+  margin:0; font-family:"Great Vibes",cursive; font-size:40px; line-height:1;
+}
+.h2-it{color:var(--lavender-600)}
+.h2-en{color:var(--blue-600)}
+.h2-fr{color:var(--wine-600)}
+.note{color:var(--muted); margin:0 0 10px 0}
+
+/* Bottoncini indice lingue */
+.lang-toc{display:flex; gap:10px; justify-content:center; margin:10px 0 20px}
+.lang-toc a{
+  text-decoration:none; color:var(--ink); border:1px solid #ddd; padding:6px 10px; border-radius:10px;
+}
+.lang-toc a:hover{border-color:var(--lavender-600)}
+iframe{width:100%; border:0; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,0,.06)}
+@media (max-width:700px){ .h1{font-size:44px} .tag{font-size:22px} }
 </style>
 </head>
+
 <body>
 <header>
   <div class="nav">
     <div class="brand">
-      <button id="hambBtn" class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
-      <div class="names">Charlotte &amp; Gianluca</div><div class="dot">·</div><div class="date" id="navDate">20 Giugno 2026</div>
+      <div class="names">Charlotte &amp; Gianluca</div>
+      <div class="dot">·</div>
+      <div class="date">20 Giugno 2026</div>
     </div>
-    <nav><ul>
-      <li><a href="home.html" data-i18n="nav.home">Home</a></li>
-      <li><a href="story.html" data-i18n="nav.story">La nostra storia</a></li>
-      <li><a href="stay.html" data-i18n="nav.stay">Dove alloggiare</a></li>
-      <li><a href="trip.html" data-i18n="nav.trip">Viaggio di nozze</a></li>
-      <li><a href="rsvp.html" data-i18n="nav.rsvp">RSVP</a></li>
-    </ul></nav>
-    <div class="lang" aria-label="Language switcher">
-      <button data-lang="it">🇮🇹 IT</button>
-      <button data-lang="en">🇬🇧 EN</button>
-      <button data-lang="fr">🇫🇷 FR</button>
-    </div>
-  </div>
-  <div id="mobileMenu" class="mobile-menu">
-    <a href="home.html" data-i18n="nav.home">Home</a>
-    <a href="story.html" data-i18n="nav.story">La nostra storia</a>
-    <a href="stay.html" data-i18n="nav.stay">Dove alloggiare</a>
-    <a href="trip.html" data-i18n="nav.trip">Viaggio di nozze</a>
-    <a href="rsvp.html" data-i18n="nav.rsvp">RSVP</a>
+    <nav>
+      <ul>
+        <li><a href="/wedding-site/home.html">Home</a></li>
+        <li><a href="/wedding-site/story.html">La nostra storia</a></li>
+        <li><a href="/wedding-site/stay.html">Dove alloggiare</a></li>
+        <li><a href="/wedding-site/trip.html">Viaggio di nozze</a></li>
+        <li><a href="/wedding-site/rsvp.html">RSVP</a></li>
+      </ul>
+    </nav>
   </div>
 </header>
 
 <main class="section">
-  <h2 id="rsvpTitle">RSVP</h2>
-  <p id="rsvpIntro" style="color:var(--muted);margin-bottom:12px;">Conferma la tua presenza.</p>
+  <h1 class="h1">RSVP</h1>
+  <p class="lead">Scegli la tua lingua qui sotto e compila il modulo.</p>
 
-<main class="section">
-  <h2>RSVP</h2>
-  <p style="color:var(--muted);margin-bottom:12px;">Compila il modulo per confermare la tua presenza.</p>
+  <!-- Indice con ancore -->
+  <nav class="lang-toc">
+    <a href="#it">🇮🇹 Italiano</a>
+    <a href="#en">🇬🇧 English</a>
+    <a href="#fr">🇫🇷 Français</a>
+  </nav>
 
-  <div class="card">
-    <iframe src=https://docs.google.com/forms/d/e/1FAIpQLSch-IIVOjsbcQOGh7nsRIPOQoUoEgjWxc73-QmQC9ZA4gvO7A/viewform?embedded=true" 
-      width="640" height="926" frameborder="0" marginheight="0" marginwidth="0">Caricamento…
+  <!-- 🇮🇹 ITALIANO -->
+  <section id="it" class="box box-it">
+    <div class="tag">
+      <span class="h2 h2-it">RSVP</span>
+      <span>· 🇮🇹 Italiano</span>
+    </div>
+    <p class="note">Compila il modulo per confermare la tua presenza (mappa, dinner, brunch, allergie, ecc.).</p>
+
+    <!-- ⤵️ Incolla l'iframe del Google Form IT al posto di PASTE_IT_IFRAME_URL -->
+    <iframe
+      src="PASTE_IT_IFRAME_URL"
+      height="1400"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade">
+      Caricamento…
     </iframe>
-  </div>
+  </section>
+
+  <!-- 🇬🇧 ENGLISH -->
+  <section id="en" class="box box-en">
+    <div class="tag">
+      <span class="h2 h2-en">RSVP</span>
+      <span>· 🇬🇧 English</span>
+    </div>
+    <p class="note">Please fill in the form to confirm your attendance.</p>
+
+    <!-- ⤵️ Incolla l'iframe del Google Form EN -->
+    <iframe
+      src="PASTE_EN_IFRAME_URL"
+      height="1400"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade">
+      Loading…
+    </iframe>
+  </section>
+
+  <!-- 🇫🇷 FRANÇAIS -->
+  <section id="fr" class="box box-fr">
+    <div class="tag">
+      <span class="h2 h2-fr">RSVP</span>
+      <span>· 🇫🇷 Français</span>
+    </div>
+    <p class="note">Merci de remplir le formulaire pour confirmer votre présence.</p>
+
+    <!-- ⤵️ Incolla l'iframe du Google Form FR -->
+    <iframe
+      src="PASTE_FR_IFRAME_URL"
+      height="1400"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade">
+      Chargement…
+    </iframe>
+  </section>
 </main>
-  
-  
-  <p style="margin-top:10px;color:var(--muted);font-size:14px">
-    <span id="testLinkLabel">Link di test:</span> <a href="/rsvp.html?guest=demo&inv=all">versione “tutti gli eventi”</a>
-  </p>
-</main>
 
-<footer><small id="footNote">© Charlotte &amp; Gianluca — 2026</small></footer>
-
-<script>
-// ===== i18n mini =====
-const STRINGS={
-  it:{nav:{home:'Home',story:'La nostra storia',stay:'Dove alloggiare',trip:'Viaggio di nozze',rsvp:'RSVP'},
-      rsvpTitle:'RSVP', rsvpIntro:'Conferma la tua presenza. Il modulo è personalizzato per te.',
-      attending:'Parteciperai al matrimonio di Charlotte & Gianluca?', yes:'Sì, con gioia', no:'Mi dispiace, non potrò',
-      dinner:'Parteciperai alla cena di benvenuto (venerdì sera)?', brunch:'Parteciperai al brunch della domenica?',
-      guests:'Numero totale di persone (incluso te)', dietary:'Allergie o esigenze alimentari', msg:'Messaggio (opzionale)', guestNames:'Nome degli ospiti', submit:'Invia RSVP', test:'Link di test:'},
-  en:{nav:{home:'Home',story:'Our story',stay:'Where to stay',trip:'Honeymoon',rsvp:'RSVP'},
-      rsvpTitle:'RSVP', rsvpIntro:'Please confirm your attendance. This form is tailored to you.',
-      attending:\"Will you attend Charlotte & Gianluca's wedding?\", yes:'Yes, with joy', no:\"Sadly, I can't\",
-      dinner:'Will you join the welcome dinner (Friday evening)?', brunch:'Will you join the Sunday brunch?',
-      guests:'Total number of guests (including you)', dietary:'Dietary needs or allergies', msg:'Message (optional)', guestNames:'Guests names', submit:'Send RSVP', test:'Test link:'},
-  fr:{nav:{home:'Accueil',story:'Notre histoire',stay:'Où loger',trip:'Voyage de noces',rsvp:'RSVP'},
-      rsvpTitle:'RSVP', rsvpIntro:'Merci de confirmer votre présence. Ce formulaire est personnalisé pour vous.',
-      attending:\"Serez-vous présent au mariage de Charlotte & Gianluca ?\", yes:'Oui, avec joie', no:\"Désolé, je ne pourrai pas\",
-      dinner:'Participerez-vous au dîner de bienvenue (vendredi soir) ?', brunch:'Participerez-vous au brunch du dimanche ?',
-      guests:'Nombre total de personnes (vous inclus)', dietary:'Régimes / allergies', msg:'Message (facultatif)', guestNames:'Noms des invités', submit:'Envoyer le RSVP', test:'Lien de test :'}
-};
-function pickLang(){const s=localStorage.getItem('lang'); if(s&&STRINGS[s]) return s; const n=(navigator.language||'it').toLowerCase(); if(n.startsWith('it')) return 'it'; if(n.startsWith('fr')) return 'fr'; return 'en';}
-function applyLang(lang){
-  const T=STRINGS[lang]||STRINGS.it;
-  document.querySelectorAll('[data-i18n]').forEach(a=>{const path=a.dataset.i18n.split('.'); let v=T; path.forEach(k=>v=v?.[k]); if(typeof v==='string') a.textContent=v;});
-  document.getElementById('rsvpTitle').textContent=T.rsvpTitle;
-  document.getElementById('rsvpIntro').textContent=T.rsvpIntro;
-  document.getElementById('attendingLabel').textContent=T.attending;
-  document.getElementById('yesText').textContent=T.yes;
-  document.getElementById('noText').textContent=T.no;
-  document.getElementById('dinnerText').textContent=T.dinner;
-  document.getElementById('brunchText').textContent=T.brunch;
-  document.getElementById('guestsText').textContent=T.guests;
-  document.getElementById('dietaryText').textContent=T.dietary;
-  document.getElementById('messageText').textContent=T.msg;
-  document.getElementById('guestNamesTitle').textContent=T.guestNames;
-  document.getElementById('submitBtn').textContent=T.submit;
-  document.getElementById('testLinkLabel').textContent=T.test;
-  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
-  document.getElementById('langField').value=lang;
-  localStorage.setItem('lang',lang);
-}
-(function(){ const lang=pickLang(); applyLang(lang); document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));})();
-
-// menu mobile
-const btn=document.getElementById('hambBtn'), menu=document.getElementById('mobileMenu');
-if(btn&&menu){btn.addEventListener('click',()=>{menu.style.display=(menu.style.display==='block')?'none':'block';});
-document.addEventListener('click',e=>{if(!menu.contains(e.target)&&e.target!==btn) menu.style.display='none';});}
-
-// Personalizzazione invito da URL (?guest=...&inv=wedding+dinner|wedding+brunch|all)
-(function(){
-  const p=new URLSearchParams(window.location.search);
-  const inv=(p.get('inv')||'wedding').toLowerCase();
-  const showDinner=inv==='all'||inv.includes('dinner');
-  const showBrunch=inv==='all'||inv.includes('brunch');
-  document.getElementById('inviteFlags').value=inv;
-  const g=p.get('guest')||''; document.getElementById('guestCode').value=g;
-  const dinner=document.getElementById('rowDinner');
-  const brunch=document.getElementById('rowBrunch');
-  if(dinner) dinner.style.display=showDinner?'block':'none';
-  if(brunch) brunch.style.display=showBrunch?'block':'none';
-})();
-
-// Mostra blocchi extra solo se "Partecipo"
-(function(){
-  const yes=document.getElementById('yes');
-  const no=document.getElementById('no');
-  const block=document.getElementById('attendingBlock');
-  function toggle(){ block.style.display = yes && yes.checked ? 'block' : 'none'; }
-  ;[yes,no].forEach(r=>r&&r.addEventListener('change',toggle));
-  toggle();
-})();
-
-// Genera i campi nome ospiti in base al numero
-(function(){
-  const guests=document.getElementById('guests');
-  const wrap=document.getElementById('guestNamesWrap');
-  const holder=document.getElementById('guestNames');
-  function render(){
-    const n=parseInt(guests?.value||'1',10);
-    if(!holder) return;
-    holder.innerHTML='';
-    if(n>1){
-      wrap.style.display='block';
-      for(let i=2;i<=n;i++){
-        const label=document.createElement('label');
-        label.innerHTML = 'Ospite ' + i + ' — Nome e cognome<br>' +
-          '<input name="guest_'+i+'_name" type="text" style="width:100%;padding:10px;border-radius:12px;border:1px solid rgba(0,0,0,.15);background:white;">';
-        holder.appendChild(label);
-      }
-    }else{
-      wrap.style.display='none';
-    }
-  }
-  if(guests){ guests.addEventListener('input',render); render(); }
-})();
-
-// Mirroring valori per email certa (riempie gli hidden *_copy al submit)
-document.getElementById('rsvpForm').addEventListener('submit',function(){
-  const yes=document.getElementById('yes');
-  const dinner=document.getElementById('dinner');
-  const brunch=document.getElementById('brunch');
-  document.getElementById('attending_copy').value = yes && yes.checked ? 'yes' : 'no';
-  document.getElementById('welcome_dinner_copy').value = dinner && dinner.checked ? 'yes' : 'no';
-  document.getElementById('sunday_brunch_copy').value = brunch && brunch.checked ? 'yes' : 'no';
-});
-</script>
+<footer style="text-align:center;color:#6b6b6b;padding:40px 20px">
+  <small>© Charlotte &amp; Gianluca — 2026</small>
+</footer>
 </body>
 </html>
