@@ -13,6 +13,12 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 body{margin:0;font-family:"Cormorant Garamond",Georgia,serif;color:var(--ink);background:var(--beige)}
+  /* aumenta i font anche quando non scatta l’hamburger */
+@media (max-width:1024px){
+  nav a{ font-size:clamp(18px,2.4vw,20px); padding:12px 10px }
+  .brand .names{ font-size:clamp(28px,3.2vw,35px) }
+}
+
 
 /* Header */
 header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.88);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
