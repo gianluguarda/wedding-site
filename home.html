@@ -3,30 +3,61 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Home — Charlotte & Gianluca</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Charlotte & Gianluca — Home</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
-:root{--lavender-600:#6a68a3;--blue-600:#4b6cb7;--wine-600:#b84b62;--beige:#f7f4ef;--ink:#242424;--muted:#6b6b6b}
-*{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:"Cormorant Garamond",Georgia,serif;color:var(--ink);background:var(--beige)}
-header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.8);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
-.nav{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:baseline;gap:10px}.brand .names{font-family:"Great Vibes",cursive;font-size:30px;color:var(--lavender-600)}
-nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}nav a{text-decoration:none;color:var(--ink);opacity:.9}nav a:hover{opacity:1;border-bottom:1px solid var(--lavender-600)}
-.section{max-width:1100px;margin:0 auto;padding:80px 20px 60px}
-.h1{font-family:"Great Vibes",cursive;font-size:56px;color:var(--lavender-600);text-align:center;margin:10px 0 4px}
-.lead{color:var(--muted);text-align:center;margin:0 0 20px}
-.box{background:#fff;border:1px solid #eee;border-radius:20px;padding:24px;margin:26px 0}
-.box-it{border-left:6px solid var(--lavender-600)}.box-en{border-left:6px solid var(--blue-600)}.box-fr{border-left:6px solid var(--wine-600)}
-.tag{display:flex;align-items:center;gap:10px;margin:0 0 8px 0;font-size:26px;font-weight:600;color:var(--ink)}
-.h2{margin:0;font-family:"Great Vibes",cursive;font-size:40px}.h2-it{color:var(--lavender-600)}.h2-en{color:var(--blue-600)}.h2-fr{color:var(--wine-600)}
-.lang-toc{display:flex;gap:10px;justify-content:center;margin:10px 0 20px}.lang-toc a{text-decoration:none;color:var(--ink);border:1px solid #ddd;padding:6px 10px;border-radius:10px}
-.lang-toc a:hover{border-color:var(--lavender-600)}
-.btn{display:inline-block;background:var(--lavender-600);color:#fff;padding:10px 16px;border-radius:14px;text-decoration:none;font-weight:600}
-@media (max-width:700px){.h1{font-size:44px}.tag{font-size:22px}}
+:root{
+  --it:#6FA968; /* verde pastello più scuro */
+  --en:#4b6cb7;
+  --fr:#b84b62;
+  --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:"Cormorant Garamond",serif;color:var(--ink);background:var(--beige);
+  background-image:radial-gradient(1200px 700px at 100% -10%, rgba(75,108,183,.1), transparent 60%),
+                   radial-gradient(900px 500px at -10% 10%, rgba(138,154,91,.08), transparent 55%);
+  background-attachment:fixed}
+
+/* Header */
+header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.88);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
+.nav{max-width:1100px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand .names{font-family:"Great Vibes",cursive;font-size:30px;color:var(--en)}
+nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}
+nav a{text-decoration:none;color:var(--ink);opacity:.9}
+nav a:hover{opacity:1;border-bottom:1px solid var(--en)}
+
+/* Hero */
+.hero{padding:80px 20px;text-align:center}
+.hero h1{font-family:"Great Vibes",cursive;font-size:64px;color:var(--en);margin:0 0 8px}
+.hero p{color:var(--muted);font-size:20px;margin:0 0 16px}
+
+/* Sections */
+.section{max-width:900px;margin:0 auto;padding:40px 20px 80px;text-align:center}
+.lang-block{background:#fff;border-radius:18px;border:1px solid #eee;padding:24px;margin-top:24px}
+.lang-block h2{margin:0 0 10px;font-family:"Great Vibes",cursive;font-size:42px}
+.it h2{color:var(--it)} .en h2{color:var(--en)} .fr h2{color:var(--fr)}
+p{margin:0 0 14px}
+.btn{display:inline-block;background:var(--en);color:#fff;text-decoration:none;padding:12px 22px;border-radius:16px;font-weight:600}
+.btn:hover{opacity:.9}
+
+/* Footer */
+footer{text-align:center;color:#6b6b6b;padding:40px 20px;font-size:14px}
+
+/* Mobile */
+@media (max-width:700px){
+  .hero h1{font-size:46px}
+  nav ul{gap:12px}
+  nav a{font-size:18px}
+}
 </style>
 </head>
 <body>
+
 <header>
   <div class="nav">
     <div class="brand">
@@ -44,36 +75,40 @@ nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}nav a{text-decor
   </div>
 </header>
 
-<main class="section">
-  <h1 class="h1">Charlotte &amp; Gianluca</h1>
-  <p class="lead">Château de Pradines · Grambois, Provence</p>
+<main>
+  <div class="hero">
+    <h1>Charlotte &amp; Gianluca</h1>
+    <p>June 20, 2026 — Château de Pradines, Provence</p>
+    <a href="/wedding-site/rsvp.html" class="btn">RSVP</a>
+  </div>
 
-  <nav class="lang-toc">
-    <a href="#it">🇮🇹 Italiano</a><a href="#en">🇬🇧 English</a><a href="#fr">🇫🇷 Français</a>
-  </nav>
+  <div class="section">
+    <div class="lang-block it">
+      <h2>🇮🇹 Benvenuti</h2>
+      <p>Siamo felicissimi di invitarvi al nostro matrimonio in Provenza! 🌿</p>
+      <p>Vi aspettiamo per un weekend di festa, tra profumi di lavanda e brindisi sotto le stelle.</p>
+      <p><a class="btn" href="/wedding-site/stay.html">Plan your trip</a></p>
+    </div>
 
-  <!-- IT -->
-  <section id="it" class="box box-it">
-    <div class="tag"><span class="h2 h2-it">Benvenuti</span><span>· 🇮🇹 Italiano</span></div>
-    <p>Che gioia condividere con voi il nostro giorno speciale in Provenza! Qui troverete tutte le informazioni utili: programma, alloggi, come arrivare e RSVP.</p>
-    <p><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ch%C3%A2teau%20de%20Pradines%2C%20Grambois%2C%20Provence">Apri in Google Maps</a></p>
-  </section>
+    <div class="lang-block en">
+      <h2>🇬🇧 Welcome</h2>
+      <p>We’re thrilled to invite you to our wedding in Provence! 🌸</p>
+      <p>Join us for a weekend of celebration, lavender scents and starry skies.</p>
+      <p><a class="btn" href="/wedding-site/stay.html">Plan your trip</a></p>
+    </div>
 
-  <!-- EN -->
-  <section id="en" class="box box-en">
-    <div class="tag"><span class="h2 h2-en">Welcome</span><span>· 🇬🇧 English</span></div>
-    <p>We’re thrilled to celebrate with you in Provence! Here you’ll find all useful details: schedule, accommodation, travel tips and the RSVP link.</p>
-    <p><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ch%C3%A2teau%20de%20Pradines%2C%20Grambois%2C%20Provence">Open in Google Maps</a></p>
-  </section>
-
-  <!-- FR -->
-  <section id="fr" class="box box-fr">
-    <div class="tag"><span class="h2 h2-fr">Bienvenue</span><span>· 🇫🇷 Français</span></div>
-    <p>Quel bonheur de fêter avec vous en Provence ! Ici vous trouverez toutes les informations utiles : programme, hébergements, trajets et le lien RSVP.</p>
-    <p><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ch%C3%A2teau%20de%20Pradines%2C%20Grambois%2C%20Provence">Ouvrir dans Google Maps</a></p>
-  </section>
+    <div class="lang-block fr">
+      <h2>🇫🇷 Bienvenue</h2>
+      <p>Nous sommes ravis de vous inviter à notre mariage en Provence ! 💜</p>
+      <p>Un week-end de fête, de lavande et de moments inoubliables sous les étoiles.</p>
+      <p><a class="btn" href="/wedding-site/stay.html">Plan your trip</a></p>
+    </div>
+  </div>
 </main>
 
-<footer style="text-align:center;color:#6b6b6b;padding:40px 20px"><small>© Charlotte &amp; Gianluca — 2026</small></footer>
+<footer>
+  <small>© Charlotte &amp; Gianluca — 2026</small>
+</footer>
+
 </body>
 </html>
