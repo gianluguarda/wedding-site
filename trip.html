@@ -11,7 +11,7 @@
 
 <style>
 :root{
-  --it:#9DBF90;      /* verde IT (più scuro per contrasto) */
+  --it:#8fbf7f;      /* verde IT (un po’ più scuro, leggibile) */
   --en:#4b6cb7;      /* blu EN */
   --fr:#b84b62;      /* bordeaux FR */
   --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b;
@@ -19,7 +19,7 @@
 *{box-sizing:border-box} html,body{height:100%}
 body{margin:0;font-family:"Cormorant Garamond",Georgia,serif;color:var(--ink);background:var(--beige)}
 
-/* Header */
+/* Header (menu in inglese) */
 header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.88);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
 .nav{max-width:1100px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:baseline;gap:10px}
@@ -29,63 +29,51 @@ nav a{text-decoration:none;color:var(--ink);opacity:.9}
 nav a:hover{opacity:1;border-bottom:1px solid var(--en)}
 
 /* Hero */
-.hero{
+.hero{padding:60px 20px 10px;text-align:center;
   background: radial-gradient(1200px 700px at 100% -10%, rgba(75,108,183,.18), transparent 60%),
-              linear-gradient(160deg, #e7ecff 0%, #f7f4ef 60%);
-  padding:60px 20px 20px;
-  text-align:center;
-}
+              linear-gradient(160deg, #e7ecff 0%, #f7f4ef 65%)}
 .h1{font-family:"Great Vibes",cursive;font-size:56px;color:var(--en);margin:0 0 8px}
-.sublead{color:var(--muted);margin:0}
-.wave{display:block;width:100%;height:auto}
+.sublead{color:var(--muted);margin:0 0 8px}
 
-/* Section scaffold */
-.section{max-width:1100px;margin:0 auto;padding:30px 20px 70px}
-.lang-toc{display:flex;gap:10px;justify-content:center;margin:0 0 22px}
-.lang-toc a{text-decoration:none;color:var(--ink);border:1px solid #ddd;padding:8px 12px;border-radius:12px}
-
-/* Language boxes */
-.box{background:#fff;border:1px solid #eee;border-radius:20px;padding:24px;margin:26px 0}
-.box-it{border-left:6px solid var(--it)}
-.box-en{border-left:6px solid var(--en)}
-.box-fr{border-left:6px solid var(--fr)}
-.tag{display:flex;align-items:center;gap:10px;margin:0 0 8px 0;font-size:26px;font-weight:600}
-.h2{margin:0;font-family:"Great Vibes",cursive;font-size:40px}
-.h2-it{color:var(--it)} .h2-en{color:var(--en)} .h2-fr{color:var(--fr)}
-.note{color:var(--muted);margin:0 0 14px}
-
-/* Duo cards (Hawaii / Polynesia) */
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
-.card{
-  border:1px solid rgba(0,0,0,.06); border-radius:18px; overflow:hidden; background:#fff;
-  box-shadow:0 12px 40px rgba(0,0,0,.06)
+/* Map wrapper */
+.map-wrap{max-width:1100px;margin:0 auto;padding:10px 20px 30px;position:relative}
+.map{
+  width:100%; height:auto; display:block;
+  border-radius:20px; border:1px solid #eee; background:#fff;
+  box-shadow:0 10px 30px rgba(0,0,0,.06)
 }
-.card-hero{
-  padding:24px; color:#fff;
-  background: linear-gradient(135deg, rgba(0,0,0,.35), rgba(0,0,0,.2)),
-              radial-gradient(600px 300px at 80% 10%, rgba(255,255,255,.18), transparent 60%),
-              linear-gradient(120deg, #6da7ff, #77d0ff 40%, #7bd3c4 100%);
-}
-.card-hero h3{margin:0 0 6px 0;font-weight:600}
-.badges{display:flex;flex-wrap:wrap;gap:8px}
-.badge{background:rgba(255,255,255,.85);color:#1e1e1e;border-radius:999px;padding:6px 10px;font-size:14px}
-.card-body{padding:16px 18px}
-.card-body ul{margin:0 0 0 18px}
-.card-body p{margin:0 0 10px}
 
-/* Contribution box */
-.contrib{
-  margin-top:20px;padding:18px;border:1px solid rgba(0,0,0,.06);border-radius:16px;background:rgba(75,108,183,.06)
+/* Polaroid photos pinned */
+.polaroid{
+  position:absolute; width:220px; background:#fff; border:1px solid rgba(0,0,0,.08);
+  border-radius:10px; box-shadow:0 14px 40px rgba(0,0,0,.12); padding:8px 8px 16px;
+  transform:rotate(-3deg)
 }
-a.link{color:var(--en);text-decoration:none;border-bottom:1px dotted rgba(0,0,0,.25)}
-a.link:hover{border-bottom-color:var(--en)}
+.polaroid img{
+  width:100%; height:150px; object-fit:cover; border-radius:6px
+}
+.polaroid .cap{font-size:14px;text-align:center;margin-top:8px;color:#222}
+.pin{
+  position:absolute; width:14px; height:14px; background:#e74c3c; border-radius:50%;
+  box-shadow:0 0 0 3px rgba(231,76,60,.25)
+}
 
-@media (max-width:900px){.duo{grid-template-columns:1fr}}
+/* Contribution (multilingue in un unico blocco) */
+.section{max-width:900px;margin:0 auto 80px; padding:0 20px}
+.contrib{margin-top:22px; display:grid; gap:14px}
+.contrib .box{
+  background:#fff;border:1px solid #eee;border-radius:16px;padding:18px;
+}
+.head{display:flex;align-items:center;gap:10px;margin:0 0 6px 0;font-weight:700}
+.it .head{color:var(--it)} .en .head{color:var(--en)} .fr .head{color:var(--fr)}
+
+/* Mobile */
 @media (max-width:700px){
   .h1{font-size:44px}
   .nav{padding:20px 16px}
   nav ul{gap:12px}
   nav a{font-size:18px}
+  .polaroid{width:45vw}
 }
 </style>
 </head>
@@ -111,175 +99,101 @@ a.link:hover{border-bottom-color:var(--en)}
 <!-- Hero -->
 <div class="hero">
   <h1 class="h1">Honeymoon</h1>
-  <p class="sublead">Hawaiʻi for adventure · French Polynesia for pure relax</p>
+  <p class="sublead">Hawaiʻi → French Polynesia</p>
 </div>
-<svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M0,40 C240,120 480,0 720,60 C960,120 1200,40 1440,80 L1440,120 L0,120 Z" fill="#f7f4ef"></path>
-</svg>
 
-<main class="section">
-  <nav class="lang-toc">
-    <a href="#it">🇮🇹 Italiano</a>
-    <a href="#en">🇬🇧 English</a>
-    <a href="#fr">🇫🇷 Français</a>
-  </nav>
+<!-- Map + flight path -->
+<div class="map-wrap">
+  <!-- Inline SVG minimal: graticule + flight arcs + labels -->
+  <svg class="map" viewBox="0 0 1000 480" role="img" aria-label="World map with flight path from Italy to Hawaiʻi and French Polynesia">
+    <defs>
+      <linearGradient id="ocean" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="#fdfdfd"/>
+        <stop offset="100%" stop-color="#f6f8fb"/>
+      </linearGradient>
+      <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+        <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(0,0,0,.04)" stroke-width="1"/>
+      </pattern>
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+        <path d="M0,0 L8,3 L0,6 Z" fill="#6a68a3"/>
+      </marker>
+    </defs>
 
-  <!-- IT -->
-  <section id="it" class="box box-it">
-    <div class="tag"><span class="h2 h2-it">Viaggio di nozze</span><span>· 🇮🇹 Italiano</span></div>
-    <p class="note">Prima un po’ di avventura tra vulcani, jungle & onde alle <strong>Hawaiʻi</strong> — poi totale relax tra lagune turchesi in <strong>Polinesia Francese</strong>.</p>
+    <!-- Background -->
+    <rect x="0" y="0" width="1000" height="480" fill="url(#ocean)"/>
+    <rect x="0" y="0" width="1000" height="480" fill="url(#grid)"/>
 
-    <div class="duo">
-      <!-- Hawaii -->
-      <article class="card">
-        <div class="card-hero">
-          <h3>Hawaiʻi · Avventura 🌋🌿🏄‍♂️</h3>
-          <div class="badges">
-            <span class="badge">Big Island</span>
-            <span class="badge">Volcanoes</span>
-            <span class="badge">Waterfalls</span>
-            <span class="badge">Road trips</span>
-          </div>
-        </div>
-        <div class="card-body">
-          <p>Trekkings tra crateri e foreste, spiagge laviche, snorkeling e strade panoramiche. Un capitolo energico, pieno di natura.</p>
-          <ul>
-            <li>Kīlauea & Volcanoes National Park</li>
-            <li>Hamakua Coast & cascate</li>
-            <li>Baie nere e verdi, manta rays</li>
-          </ul>
-        </div>
-      </article>
+    <!-- Simple continents silhouettes (very minimal) -->
+    <path d="M130,110 L210,120 L240,140 L250,170 L230,195 L190,190 L150,170 Z" fill="#e6ede9" opacity="0.9"/> <!-- NA rough -->
+    <path d="M300,200 L380,210 L420,240 L410,270 L360,280 L320,260 Z" fill="#e6ede9" opacity="0.9"/> <!-- SA rough -->
+    <path d="M520,140 L640,150 L700,180 L720,220 L690,240 L610,230 L560,200 Z" fill="#e6ede9" opacity="0.9"/> <!-- EUR/ME rough -->
+    <path d="M710,170 L800,175 L870,210 L890,250 L840,270 L770,250 L720,220 Z" fill="#e6ede9" opacity="0.9"/> <!-- AS rough -->
+    <path d="M770,300 L860,320 L840,360 L760,350 Z" fill="#e6ede9" opacity="0.9"/> <!-- AUS rough -->
+    <path d="M640,290 L690,300 L700,330 L650,340 L620,320 Z" fill="#e6ede9" opacity="0.9"/> <!-- AFR rough -->
 
-      <!-- Polynesia -->
-      <article class="card">
-        <div class="card-hero" style="background: linear-gradient(135deg, rgba(0,0,0,.35), rgba(0,0,0,.2)), radial-gradient(600px 300px at 80% 10%, rgba(255,255,255,.18), transparent 60%), linear-gradient(120deg, #7bd3c4, #7fd8ff 40%, #9ab6ff 100%);">
-          <h3>Polinesia Francese · Relax 🌺🐠🏝️</h3>
-          <div class="badges">
-            <span class="badge">Lagune turchesi</span>
-            <span class="badge">Overwater</span>
-            <span class="badge">Snorkeling</span>
-            <span class="badge">Tramonti</span>
-          </div>
-        </div>
-        <div class="card-body">
-          <p>Acque trasparenti, bungalow sull’acqua e ritmi lenti. Il modo perfetto per chiudere il viaggio.</p>
-          <ul>
-            <li>Bora Bora · motu & lagoon tour</li>
-            <li>Rangiroa · giardini di corallo</li>
-            <li>Polinesian vibes & vaniglia</li>
-          </ul>
-        </div>
-      </article>
-    </div>
+    <!-- Pins (approx positions for aesthetics, not geodesic) -->
+    <!-- Italy -->
+    <circle cx="620" cy="120" r="5" fill="#2c3e50"/>
+    <text x="628" y="118" font-size="12" fill="#2c3e50">Italy</text>
+    <!-- Hawaiʻi -->
+    <circle cx="240" cy="190" r="5" fill="#2c3e50"/>
+    <text x="248" y="188" font-size="12" fill="#2c3e50">Hawaiʻi</text>
+    <!-- French Polynesia -->
+    <circle cx="300" cy="260" r="5" fill="#2c3e50"/>
+    <text x="308" y="258" font-size="12" fill="#2c3e50">French Polynesia</text>
 
-    <div class="contrib">
+    <!-- Flight path (dashed arcs) -->
+    <path d="M620,120 C500,40 360,120 240,190" fill="none" stroke="#6a68a3" stroke-width="2.5" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+    <path d="M240,190 C260,220 280,240 300,260" fill="none" stroke="#6a68a3" stroke-width="2.5" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+  </svg>
+
+  <!-- Pins (visual accent above the SVG) -->
+  <span class="pin" style="left:59.5%; top:19.5%"></span>   <!-- Italy -->
+  <span class="pin" style="left:23.5%; top:47%"></span>     <!-- Hawaiʻi -->
+  <span class="pin" style="left:29.5%; top:63%"></span>     <!-- FP -->
+
+  <!-- Polaroids (replace src with your images) -->
+  <figure class="polaroid" style="left:6%; top:8%; transform:rotate(-4deg)">
+    <img src="/wedding-site/assets/hawaii.jpg" alt="Hawaiʻi photo">
+    <figcaption class="cap">Hawaiʻi</figcaption>
+  </figure>
+
+  <figure class="polaroid" style="right:6%; bottom: -20px; transform:rotate(3deg)">
+    <img src="/wedding-site/assets/polynesia.jpg" alt="French Polynesia photo">
+    <figcaption class="cap">French Polynesia</figcaption>
+  </figure>
+</div>
+
+<!-- Contribution (single multilingual block) -->
+<section class="section">
+  <div class="contrib">
+
+    <div class="box it">
+      <p class="head">🇮🇹 Italiano</p>
       <p><strong>Vuoi contribuire al nostro viaggio?</strong><br>
-      Il regalo più bello è la tua presenza nel nostro giorno speciale. Ma se desideri, puoi contribuire al nostro viaggio di nozze.<br>
+      Il regalo più bello che possiamo ricevere è la tua presenza nel nostro giorno speciale.
+      Ma se desideri farci un regalo, puoi contribuire al nostro viaggio di nozze!<br>
       <strong>IBAN:</strong> XXX &nbsp; <strong>BIC:</strong> YYY</p>
     </div>
-  </section>
 
-  <!-- EN -->
-  <section id="en" class="box box-en">
-    <div class="tag"><span class="h2 h2-en">Honeymoon</span><span>· 🇬🇧 English</span></div>
-    <p class="note">We’ll start with adventure among volcanoes, jungles and waves in <strong>Hawaiʻi</strong>, then unwind in the turquoise lagoons of <strong>French Polynesia</strong>.</p>
-
-    <div class="duo">
-      <article class="card">
-        <div class="card-hero">
-          <h3>Hawaiʻi · Adventure 🌋🌿🏄‍♂️</h3>
-          <div class="badges">
-            <span class="badge">Big Island</span><span class="badge">Volcanoes</span>
-            <span class="badge">Waterfalls</span><span class="badge">Road trips</span>
-          </div>
-        </div>
-        <div class="card-body">
-          <p>Crater hikes, lava beaches, snorkeling and scenic drives — a vibrant nature chapter.</p>
-          <ul>
-            <li>Kīlauea & Volcanoes National Park</li>
-            <li>Hamakua Coast & waterfalls</li>
-            <li>Black/green sand bays, manta rays</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-hero" style="background: linear-gradient(135deg, rgba(0,0,0,.35), rgba(0,0,0,.2)), radial-gradient(600px 300px at 80% 10%, rgba(255,255,255,.18), transparent 60%), linear-gradient(120deg, #7bd3c4, #7fd8ff 40%, #9ab6ff 100%);">
-          <h3>French Polynesia · Relax 🌺🐠🏝️</h3>
-          <div class="badges">
-            <span class="badge">Turquoise lagoons</span><span class="badge">Overwater</span>
-            <span class="badge">Snorkeling</span><span class="badge">Sunsets</span>
-          </div>
-        </div>
-        <div class="card-body">
-          <p>Crystal-clear waters, overwater bungalows and slow island time — a dreamy finale.</p>
-          <ul>
-            <li>Bora Bora · motu & lagoon tour</li>
-            <li>Rangiroa · coral gardens</li>
-            <li>Polynesian vibes & vanilla</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-
-    <div class="contrib">
+    <div class="box en">
+      <p class="head">🇬🇧 English</p>
       <p><strong>Would you like to contribute to our trip?</strong><br>
-      Your presence is the greatest gift. If you wish to offer something, you can contribute to our honeymoon.<br>
+      Your presence is the greatest gift on our special day.
+      If you wish to offer a present, you can contribute to our honeymoon!<br>
       <strong>IBAN:</strong> XXX &nbsp; <strong>BIC:</strong> YYY</p>
     </div>
-  </section>
 
-  <!-- FR -->
-  <section id="fr" class="box box-fr">
-    <div class="tag"><span class="h2 h2-fr">Voyage de noces</span><span>· 🇫🇷 Français</span></div>
-    <p class="note">Un début d’aventure parmi volcans, jungle et vagues à <strong>Hawaiʻi</strong>, puis détente totale dans les lagons turquoise de <strong>Polynésie française</strong>.</p>
-
-    <div class="duo">
-      <article class="card">
-        <div class="card-hero">
-          <h3>Hawaiʻi · Aventure 🌋🌿🏄‍♂️</h3>
-          <div class="badges">
-            <span class="badge">Big Island</span><span class="badge">Volcans</span>
-            <span class="badge">Cascades</span><span class="badge">Road trips</span>
-          </div>
-        </div>
-        <div class="card-body">
-          <p>Randos sur cratères, plages de lave, snorkeling et routes panoramiques — un chapitre 100% nature.</p>
-          <ul>
-            <li>Kīlauea & Volcanoes National Park</li>
-            <li>Hamakua Coast & cascades</li>
-            <li>Baies de sable noir/vert, raies manta</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-hero" style="background: linear-gradient(135deg, rgba(0,0,0,.35), rgba(0,0,0,.2)), radial-gradient(600px 300px at 80% 10%, rgba(255,255,255,.18), transparent 60%), linear-gradient(120deg, #7bd3c4, #7fd8ff 40%, #9ab6ff 100%);">
-          <h3>Polynésie française · Détente 🌺🐠🏝️</h3>
-          <div class="badges">
-            <span class="badge">Lagons turquoise</span><span class="badge">Overwater</span>
-            <span class="badge">Snorkeling</span><span class="badge">Couchers de soleil</span>
-          </div>
-        </div>
-        <div class="card-body">
-          <p>Eaux cristallines, bungalows sur pilotis et rythme insulaire — le final rêvé.</p>
-          <ul>
-            <li>Bora Bora · motu & lagoon tour</li>
-            <li>Rangiroa · jardins de corail</li>
-            <li>Ambiance polynésienne & vanille</li>
-          </ul>
-        </div>
-      </article>
+    <div class="box fr">
+      <p class="head">🇫🇷 Français</p>
+      <p><strong>Souhaitez-vous contribuer à notre voyage&nbsp;?</strong><br>
+      Le plus beau cadeau est votre présence le jour de notre mariage.
+      Mais si vous souhaitez nous faire un présent, vous pouvez participer à notre voyage de noces&nbsp;!<br>
+      <strong>IBAN&nbsp;:</strong> XXX &nbsp; <strong>BIC&nbsp;:</strong> YYY</p>
     </div>
 
-    <div class="contrib" style="background:rgba(184,75,98,.06)">
-      <p><strong>Souhaitez-vous contribuer à notre voyage ?</strong><br>
-      Le plus beau cadeau reste votre présence. Si vous le souhaitez, vous pouvez participer à notre voyage de noces.<br>
-      <strong>IBAN :</strong> XXX &nbsp; <strong>BIC :</strong> YYY</p>
-    </div>
-  </section>
-</main>
+  </div>
+</section>
 
 <footer style="text-align:center;color:#6b6b6b;padding:40px 20px">
   <small>© Charlotte &amp; Gianluca — 2026</small>
