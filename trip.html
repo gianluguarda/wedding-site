@@ -1,28 +1,96 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Honeymoon — Charlotte & Gianluca</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
-:root{--lavender-600:#6a68a3;--blue-600:#4b6cb7;--wine-600:#b84b62;--beige:#f7f4ef;--ink:#242424;--muted:#6b6b6b}
-*{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:"Cormorant Garamond",Georgia,serif;color:var(--ink);background:var(--beige)}
-header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.8);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
-.nav{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:baseline;gap:10px}.brand .names{font-family:"Great Vibes",cursive;font-size:30px;color:var(--lavender-600)}
-nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}nav a{text-decoration:none;color:var(--ink);opacity:.9}nav a:hover{opacity:1;border-bottom:1px solid var(--lavender-600)}
-.section{max-width:1100px;margin:0 auto;padding:80px 20px 60px}
-.h1{font-family:"Great Vibes",cursive;font-size:56px;color:var(--lavender-600);text-align:center;margin:10px 0 4px}
-.lead{color:var(--muted);text-align:center;margin:0 0 20px}
+:root{
+  --it:#9DBF90;      /* verde IT (più scuro per contrasto) */
+  --en:#4b6cb7;      /* blu EN */
+  --fr:#b84b62;      /* bordeaux FR */
+  --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b;
+}
+*{box-sizing:border-box} html,body{height:100%}
+body{margin:0;font-family:"Cormorant Garamond",Georgia,serif;color:var(--ink);background:var(--beige)}
+
+/* Header */
+header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.88);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
+.nav{max-width:1100px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand .names{font-family:"Great Vibes",cursive;font-size:30px;color:var(--en)}
+nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}
+nav a{text-decoration:none;color:var(--ink);opacity:.9}
+nav a:hover{opacity:1;border-bottom:1px solid var(--en)}
+
+/* Hero */
+.hero{
+  background: radial-gradient(1200px 700px at 100% -10%, rgba(75,108,183,.18), transparent 60%),
+              linear-gradient(160deg, #e7ecff 0%, #f7f4ef 60%);
+  padding:60px 20px 20px;
+  text-align:center;
+}
+.h1{font-family:"Great Vibes",cursive;font-size:56px;color:var(--en);margin:0 0 8px}
+.sublead{color:var(--muted);margin:0}
+.wave{display:block;width:100%;height:auto}
+
+/* Section scaffold */
+.section{max-width:1100px;margin:0 auto;padding:30px 20px 70px}
+.lang-toc{display:flex;gap:10px;justify-content:center;margin:0 0 22px}
+.lang-toc a{text-decoration:none;color:var(--ink);border:1px solid #ddd;padding:8px 12px;border-radius:12px}
+
+/* Language boxes */
 .box{background:#fff;border:1px solid #eee;border-radius:20px;padding:24px;margin:26px 0}
-.box-it{border-left:6px solid var(--lavender-600)}.box-en{border-left:6px solid var(--blue-600)}.box-fr{border-left:6px solid var(--wine-600)}
-.tag{display:flex;align-items:center;gap:10px;margin:0 0 8px 0;font-size:26px;font-weight:600;color:var(--ink)}
-.h2{margin:0;font-family:"Great Vibes",cursive;font-size:40px}.h2-it{color:var(--lavender-600)}.h2-en{color:var(--blue-600)}.h2-fr{color:var(--wine-600)}
-@media (max-width:700px){.h1{font-size:44px}.tag{font-size:22px}}
+.box-it{border-left:6px solid var(--it)}
+.box-en{border-left:6px solid var(--en)}
+.box-fr{border-left:6px solid var(--fr)}
+.tag{display:flex;align-items:center;gap:10px;margin:0 0 8px 0;font-size:26px;font-weight:600}
+.h2{margin:0;font-family:"Great Vibes",cursive;font-size:40px}
+.h2-it{color:var(--it)} .h2-en{color:var(--en)} .h2-fr{color:var(--fr)}
+.note{color:var(--muted);margin:0 0 14px}
+
+/* Duo cards (Hawaii / Polynesia) */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+.card{
+  border:1px solid rgba(0,0,0,.06); border-radius:18px; overflow:hidden; background:#fff;
+  box-shadow:0 12px 40px rgba(0,0,0,.06)
+}
+.card-hero{
+  padding:24px; color:#fff;
+  background: linear-gradient(135deg, rgba(0,0,0,.35), rgba(0,0,0,.2)),
+              radial-gradient(600px 300px at 80% 10%, rgba(255,255,255,.18), transparent 60%),
+              linear-gradient(120deg, #6da7ff, #77d0ff 40%, #7bd3c4 100%);
+}
+.card-hero h3{margin:0 0 6px 0;font-weight:600}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badge{background:rgba(255,255,255,.85);color:#1e1e1e;border-radius:999px;padding:6px 10px;font-size:14px}
+.card-body{padding:16px 18px}
+.card-body ul{margin:0 0 0 18px}
+.card-body p{margin:0 0 10px}
+
+/* Contribution box */
+.contrib{
+  margin-top:20px;padding:18px;border:1px solid rgba(0,0,0,.06);border-radius:16px;background:rgba(75,108,183,.06)
+}
+a.link{color:var(--en);text-decoration:none;border-bottom:1px dotted rgba(0,0,0,.25)}
+a.link:hover{border-bottom-color:var(--en)}
+
+@media (max-width:900px){.duo{grid-template-columns:1fr}}
+@media (max-width:700px){
+  .h1{font-size:44px}
+  .nav{padding:20px 16px}
+  nav ul{gap:12px}
+  nav a{font-size:18px}
+}
 </style>
 </head>
 <body>
+
 <header>
   <div class="nav">
     <div class="brand">
@@ -32,7 +100,7 @@ nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}nav a{text-decor
       <ul>
         <li><a href="/wedding-site/home.html">Home</a></li>
         <li><a href="/wedding-site/story.html">Our story</a></li>
-        <li><a href="/wedding-site/stay.html">Where to stay</a></li>
+        <li><a href="/wedding-site/stay.html">Plan your trip</a></li>
         <li><a href="/wedding-site/trip.html">Honeymoon</a></li>
         <li><a href="/wedding-site/rsvp.html">RSVP</a></li>
       </ul>
@@ -40,29 +108,181 @@ nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}nav a{text-decor
   </div>
 </header>
 
-<main class="section">
+<!-- Hero -->
+<div class="hero">
   <h1 class="h1">Honeymoon</h1>
-  <p class="lead">A heartfelt note about the trip and how to contribute (if desired).</p>
+  <p class="sublead">Hawaiʻi for adventure · French Polynesia for pure relax</p>
+</div>
+<svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,40 C240,120 480,0 720,60 C960,120 1200,40 1440,80 L1440,120 L0,120 Z" fill="#f7f4ef"></path>
+</svg>
+
+<main class="section">
+  <nav class="lang-toc">
+    <a href="#it">🇮🇹 Italiano</a>
+    <a href="#en">🇬🇧 English</a>
+    <a href="#fr">🇫🇷 Français</a>
+  </nav>
 
   <!-- IT -->
   <section id="it" class="box box-it">
     <div class="tag"><span class="h2 h2-it">Viaggio di nozze</span><span>· 🇮🇹 Italiano</span></div>
-    <p>Se desiderate farci un regalo, potete contribuire al nostro viaggio di nozze. I dettagli (IBAN, note) possono essere inseriti qui.</p>
+    <p class="note">Prima un po’ di avventura tra vulcani, jungle & onde alle <strong>Hawaiʻi</strong> — poi totale relax tra lagune turchesi in <strong>Polinesia Francese</strong>.</p>
+
+    <div class="duo">
+      <!-- Hawaii -->
+      <article class="card">
+        <div class="card-hero">
+          <h3>Hawaiʻi · Avventura 🌋🌿🏄‍♂️</h3>
+          <div class="badges">
+            <span class="badge">Big Island</span>
+            <span class="badge">Volcanoes</span>
+            <span class="badge">Waterfalls</span>
+            <span class="badge">Road trips</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Trekkings tra crateri e foreste, spiagge laviche, snorkeling e strade panoramiche. Un capitolo energico, pieno di natura.</p>
+          <ul>
+            <li>Kīlauea & Volcanoes National Park</li>
+            <li>Hamakua Coast & cascate</li>
+            <li>Baie nere e verdi, manta rays</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Polynesia -->
+      <article class="card">
+        <div class="card-hero" style="background: linear-gradient(135deg, rgba(0,0,0,.35), rgba(0,0,0,.2)), radial-gradient(600px 300px at 80% 10%, rgba(255,255,255,.18), transparent 60%), linear-gradient(120deg, #7bd3c4, #7fd8ff 40%, #9ab6ff 100%);">
+          <h3>Polinesia Francese · Relax 🌺🐠🏝️</h3>
+          <div class="badges">
+            <span class="badge">Lagune turchesi</span>
+            <span class="badge">Overwater</span>
+            <span class="badge">Snorkeling</span>
+            <span class="badge">Tramonti</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Acque trasparenti, bungalow sull’acqua e ritmi lenti. Il modo perfetto per chiudere il viaggio.</p>
+          <ul>
+            <li>Bora Bora · motu & lagoon tour</li>
+            <li>Rangiroa · giardini di corallo</li>
+            <li>Polinesian vibes & vaniglia</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <div class="contrib">
+      <p><strong>Vuoi contribuire al nostro viaggio?</strong><br>
+      Il regalo più bello è la tua presenza nel nostro giorno speciale. Ma se desideri, puoi contribuire al nostro viaggio di nozze.<br>
+      <strong>IBAN:</strong> XXX &nbsp; <strong>BIC:</strong> YYY</p>
+    </div>
   </section>
 
   <!-- EN -->
   <section id="en" class="box box-en">
     <div class="tag"><span class="h2 h2-en">Honeymoon</span><span>· 🇬🇧 English</span></div>
-    <p>If you wish to offer a gift, you can contribute to our honeymoon. Details (bank info or link) can be placed here.</p>
+    <p class="note">We’ll start with adventure among volcanoes, jungles and waves in <strong>Hawaiʻi</strong>, then unwind in the turquoise lagoons of <strong>French Polynesia</strong>.</p>
+
+    <div class="duo">
+      <article class="card">
+        <div class="card-hero">
+          <h3>Hawaiʻi · Adventure 🌋🌿🏄‍♂️</h3>
+          <div class="badges">
+            <span class="badge">Big Island</span><span class="badge">Volcanoes</span>
+            <span class="badge">Waterfalls</span><span class="badge">Road trips</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Crater hikes, lava beaches, snorkeling and scenic drives — a vibrant nature chapter.</p>
+          <ul>
+            <li>Kīlauea & Volcanoes National Park</li>
+            <li>Hamakua Coast & waterfalls</li>
+            <li>Black/green sand bays, manta rays</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-hero" style="background: linear-gradient(135deg, rgba(0,0,0,.35), rgba(0,0,0,.2)), radial-gradient(600px 300px at 80% 10%, rgba(255,255,255,.18), transparent 60%), linear-gradient(120deg, #7bd3c4, #7fd8ff 40%, #9ab6ff 100%);">
+          <h3>French Polynesia · Relax 🌺🐠🏝️</h3>
+          <div class="badges">
+            <span class="badge">Turquoise lagoons</span><span class="badge">Overwater</span>
+            <span class="badge">Snorkeling</span><span class="badge">Sunsets</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Crystal-clear waters, overwater bungalows and slow island time — a dreamy finale.</p>
+          <ul>
+            <li>Bora Bora · motu & lagoon tour</li>
+            <li>Rangiroa · coral gardens</li>
+            <li>Polynesian vibes & vanilla</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <div class="contrib">
+      <p><strong>Would you like to contribute to our trip?</strong><br>
+      Your presence is the greatest gift. If you wish to offer something, you can contribute to our honeymoon.<br>
+      <strong>IBAN:</strong> XXX &nbsp; <strong>BIC:</strong> YYY</p>
+    </div>
   </section>
 
   <!-- FR -->
   <section id="fr" class="box box-fr">
     <div class="tag"><span class="h2 h2-fr">Voyage de noces</span><span>· 🇫🇷 Français</span></div>
-    <p>Si vous souhaitez nous faire un cadeau, vous pouvez contribuer à notre voyage de noces. Les détails (coordonnées bancaires, lien) peuvent être ajoutés ici.</p>
+    <p class="note">Un début d’aventure parmi volcans, jungle et vagues à <strong>Hawaiʻi</strong>, puis détente totale dans les lagons turquoise de <strong>Polynésie française</strong>.</p>
+
+    <div class="duo">
+      <article class="card">
+        <div class="card-hero">
+          <h3>Hawaiʻi · Aventure 🌋🌿🏄‍♂️</h3>
+          <div class="badges">
+            <span class="badge">Big Island</span><span class="badge">Volcans</span>
+            <span class="badge">Cascades</span><span class="badge">Road trips</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Randos sur cratères, plages de lave, snorkeling et routes panoramiques — un chapitre 100% nature.</p>
+          <ul>
+            <li>Kīlauea & Volcanoes National Park</li>
+            <li>Hamakua Coast & cascades</li>
+            <li>Baies de sable noir/vert, raies manta</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-hero" style="background: linear-gradient(135deg, rgba(0,0,0,.35), rgba(0,0,0,.2)), radial-gradient(600px 300px at 80% 10%, rgba(255,255,255,.18), transparent 60%), linear-gradient(120deg, #7bd3c4, #7fd8ff 40%, #9ab6ff 100%);">
+          <h3>Polynésie française · Détente 🌺🐠🏝️</h3>
+          <div class="badges">
+            <span class="badge">Lagons turquoise</span><span class="badge">Overwater</span>
+            <span class="badge">Snorkeling</span><span class="badge">Couchers de soleil</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Eaux cristallines, bungalows sur pilotis et rythme insulaire — le final rêvé.</p>
+          <ul>
+            <li>Bora Bora · motu & lagoon tour</li>
+            <li>Rangiroa · jardins de corail</li>
+            <li>Ambiance polynésienne & vanille</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <div class="contrib" style="background:rgba(184,75,98,.06)">
+      <p><strong>Souhaitez-vous contribuer à notre voyage ?</strong><br>
+      Le plus beau cadeau reste votre présence. Si vous le souhaitez, vous pouvez participer à notre voyage de noces.<br>
+      <strong>IBAN :</strong> XXX &nbsp; <strong>BIC :</strong> YYY</p>
+    </div>
   </section>
 </main>
 
-<footer style="text-align:center;color:#6b6b6b;padding:40px 20px"><small>© Charlotte &amp; Gianluca — 2026</small></footer>
+<footer style="text-align:center;color:#6b6b6b;padding:40px 20px">
+  <small>© Charlotte &amp; Gianluca — 2026</small>
+</footer>
 </body>
 </html>
