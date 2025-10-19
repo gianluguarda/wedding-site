@@ -4,67 +4,58 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Honeymoon — Charlotte & Gianluca</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-
 <style>
-:root{
-  --accent:#7465ad;
-  --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b;
-}
-
+:root{ --accent:#7465ad; --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b }
 *{box-sizing:border-box} html,body{height:100%}
 body{margin:0;font-family:"Cormorant Garamond",Georgia,serif;color:var(--ink);background:var(--beige)}
-
-/* Header (menu in inglese) */
+/* Header */
 header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.88);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
 .nav{max-width:1100px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:baseline;gap:10px}
-.brand .names{font-family:"Great Vibes",cursive;font-size:30px;color:var(--accent)}
-nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}
-nav a{text-decoration:none;color:var(--ink);opacity:.9}
+.brand{display:flex;align-items:center;gap:12px}
+.hamburger{display:none;border:1px solid rgba(0,0,0,.1);background:white;border-radius:10px;padding:8px 10px;cursor:pointer}
+.hamburger span{display:block;width:20px;height:2px;background:#444;margin:4px 0}
+.brand .names{font-family:"Great Vibes",cursive;font-size:35px;color:var(--accent)}
+.brand .date{font-size:16px;color:var(--muted)}
+nav ul{list-style:none;display:flex;gap:24px;margin:0;padding:0}
+nav a{text-decoration:none;color:var(--ink);opacity:.95;font-size:19px;line-height:1;padding:8px 6px;border-radius:10px}
 nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
-
-/* Hero */
-.hero{padding:60px 20px 20px;text-align:center;
-  background: radial-gradient(1200px 700px at 100% -10%, rgba(75,108,183,.18), transparent 60%),
-              linear-gradient(160deg, #e7ecff 0%, #f7f4ef 65%)}
-.h1{font-family:"Great Vibes",cursive;font-size:56px;color:var(--accent);margin:0 0 8px}
-.sublead{color:var(--muted);margin:0 0 8px}
-
-/* Image frame */
-.frame{max-width:1100px;margin:10px auto 30px;padding:0 20px}
-.heroimg{
-  width:100%; height:auto; display:block;
-  border-radius:20px; border:1px solid #eee; background:#fff;
-  box-shadow:0 12px 36px rgba(0,0,0,.08)
+nav li.cta a{background:var(--accent);color:#fff;padding:10px 14px;border-radius:14px;border-bottom:none}
+nav li.cta a:hover{opacity:.95;transform:translateY(-1px)}
+.mobile-menu{display:none;position:fixed;top:64px;right:16px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.12);padding:12px;z-index:40}
+.mobile-menu a{display:block;padding:10px 12px;border-radius:10px;color:var(--ink);text-decoration:none}
+.mobile-menu a:hover{background:rgba(116,101,173,.08)}
+/* Page */
+.section{max-width:1100px;margin:0 auto;padding:86px 20px 60px}
+.h1{font-family:"Great Vibes",cursive;font-size:56px;color:var(--accent);text-align:center;margin:10px 0 14px}
+.frame{max-width:980px;margin:0 auto 24px;padding:0 20px}
+/* Polaroid */
+.polaroid{
+  display:block;width:100%;height:auto;background:#fff;
+  border:10px solid #fff;border-bottom-width:22px;border-radius:6px;
+  box-shadow:0 10px 30px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
+  transform:rotate(-0.4deg);
 }
-
-/* Contribution (multilingue in un unico blocco) */
-.section{max-width:900px;margin:0 auto 80px; padding:0 20px}
-.contrib{margin-top:22px; display:grid; gap:14px}
-.contrib .box{
-  background:#fff;border:1px solid #eee;border-radius:16px;padding:18px;
-}
-.head{display:flex;align-items:center;gap:10px;margin:0 0 6px 0;font-weight:700}
-.it .head{color:var(--accent)} .en .head{color:var(--accent)} .fr .head{color:var(--accent)}
-
-/* Mobile tweaks */
+.contrib{max-width:900px;margin:0 auto;padding:0 20px;display:grid;gap:14px}
+.box{background:#fff;border:1px solid #eee;border-radius:16px;padding:18px}
+.head{font-weight:700;margin:0 0 6px 0;color:var(--accent)}
+@media (max-width:900px){.hamburger{display:block} nav ul{display:none}}
 @media (max-width:700px){
   .h1{font-size:44px}
   .nav{padding:20px 16px}
-  nav ul{gap:12px}
-  nav a{font-size:18px}
+  .brand .names{font-size:31px}
+  .mobile-menu{top:60px}
+  nav a{font-size:18px;padding:10px 8px}
 }
 </style>
 </head>
 <body>
-
 <header>
   <div class="nav">
     <div class="brand">
+      <button id="hambBtn" class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
       <div class="names">Charlotte &amp; Gianluca</div><div class="dot">·</div><div class="date">June 20, 2026</div>
     </div>
     <nav>
@@ -73,59 +64,59 @@ nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
         <li><a href="/wedding-site/story.html">Our story</a></li>
         <li><a href="/wedding-site/stay.html">Plan your trip</a></li>
         <li><a href="/wedding-site/trip.html">Honeymoon</a></li>
-        <li><a href="/wedding-site/rsvp.html">RSVP</a></li>
+        <li class="cta"><a href="/wedding-site/rsvp.html">RSVP</a></li>
       </ul>
     </nav>
   </div>
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="/wedding-site/home.html">Home</a>
+    <a href="/wedding-site/story.html">Our story</a>
+    <a href="/wedding-site/stay.html">Plan your trip</a>
+    <a href="/wedding-site/trip.html">Honeymoon</a>
+    <a href="/wedding-site/rsvp.html"><strong>RSVP</strong></a>
+  </div>
 </header>
 
-<!-- Hero -->
-<div class="hero">
+<main class="section">
   <h1 class="h1">Honeymoon</h1>
-  <p class="sublead">Italia → Hawaiʻi → Polinesia Francese</p>
-</div>
-
-<!-- Canva image -->
-<div class="frame">
-  <!-- Sostituisci il src con il nome del tuo file se diverso -->
-  <img class="heroimg" src="/wedding-site/assets/honeymoon-map.jpg"
-       alt="Planisfero con rotta del nostro viaggio di nozze: Italia → Hawaiʻi → Polinesia Francese"
-       loading="lazy" decoding="async">
-</div>
-
-<!-- Contribution (single multilingual block) -->
-<section class="section">
-  <div class="contrib">
-
-    <div class="box it">
-      <p class="head">🇮🇹 Italiano</p>
-      <p><strong>Vuoi contribuire al nostro viaggio?</strong><br>
-      Il regalo più bello che possiamo ricevere è la tua presenza nel nostro giorno speciale.
-      Ma se desideri farci un regalo, puoi contribuire al nostro viaggio di nozze!<br>
-      <strong>IBAN:</strong> XXX &nbsp; <strong>BIC:</strong> YYY</p>
-    </div>
-
-    <div class="box en">
-      <p class="head">🇬🇧 English</p>
-      <p><strong>Would you like to contribute to our trip?</strong><br>
-      Your presence is the greatest gift on our special day.
-      If you wish to offer a present, you can contribute to our honeymoon!<br>
-      <strong>IBAN:</strong> XXX &nbsp; <strong>BIC:</strong> YYY</p>
-    </div>
-
-    <div class="box fr">
-      <p class="head">🇫🇷 Français</p>
-      <p><strong>Souhaitez-vous contribuer à notre voyage&nbsp;?</strong><br>
-      Le plus beau cadeau est votre présence le jour de notre mariage.
-      Mais si vous souhaitez nous faire un présent, vous pouvez participer à notre voyage de noces&nbsp;!<br>
-      <strong>IBAN&nbsp;:</strong> XXX &nbsp; <strong>BIC&nbsp;:</strong> YYY</p>
-    </div>
-
+  <div class="frame">
+    <img class="polaroid" src="/wedding-site/assets/honeymoon-map.jpg" alt="Planisfero: Italia → Hawaiʻi → Polinesia Francese" loading="lazy" decoding="async">
   </div>
-</section>
 
-<footer style="text-align:center;color:#6b6b6b;padding:40px 20px">
-  <small>© Charlotte &amp; Gianluca — 2026</small>
-</footer>
+  <div class="contrib">
+    <div class="box">
+      <p class="head">🇮🇹 Italiano</p>
+      <p><strong>Vuoi contribuire al nostro viaggio?</strong><br>Il regalo più bello è la tua presenza nel nostro giorno speciale. Se desideri, puoi contribuire al nostro viaggio di nozze.<br><strong>IBAN:</strong> XXX &nbsp; <strong>BIC:</strong> YYY</p>
+    </div>
+    <div class="box">
+      <p class="head">🇬🇧 English</p>
+      <p><strong>Would you like to contribute to our trip?</strong><br>Your presence is the greatest gift. If you wish, you can contribute to our honeymoon.<br><strong>IBAN:</strong> XXX &nbsp; <strong>BIC:</strong> YYY</p>
+    </div>
+    <div class="box">
+      <p class="head">🇫🇷 Français</p>
+      <p><strong>Souhaitez-vous contribuer à notre voyage&nbsp;?</strong><br>Le plus beau cadeau est votre présence. Si vous le souhaitez, vous pouvez participer à notre voyage de noces.<br><strong>IBAN&nbsp;:</strong> XXX &nbsp; <strong>BIC&nbsp;:</strong> YYY</p>
+    </div>
+  </div>
+</main>
+
+<footer style="text-align:center;color:#6b6b6b;padding:40px 20px"><small>© Charlotte &amp; Gianluca — 2026</small></footer>
+
+<script>
+(function(){
+  const btn=document.getElementById('hambBtn');
+  const menu=document.getElementById('mobileMenu');
+  if(btn&&menu){
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      menu.style.display = (menu.style.display==='block')?'none':'block';
+    });
+    document.addEventListener('click',e=>{
+      if(menu.style.display==='block' && !menu.contains(e.target) && e.target!==btn){
+        menu.style.display='none';
+      }
+    });
+  }
+})();
+</script>
 </body>
 </html>
