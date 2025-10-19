@@ -4,45 +4,39 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Our story — Charlotte & Gianluca</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-
 <style>
-:root{
-  --accent:#7465ad;
-  --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b;
-}
+:root{ --accent:#7465ad; --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b }
 *{box-sizing:border-box} html,body{height:100%}
 body{margin:0;font-family:"Cormorant Garamond",Georgia,serif;color:var(--ink);background:var(--beige)}
-
 /* Header */
 header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.88);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
 .nav{max-width:1100px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:baseline;gap:10px}
-.brand .names{font-family:"Great Vibes",cursive;font-size:30px;color:var(--accent)}
-nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}
-nav a{text-decoration:none;color:var(--ink);opacity:.9}
+.brand{display:flex;align-items:center;gap:12px}
+.hamburger{display:none;border:1px solid rgba(0,0,0,.1);background:white;border-radius:10px;padding:8px 10px;cursor:pointer}
+.hamburger span{display:block;width:20px;height:2px;background:#444;margin:4px 0}
+.brand .names{font-family:"Great Vibes",cursive;font-size:35px;color:var(--accent)}
+.brand .date{font-size:16px;color:var(--muted)}
+nav ul{list-style:none;display:flex;gap:24px;margin:0;padding:0}
+nav a{text-decoration:none;color:var(--ink);opacity:.95;font-size:19px;line-height:1;padding:8px 6px;border-radius:10px}
 nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
-
-/* Layout */
+nav li.cta a{background:var(--accent);color:#fff;padding:10px 14px;border-radius:14px;border-bottom:none}
+nav li.cta a:hover{opacity:.95;transform:translateY(-1px)}
+.mobile-menu{display:none;position:fixed;top:64px;right:16px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.12);padding:12px;z-index:40}
+.mobile-menu a{display:block;padding:10px 12px;border-radius:10px;color:var(--ink);text-decoration:none}
+.mobile-menu a:hover{background:rgba(116,101,173,.08)}
+/* Page */
 .section{max-width:1100px;margin:0 auto;padding:86px 20px 60px}
 .h1{font-family:"Great Vibes",cursive;font-size:56px;color:var(--accent);text-align:center;margin:10px 0 4px}
 .lead{color:var(--muted);text-align:center;margin:0 0 22px}
 .lang-toc{display:flex;gap:10px;justify-content:center;margin:0 0 26px}
 .lang-toc a{text-decoration:none;color:var(--ink);border:1px solid #ddd;padding:8px 12px;border-radius:12px}
-
-/* Boxes lingue */
 .box{background:#fff;border:1px solid #eee;border-radius:20px;padding:24px;margin:26px 0}
-.box-it{border-left:6px solid var(--accent)}
-.box-en{border-left:6px solid var(--accent)}
-.box-fr{border-left:6px solid var(--accent)}
 .tag{display:flex;align-items:center;gap:10px;margin:0 0 12px 0;font-size:26px;font-weight:600}
-.h2{margin:0;font-family:"Great Vibes",cursive;font-size:40px}
-.h2-it{color:var(--accent)} .h2-en{color:var(--accent)} .h2-fr{color:var(--accent)}
+.h2{margin:0;font-family:"Great Vibes",cursive;font-size:40px;color:var(--accent)}
 .note{color:var(--muted);margin:0 0 14px}
-
 /* Timeline */
 .timeline{position:relative;margin:10px 0 0 0;padding-left:22px}
 .timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:rgba(0,0,0,.08)}
@@ -51,27 +45,28 @@ nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
 .badge{display:inline-block;font-weight:700;letter-spacing:.3px;background:#f5f5f5;border:1px solid #eee;color:#333;padding:4px 10px;border-radius:999px;margin-bottom:6px}
 .step h3{margin:6px 0 6px 0;font-size:22px}
 .step p{margin:0 0 10px 0}
-.media{margin-top:10px;border:1px solid #eee;border-radius:14px;overflow:hidden;background:#fafafa}
-.media img{display:block;width:100%;height:auto}
-
-/* Accenti badge per lingua */
-#it .badge{border-color:color-mix(in srgb,var(--accent) 50%, #eee)}
-#en .badge{border-color:color-mix(in srgb,var(--accent) 50%, #eee)}
-#fr .badge{border-color:color-mix(in srgb,var(--accent) 50%, #eee)}
-
+/* Polaroid media */
+.media{margin-top:10px;display:block;max-width:760px}
+.media img{
+  display:block;width:100%;height:auto;background:#fff;border:10px solid #fff;border-bottom-width:22px;border-radius:6px;
+  box-shadow:0 10px 30px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
+  transform:rotate(0.3deg);
+}
+@media (max-width:900px){.hamburger{display:block} nav ul{display:none}}
 @media (max-width:700px){
   .h1{font-size:44px}
   .nav{padding:20px 16px}
-  nav ul{gap:12px}
-  nav a{font-size:18px}
+  .brand .names{font-size:31px}
+  .mobile-menu{top:60px}
+  nav a{font-size:18px;padding:10px 8px}
 }
 </style>
 </head>
 <body>
-
 <header>
   <div class="nav">
     <div class="brand">
+      <button id="hambBtn" class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
       <div class="names">Charlotte &amp; Gianluca</div><div class="dot">·</div><div class="date">June 20, 2026</div>
     </div>
     <nav>
@@ -80,9 +75,16 @@ nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
         <li><a href="/wedding-site/story.html">Our story</a></li>
         <li><a href="/wedding-site/stay.html">Plan your trip</a></li>
         <li><a href="/wedding-site/trip.html">Honeymoon</a></li>
-        <li><a href="/wedding-site/rsvp.html">RSVP</a></li>
+        <li class="cta"><a href="/wedding-site/rsvp.html">RSVP</a></li>
       </ul>
     </nav>
+  </div>
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="/wedding-site/home.html">Home</a>
+    <a href="/wedding-site/story.html">Our story</a>
+    <a href="/wedding-site/stay.html">Plan your trip</a>
+    <a href="/wedding-site/trip.html">Honeymoon</a>
+    <a href="/wedding-site/rsvp.html"><strong>RSVP</strong></a>
   </div>
 </header>
 
@@ -90,76 +92,51 @@ nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
   <h1 class="h1">Our story</h1>
   <p class="lead">Una timeline di noi — dal primo ballo del 2014 fino al 2026.</p>
 
-  <nav class="lang-toc">
-    <a href="#it">🇮🇹 Italiano</a>
-    <a href="#en">🇬🇧 English</a>
-    <a href="#fr">🇫🇷 Français</a>
-  </nav>
+  <nav class="lang-toc"><a href="#it">🇮🇹 Italiano</a><a href="#en">🇬🇧 English</a><a href="#fr">🇫🇷 Français</a></nav>
 
-  <!-- 🇮🇹 ITALIANO -->
-  <section id="it" class="box box-it">
-    <div class="tag"><span class="h2 h2-it">La nostra storia</span><span>· 🇮🇹 Italiano</span></div>
+  <!-- 🇮🇹 IT -->
+  <section id="it" class="box">
+    <div class="tag"><span class="h2">La nostra storia</span><span>· 🇮🇹 Italiano</span></div>
     <p class="note">Piccoli grandi capitoli, città diverse e tanta strada fatta insieme. Questa è la nostra timeline.</p>
 
     <div class="timeline">
-      <!-- 2014 -->
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2014 · L’incontro</span>
+      <article class="step"><span class="dot"></span><span class="badge">2014 · L’incontro</span>
         <h3>Mykonos, 20 luglio — il primo ballo</h3>
         <p>Tutto comincia una sera d’estate, il <strong>20 luglio 2014 a Mykonos</strong>. Gianluca è in viaggio di maturità con gli amici, Charlotte è in vacanza con la sua famiglia (e, ironia della sorte, non era nemmeno felice di andare in Grecia quell’anno!). I nostri sguardi si incrociano tra tanti, e lì facciamo il nostro primo vero ballo.</p>
         <div class="media"><img src="/wedding-site/assets/story/2014.jpg" alt="Mykonos 2014 — il primo incontro"></div>
       </article>
 
-      <!-- 2014–2017 -->
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2014–2017 · La relazione a distanza</span>
+      <article class="step"><span class="dot"></span><span class="badge">2014–2017 · La relazione a distanza</span>
         <h3>Milano ↔ Charleroi — voli, chiamate e pazienza</h3>
-        <p>Tre anni di relazione a distanza non sono semplici: <strong>voli low-cost Milano–Charleroi</strong>, telefonate infinite, messaggi a ogni ora del giorno e della notte. Non è stato facile, ma la voglia di rivederci è sempre stata più forte di ogni chilometro.</p>
+        <p>Tre anni di relazione a distanza non sono semplici: <strong>voli low-cost Milano–Charleroi</strong>, telefonate infinite, messaggi a ogni ora. Non è stato facile, ma la voglia di rivederci è sempre stata più forte di ogni chilometro.</p>
         <div class="media"><img src="/wedding-site/assets/story/2014-2017.jpg" alt="Anni di relazione a distanza"></div>
       </article>
 
-      <!-- 2017–2018 -->
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2017–2018 · Charlotte diventa “Carlotta”</span>
+      <article class="step"><span class="dot"></span><span class="badge">2017–2018 · Charlotte diventa “Carlotta”</span>
         <h3>Milano — una nuova città, una nuova lingua</h3>
         <p>Le nostre vite si avvicinano quando <strong>Charlotte viene ammessa alla Bocconi</strong> (kudos!). Lei dice ancora oggi che è venuta a Milano perché c’è una delle migliori università al mondo… quindi non pensate che l’abbia fatto per Gianluca! 😉</p>
         <div class="media"><img src="/wedding-site/assets/story/2017-2018.jpg" alt="Anni a Milano — Bocconi"></div>
       </article>
 
-      <!-- 2018–2020 -->
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2018–2020 · Altri ostacoli</span>
+      <article class="step"><span class="dot"></span><span class="badge">2018–2020 · Altri ostacoli</span>
         <h3>Cile, Madrid, Parigi — e una pandemia</h3>
-        <p>Sarebbe stato troppo semplice fermarci lì. Prima Charlotte parte per <strong>sei mesi in Cile</strong> per studio, poi al rientro conviviamo per la prima volta. Ma non dura molto: questa volta è Gianluca a trasferirsi a <strong>Madrid</strong> per la tesi, dove Charlotte lo raggiunge per qualche mese. Poco dopo, Charlotte trova uno <strong>stage a Parigi</strong> — e di nuovo, distanza. E quando pensiamo che nulla possa più sorprenderci… arriva una <strong>pandemia globale</strong>: Gianluca bloccato in Italia, Charlotte in Belgio. Eppure, resistiamo.</p>
+        <p>Sarebbe stato troppo semplice fermarci lì. Charlotte parte per <strong>sei mesi in Cile</strong> per studio; al rientro conviviamo per la prima volta. Poi Gianluca si trasferisce a <strong>Madrid</strong> per la tesi e Charlotte lo raggiunge per qualche mese. Poco dopo, uno <strong>stage a Parigi</strong> rimette distanza. E quando pensiamo di averle viste tutte… arriva una <strong>pandemia globale</strong>: Gianluca in Italia, Charlotte in Belgio. Eppure, resistiamo.</p>
         <div class="media"><img src="/wedding-site/assets/story/2018-2020.jpg" alt="Cile, Madrid, Parigi e pandemia"></div>
       </article>
 
-      <!-- 2020–2024 -->
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2020–2024 · Si inizia a costruire una vita insieme</span>
+      <article class="step"><span class="dot"></span><span class="badge">2020–2024 · Si inizia a costruire una vita insieme</span>
         <h3>Una casa, nuovi lavori e più leggerezza</h3>
-        <p>Ci laureiamo e inizia la vita “vera”: Charlotte (forse un po’ nostalgica) entra nel mondo della <strong>birra belga</strong>, Gianluca decide di farsi del male e accetta un lavoro in <strong>Amazon</strong>… a Piacenza, lavorando notti e weekend. Il nostro primo nido è un bilocale di <strong>50 m² in Porta Romana</strong>, poi arriva la casa in <strong>Via Lucano</strong>. Nel 2024 Gianluca riesce finalmente a tornare a Milano con orari (quasi) da esseri umani — tutto diventa più semplice, e più leggero.</p>
+        <p>Ci laureiamo e inizia la vita “vera”: Charlotte (forse un po’ nostalgica) entra nel mondo della <strong>birra belga</strong>, Gianluca va in <strong>Amazon</strong>… a Piacenza, tra notti e weekend. Il nostro primo nido è un bilocale di <strong>50 m² in Porta Romana</strong>, poi la casa in <strong>Via Lucano</strong>. Nel 2024 Gianluca torna a Milano con orari (quasi) da esseri umani — tutto diventa più semplice e leggero.</p>
         <div class="media"><img src="/wedding-site/assets/story/2020-2024.jpg" alt="La nostra casa e i primi lavori"></div>
       </article>
 
-      <!-- 21 luglio 2025 -->
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">21 luglio 2025 · La proposta</span>
+      <article class="step"><span class="dot"></span><span class="badge">21 luglio 2025 · La proposta</span>
         <h3>Andalo, Dolomiti — “mi butto”</h3>
         <p>Dopo undici anni intensi, Gianluca capisce che è arrivato il momento di fare il passo. Tra le montagne delle <strong>Dolomiti, ad Andalo</strong>, arriva la proposta (inaspettata!). Charlotte dice sì. 💍</p>
         <div class="media"><img src="/wedding-site/assets/story/2025-proposta.jpg" alt="La proposta nelle Dolomiti"></div>
       </article>
 
-      <!-- 2026 -->
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2026 · Il matrimonio</span>
+      <article class="step"><span class="dot"></span><span class="badge">2026 · Il matrimonio</span>
         <h3>Provenza — Château de Pradines</h3>
         <p>La nostra storia ci porta qui, in <strong>Provenza</strong>, tra i profumi di lavanda e la luce dorata del Château de Pradines. Un brindisi con le persone che amiamo e un nuovo inizio — <strong>insieme</strong>.</p>
         <div class="media"><img src="/wedding-site/assets/story/2026-wedding.jpg" alt="Château de Pradines — 2026"></div>
@@ -167,63 +144,49 @@ nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
     </div>
   </section>
 
-  <!-- 🇬🇧 ENGLISH -->
-  <section id="en" class="box box-en">
-    <div class="tag"><span class="h2 h2-en">Our story</span><span>· 🇬🇧 English</span></div>
+  <!-- 🇬🇧 EN -->
+  <section id="en" class="box">
+    <div class="tag"><span class="h2">Our story</span><span>· 🇬🇧 English</span></div>
     <p class="note">A handful of milestones across years and cities — this is our timeline.</p>
 
     <div class="timeline">
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2014 · The beginning</span>
+      <article class="step"><span class="dot"></span><span class="badge">2014 · The beginning</span>
         <h3>Mykonos, July 20 — our first dance</h3>
-        <p>It all starts on a summer night — <strong>July 20, 2014, in Mykonos</strong>. Gianluca is on a post-graduation trip with friends; Charlotte is on holiday with her family (and funnily enough, she wasn’t even happy about going to Greece that year!). Our eyes meet in the crowd, and we share our first real dance.</p>
+        <p>It all starts on a summer night — <strong>July 20, 2014, in Mykonos</strong>. Gianluca is on a post-graduation trip with friends; Charlotte is on holiday with her family (and she wasn’t even happy about going to Greece that year!). Our eyes meet in the crowd, and we share our first real dance.</p>
         <div class="media"><img src="/wedding-site/assets/story/2014.jpg" alt="Mykonos 2014 — first meeting"></div>
       </article>
 
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2014–2017 · Long-distance</span>
+      <article class="step"><span class="dot"></span><span class="badge">2014–2017 · Long-distance</span>
         <h3>Milan ↔ Charleroi — flights, calls and patience</h3>
         <p>Three years apart aren’t easy: <strong>low-cost Milan–Charleroi flights</strong>, endless calls, messages at all hours. It was tough, but the will to see each other again was stronger than the miles between us.</p>
         <div class="media"><img src="/wedding-site/assets/story/2014-2017.jpg" alt="Years of long-distance relationship"></div>
       </article>
 
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2017–2018 · Charlotte becomes “Carlotta”</span>
+      <article class="step"><span class="dot"></span><span class="badge">2017–2018 · Charlotte becomes “Carlotta”</span>
         <h3>Milan — a new city, a new language</h3>
         <p>We get closer when <strong>Charlotte is admitted to Bocconi</strong> (kudos!). She still says she moved to Milan for one of the best universities in the world… so don’t think she did it for Gianluca! 😉</p>
         <div class="media"><img src="/wedding-site/assets/story/2017-2018.jpg" alt="Milan — Bocconi years"></div>
       </article>
 
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2018–2020 · More hurdles</span>
+      <article class="step"><span class="dot"></span><span class="badge">2018–2020 · More hurdles</span>
         <h3>Chile, Madrid, Paris — and a pandemic</h3>
-        <p>Charlotte leaves for <strong>six months in Chile</strong>; when she’s back, we try living together for the first time. It doesn’t last long: Gianluca then moves to <strong>Madrid</strong> for his thesis, and Charlotte joins for a while. Soon after, an <strong>internship in Paris</strong> puts distance between us again. And when we think nothing could surprise us anymore… a <strong>global pandemic</strong> hits: Gianluca in Italy, Charlotte in Belgium. We hold on.</p>
+        <p>Charlotte leaves for <strong>six months in Chile</strong>; when she’s back, we try living together for the first time. Then Gianluca moves to <strong>Madrid</strong> for his thesis and Charlotte joins for a while. Soon after, an <strong>internship in Paris</strong> brings distance again. And then a <strong>global pandemic</strong>: Gianluca in Italy, Charlotte in Belgium. We hold on.</p>
         <div class="media"><img src="/wedding-site/assets/story/2018-2020.jpg" alt="Chile, Madrid, Paris and the pandemic"></div>
       </article>
 
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2020–2024 · Building a life</span>
+      <article class="step"><span class="dot"></span><span class="badge">2020–2024 · Building a life</span>
         <h3>A home, new jobs and lighter days</h3>
-        <p>We graduate and dive into “real life”: Charlotte (maybe a bit nostalgic) joins the <strong>Belgian beer</strong> world; Gianluca joins <strong>Amazon</strong>… in Piacenza, with nights and weekends. Our first nest is a <strong>50 m² flat in Porta Romana</strong>, then comes our home in <strong>Via Lucano</strong>. In 2024 Gianluca finally moves to Milan with (almost) normal hours — everything gets easier, and lighter.</p>
+        <p>We graduate and dive into “real life”: Charlotte (maybe a bit nostalgic) joins the <strong>Belgian beer</strong> world; Gianluca joins <strong>Amazon</strong>… in Piacenza, with nights and weekends. Our first nest is a <strong>50 m² flat in Porta Romana</strong>, then comes our home in <strong>Via Lucano</strong>. In 2024 Gianluca finally moves to Milan with (almost) normal hours — everything gets easier and lighter.</p>
         <div class="media"><img src="/wedding-site/assets/story/2020-2024.jpg" alt="Our home and first jobs"></div>
       </article>
 
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">July 21, 2025 · The proposal</span>
+      <article class="step"><span class="dot"></span><span class="badge">July 21, 2025 · The proposal</span>
         <h3>Andalo, Dolomites — “here we go”</h3>
         <p>After eleven intense years, Gianluca takes the leap. Among the <strong>Dolomites, in Andalo</strong>, the question is asked (unexpected!). Charlotte says yes. 💍</p>
         <div class="media"><img src="/wedding-site/assets/story/2025-proposal.jpg" alt="Proposal in the Dolomites"></div>
       </article>
 
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2026 · The wedding</span>
+      <article class="step"><span class="dot"></span><span class="badge">2026 · The wedding</span>
         <h3>Provence — Château de Pradines</h3>
         <p>Our story leads us here, in <strong>Provence</strong>, among lavender scents and golden light. A toast with the people we love, and a new beginning — <strong>together</strong>.</p>
         <div class="media"><img src="/wedding-site/assets/story/2026-wedding.jpg" alt="Château de Pradines — 2026"></div>
@@ -231,63 +194,49 @@ nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
     </div>
   </section>
 
-  <!-- 🇫🇷 FRANÇAIS -->
-  <section id="fr" class="box box-fr">
-    <div class="tag"><span class="h2 h2-fr">Notre histoire</span><span>· 🇫🇷 Français</span></div>
+  <!-- 🇫🇷 FR -->
+  <section id="fr" class="box">
+    <div class="tag"><span class="h2">Notre histoire</span><span>· 🇫🇷 Français</span></div>
     <p class="note">Quelques jalons, des villes différentes, et beaucoup de chemin parcouru — voici notre timeline.</p>
 
     <div class="timeline">
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2014 · La rencontre</span>
+      <article class="step"><span class="dot"></span><span class="badge">2014 · La rencontre</span>
         <h3>Mykonos, 20 juillet — notre première danse</h3>
-        <p>Tout commence un soir d’été — le <strong>20 juillet 2014, à Mykonos</strong>. Gianluca est en voyage de fin d’études avec des amis ; Charlotte est en vacances avec sa famille (et, ironie du sort, elle n’était même pas ravie d’aller en Grèce cette année-là !). Nos regards se croisent dans la foule et nous partageons notre première vraie danse.</p>
+        <p>Tout commence un soir d’été — le <strong>20 juillet 2014, à Mykonos</strong>. Gianluca est en voyage de fin d’études avec des amis ; Charlotte est en vacances avec sa famille (et elle n’était même pas ravie d’aller en Grèce cette année-là !). Nos regards se croisent et nous partageons notre première vraie danse.</p>
         <div class="media"><img src="/wedding-site/assets/story/2014.jpg" alt="Mykonos 2014 — première rencontre"></div>
       </article>
 
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2014–2017 · À distance</span>
+      <article class="step"><span class="dot"></span><span class="badge">2014–2017 · À distance</span>
         <h3>Milan ↔ Charleroi — vols, appels et patience</h3>
-        <p>Trois ans à distance, ce n’est pas simple : <strong>vols low-cost Milan–Charleroi</strong>, appels sans fin, messages à toute heure. Ce fut difficile, mais l’envie de se retrouver est toujours restée plus forte que les kilomètres.</p>
+        <p>Trois ans à distance, ce n’est pas simple : <strong>vols low-cost Milan–Charleroi</strong>, appels sans fin, messages à toute heure. Ce fut difficile, mais l’envie de se retrouver est restée plus forte que les kilomètres.</p>
         <div class="media"><img src="/wedding-site/assets/story/2014-2017.jpg" alt="Années de relation à distance"></div>
       </article>
 
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2017–2018 · Charlotte devient “Carlotta”</span>
+      <article class="step"><span class="dot"></span><span class="badge">2017–2018 · Charlotte devient “Carlotta”</span>
         <h3>Milan — nouvelle ville, nouvelle langue</h3>
-        <p>Nos vies se rapprochent quand <strong>Charlotte est admise à la Bocconi</strong> (bravo !). Elle affirme encore aujourd’hui être venue à Milan pour l’une des meilleures universités au monde… donc pas pour Gianluca, bien sûr ! 😉</p>
+        <p>Nos vies se rapprochent quand <strong>Charlotte est admise à la Bocconi</strong> (bravo !). Elle affirme encore qu’elle est venue à Milan pour l’une des meilleures universités au monde… donc pas pour Gianluca ! 😉</p>
         <div class="media"><img src="/wedding-site/assets/story/2017-2018.jpg" alt="Milan — années Bocconi"></div>
       </article>
 
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2018–2020 · D’autres défis</span>
+      <article class="step"><span class="dot"></span><span class="badge">2018–2020 · D’autres défis</span>
         <h3>Chili, Madrid, Paris — et une pandémie</h3>
-        <p>Charlotte part <strong>six mois au Chili</strong> ; à son retour, nous emménageons pour la première fois. Cela ne dure pas : Gianluca s’installe à <strong>Madrid</strong> pour sa thèse, Charlotte le rejoint quelques mois. Peu après, un <strong>stage à Paris</strong> remet de la distance. Et quand on pense avoir tout vu… arrive une <strong>pandémie mondiale</strong> : Gianluca en Italie, Charlotte en Belgique. Nous tenons bon.</p>
+        <p>Charlotte part <strong>six mois au Chili</strong> ; à son retour, nous emménageons pour la première fois. Puis Gianluca s’installe à <strong>Madrid</strong> pour sa thèse, Charlotte le rejoint quelque temps. Bientôt, un <strong>stage à Paris</strong> remet de la distance. Et puis une <strong>pandémie mondiale</strong> : Gianluca en Italie, Charlotte en Belgique. Nous tenons bon.</p>
         <div class="media"><img src="/wedding-site/assets/story/2018-2020.jpg" alt="Chili, Madrid, Paris et la pandémie"></div>
       </article>
 
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2020–2024 · Construire à deux</span>
+      <article class="step"><span class="dot"></span><span class="badge">2020–2024 · Construire à deux</span>
         <h3>Un foyer, de nouveaux jobs et des jours plus légers</h3>
-        <p>Nous obtenons nos diplômes et plongeons dans la “vraie vie” : Charlotte (peut-être un peu nostalgique) rejoint l’univers de la <strong>bière belge</strong> ; Gianluca rejoint <strong>Amazon</strong>… à Plaisance, avec des nuits et des week-ends. Notre premier nid est un <strong>50 m² à Porta Romana</strong>, puis la maison de la <strong>Via Lucano</strong>. En 2024, Gianluca passe enfin à Milan avec des horaires (presque) normaux — tout devient plus simple et plus léger.</p>
+        <p>Diplômes en poche, on plonge dans la “vraie vie” : Charlotte (peut-être un peu nostalgique) rejoint l’univers de la <strong>bière belge</strong> ; Gianluca rejoint <strong>Amazon</strong>… à Plaisance, avec nuits et week-ends. Premier nid : <strong>50 m² à Porta Romana</strong>, puis la <strong>Via Lucano</strong>. En 2024, Gianluca passe à Milan avec des horaires (presque) normaux — tout devient plus simple et plus léger.</p>
         <div class="media"><img src="/wedding-site/assets/story/2020-2024.jpg" alt="Notre maison et nos premiers jobs"></div>
       </article>
 
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">21 juillet 2025 · La demande</span>
+      <article class="step"><span class="dot"></span><span class="badge">21 juillet 2025 · La demande</span>
         <h3>Andalo, Dolomites — “c’est parti”</h3>
         <p>Après onze années intenses, Gianluca fait le grand pas. Au cœur des <strong>Dolomites, à Andalo</strong>, la question est posée (inattendue !). Charlotte dit oui. 💍</p>
         <div class="media"><img src="/wedding-site/assets/story/2025-proposition.jpg" alt="La demande dans les Dolomites"></div>
       </article>
 
-      <article class="step">
-        <span class="dot"></span>
-        <span class="badge">2026 · Le mariage</span>
+      <article class="step"><span class="dot"></span><span class="badge">2026 · Le mariage</span>
         <h3>Provence — Château de Pradines</h3>
         <p>Notre histoire nous mène ici, en <strong>Provence</strong>, entre parfums de lavande et lumière dorée. Un toast avec ceux que nous aimons, et un nouveau départ — <strong>ensemble</strong>.</p>
         <div class="media"><img src="/wedding-site/assets/story/2026-mariage.jpg" alt="Château de Pradines — 2026"></div>
@@ -296,8 +245,24 @@ nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
   </section>
 </main>
 
-<footer style="text-align:center;color:#6b6b6b;padding:40px 20px">
-  <small>© Charlotte &amp; Gianluca — 2026</small>
-</footer>
+<footer style="text-align:center;color:#6b6b6b;padding:40px 20px"><small>© Charlotte &amp; Gianluca — 2026</small></footer>
+
+<script>
+(function(){
+  const btn=document.getElementById('hambBtn');
+  const menu=document.getElementById('mobileMenu');
+  if(btn&&menu){
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      menu.style.display = (menu.style.display==='block')?'none':'block';
+    });
+    document.addEventListener('click',e=>{
+      if(menu.style.display==='block' && !menu.contains(e.target) && e.target!==btn){
+        menu.style.display='none';
+      }
+    });
+  }
+})();
+</script>
 </body>
 </html>
