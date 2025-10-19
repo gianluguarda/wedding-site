@@ -66,6 +66,31 @@ nav li.cta a:hover{opacity:.95;transform:translateY(-1px)}
   .mobile-menu{top:60px}
   nav a{font-size:18px;padding:10px 8px}
 }
+
+  /* --- Migliora leggibilità timeline su mobile --- */
+
+/* Titoli delle sezioni (es. “2014 · L’incontro”) */
+.h2 {
+  margin: 0;
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(28px, 4.2vw, 40px); /* si adatta automaticamente */
+  color: var(--accent);
+}
+
+/* Etichette anni o piccoli badge */
+.badge {
+  font-size: clamp(14px, 2.6vw, 16px);
+  padding: 4px 10px;
+}
+
+/* Titoli piccoli e testo della timeline */
+.step h3 {
+  font-size: clamp(18px, 2.8vw, 22px);
+}
+.step p {
+  font-size: clamp(16px, 2.6vw, 18px);
+}
+
 </style>
 </head>
 <body>
