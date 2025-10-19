@@ -11,48 +11,59 @@
 
 <style>
 :root{
-  --it:#6FA968; /* verde pastello più scuro */
-  --en:#4b6cb7;
-  --fr:#b84b62;
+  --accent:#7465ad;   /* unico colore per titoli e accenti */
   --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b;
 }
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;font-family:"Cormorant Garamond",serif;color:var(--ink);background:var(--beige);
-  background-image:radial-gradient(1200px 700px at 100% -10%, rgba(75,108,183,.1), transparent 60%),
-                   radial-gradient(900px 500px at -10% 10%, rgba(138,154,91,.08), transparent 55%);
+  background-image:radial-gradient(1200px 700px at 100% -10%, rgba(116,101,173,.10), transparent 60%),
+                   radial-gradient(900px 500px at -10% 10%, rgba(116,101,173,.06), transparent 55%);
   background-attachment:fixed}
 
 /* Header */
 header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.88);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
 .nav{max-width:1100px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:baseline;gap:10px}
-.brand .names{font-family:"Great Vibes",cursive;font-size:30px;color:var(--en)}
-nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}
-nav a{text-decoration:none;color:var(--ink);opacity:.9}
-nav a:hover{opacity:1;border-bottom:1px solid var(--en)}
+.brand .names{font-family:"Great Vibes",cursive;font-size:34px;color:var(--accent)}
+.brand .date{font-size:16px;color:var(--muted)}
+nav ul{list-style:none;display:flex;gap:22px;margin:0;padding:0}
+nav a{text-decoration:none;color:var(--ink);opacity:.95;font-size:18px;line-height:1;padding:8px 6px;border-radius:10px}
+nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
+/* CTA RSVP evidenziato */
+nav li.cta a{background:var(--accent);color:#fff;padding:10px 14px;border-radius:14px;border-bottom:none}
+nav li.cta a:hover{opacity:.95;transform:translateY(-1px)}
 
 /* Hero */
-.hero{padding:80px 20px;text-align:center}
-.hero h1{font-family:"Great Vibes",cursive;font-size:64px;color:var(--en);margin:0 0 8px}
-.hero p{color:var(--muted);font-size:20px;margin:0 0 16px}
+.hero{padding:80px 20px 30px;text-align:center}
+.hero h1{font-family:"Great Vibes",cursive;font-size:64px;color:var(--accent);margin:0 0 8px}
+.hero p{color:var(--muted);font-size:20px;margin:0 0 18px}
+
+/* Countdown */
+.countdown{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:10px}
+.cd-box{min-width:110px;background:#fff;border:1px solid #eee;border-radius:14px;padding:12px 14px;text-align:center;
+  box-shadow:0 10px 28px rgba(0,0,0,.06)}
+.cd-num{font-size:30px;font-weight:600;color:var(--accent);line-height:1}
+.cd-label{font-size:12px;color:var(--muted);letter-spacing:.4px;text-transform:uppercase;margin-top:4px}
 
 /* Sections */
 .section{max-width:900px;margin:0 auto;padding:40px 20px 80px;text-align:center}
 .lang-block{background:#fff;border-radius:18px;border:1px solid #eee;padding:24px;margin-top:24px}
-.lang-block h2{margin:0 0 10px;font-family:"Great Vibes",cursive;font-size:42px}
-.it h2{color:var(--it)} .en h2{color:var(--en)} .fr h2{color:var(--fr)}
+.lang-block h2{margin:0 0 10px;font-family:"Great Vibes",cursive;font-size:42px;color:var(--accent)}
 p{margin:0 0 14px}
-.btn{display:inline-block;background:var(--en);color:#fff;text-decoration:none;padding:12px 22px;border-radius:16px;font-weight:600}
-.btn:hover{opacity:.9}
+.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 22px;border-radius:16px;font-weight:600}
+.btn:hover{opacity:.95}
 
 /* Footer */
 footer{text-align:center;color:#6b6b6b;padding:40px 20px;font-size:14px}
 
 /* Mobile */
 @media (max-width:700px){
-  .hero h1{font-size:46px}
-  nav ul{gap:12px}
-  nav a{font-size:18px}
+  .hero h1{font-size:48px}
+  .nav{padding:20px 16px}
+  nav ul{gap:16px}
+  nav a{font-size:17px;padding:10px 8px}   /* più grande su telefono */
+  .brand .names{font-size:30px}
+  .cd-box{min-width:44%}
 }
 </style>
 </head>
@@ -69,7 +80,7 @@ footer{text-align:center;color:#6b6b6b;padding:40px 20px;font-size:14px}
         <li><a href="/wedding-site/story.html">Our story</a></li>
         <li><a href="/wedding-site/stay.html">Plan your trip</a></li>
         <li><a href="/wedding-site/trip.html">Honeymoon</a></li>
-        <li><a href="/wedding-site/rsvp.html">RSVP</a></li>
+        <li class="cta"><a href="/wedding-site/rsvp.html">RSVP</a></li>
       </ul>
     </nav>
   </div>
@@ -79,25 +90,36 @@ footer{text-align:center;color:#6b6b6b;padding:40px 20px;font-size:14px}
   <div class="hero">
     <h1>Charlotte &amp; Gianluca</h1>
     <p>June 20, 2026 — Château de Pradines, Provence</p>
-    <a href="/wedding-site/rsvp.html" class="btn">RSVP</a>
+
+    <!-- Countdown -->
+    <div id="countdown" class="countdown" aria-label="Countdown to the wedding">
+      <div class="cd-box"><div class="cd-num" id="cd-days">—</div><div class="cd-label">Days</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-hours">—</div><div class="cd-label">Hours</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-mins">—</div><div class="cd-label">Minutes</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-secs">—</div><div class="cd-label">Seconds</div></div>
+    </div>
+
+    <div style="margin-top:18px">
+      <a href="/wedding-site/rsvp.html" class="btn">RSVP</a>
+    </div>
   </div>
 
   <div class="section">
-    <div class="lang-block it">
+    <div class="lang-block">
       <h2>🇮🇹 Benvenuti</h2>
       <p>Siamo felicissimi di invitarvi al nostro matrimonio in Provenza! 🌿</p>
       <p>Vi aspettiamo per un weekend di festa, tra profumi di lavanda e brindisi sotto le stelle.</p>
       <p><a class="btn" href="/wedding-site/stay.html">Plan your trip</a></p>
     </div>
 
-    <div class="lang-block en">
+    <div class="lang-block">
       <h2>🇬🇧 Welcome</h2>
       <p>We’re thrilled to invite you to our wedding in Provence! 🌸</p>
       <p>Join us for a weekend of celebration, lavender scents and starry skies.</p>
       <p><a class="btn" href="/wedding-site/stay.html">Plan your trip</a></p>
     </div>
 
-    <div class="lang-block fr">
+    <div class="lang-block">
       <h2>🇫🇷 Bienvenue</h2>
       <p>Nous sommes ravis de vous inviter à notre mariage en Provence ! 💜</p>
       <p>Un week-end de fête, de lavande et de moments inoubliables sous les étoiles.</p>
@@ -110,5 +132,34 @@ footer{text-align:center;color:#6b6b6b;padding:40px 20px;font-size:14px}
   <small>© Charlotte &amp; Gianluca — 2026</small>
 </footer>
 
+<script>
+/* Countdown to 2026-06-20 16:30 Europe/Rome */
+(function(){
+  const dEl = document.getElementById('cd-days');
+  const hEl = document.getElementById('cd-hours');
+  const mEl = document.getElementById('cd-mins');
+  const sEl = document.getElementById('cd-secs');
+
+  // ISO con offset +02:00 (ora legale italiana a giugno)
+  const target = new Date('2026-06-20T16:30:00+02:00').getTime();
+
+  function tick(){
+    const now = Date.now();
+    let diff = Math.max(0, target - now);
+
+    const days  = Math.floor(diff / (1000*60*60*24)); diff -= days  * (1000*60*60*24);
+    const hours = Math.floor(diff / (1000*60*60));    diff -= hours * (1000*60*60);
+    const mins  = Math.floor(diff / (1000*60));       diff -= mins  * (1000*60);
+    const secs  = Math.floor(diff / 1000);
+
+    dEl.textContent = days;
+    hEl.textContent = String(hours).padStart(2,'0');
+    mEl.textContent = String(mins ).padStart(2,'0');
+    sEl.textContent = String(secs ).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
 </body>
 </html>
