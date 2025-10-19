@@ -21,26 +21,26 @@ body{margin:0;font-family:"Cormorant Garamond",Georgia,serif;color:var(--ink);ba
 header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.88);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
 .nav{max-width:1100px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:baseline;gap:10px}
-.brand .names{font-family:"Great Vibes",cursive;font-size:30px;color:var(--en)}
+.brand .names{font-family:"Great Vibes",cursive;font-size:30px;color:var(--accent)}
 nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}
 nav a{text-decoration:none;color:var(--ink);opacity:.9}
-nav a:hover{opacity:1;border-bottom:1px solid var(--en)}
+nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
 
 /* Layout */
 .section{max-width:1100px;margin:0 auto;padding:86px 20px 60px}
-.h1{font-family:"Great Vibes",cursive;font-size:56px;color:var(--en);text-align:center;margin:10px 0 4px}
+.h1{font-family:"Great Vibes",cursive;font-size:56px;color:var(--accent);text-align:center;margin:10px 0 4px}
 .lead{color:var(--muted);text-align:center;margin:0 0 22px}
 .lang-toc{display:flex;gap:10px;justify-content:center;margin:0 0 26px}
 .lang-toc a{text-decoration:none;color:var(--ink);border:1px solid #ddd;padding:8px 12px;border-radius:12px}
 
 /* Boxes lingue */
 .box{background:#fff;border:1px solid #eee;border-radius:20px;padding:24px;margin:26px 0}
-.box-it{border-left:6px solid var(--it)}
-.box-en{border-left:6px solid var(--en)}
-.box-fr{border-left:6px solid var(--fr)}
+.box-it{border-left:6px solid var(--accent)}
+.box-en{border-left:6px solid var(--accent)}
+.box-fr{border-left:6px solid var(--accent)}
 .tag{display:flex;align-items:center;gap:10px;margin:0 0 12px 0;font-size:26px;font-weight:600}
 .h2{margin:0;font-family:"Great Vibes",cursive;font-size:40px}
-.h2-it{color:var(--it)} .h2-en{color:var(--en)} .h2-fr{color:var(--fr)}
+.h2-it{color:var(--accent)} .h2-en{color:var(--accent)} .h2-fr{color:var(--accent)}
 .note{color:var(--muted);margin:0 0 14px}
 
 /* Timeline */
@@ -55,9 +55,9 @@ nav a:hover{opacity:1;border-bottom:1px solid var(--en)}
 .media img{display:block;width:100%;height:auto}
 
 /* Accenti badge per lingua */
-#it .badge{border-color:color-mix(in srgb,var(--it) 50%, #eee)}
-#en .badge{border-color:color-mix(in srgb,var(--en) 50%, #eee)}
-#fr .badge{border-color:color-mix(in srgb,var(--fr) 50%, #eee)}
+#it .badge{border-color:color-mix(in srgb,var(--accent) 50%, #eee)}
+#en .badge{border-color:color-mix(in srgb,var(--accent) 50%, #eee)}
+#fr .badge{border-color:color-mix(in srgb,var(--accent) 50%, #eee)}
 
 @media (max-width:700px){
   .h1{font-size:44px}
