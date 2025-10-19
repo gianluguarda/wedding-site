@@ -9,67 +9,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
-:root{ --accent:#7465ad; --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b }
+:root{
+  --accent:#7465ad;
+  --beige:#f7f4ef;
+  --ink:#242424;
+  --muted:#6b6b6b;
+}
 *{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;font-family:"Cormorant Garamond",Georgia,serif;color:var(--ink);background:var(--beige)}
-
-/* Header */
+body{
+  margin:0;
+  font-family:"Cormorant Garamond",serif;
+  background:var(--beige);
+  color:var(--ink);
+}
 header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.88);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
-.nav{max-width:1100px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:center;gap:12px}
-.hamburger{display:none;border:1px solid rgba(0,0,0,.1);background:white;border-radius:10px;padding:8px 10px;cursor:pointer}
-.hamburger span{display:block;width:20px;height:2px;background:#444;margin:4px 0}
+.nav{max-width:1100px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
 .brand .names{font-family:"Great Vibes",cursive;font-size:clamp(28px,3.2vw,35px);color:var(--accent)}
-.brand .date{font-size:14px;color:var(--muted)}
-nav ul{list-style:none;display:flex;gap:clamp(14px,2.2vw,24px);margin:0;padding:0}
-nav a{text-decoration:none;color:var(--ink);opacity:.95;font-size:clamp(17px,2.1vw,19px);line-height:1;padding:10px 8px;border-radius:10px}
-nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
-nav li.cta a{background:var(--accent);color:#fff;padding:10px 14px;border-radius:14px;border-bottom:none}
-nav li.cta a:hover{opacity:.95;transform:translateY(-1px)}
-.mobile-menu{display:none;position:fixed;top:64px;right:16px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.12);padding:12px;z-index:40}
-.mobile-menu a{display:block;padding:12px 14px;border-radius:10px;color:var(--ink);text-decoration:none}
-.mobile-menu a:hover{background:rgba(116,101,173,.08)}
-
-/* Page */
-.section{max-width:1100px;margin:0 auto;padding:86px 20px 60px}
-.h1{font-family:"Great Vibes",cursive;font-size:clamp(40px,6vw,56px);color:var(--accent);text-align:center;margin:8px 0 6px}
-.lead{color:var(--muted);text-align:center;margin:0 0 24px}
-.frame{max-width:980px;margin:0 auto 22px;padding:0 20px}
-.polaroid{display:block;width:100%;height:auto;background:#fff;border:10px solid #fff;border-bottom-width:22px;border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);transform:rotate(-0.4deg)}
-
-/* Language tabs */
-.lang-tabs{display:flex;gap:8px;justify-content:center;margin:10px 0 22px;flex-wrap:wrap}
-.lang-tabs a{text-decoration:none;border:1px solid #ddd;padding:8px 12px;border-radius:999px;color:#333}
-.lang-tabs a:hover{border-color:var(--accent);color:var(--accent)}
-
-/* Content blocks */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.card{background:#fff;border:1px solid #eee;border-radius:18px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,.04)}
-.card h3{margin:4px 0 10px 0;font-size:clamp(18px,2.2vw,22px)}
-.small{color:var(--muted);font-size:14px}
+nav ul{list-style:none;display:flex;gap:24px;margin:0;padding:0}
+nav a{text-decoration:none;color:var(--ink);font-size:clamp(17px,2.1vw,19px);padding:8px;border-radius:10px}
+nav li.cta a{background:var(--accent);color:#fff;border-radius:14px;padding:10px 14px}
+.mobile-menu{display:none;position:fixed;top:64px;right:16px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.12);padding:12px}
+.section{max-width:1100px;margin:0 auto;padding:80px 20px}
+.h1{font-family:"Great Vibes",cursive;font-size:clamp(40px,6vw,56px);color:var(--accent);text-align:center}
+.frame{max-width:900px;margin:0 auto 30px}
+.polaroid{width:100%;display:block;background:#fff;border:10px solid #fff;border-bottom-width:22px;border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+.langtitle{text-align:center;font-size:28px;margin:60px 0 20px;color:var(--accent);font-weight:600}
+.card{background:#fff;border:1px solid #eee;border-radius:18px;padding:18px;margin:12px 0;box-shadow:0 8px 30px rgba(0,0,0,.04)}
 a.link{color:var(--accent);text-decoration:none;border-bottom:1px dotted rgba(0,0,0,.25)}
 a.link:hover{border-bottom-color:var(--accent)}
 .note{background:#fff;border:1px solid #eee;border-radius:16px;padding:16px;margin-top:18px}
-
-/* Responsive boosts when navbar is not collapsed */
-@media (max-width:1024px){
-  nav a{font-size:clamp(18px,2.4vw,20px);padding:12px 10px}
-  .brand .names{font-size:clamp(28px,3.2vw,35px)}
-}
-@media (max-width:900px){
-  .hamburger{display:block}
-  nav ul{display:none}
-}
-@media (max-width:700px){
-  .nav{padding:20px 16px}
-  .mobile-menu{top:60px}
-  .grid{grid-template-columns:1fr}
-}
+@media (max-width:900px){nav ul{display:none}}
 </style>
 </head>
 <body>
-
 <header>
   <div class="nav">
     <div class="brand">
@@ -86,232 +59,133 @@ a.link:hover{border-bottom-color:var(--accent)}
       </ul>
     </nav>
   </div>
-  <div id="mobileMenu" class="mobile-menu">
-    <a href="/wedding-site/home.html">Home</a>
-    <a href="/wedding-site/story.html">Our story</a>
-    <a href="/wedding-site/stay.html">Plan your trip</a>
-    <a href="/wedding-site/trip.html">Honeymoon</a>
-    <a href="/wedding-site/rsvp.html"><strong>RSVP</strong></a>
-  </div>
 </header>
 
 <main class="section">
   <h1 class="h1">Plan your trip</h1>
-  <p class="lead">Info pratiche per raggiungere la Provenza e goderti il weekend.</p>
-
   <div class="frame">
-    <img class="polaroid" src="/wedding-site/assets/chateau.jpg" alt="Château de Pradines — Grambois" loading="lazy" decoding="async">
+    <img class="polaroid" src="/wedding-site/assets/chateau.jpg" alt="Château de Pradines, Grambois">
   </div>
 
-  <!-- Tabs lingua -->
-  <nav class="lang-tabs">
-    <a href="#it">🇮🇹 IT</a>
-    <a href="#en">🇬🇧 EN</a>
-    <a href="#fr">🇫🇷 FR</a>
-  </nav>
+  <!-- 🇮🇹 ITALIANO -->
+  <h2 class="langtitle">🇮🇹 Versione italiana</h2>
+  <div class="card">
+    <h3>💒 Cerimonia & ricevimento</h3>
+    <p>📍 Château de Pradines, Grambois (45 min a nord di Aix-en-Provence)<br>
+    🕓 Ore <strong>16:30</strong> (TBC) — festa fino alle <strong>4:00</strong><br>
+    🗺️ <a class="link" href="https://maps.google.com/?q=Ch%C3%A2teau%20de%20Pradines%20Grambois" target="_blank">Apri in Google Maps</a></p>
+  </div>
+  <div class="card">
+    <h3>🚌 Shuttle A/R per la location</h3>
+    <p>Organizziamo <strong>navette A/R</strong> da <strong>Aix-en-Provence</strong> per permettere a tutti di godersi la serata senza pensieri.</p>
+  </div>
+  <div class="card">
+    <h3>🚆 In treno</h3>
+    <p>Da Milano: Frecciarossa fino a Lione + TGV per Aix-en-Provence TGV (~6h).<br>
+    Dal Belgio/Lussemburgo: AV fino a Parigi + TGV per Aix (~6–7h).</p>
+  </div>
+  <div class="card">
+    <h3>✈️ In aereo</h3>
+    <p>Aeroporti: Marsiglia (1h) o Nizza (2h).<br>
+    Voli diretti da Milano, Roma, Napoli, Catania, Barcellona, Madrid, Bruxelles.</p>
+  </div>
+  <div class="card">
+    <h3>🏨 Dove alloggiare</h3>
+    <ul>
+      <li>Hôtel Cézanne — elegante, centro Aix.</li>
+      <li>Le Mas des Écureuils — immerso nel verde.</li>
+      <li>Villa Gallici — raffinata e romantica.</li>
+    </ul>
+  </div>
+  <div class="note">👶 Per motivi legati alla location, non potremo ospitare bambini piccoli. Contattateci se serve aiuto 💜</div>
 
-  <!-- 🇮🇹 IT -->
-  <section id="it" class="lang">
-    <div class="grid">
-      <div class="card">
-        <h3>💒 Cerimonia &amp; ricevimento</h3>
-        <p>📍 <strong>Château de Pradines</strong>, Grambois (45 min a nord di Aix-en-Provence)</p>
-        <p>🕓 Ore <strong>16:30</strong> (TBC) — festa fino alle <strong>4:00</strong></p>
-        <p>🗺️ <a class="link" target="_blank" href="https://maps.google.com/?q=Ch%C3%A2teau%20de%20Pradines%20Grambois">Apri in Google Maps</a></p>
-      </div>
+  <!-- 🇬🇧 ENGLISH -->
+  <h2 class="langtitle">🇬🇧 English version</h2>
+  <div class="card">
+    <h3>💒 Ceremony & Reception</h3>
+    <p>📍 Château de Pradines, Grambois (45 min north of Aix-en-Provence)<br>
+    🕓 <strong>4:30 PM</strong> (TBC) — celebration until <strong>4:00 AM</strong><br>
+    🗺️ <a class="link" href="https://maps.google.com/?q=Ch%C3%A2teau%20de%20Pradines%20Grambois" target="_blank">Open in Google Maps</a></p>
+  </div>
+  <div class="card">
+    <h3>🚌 Shuttle to/from the venue</h3>
+    <p>We will arrange <strong>round-trip shuttles</strong> from <strong>Aix-en-Provence</strong> so everyone can enjoy the night worry-free.</p>
+  </div>
+  <div class="card">
+    <h3>🚆 By train</h3>
+    <p>From Milan: Frecciarossa to Lyon + TGV to Aix-en-Provence TGV (~6h).<br>
+    From Belgium/Luxembourg: high-speed to Paris + TGV to Aix (~6–7h).</p>
+  </div>
+  <div class="card">
+    <h3>✈️ By plane</h3>
+    <p>Airports: Marseille (1h) or Nice (2h).<br>
+    Direct flights from Milan, Rome, Naples, Catania, Barcelona, Madrid, Brussels.</p>
+  </div>
+  <div class="card">
+    <h3>🏨 Where to stay</h3>
+    <ul>
+      <li>Hôtel Cézanne — elegant, central Aix.</li>
+      <li>Le Mas des Écureuils — green and quiet.</li>
+      <li>Villa Gallici — refined and romantic.</li>
+    </ul>
+  </div>
+  <div class="note">👶 Due to venue constraints, we can’t host small children. Reach out if needed 💜</div>
 
-      <div class="card">
-        <h3>🚆 Arrivare in treno</h3>
-        <p><strong>Da Milano:</strong> Frecciarossa fino a <em>Lione</em>, poi TGV per <em>Aix-en-Provence TGV</em>. È la combinazione più veloce (~6h totali). Verifica orari su <a class="link" href="https://www.thetrainline.com" target="_blank">Trainline</a>.</p>
-        <p><strong>Da Belgio/Lussemburgo:</strong> AV fino a <em>Parigi</em>, poi TGV diretto per <em>Aix-en-Provence TGV</em> (~6–7h).</p>
-      </div>
+  <!-- 🇫🇷 FRANÇAIS -->
+  <h2 class="langtitle">🇫🇷 Version française</h2>
+  <div class="card">
+    <h3>💒 Cérémonie & Réception</h3>
+    <p>📍 Château de Pradines, Grambois (45 min au nord d’Aix-en-Provence)<br>
+    🕓 <strong>16h30</strong> (TBC) — fête jusqu’à <strong>4h00</strong><br>
+    🗺️ <a class="link" href="https://maps.google.com/?q=Ch%C3%A2teau%20de%20Pradines%20Grambois" target="_blank">Ouvrir dans Google Maps</a></p>
+  </div>
+  <div class="card">
+    <h3>🚌 Navettes A/R</h3>
+    <p>Nous organiserons des <strong>navettes A/R</strong> depuis <strong>Aix-en-Provence</strong> afin que chacun puisse profiter de la soirée sereinement.</p>
+  </div>
+  <div class="card">
+    <h3>🚆 En train</h3>
+    <p>Depuis Milan : Frecciarossa jusqu’à Lyon + TGV pour Aix-en-Provence TGV (~6h).<br>
+    Depuis Belgique/Luxembourg : grande vitesse jusqu’à Paris + TGV pour Aix (~6–7h).</p>
+  </div>
+  <div class="card">
+    <h3>✈️ En avion</h3>
+    <p>Aéroports : Marseille (1h) ou Nice (2h).<br>
+    Vols directs depuis Milan, Rome, Naples, Catane, Barcelone, Madrid, Bruxelles.</p>
+  </div>
+  <div class="card">
+    <h3>🏨 Où loger</h3>
+    <ul>
+      <li>Hôtel Cézanne — élégant, centre d’Aix.</li>
+      <li>Le Mas des Écureuils — au vert, proche du centre.</li>
+      <li>Villa Gallici — raffinée et romantique.</li>
+    </ul>
+  </div>
+  <div class="note">👶 Pour des raisons liées au lieu, nous ne pourrons pas accueillir les petits enfants. N’hésitez pas à nous écrire 💜</div>
 
-      <div class="card">
-        <h3>✈️ Arrivare in aereo</h3>
-        <p><strong>Marsiglia (MRS)</strong>: ~1h dallo Château, ~30 min da Aix.</p>
-        <p>Voli diretti (settimanali) da: Milano, Roma, Napoli, Catania, Barcellona, Madrid, Bruxelles (verifica date).</p>
-        <p><strong>Nizza (NCE)</strong>: alternativa a ~2h d’auto.</p>
-      </div>
-
-      <div class="card">
-        <h3>🚗 In auto &amp; parcheggio</h3>
-        <p>Da Milano: ~5h30 via Liguria. Parcheggio gratuito in location.</p>
-      </div>
-
-      <div class="card">
-        <h3>🚌 Shuttle A/R per la location</h3>
-        <p>Per chi <strong>non ha l’auto</strong> o preferisce non guidare: organizziamo <strong>navette A/R</strong> da <strong>Aix-en-Provence</strong> (e possibili altre località TBC) verso il <em>Château de Pradines</em>.</p>
-        <p class="small">Dettagli su orari, punti di raccolta e prenotazione arriveranno più avanti via email/RSVP.</p>
-      </div>
-
-      <div class="card">
-        <h3>🏨 Hotel consigliati</h3>
-        <ul>
-          <li>🏨 Hôtel Cézanne — elegante, centro Aix.</li>
-          <li>🌿 Le Mas des Écureuils — nel verde, vicino al centro.</li>
-          <li>🏡 Villa Gallici — esperienza raffinata e romantica.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>🍷 Cosa vedere</h3>
-        <ul>
-          <li><strong>Aix-en-Provence</strong> — centro, Cours Mirabeau, mercati.</li>
-          <li><strong>Lourmarin, Gordes, Roussillon, L’Isle-sur-la-Sorgue</strong> — borghi iconici.</li>
-          <li><strong>Cassis</strong> — mare & calanques, poco più di un’ora.</li>
-          <li><strong>Vigneti</strong> — calice di rosé o degustazione.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="note" style="margin-top:22px">
-      👶 <strong>Nota bimbi:</strong> per ragioni legate alla location, non potremo ospitare i bambini piccoli. Vi avvisiamo con anticipo per aiutarvi a organizzarvi. Scriveteci se è un problema 💜
-    </div>
-
-    <div class="note" style="margin-top:18px">
-      💌 RSVP entro il <strong>31 gennaio</strong> sulla pagina <a class="link" href="/wedding-site/rsvp.html">RSVP</a>.
-    </div>
-  </section>
-
-  <!-- 🇬🇧 EN -->
-  <section id="en" class="lang" style="margin-top:40px">
-    <div class="grid">
-      <div class="card">
-        <h3>💒 Ceremony &amp; reception</h3>
-        <p>📍 <strong>Château de Pradines</strong>, Grambois (45 min north of Aix-en-Provence)</p>
-        <p>🕓 <strong>4:30 PM</strong> (TBC) — party until <strong>4:00 AM</strong></p>
-        <p>🗺️ <a class="link" target="_blank" href="https://maps.google.com/?q=Ch%C3%A2teau%20de%20Pradines%20Grambois">Open in Google Maps</a></p>
-      </div>
-
-      <div class="card">
-        <h3>🚆 By train</h3>
-        <p><strong>From Milan:</strong> Frecciarossa to <em>Lyon</em>, then TGV to <em>Aix-en-Provence TGV</em>. Fastest combo (~6h). Check <a class="link" href="https://www.thetrainline.com" target="_blank">Trainline</a>.</p>
-        <p><strong>From Belgium/Luxembourg:</strong> High-speed to <em>Paris</em>, then direct TGV to <em>Aix-en-Provence TGV</em> (~6–7h).</p>
-      </div>
-
-      <div class="card">
-        <h3>✈️ By plane</h3>
-        <p><strong>Marseille (MRS)</strong>: ~1h from venue, ~30 min from Aix.</p>
-        <p>Direct weekly flights from: Milan, Rome, Naples, Catania, Barcelona, Madrid, Brussels (dates vary).</p>
-        <p><strong>Nice (NCE)</strong>: ~2h drive alternative.</p>
-      </div>
-
-      <div class="card">
-        <h3>🚗 By car &amp; parking</h3>
-        <p>From Milan: ~5h30 via Liguria. Free parking on site.</p>
-      </div>
-
-      <div class="card">
-        <h3>🚌 Shuttle to/from the venue</h3>
-        <p>For guests <strong>without a car</strong> (or who prefer not to drive): we will arrange <strong>round-trip shuttles</strong> from <strong>Aix-en-Provence</strong> (and possibly other towns TBC) to <em>Château de Pradines</em>.</p>
-        <p class="small">Pickup points, timing and booking details will follow via email/RSVP.</p>
-      </div>
-
-      <div class="card">
-        <h3>🏨 Recommended hotels</h3>
-        <ul>
-          <li>🏨 Hôtel Cézanne — elegant, central Aix.</li>
-          <li>🌿 Le Mas des Écureuils — green setting near town.</li>
-          <li>🏡 Villa Gallici — refined & romantic.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>🍷 What to see</h3>
-        <ul>
-          <li><strong>Aix-en-Provence</strong> — old town, Cours Mirabeau, markets.</li>
-          <li><strong>Lourmarin, Gordes, Roussillon, L’Isle-sur-la-Sorgue</strong> — postcard villages.</li>
-          <li><strong>Cassis</strong> — sea & calanques, just over an hour.</li>
-          <li><strong>Vineyards</strong> — rosé tastings.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="note" style="margin-top:22px">
-      👶 <strong>Note:</strong> due to venue constraints, we can’t host small children. Sharing early to help planning — write us if needed 💜
-    </div>
-
-    <div class="note" style="margin-top:18px">
-      💌 Please RSVP by <strong>January 31</strong> on the <a class="link" href="/wedding-site/rsvp.html">RSVP page</a>.
-    </div>
-  </section>
-
-  <!-- 🇫🇷 FR -->
-  <section id="fr" class="lang" style="margin-top:40px">
-    <div class="grid">
-      <div class="card">
-        <h3>💒 Cérémonie &amp; réception</h3>
-        <p>📍 <strong>Château de Pradines</strong>, Grambois (45 min au nord d’Aix-en-Provence)</p>
-        <p>🕓 <strong>16h30</strong> (TBC) — fête jusqu’à <strong>4h00</strong></p>
-        <p>🗺️ <a class="link" target="_blank" href="https://maps.google.com/?q=Ch%C3%A2teau%20de%20Pradines%20Grambois">Ouvrir dans Google Maps</a></p>
-      </div>
-
-      <div class="card">
-        <h3>🚆 Venir en train</h3>
-        <p><strong>Depuis Milan :</strong> Frecciarossa jusqu’à <em>Lyon</em>, puis TGV vers <em>Aix-en-Provence TGV</em>. La combinaison la plus rapide (~6h). Vérifiez sur <a class="link" href="https://www.thetrainline.com" target="_blank">Trainline</a>.</p>
-        <p><strong>Depuis Belgique/Luxembourg :</strong> Grande vitesse jusqu’à <em>Paris</em>, puis TGV direct vers <em>Aix-en-Provence TGV</em> (~6–7h).</p>
-      </div>
-
-      <div class="card">
-        <h3>✈️ Venir en avion</h3>
-        <p><strong>Marseille (MRS)</strong> : ~1h du lieu, ~30 min d’Aix.</p>
-        <p>Vols directs hebdomadaires depuis : Milan, Rome, Naples, Catane, Barcelone, Madrid, Bruxelles.</p>
-        <p><strong>Nice (NCE)</strong> : alternative à ~2h de route.</p>
-      </div>
-
-      <div class="card">
-        <h3>🚗 En voiture &amp; parking</h3>
-        <p>Depuis Milan : ~5h30 via la Ligurie. Parking gratuit sur place.</p>
-      </div>
-
-      <div class="card">
-        <h3>🚌 Navettes A/R pour le lieu</h3>
-        <p>Pour les invités <strong>sans voiture</strong> (ou qui préfèrent ne pas conduire) : nous organiserons des <strong>navettes A/R</strong> depuis <strong>Aix-en-Provence</strong> (et possiblement d’autres localités TBC) vers le <em>Château de Pradines</em>.</p>
-        <p class="small">Points de rendez-vous, horaires et réservation suivront par email/RSVP.</p>
-      </div>
-
-      <div class="card">
-        <h3>🏨 Hôtels recommandés</h3>
-        <ul>
-          <li>🏨 Hôtel Cézanne — élégant, centre d’Aix.</li>
-          <li>🌿 Le Mas des Écureuils — au vert, proche du centre.</li>
-          <li>🏡 Villa Gallici — raffiné & romantique.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>🍷 À voir</h3>
-        <ul>
-          <li><strong>Aix-en-Provence</strong> — centre, Cours Mirabeau, marchés.</li>
-          <li><strong>Lourmarin, Gordes, Roussillon, L’Isle-sur-la-Sorgue</strong> — villages carte postale.</li>
-          <li><strong>Cassis</strong> — mer & calanques, un peu plus d’une heure.</li>
-          <li><strong>Vignobles</strong> — dégustations de rosé.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="note" style="margin-top:22px">
-      👶 <strong>À noter :</strong> pour des raisons liées au lieu, nous ne pourrons pas accueillir les petits enfants. On vous prévient tôt pour faciliter l’organisation. Écrivez-nous si besoin 💜
-    </div>
-
-    <div class="note" style="margin-top:18px">
-      💌 RSVP avant le <strong>31 janvier</strong> sur la page <a class="link" href="/wedding-site/rsvp.html">RSVP</a>.
-    </div>
-  </section>
+  <div class="note" style="margin-top:30px;text-align:center">
+    💌 <a class="link" href="/wedding-site/rsvp.html">RSVP ici</a> avant le 31 janvier 2026
+  </div>
 </main>
 
-<footer style="text-align:center;color:#6b6b6b;padding:40px 20px"><small>© Charlotte &amp; Gianluca — 2026</small></footer>
+<footer style="text-align:center;color:#6b6b6b;padding:40px 20px">
+  <small>© Charlotte &amp; Gianluca — 2026</small>
+</footer>
 
 <script>
-/* Mobile menu toggle */
-(function(){
-  const btn=document.getElementById('hambBtn');
-  const menu=document.getElementById('mobileMenu');
-  if(btn&&menu){
-    btn.addEventListener('click',e=>{e.stopPropagation();menu.style.display=(menu.style.display==='block')?'none':'block';});
-    document.addEventListener('click',e=>{if(menu.style.display==='block'&&!menu.contains(e.target)&&e.target!==btn){menu.style.display='none';}});
-  }
-})();
+const btn=document.getElementById('hambBtn');
+const menu=document.getElementById('mobileMenu');
+if(btn&&menu){
+  btn.addEventListener('click',e=>{
+    e.stopPropagation();
+    menu.style.display=(menu.style.display==='block')?'none':'block';
+  });
+  document.addEventListener('click',e=>{
+    if(menu.style.display==='block'&&!menu.contains(e.target)&&e.target!==btn){
+      menu.style.display='none';
+    }
+  });
+}
 </script>
 </body>
 </html>
