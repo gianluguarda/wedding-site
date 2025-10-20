@@ -16,21 +16,39 @@
   --muted:#6b6b6b;
 }
 *{box-sizing:border-box}
+html,body{height:100%}
 body{
   margin:0;
   font-family:"Cormorant Garamond",serif;
   background:var(--beige);
   color:var(--ink);
 }
+
+/* Header */
 header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.88);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
-.nav{max-width:1100px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px}
+.nav{max-width:1100px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:12px}
 .brand .names{font-family:"Great Vibes",cursive;font-size:clamp(28px,3.2vw,35px);color:var(--accent)}
+.brand .date{font-size:14px;color:var(--muted)}
 nav ul{list-style:none;display:flex;gap:24px;margin:0;padding:0}
-nav a{text-decoration:none;color:var(--ink);font-size:clamp(17px,2.1vw,19px);padding:8px;border-radius:10px}
-nav li.cta a{background:var(--accent);color:#fff;border-radius:14px;padding:10px 14px}
-.mobile-menu{display:none;position:fixed;top:64px;right:16px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.12);padding:12px}
-.section{max-width:1100px;margin:0 auto;padding:80px 20px}
+nav a{text-decoration:none;color:var(--ink);opacity:.95;font-size:clamp(17px,2.1vw,19px);line-height:1;padding:8px 6px;border-radius:10px}
+nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
+nav li.cta a{background:var(--accent);color:#fff;padding:10px 14px;border-radius:14px;border-bottom:none}
+nav li.cta a:hover{opacity:.95;transform:translateY(-1px)}
+
+/* Hamburger + mobile menu */
+.hamburger{display:none;border:1px solid rgba(0,0,0,.1);background:#fff;border-radius:10px;padding:8px 10px;cursor:pointer}
+.hamburger span{display:block;width:20px;height:2px;background:#444;margin:4px 0}
+.mobile-menu{
+  display:none; position:fixed; top:64px; left:16px;
+  background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:16px;
+  box-shadow:0 8px 40px rgba(0,0,0,.12); padding:12px; z-index:40
+}
+.mobile-menu a{display:block;padding:10px 12px;border-radius:10px;color:var(--ink);text-decoration:none}
+.mobile-menu a:hover{background:rgba(116,101,173,.08)}
+
+/* Page */
+.section{max-width:1100px;margin:0 auto;padding:86px 20px 60px}
 .h1{font-family:"Great Vibes",cursive;font-size:clamp(40px,6vw,56px);color:var(--accent);text-align:center}
 .frame{max-width:900px;margin:0 auto 30px}
 .polaroid{width:100%;display:block;background:#fff;border:10px solid #fff;border-bottom-width:22px;border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.12)}
@@ -39,7 +57,16 @@ nav li.cta a{background:var(--accent);color:#fff;border-radius:14px;padding:10px
 a.link{color:var(--accent);text-decoration:none;border-bottom:1px dotted rgba(0,0,0,.25)}
 a.link:hover{border-bottom-color:var(--accent)}
 .note{background:#fff;border:1px solid #eee;border-radius:16px;padding:16px;margin-top:18px}
-@media (max-width:900px){nav ul{display:none}}
+
+/* Responsive */
+@media (max-width:900px){
+  .hamburger{display:block}
+  nav ul{display:none}
+}
+@media (max-width:700px){
+  .nav{padding:20px 16px}
+  .mobile-menu{top:60px}
+}
 </style>
 </head>
 <body>
@@ -59,6 +86,14 @@ a.link:hover{border-bottom-color:var(--accent)}
       </ul>
     </nav>
   </div>
+  <!-- MENU MOBILE -->
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="/wedding-site/home.html">Home</a>
+    <a href="/wedding-site/story.html">Our story</a>
+    <a href="/wedding-site/stay.html">Plan your trip</a>
+    <a href="/wedding-site/trip.html">Honeymoon</a>
+    <a href="/wedding-site/rsvp.html"><strong>RSVP</strong></a>
+  </div>
 </header>
 
 <main class="section">
@@ -77,17 +112,21 @@ a.link:hover{border-bottom-color:var(--accent)}
   </div>
   <div class="card">
     <h3>🚌 Shuttle A/R per la location</h3>
-    <p>Organizziamo <strong>navette A/R</strong> da <strong>Aix-en-Provence</strong> per permettere a tutti di godersi la serata senza pensieri.</p>
+    <p>Organizziamo <strong>navette A/R</strong> da <strong>Aix-en-Provence</strong> (ed eventualmente altre località TBC) per permettere a tutti di godersi la serata senza pensieri.</p>
   </div>
   <div class="card">
     <h3>🚆 In treno</h3>
-    <p>Da Milano: Frecciarossa fino a Lione + TGV per Aix-en-Provence TGV (~6h).<br>
-    Dal Belgio/Lussemburgo: AV fino a Parigi + TGV per Aix (~6–7h).</p>
+    <p><strong>Da Milano:</strong> Frecciarossa fino a Lione + TGV per Aix-en-Provence TGV (~6h).<br>
+    <strong>Dal Belgio/Lussemburgo:</strong> AV fino a Parigi + TGV per Aix (~6–7h).</p>
   </div>
   <div class="card">
     <h3>✈️ In aereo</h3>
-    <p>Aeroporti: Marsiglia (1h) o Nizza (2h).<br>
-    Voli diretti da Milano, Roma, Napoli, Catania, Barcellona, Madrid, Bruxelles.</p>
+    <p><strong>Marsiglia (MRS)</strong> ~1h dallo Château, ~30 min da Aix. Voli diretti settimanali da Milano, Roma, Napoli, Catania, Barcellona, Madrid, Bruxelles. <br>
+    <strong>Nizza (NCE)</strong> ~2h d’auto.</p>
+  </div>
+  <div class="card">
+    <h3>🚗 In auto & parcheggio</h3>
+    <p>Da Milano: ~5h30 via Liguria. Parcheggio gratuito in location.</p>
   </div>
   <div class="card">
     <h3>🏨 Dove alloggiare</h3>
@@ -109,17 +148,21 @@ a.link:hover{border-bottom-color:var(--accent)}
   </div>
   <div class="card">
     <h3>🚌 Shuttle to/from the venue</h3>
-    <p>We will arrange <strong>round-trip shuttles</strong> from <strong>Aix-en-Provence</strong> so everyone can enjoy the night worry-free.</p>
+    <p>We will arrange <strong>round-trip shuttles</strong> from <strong>Aix-en-Provence</strong> (and possibly other towns TBC) so everyone can enjoy the night worry-free.</p>
   </div>
   <div class="card">
     <h3>🚆 By train</h3>
-    <p>From Milan: Frecciarossa to Lyon + TGV to Aix-en-Provence TGV (~6h).<br>
-    From Belgium/Luxembourg: high-speed to Paris + TGV to Aix (~6–7h).</p>
+    <p><strong>From Milan:</strong> Frecciarossa to Lyon + TGV to Aix-en-Provence TGV (~6h).<br>
+    <strong>From Belgium/Luxembourg:</strong> High-speed to Paris + TGV to Aix (~6–7h).</p>
   </div>
   <div class="card">
     <h3>✈️ By plane</h3>
-    <p>Airports: Marseille (1h) or Nice (2h).<br>
-    Direct flights from Milan, Rome, Naples, Catania, Barcelona, Madrid, Brussels.</p>
+    <p><strong>Marseille (MRS)</strong> ~1h from the venue, ~30 min from Aix. Direct weekly flights from Milan, Rome, Naples, Catania, Barcelona, Madrid, Brussels. <br>
+    <strong>Nice (NCE)</strong> ~2h drive.</p>
+  </div>
+  <div class="card">
+    <h3>🚗 By car & parking</h3>
+    <p>From Milan: ~5h30 via Liguria. Free parking on site.</p>
   </div>
   <div class="card">
     <h3>🏨 Where to stay</h3>
@@ -141,17 +184,21 @@ a.link:hover{border-bottom-color:var(--accent)}
   </div>
   <div class="card">
     <h3>🚌 Navettes A/R</h3>
-    <p>Nous organiserons des <strong>navettes A/R</strong> depuis <strong>Aix-en-Provence</strong> afin que chacun puisse profiter de la soirée sereinement.</p>
+    <p>Nous organiserons des <strong>navettes A/R</strong> depuis <strong>Aix-en-Provence</strong> (et possiblement d’autres localités TBC) afin que chacun profite sereinement de la soirée.</p>
   </div>
   <div class="card">
     <h3>🚆 En train</h3>
-    <p>Depuis Milan : Frecciarossa jusqu’à Lyon + TGV pour Aix-en-Provence TGV (~6h).<br>
-    Depuis Belgique/Luxembourg : grande vitesse jusqu’à Paris + TGV pour Aix (~6–7h).</p>
+    <p><strong>Depuis Milan :</strong> Frecciarossa jusqu’à Lyon + TGV vers Aix-en-Provence TGV (~6h).<br>
+    <strong>Depuis Belgique/Luxembourg :</strong> Grande vitesse jusqu’à Paris + TGV vers Aix (~6–7h).</p>
   </div>
   <div class="card">
     <h3>✈️ En avion</h3>
-    <p>Aéroports : Marseille (1h) ou Nice (2h).<br>
-    Vols directs depuis Milan, Rome, Naples, Catane, Barcelone, Madrid, Bruxelles.</p>
+    <p><strong>Marseille (MRS)</strong> ~1h du lieu, ~30 min d’Aix. Vols directs hebdomadaires depuis Milan, Rome, Naples, Catane, Barcelone, Madrid, Bruxelles. <br>
+    <strong>Nice (NCE)</strong> ~2h de route.</p>
+  </div>
+  <div class="card">
+    <h3>🚗 En voiture & parking</h3>
+    <p>Depuis Milan : ~5h30 via la Ligurie. Parking gratuit sur place.</p>
   </div>
   <div class="card">
     <h3>🏨 Où loger</h3>
@@ -164,7 +211,7 @@ a.link:hover{border-bottom-color:var(--accent)}
   <div class="note">👶 Pour des raisons liées au lieu, nous ne pourrons pas accueillir les petits enfants. N’hésitez pas à nous écrire 💜</div>
 
   <div class="note" style="margin-top:30px;text-align:center">
-    💌 <a class="link" href="/wedding-site/rsvp.html">RSVP ici</a> avant le 31 janvier 2026
+    💌 <a class="link" href="/wedding-site/rsvp.html">RSVP</a> entro/avant/by <strong>31 gennaio 2026</strong>
   </div>
 </main>
 
@@ -173,6 +220,7 @@ a.link:hover{border-bottom-color:var(--accent)}
 </footer>
 
 <script>
+/* Mobile menu toggle */
 const btn=document.getElementById('hambBtn');
 const menu=document.getElementById('mobileMenu');
 if(btn&&menu){
@@ -181,7 +229,7 @@ if(btn&&menu){
     menu.style.display=(menu.style.display==='block')?'none':'block';
   });
   document.addEventListener('click',e=>{
-    if(menu.style.display==='block'&&!menu.contains(e.target)&&e.target!==btn){
+    if(menu.style.display==='block' && !menu.contains(e.target) && e.target!==btn){
       menu.style.display='none';
     }
   });
