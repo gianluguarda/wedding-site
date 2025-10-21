@@ -16,37 +16,33 @@
   --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b;
 }
 *{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:"Cormorant", Georgia, "Cormorant", serif;
-  color:var(--ink);
-  background:var(--beige);
-}
+html,body{height:100%;margin:0;font-family:"Cormorant",serif;color:var(--ink);background:var(--beige);
+  background-image:radial-gradient(1200px 700px at 100% -10%, rgba(116,101,173,.10), transparent 60%),
+                   radial-gradient(900px 500px at -10% 10%, rgba(116,101,173,.06), transparent 55%);
+  background-attachment:fixed}
 
-/* Header / Nav */
+/* Header */
 header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.88);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
 .nav{max-width:1100px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:center;gap:12px}
-.brand .names{font-family:"Marck Script", cursive; font-size:clamp(28px,3.2vw,35px); color:var(--accent)}
-.brand .date{font-size:14px;color:var(--muted)}
+.hamburger{display:none;border:1px solid rgba(0,0,0,.1);background:white;border-radius:10px;padding:8px 10px;cursor:pointer}
+.hamburger span{display:block;width:20px;height:2px;background:#444;margin:4px 0}
+.brand .names{font-family:"Marck Script",cursive;font-size:35px;color:var(--accent)}
+.brand .date{font-size:16px;color:var(--muted)}
 nav ul{list-style:none;display:flex;gap:24px;margin:0;padding:0}
-nav a{text-decoration:none;color:var(--ink);opacity:.95;font-size:clamp(17px,2.1vw,19px);line-height:1;padding:8px 6px;border-radius:10px}
+nav a{text-decoration:none;color:var(--ink);opacity:.95;font-size:19px;line-height:1;padding:8px 6px;border-radius:10px}
 nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
 nav li.cta a{background:var(--accent);color:#fff;padding:10px 14px;border-radius:14px;border-bottom:none}
 nav li.cta a:hover{opacity:.95;transform:translateY(-1px)}
-
-/* Hamburger + mobile menu */
-.hamburger{display:none;border:1px solid rgba(0,0,0,.1);background:#fff;border-radius:10px;padding:8px 10px;cursor:pointer}
-.hamburger span{display:block;width:20px;height:2px;background:#444;margin:4px 0}
-.mobile-menu{
-  display:none; position:fixed; top:64px; left:16px;
-  background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:16px;
-  box-shadow:0 8px 40px rgba(0,0,0,.12); padding:12px; z-index:40
-}
+/* Mobile menu */
+.mobile-menu{display:none;position:fixed;top:64px;left:16px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.12);padding:12px;z-index:40}
 .mobile-menu a{display:block;padding:10px 12px;border-radius:10px;color:var(--ink);text-decoration:none}
 .mobile-menu a:hover{background:rgba(116,101,173,.08)}
 
+/* Hero */
+.hero{padding:80px 20px 30px;text-align:center}
+.hero h1{font-family:"Marck Script",cursive;font-size:64px;color:var(--accent);margin:0 0 8px}
+.hero p{color:var(--muted);font-size:20px;margin:0 0 18px}
 /* Main */
 .section{max-width:1100px;margin:0 auto;padding:86px 20px 60px}
 .h1{font-family:"Marck Script",cursive;font-size:56px;color:var(--accent);text-align:center;margin:0 0 8px 0}
