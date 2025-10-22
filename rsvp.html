@@ -28,7 +28,12 @@ header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.88);backdro
 .hamburger{display:none;border:1px solid rgba(0,0,0,.1);background:white;border-radius:10px;padding:8px 10px;cursor:pointer}
 .hamburger span{display:block;width:20px;height:2px;background:#444;margin:4px 0}
 .brand .names{font-family:"Allura",cursive;font-size:35px;color:var(--accent)}
-.brand .date{font-size:16px;color:var(--muted)}
+.brand .date {
+  font-size: 20px;        /* aumenta la dimensione */
+  color: var(--muted);
+  letter-spacing: 0.5px;  /* opzionale: spazia un po’ di più le lettere */
+  font-weight: 500;       /* opzionale: leggermente più marcata */
+}
 nav ul{list-style:none;display:flex;gap:24px;margin:0;padding:0}
 nav a{text-decoration:none;color:var(--ink);opacity:.95;font-size:19px;line-height:1;padding:8px 6px;border-radius:10px}
 nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
