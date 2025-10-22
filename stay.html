@@ -49,6 +49,35 @@ nav li.cta a:hover{opacity:.95;transform:translateY(-1px)}
 .mobile-menu a{display:block;padding:10px 12px;border-radius:10px;color:var(--ink);text-decoration:none}
 .mobile-menu a:hover{background:rgba(116,101,173,.08)}
 
+/* Language picker */
+.lang-picker{
+  display:flex; justify-content:center; gap:10px;
+  margin:14px 0 26px;
+  flex-wrap:wrap;
+}
+.lang-picker .chip{
+  display:inline-flex; align-items:center; gap:8px;
+  text-decoration:none; color:var(--ink);
+  background:#fff; border:1px solid #e8e6e1;
+  padding:10px 14px; border-radius:999px;
+  box-shadow:0 6px 18px rgba(0,0,0,.05);
+  transition:transform .08s ease, box-shadow .12s ease, border-color .12s ease;
+  font-size:16px; line-height:1;
+}
+.lang-picker .chip:hover{
+  transform:translateY(-1px);
+  box-shadow:0 10px 24px rgba(0,0,0,.08);
+  border-color:rgba(116,101,173,.35); /* usa il tuo --accent */
+}
+.lang-picker .chip:focus{ outline:2px solid rgba(116,101,173,.35); outline-offset:2px }
+.lang-picker .chip span{ letter-spacing:.2px; }
+
+/* opzionale: versione compatta su mobile */
+@media (max-width:520px){
+  .lang-picker .chip{ padding:9px 12px; font-size:15px }
+}
+
+
 /* Page */
 .section{max-width:1100px;margin:0 auto;padding:86px 20px 60px}
 .h1{font-family:"Marck Script",cursive;font-size:clamp(40px,6vw,56px);color:var(--accent);text-align:center}
