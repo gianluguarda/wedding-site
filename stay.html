@@ -19,28 +19,146 @@ html,body{height:100%;margin:0;font-family:"Cormorant",serif;color:var(--ink);ba
                    radial-gradient(900px 500px at -10% 10%, rgba(116,101,173,.06), transparent 55%);
   background-attachment:fixed}
 
-/* Header */
-header{position:sticky;top:0;z-index:10;background:rgba(247,244,239,.88);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,.06)}
-.nav{max-width:1100px;margin:0 auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:center;gap:12px}
-.hamburger{display:none;border:1px solid rgba(0,0,0,.1);background:white;border-radius:10px;padding:8px 10px;cursor:pointer}
-.hamburger span{display:block;width:20px;height:2px;background:#444;margin:4px 0}
-.brand .names{font-family:"Allura",cursive;font-size:35px;color:var(--accent)}
-.brand .date {
-  font-size: 20px;        /* aumenta la dimensione */
-  color: var(--muted);
-  letter-spacing: 0.5px;  /* opzionale: spazia un po’ di più le lettere */
-  font-weight: 500;       /* opzionale: leggermente più marcata */
+:root{
+  --accent:#7465ad;
+  --beige:#f7f4ef;
+  --ink:#242424;
+  --muted:#6b6b6b;
+  --card-bg:#ffffff;
 }
-nav ul{list-style:none;display:flex;gap:24px;margin:0;padding:0}
-nav a{text-decoration:none;color:var(--ink);opacity:.95;font-size:19px;line-height:1;padding:8px 6px;border-radius:10px}
-nav a:hover{opacity:1;border-bottom:1px solid var(--accent)}
-nav li.cta a{background:var(--accent);color:#fff;padding:10px 14px;border-radius:14px;border-bottom:none}
-nav li.cta a:hover{opacity:.95;transform:translateY(-1px)}
-/* Mobile menu */
-.mobile-menu{display:none;position:fixed;top:64px;left:16px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.12);padding:12px;z-index:40}
-.mobile-menu a{display:block;padding:10px 12px;border-radius:10px;color:var(--ink);text-decoration:none}
-.mobile-menu a:hover{background:rgba(116,101,173,.08)}
+
+*{ box-sizing:border-box; }
+html,body{
+  margin:0;
+  background:var(--beige);
+  color:var(--ink);
+  font-family:"Cormorant", serif;
+}
+
+/* ===== HEADER (uguale RSVP) ===== */
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(247,244,239,.88);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.nav{
+  max-width:1100px;
+  margin:0 auto;
+  padding:18px 22px;
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+}
+.brand{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+}
+.names{
+  font-family:"Allura", cursive;
+  font-size:36px;
+  line-height:1;
+  color:var(--accent);
+}
+.dot{
+  color:var(--muted);
+  font-size:20px;
+  line-height:1;
+}
+.date{
+  color:var(--muted);
+  font-size:20px;
+  line-height:1;
+  letter-spacing:.4px;
+  font-weight:500;
+}
+
+/* NAV DESKTOP */
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:24px;
+  margin:0;
+  padding:0;
+}
+nav a{
+  text-decoration:none;
+  color:var(--ink);
+  opacity:.95;
+  font-size:18px;
+  line-height:1;
+  padding:10px 8px;
+  border-radius:10px;
+}
+nav a:hover{
+  opacity:1;
+  border-bottom:1px solid var(--accent);
+}
+nav li.cta a{
+  background:var(--accent);
+  color:#fff;
+  padding:10px 14px;
+  border-radius:14px;
+  border-bottom:none;
+  font-weight:500;
+}
+nav li.cta a:hover{
+  opacity:.95;
+  transform:translateY(-1px);
+}
+
+/* HAMBURGER */
+.hamburger{
+  display:none;
+  border:1px solid rgba(0,0,0,.1);
+  background:#fff;
+  border-radius:10px;
+  padding:8px 10px;
+  cursor:pointer;
+}
+.hamburger span{
+  display:block;
+  width:20px;
+  height:2px;
+  background:#444;
+  margin:4px 0;
+}
+
+/* MENU MOBILE A TENDINA */
+.mobile-menu{
+  display:none;
+  position:fixed;
+  top:64px;
+  left:16px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:16px;
+  box-shadow:0 8px 40px rgba(0,0,0,.12);
+  padding:12px;
+  z-index:40;
+}
+.mobile-menu a{
+  display:block;
+  padding:10px 12px;
+  border-radius:10px;
+  color:var(--ink);
+  text-decoration:none;
+}
+.mobile-menu a:hover{
+  background:rgba(116,101,173,.08);
+}
+
+/* BREAKPOINT MOBILE */
+@media(max-width:900px){
+  .hamburger{ display:block; }
+  nav ul{ display:none; }
+  .names{ font-size:32px; }
+  .date{ font-size:18px; }
+}
 
 /* Page wrapper */
 .section{
