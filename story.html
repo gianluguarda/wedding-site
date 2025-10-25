@@ -27,7 +27,7 @@ html,body{
   font-family:"Cormorant", serif;
 }
 
-/* HEADER (uguale alle altre pagine) */
+/* HEADER */
 header{
   position:sticky;
   top:0;
@@ -145,7 +145,7 @@ nav li.cta a:hover{
   .date{ font-size:18px; }
 }
 
-/* PAGE HEADER (titolo pagina) */
+/* PAGE HEADER */
 .page-head{
   max-width:1100px;
   margin:0 auto;
@@ -191,6 +191,24 @@ nav li.cta a:hover{
   color:var(--accent);
 }
 
+/* SECTION TITLE PER LINGUA */
+.lang-section-title{
+  font-family:"Allura", cursive;
+  font-size:40px;
+  line-height:1.2;
+  color:var(--accent);
+  text-align:center;
+  margin:60px 0 30px;
+}
+.lang-section-note{
+  text-align:center;
+  color:var(--muted);
+  font-size:18px;
+  max-width:800px;
+  margin:0 auto 40px;
+  line-height:1.4;
+}
+
 /* TIMELINE WRAPPER */
 .timeline-wrapper{
   max-width:1100px;
@@ -225,11 +243,11 @@ nav li.cta a:hover{
   position:relative;
 }
 
-/* Alterniamo destra/sinistra sul desktop */
+/* Alterniamo destra/sinistra su desktop */
 .moment-left .content { order:2; padding-left:40px; padding-right:0; text-align:left; }
-.moment-left .photo   { order:1; justify-content:flex-end; }
+.moment-left .photos  { order:1; justify-content:flex-end; }
 .moment-right .content{ order:1; padding-right:40px; padding-left:0; text-align:right; }
-.moment-right .photo  { order:2; justify-content:flex-start; }
+.moment-right .photos { order:2; justify-content:flex-start; }
 
 /* Punto sulla linea */
 .moment .dot-year{
@@ -252,18 +270,23 @@ nav li.cta a:hover{
 }
 
 /* Colonne foto e testo */
-.photo,
+.photos,
 .content{
   width:50%;
   max-width:500px;
   display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+}
+.photos{
+  align-items:flex-start;
 }
 @media(max-width:800px){
   .moment{
     flex-direction:column;
     padding-left:50px;
   }
-  .photo,
+  .photos,
   .content{
     width:100%;
     max-width:100%;
@@ -271,13 +294,13 @@ nav li.cta a:hover{
     padding:0 !important;
     order:unset !important;
   }
-  .photo{
+  .photos{
     margin-bottom:20px;
     justify-content:flex-start !important;
   }
 }
 
-/* Polaroid-style photo */
+/* Singola polaroid */
 .polaroid{
   position:relative;
   background:#fff;
@@ -285,7 +308,7 @@ nav li.cta a:hover{
   border-bottom-width:22px;
   border-radius:6px;
   box-shadow:0 10px 30px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);
-  max-width:320px;
+  max-width:220px;
   transform:rotate(-1.5deg);
 }
 .polaroid img{
@@ -293,6 +316,12 @@ nav li.cta a:hover{
   width:100%;
   height:auto;
   border-radius:2px;
+}
+.polaroid.rotate-pos{
+  transform:rotate(2deg);
+}
+.polaroid.rotate-neg{
+  transform:rotate(-2deg);
 }
 .tape{
   position:absolute;
@@ -311,7 +340,7 @@ nav li.cta a:hover{
   display:inline-block;
   font-family:"Cormorant", serif;
   font-weight:600;
-  font-size:18px; /* più grande e più visibile */
+  font-size:18px; /* più visibile */
   color:#333;
   background:#f5f5f5;
   border:1px solid #eee;
@@ -321,7 +350,7 @@ nav li.cta a:hover{
 }
 .moment h2{
   font-family:"Allura", cursive;
-  font-size:32px; /* più piccolo rispetto alla label anno */
+  font-size:32px; /* un po' più piccolo rispetto a year-label */
   line-height:1.25;
   color:var(--accent);
   margin:0 0 10px;
@@ -341,24 +370,6 @@ footer{
   padding:40px 20px;
   font-size:14px;
   background:transparent;
-}
-
-/* LANGUAGE SECTION TITLES */
-.lang-section-title{
-  font-family:"Allura", cursive;
-  font-size:40px;
-  line-height:1.2;
-  color:var(--accent);
-  text-align:center;
-  margin:60px 0 30px;
-}
-.lang-section-note{
-  text-align:center;
-  color:var(--muted);
-  font-size:18px;
-  max-width:800px;
-  margin:0 auto 40px;
-  line-height:1.4;
 }
 </style>
 </head>
@@ -421,10 +432,20 @@ footer{
   <article class="moment moment-left">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(-2deg);">
+    <div class="photos">
+      <div class="polaroid rotate-neg">
         <div class="tape"></div>
         <img src="/wedding-site/assets/story/2014.jpg" alt="Mykonos 2014">
+      </div>
+
+      <div class="polaroid rotate-pos">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2014-1.jpg" alt="Mykonos extra 2014">
+      </div>
+
+      <div class="polaroid rotate-neg">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2014-2.jpg" alt="Ancora Mykonos 2014">
       </div>
     </div>
 
@@ -446,10 +467,15 @@ footer{
   <article class="moment moment-right">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(2deg);">
+    <div class="photos">
+      <div class="polaroid rotate-pos">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2014-2017.jpg" alt="Distanza Milano-Charleroi">
+        <img src="/wedding-site/assets/story/2014-2017-1.jpg" alt="Distanza Milano-Charleroi">
+      </div>
+
+      <div class="polaroid rotate-neg">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2014-2017-2.jpg" alt="Ryanair years">
       </div>
     </div>
 
@@ -470,10 +496,15 @@ footer{
   <article class="moment moment-left">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(-1deg);">
+    <div class="photos">
+      <div class="polaroid rotate-neg">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2017-2018.jpg" alt="Milano Bocconi">
+        <img src="/wedding-site/assets/story/2017-2018-1.jpg" alt="Milano Bocconi">
+      </div>
+
+      <div class="polaroid rotate-pos">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2017-2018-2.jpg" alt="Milano vita insieme">
       </div>
     </div>
 
@@ -494,10 +525,15 @@ footer{
   <article class="moment moment-right">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(1deg);">
+    <div class="photos">
+      <div class="polaroid rotate-pos">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2018-2020.jpg" alt="Cile, Madrid, Parigi">
+        <img src="/wedding-site/assets/story/2018-2020-1.jpg" alt="Cile, Madrid, Parigi">
+      </div>
+
+      <div class="polaroid rotate-neg">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2018-2020-2.jpg" alt="Ancora 2018-2020">
       </div>
     </div>
 
@@ -509,7 +545,8 @@ footer{
           Charlotte parte sei mesi in Cile; poi conviviamo per la prima volta.
           Per poco però, perché Gianluca si sposta a Madrid per la tesi, Charlotte lo raggiunge,
           ma poi inizia uno stage a Parigi… distanza di nuovo.
-          E quando pensiamo di aver finito: arriva una pandemia globale.
+          E quando pensiamo di aver finito:
+          arriva una pandemia globale a separarci di nuovo, in due paesi diversi.
           Ma restiamo insieme.
         </p>
       </div>
@@ -520,10 +557,15 @@ footer{
   <article class="moment moment-left">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(-2deg);">
+    <div class="photos">
+      <div class="polaroid rotate-neg">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2020-2024.jpg" alt="Porta Romana, Via Lucano">
+        <img src="/wedding-site/assets/story/2020-2024-1.jpg" alt="Porta Romana">
+      </div>
+
+      <div class="polaroid rotate-pos">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2020-2024-2.jpg" alt="Via Lucano">
       </div>
     </div>
 
@@ -546,10 +588,15 @@ footer{
   <article class="moment moment-right">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(2deg);">
+    <div class="photos">
+      <div class="polaroid rotate-pos">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2025-proposta.jpg" alt="Andalo, la proposta">
+        <img src="/wedding-site/assets/story/2025-proposta-1.jpg" alt="Andalo, la proposta">
+      </div>
+
+      <div class="polaroid rotate-neg">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2025-proposta-2.jpg" alt="Dolomiti proposal">
       </div>
     </div>
 
@@ -559,7 +606,8 @@ footer{
         <h2>Andalo, Dolomiti — “mi butto”</h2>
         <p>
           Dopo undici anni intensi, Gianluca decide che è il momento.
-          Tra le montagne delle Dolomiti, ad Andalo, arriva la domanda
+          Tra le montagne delle Dolomiti, ad Andalo,
+          arriva la domanda
           (Charlotte cade quasi dalla sedia 😄).
           Ma dice sì. 💍
         </p>
@@ -571,8 +619,8 @@ footer{
   <article class="moment moment-left">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(-1deg);">
+    <div class="photos">
+      <div class="polaroid rotate-neg" style="transform:rotate(-1deg);">
         <div class="tape"></div>
         <img src="/wedding-site/assets/story/2026-wedding.jpg" alt="Château de Pradines">
       </div>
@@ -600,7 +648,10 @@ footer{
 <section id="en" class="timeline-wrapper">
 
   <div class="lang-section-title">Our story · 🇬🇧 English</div>
-  <div class="lang-section-note">From our first dance in Mykonos to a wedding in Provence. Years, cities, distance — and still us.</div>
+  <div class="lang-section-note">
+    From our first dance in Mykonos to a wedding in Provence.
+    Years, cities, distance — and still us.
+  </div>
 
   <div class="timeline-line"></div>
 
@@ -608,10 +659,20 @@ footer{
   <article class="moment moment-left">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(-2deg);">
+    <div class="photos">
+      <div class="polaroid rotate-neg">
         <div class="tape"></div>
         <img src="/wedding-site/assets/story/2014.jpg" alt="Mykonos 2014">
+      </div>
+
+      <div class="polaroid rotate-pos">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2014-1.jpg" alt="Mykonos extra 2014">
+      </div>
+
+      <div class="polaroid rotate-neg">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2014-2.jpg" alt="More Mykonos 2014">
       </div>
     </div>
 
@@ -635,10 +696,15 @@ footer{
   <article class="moment moment-right">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(2deg);">
+    <div class="photos">
+      <div class="polaroid rotate-pos">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2014-2017.jpg" alt="Long distance years">
+        <img src="/wedding-site/assets/story/2014-2017-1.jpg" alt="Long distance years">
+      </div>
+
+      <div class="polaroid rotate-neg">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2014-2017-2.jpg" alt="Ryanair years">
       </div>
     </div>
 
@@ -660,10 +726,15 @@ footer{
   <article class="moment moment-left">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(-1deg);">
+    <div class="photos">
+      <div class="polaroid rotate-neg">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2017-2018.jpg" alt="Milano Bocconi">
+        <img src="/wedding-site/assets/story/2017-2018-1.jpg" alt="Milan Bocconi">
+      </div>
+
+      <div class="polaroid rotate-pos">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2017-2018-2.jpg" alt="Milan first years">
       </div>
     </div>
 
@@ -685,10 +756,15 @@ footer{
   <article class="moment moment-right">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(1deg);">
+    <div class="photos">
+      <div class="polaroid rotate-pos">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2018-2020.jpg" alt="Chile, Madrid, Paris">
+        <img src="/wedding-site/assets/story/2018-2020-1.jpg" alt="Chile, Madrid, Paris">
+      </div>
+
+      <div class="polaroid rotate-neg">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2018-2020-2.jpg" alt="Covid separation">
       </div>
     </div>
 
@@ -700,9 +776,11 @@ footer{
           Charlotte spends six months in Chile; then we live together
           for the first time. Not for long, though — Gianluca moves to Madrid
           for his thesis, Charlotte joins him for a while,
-          then she lands an internship in Paris.
-          And just when we think we’ve seen it all:
-          a global pandemic hits.
+          then she lands an internship in Paris…
+          distance again.
+          And just when we thought we were done:
+          a global pandemic arrives — and we end up separated again,
+          in two different countries.
           Still, we hold on. Together.
         </p>
       </div>
@@ -713,10 +791,15 @@ footer{
   <article class="moment moment-left">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(-2deg);">
+    <div class="photos">
+      <div class="polaroid rotate-neg">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2020-2024.jpg" alt="Our first homes">
+        <img src="/wedding-site/assets/story/2020-2024-1.jpg" alt="First apartment">
+      </div>
+
+      <div class="polaroid rotate-pos">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2020-2024-2.jpg" alt="Via Lucano">
       </div>
     </div>
 
@@ -740,10 +823,15 @@ footer{
   <article class="moment moment-right">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(2deg);">
+    <div class="photos">
+      <div class="polaroid rotate-pos">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2025-proposta.jpg" alt="The proposal in Andalo">
+        <img src="/wedding-site/assets/story/2025-proposta-1.jpg" alt="The proposal in Andalo">
+      </div>
+
+      <div class="polaroid rotate-neg">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2025-proposta-2.jpg" alt="Dolomites proposal">
       </div>
     </div>
 
@@ -754,7 +842,8 @@ footer{
         <p>
           After eleven intense years, Gianluca decides it’s time.
           In the mountains of Andalo, in the Dolomites,
-          he asks the question (Charlotte almost falls off her chair 😄).
+          he asks the question
+          (Charlotte almost falls off her chair 😄).
           She says yes. 💍
         </p>
       </div>
@@ -765,8 +854,8 @@ footer{
   <article class="moment moment-left">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(-1deg);">
+    <div class="photos">
+      <div class="polaroid rotate-neg" style="transform:rotate(-1deg);">
         <div class="tape"></div>
         <img src="/wedding-site/assets/story/2026-wedding.jpg" alt="Provence Château">
       </div>
@@ -794,7 +883,10 @@ footer{
 <section id="fr" class="timeline-wrapper">
 
   <div class="lang-section-title">Notre histoire · 🇫🇷 Français</div>
-  <div class="lang-section-note">De notre première danse à Mykonos jusqu’à la Provence. Des années de distance, de voyages, et toujours nous deux.</div>
+  <div class="lang-section-note">
+    De notre première danse à Mykonos jusqu’à la Provence.
+    Des années de distance, de voyages, et toujours nous deux.
+  </div>
 
   <div class="timeline-line"></div>
 
@@ -802,10 +894,20 @@ footer{
   <article class="moment moment-left">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(-2deg);">
+    <div class="photos">
+      <div class="polaroid rotate-neg">
         <div class="tape"></div>
         <img src="/wedding-site/assets/story/2014.jpg" alt="Mykonos 2014">
+      </div>
+
+      <div class="polaroid rotate-pos">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2014-1.jpg" alt="Mykonos extra 2014">
+      </div>
+
+      <div class="polaroid rotate-neg">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2014-2.jpg" alt="Encore Mykonos 2014">
       </div>
     </div>
 
@@ -829,10 +931,15 @@ footer{
   <article class="moment moment-right">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(2deg);">
+    <div class="photos">
+      <div class="polaroid rotate-pos">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2014-2017.jpg" alt="Relation à distance">
+        <img src="/wedding-site/assets/story/2014-2017-1.jpg" alt="Relation à distance">
+      </div>
+
+      <div class="polaroid rotate-neg">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2014-2017-2.jpg" alt="Vols Ryanair">
       </div>
     </div>
 
@@ -857,10 +964,15 @@ footer{
   <article class="moment moment-left">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(-1deg);">
+    <div class="photos">
+      <div class="polaroid rotate-neg">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2017-2018.jpg" alt="Bocconi Milan">
+        <img src="/wedding-site/assets/story/2017-2018-1.jpg" alt="Bocconi Milan">
+      </div>
+
+      <div class="polaroid rotate-pos">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2017-2018-2.jpg" alt="Milan ensemble">
       </div>
     </div>
 
@@ -883,10 +995,15 @@ footer{
   <article class="moment moment-right">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(1deg);">
+    <div class="photos">
+      <div class="polaroid rotate-pos">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2018-2020.jpg" alt="Chili, Madrid, Paris">
+        <img src="/wedding-site/assets/story/2018-2020-1.jpg" alt="Chili, Madrid, Paris">
+      </div>
+
+      <div class="polaroid rotate-neg">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2018-2020-2.jpg" alt="Covid séparation">
       </div>
     </div>
 
@@ -898,9 +1015,12 @@ footer{
           Charlotte part six mois au Chili ; ensuite, on vit ensemble pour la première fois.
           Pas longtemps : Gianluca part à Madrid pour sa thèse,
           Charlotte le rejoint quelques mois,
-          puis décroche un stage à Paris.
-          Et quand on pense avoir tout vécu,
-          une pandémie mondiale arrive.
+          puis décroche un stage à Paris…
+          distance à nouveau.
+          Et quand on pense avoir tout vécu :
+          une pandémie mondiale arrive —
+          et nous voilà à nouveau séparés,
+          chacun dans un pays différent.
           Mais on reste soudés.
         </p>
       </div>
@@ -911,10 +1031,15 @@ footer{
   <article class="moment moment-left">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(-2deg);">
+    <div class="photos">
+      <div class="polaroid rotate-neg">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2020-2024.jpg" alt="Nos maisons à Milan">
+        <img src="/wedding-site/assets/story/2020-2024-1.jpg" alt="Nos premiers appartements">
+      </div>
+
+      <div class="polaroid rotate-pos">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2020-2024-2.jpg" alt="Via Lucano Milan">
       </div>
     </div>
 
@@ -938,10 +1063,15 @@ footer{
   <article class="moment moment-right">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(2deg);">
+    <div class="photos">
+      <div class="polaroid rotate-pos">
         <div class="tape"></div>
-        <img src="/wedding-site/assets/story/2025-proposta.jpg" alt="Demande en mariage Andalo">
+        <img src="/wedding-site/assets/story/2025-proposta-1.jpg" alt="Demande en mariage Andalo">
+      </div>
+
+      <div class="polaroid rotate-neg">
+        <div class="tape"></div>
+        <img src="/wedding-site/assets/story/2025-proposta-2.jpg" alt="Dolomites demande">
       </div>
     </div>
 
@@ -964,8 +1094,8 @@ footer{
   <article class="moment moment-left">
     <div class="dot-year"></div>
 
-    <div class="photo">
-      <div class="polaroid" style="transform:rotate(-1deg);">
+    <div class="photos">
+      <div class="polaroid rotate-neg" style="transform:rotate(-1deg);">
         <div class="tape"></div>
         <img src="/wedding-site/assets/story/2026-wedding.jpg" alt="Château de Pradines Provence">
       </div>
