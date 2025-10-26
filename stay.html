@@ -36,7 +36,7 @@ html,body{
 }
 
 /* HEADER BASE */
-header {
+header{
   position:sticky;
   top:0;
   z-index:10;
@@ -46,50 +46,43 @@ header {
   font-family:"Cormorant", serif;
 }
 
-.nav {
+.nav{
   max-width:1100px;
   margin:0 auto;
   padding:18px 22px;
   display:flex;
-  align-items:center;           /* <-- allinea tutto sul centro verticale */
+  align-items:center;
   justify-content:space-between;
   gap:12px;
 }
 
-/* BLOCCO A SINISTRA (logo/testo) */
-.brand {
+/* BLOCCO A SINISTRA (nomi e data) */
+.brand{
   display:flex;
-  align-items:center;           /* <-- anche qui center */
+  align-items:center;
   flex-wrap:nowrap;
   gap:8px;
 }
-
-/* Nomi */
-.names {
+.names{
   font-family:"Allura", cursive;
-  font-size:36px;               /* cambia qui per ingrandire o ridurre */
+  font-size:36px;
   line-height:1.1;
   color:var(--accent);
   white-space:nowrap;
 }
-
-/* Puntino separatore */
-.dot {
+.dot{
   color:var(--muted);
   font-size:20px;
   line-height:1.1;
 }
-
-/* Data */
-.date {
+.date{
   color:var(--muted);
-  font-size:20px;               /* cambia qui per farla più grande/piccola */
+  font-size:20px;
   line-height:1.1;
   letter-spacing:.4px;
   font-weight:500;
   white-space:nowrap;
 }
-
 /* MENU DESKTOP */
 nav ul {
   list-style:none;
