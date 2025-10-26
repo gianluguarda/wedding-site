@@ -40,6 +40,27 @@ header {
   gap:12px;
 }
 
+/* LAVANDA Principale */
+
+.hero-img-wrapper {
+  max-width: 500px;  /* <– cambia qui */
+  margin: 0 auto 20px;
+}
+
+.hero-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width:700px){
+  .hero-img-wrapper {
+    max-width: 500px; /* <– anche questa puoi aumentarla, se vuoi più grande anche su mobile */
+    margin-bottom: 16px;
+  }
+}
+
+  
 /* BLOCCO A SINISTRA (logo/testo) */
 .brand {
   display:flex;
@@ -271,7 +292,7 @@ h2 {
   <div class="hero">
     <!-- Immagine lavanda con nomi -->
     <div class="hero-img-wrapper">
-      <img
+      <img+
         src="/assets/hero-lavanda.jpg"
         alt="Charlotte & Gianluca"
         class="hero-img"
