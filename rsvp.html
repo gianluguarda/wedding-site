@@ -288,16 +288,21 @@ footer{
 /* ======================= */
 /* RESPONSIVE */
 /* ======================= */
-@media(max-width:900px){
-  .nav{
+@media(max-width:600px){
+  .nav {
     width:100%;
     padding:16px 12px;
   }
-  .hamburger{display:block;}
-  nav ul{display:none;}
-  .names{font-size:30px;}
-  .date{font-size:17px;}
-  .mobile-menu{top:58px;right:12px;}
+  .hamburger { display:block; }
+  nav ul { display:none; }
+  .names { font-size:30px; }
+  .date  { font-size:17px; }
+
+  .mobile-menu {
+    top:58px;
+    left:12px;   /* spostato a sinistra */
+    right:auto;  /* niente più right */
+  }
 }
 
 @media(max-width:700px){
