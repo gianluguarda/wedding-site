@@ -35,84 +35,104 @@ html,body{
   font-family:"Cormorant", serif;
 }
 
-/* ===== HEADER (uguale RSVP) ===== */
-header{
+/* HEADER BASE */
+header {
   position:sticky;
   top:0;
   z-index:10;
   background:rgba(247,244,239,.88);
   backdrop-filter:blur(6px);
   border-bottom:1px solid rgba(0,0,0,.06);
+  font-family:"Cormorant", serif;
 }
-.nav{
+
+.nav {
   max-width:1100px;
   margin:0 auto;
   padding:18px 22px;
   display:flex;
-  align-items:baseline;
+  align-items:center;           /* <-- allinea tutto sul centro verticale */
   justify-content:space-between;
   gap:12px;
 }
-.brand{
+
+/* BLOCCO A SINISTRA (logo/testo) */
+.brand {
   display:flex;
-  align-items:baseline;
+  align-items:center;           /* <-- anche qui center */
+  flex-wrap:nowrap;
   gap:8px;
 }
-.names{
+
+/* Nomi */
+.names {
   font-family:"Allura", cursive;
-  font-size:36px;
-  line-height:1;
+  font-size:36px;               /* cambia qui per ingrandire o ridurre */
+  line-height:1.1;
   color:var(--accent);
-}
-.dot{
-  color:var(--muted);
-  font-size:20px;
-  line-height:1;
-}
-.date{
-  color:var(--muted);
-  font-size:20px;
-  line-height:1;
-  letter-spacing:.4px;
-  font-weight:500;
+  white-space:nowrap;
 }
 
-/* NAV DESKTOP */
-nav ul{
+/* Puntino separatore */
+.dot {
+  color:var(--muted);
+  font-size:20px;
+  line-height:1.1;
+}
+
+/* Data */
+.date {
+  color:var(--muted);
+  font-size:20px;               /* cambia qui per farla più grande/piccola */
+  line-height:1.1;
+  letter-spacing:.4px;
+  font-weight:500;
+  white-space:nowrap;
+}
+
+/* MENU DESKTOP */
+nav ul {
   list-style:none;
   display:flex;
   gap:24px;
   margin:0;
   padding:0;
 }
-nav a{
+
+nav a {
   text-decoration:none;
   color:var(--ink);
   opacity:.95;
-  font-size:18px;
+  font-size:19px;
   line-height:1;
-  padding:10px 8px;
+  padding:8px 6px;
   border-radius:10px;
+  font-family:"Cormorant", serif;
 }
-nav a:hover{
+
+nav a:hover {
   opacity:1;
   border-bottom:1px solid var(--accent);
 }
-nav li.cta a{
+
+/* RSVP evidenziato */
+nav li.cta a {
   background:var(--accent);
   color:#fff;
   padding:10px 14px;
   border-radius:14px;
   border-bottom:none;
   font-weight:500;
+  line-height:1.1;
 }
-nav li.cta a:hover{
+
+nav li.cta a:hover {
   opacity:.95;
   transform:translateY(-1px);
 }
 
-/* HAMBURGER */
-.hamburger{
+/* HAMBURGER (mobile) */
+.hamburger {
   display:none;
   border:1px solid rgba(0,0,0,.1);
   background:#fff;
@@ -120,7 +140,7 @@ nav li.cta a:hover{
   padding:8px 10px;
   cursor:pointer;
 }
-.hamburger span{
+.hamburger span {
   display:block;
   width:20px;
   height:2px;
@@ -128,12 +148,12 @@ nav li.cta a:hover{
   margin:4px 0;
 }
 
-/* MENU MOBILE A TENDINA */
-.mobile-menu{
+/* MENU MOBILE POPUP */
+.mobile-menu {
   display:none;
   position:fixed;
   top:64px;
-  left:16px;
+  right:16px;
   background:#fff;
   border:1px solid rgba(0,0,0,.06);
   border-radius:16px;
@@ -141,24 +161,56 @@ nav li.cta a:hover{
   padding:12px;
   z-index:40;
 }
-.mobile-menu a{
+.mobile-menu a {
   display:block;
   padding:10px 12px;
   border-radius:10px;
   color:var(--ink);
   text-decoration:none;
+  font-family:"Cormorant", serif;
+  font-size:18px;
 }
-.mobile-menu a:hover{
+.mobile-menu a:hover {
   background:rgba(116,101,173,.08);
 }
 
-/* BREAKPOINT MOBILE */
-@media(max-width:900px){
-  .hamburger{ display:block; }
-  nav ul{ display:none; }
-  .names{ font-size:32px; }
-  .date{ font-size:18px; }
+/* HERO TITLE DELLA PAGINA (Our story, RSVP, ecc.) */
+.page-head {
+  text-align: center;
+  padding: 60px 20px 40px;
 }
+
+.page-head h1 {
+  font-family: "Allura", cursive;
+  font-size: 56px;
+  color: var(--accent);
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+
+.page-head p {
+  font-family: "Cormorant", serif;
+  font-size: 22px;
+  color: var(--muted);
+  margin: 0;
+  font-style: italic; /* <-- corsivo per il sottotitolo */
+}
+
+  
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav {
+    width: 100%;              /* evita overflow */
+    padding: 16px 12px;       /* leggermente meno padding laterale */
+  }
+  .hamburger { display:block; }
+  nav ul { display:none; }
+  .names { font-size:30px; }
+  .date  { font-size:17px; }
+  .mobile-menu { top:58px; right:12px; } /* leggermente più dentro */
+}
+
+
 
 /* Page wrapper */
 .section{
