@@ -36,108 +36,104 @@ html,body{
   font-family:"Cormorant", serif;
 }
 
-/* ===== HEADER (uguale RSVP) ===== */
-header{
+/* HEADER BASE */
+header {
   position:sticky;
   top:0;
   z-index:10;
   background:rgba(247,244,239,.88);
   backdrop-filter:blur(6px);
   border-bottom:1px solid rgba(0,0,0,.06);
+  font-family:"Cormorant", serif;
 }
-.nav{
+
+.nav {
   max-width:1100px;
   margin:0 auto;
   padding:18px 22px;
   display:flex;
-  align-items:baseline;
+  align-items:center;           /* <-- allinea tutto sul centro verticale */
   justify-content:space-between;
   gap:12px;
 }
-.brand{
+
+/* BLOCCO A SINISTRA (logo/testo) */
+.brand {
   display:flex;
-  align-items:baseline;
+  align-items:center;           /* <-- anche qui center */
+  flex-wrap:nowrap;
   gap:8px;
 }
-.names{
+
+/* Nomi */
+.names {
   font-family:"Allura", cursive;
-  font-size:36px;
-  line-height:1;
+  font-size:36px;               /* cambia qui per ingrandire o ridurre */
+  line-height:1.1;
   color:var(--accent);
+  white-space:nowrap;
 }
-.dot{
+
+/* Puntino separatore */
+.dot {
   color:var(--muted);
   font-size:20px;
-  line-height:1;
+  line-height:1.1;
 }
-.date{
+
+/* Data */
+.date {
   color:var(--muted);
-  font-size:20px;
-  line-height:1;
+  font-size:20px;               /* cambia qui per farla più grande/piccola */
+  line-height:1.1;
   letter-spacing:.4px;
   font-weight:500;
+  white-space:nowrap;
 }
 
-  /* ===== PAGE HEAD (Titolo principale della pagina) ===== */
-.page-head{
-  max-width:1100px;
-  margin:0 auto;
-  padding:60px 20px 10px;
-  text-align:center;
-}
-
-.page-head h1{
-  font-family:"Allura", cursive;
-  color:var(--accent);
-  font-size:56px;
-  line-height:1.1;
-  margin:0 0 10px;
-}
-
-.page-head p{
-  margin:0;
-  color:var(--muted);
-  font-size:20px;
-  font-weight:400;
-}
-
-
-/* NAV DESKTOP */
-nav ul{
+/* MENU DESKTOP */
+nav ul {
   list-style:none;
   display:flex;
   gap:24px;
   margin:0;
   padding:0;
 }
-nav a{
+
+nav a {
   text-decoration:none;
   color:var(--ink);
   opacity:.95;
-  font-size:18px;
+  font-size:19px;
   line-height:1;
-  padding:10px 8px;
+  padding:8px 6px;
   border-radius:10px;
+  font-family:"Cormorant", serif;
 }
-nav a:hover{
+
+nav a:hover {
   opacity:1;
   border-bottom:1px solid var(--accent);
 }
-nav li.cta a{
+
+/* RSVP evidenziato */
+nav li.cta a {
   background:var(--accent);
   color:#fff;
   padding:10px 14px;
   border-radius:14px;
   border-bottom:none;
   font-weight:500;
+  line-height:1.1;
 }
-nav li.cta a:hover{
+
+nav li.cta a:hover {
   opacity:.95;
   transform:translateY(-1px);
 }
 
-/* HAMBURGER */
-.hamburger{
+/* HAMBURGER (mobile) */
+.hamburger {
   display:none;
   border:1px solid rgba(0,0,0,.1);
   background:#fff;
@@ -145,7 +141,7 @@ nav li.cta a:hover{
   padding:8px 10px;
   cursor:pointer;
 }
-.hamburger span{
+.hamburger span {
   display:block;
   width:20px;
   height:2px;
@@ -153,12 +149,12 @@ nav li.cta a:hover{
   margin:4px 0;
 }
 
-/* MENU MOBILE A TENDINA */
-.mobile-menu{
+/* MENU MOBILE POPUP */
+.mobile-menu {
   display:none;
   position:fixed;
   top:64px;
-  left:16px;
+  right:16px;
   background:#fff;
   border:1px solid rgba(0,0,0,.06);
   border-radius:16px;
@@ -166,23 +162,27 @@ nav li.cta a:hover{
   padding:12px;
   z-index:40;
 }
-.mobile-menu a{
+.mobile-menu a {
   display:block;
   padding:10px 12px;
   border-radius:10px;
   color:var(--ink);
   text-decoration:none;
+  font-family:"Cormorant", serif;
+  font-size:18px;
 }
-.mobile-menu a:hover{
+.mobile-menu a:hover {
   background:rgba(116,101,173,.08);
 }
 
-/* BREAKPOINT MOBILE */
+/* RESPONSIVE */
 @media(max-width:900px){
-  .hamburger{ display:block; }
-  nav ul{ display:none; }
-  .names{ font-size:32px; }
-  .date{ font-size:18px; }
+  .hamburger { display:block; }
+  nav ul { display:none; }
+  .names { font-size:32px; }
+  .date  { font-size:18px; }
+  .nav   { padding:18px 16px; }
+  .mobile-menu { top:60px; }
 }
 
 
