@@ -4,22 +4,31 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Charlotte & Gianluca — Home</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Allura&display=swap" rel="stylesheet">
 
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Allura&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --accent:#7465ad;
-  --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b;
+  --beige:#f7f4ef;
+  --ink:#242424;
+  --muted:#6b6b6b;
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:"Cormorant",serif;color:var(--ink);background:var(--beige);
-  background-image:radial-gradient(1200px 700px at 100% -10%, rgba(116,101,173,.10), transparent 60%),
-                   radial-gradient(900px 500px at -10% 10%, rgba(116,101,173,.06), transparent 55%);
-  background-attachment:fixed}
+html,body{
+  height:100%;
+  margin:0;
+  font-family:"Cormorant",serif;
+  color:var(--ink);
+  background:var(--beige);
+  background-image:
+    radial-gradient(1200px 700px at 100% -10%, rgba(116,101,173,.10), transparent 60%),
+    radial-gradient(900px 500px at -10% 10%, rgba(116,101,173,.06), transparent 55%);
+  background-attachment:fixed;
+}
 
-/* HEADER BASE */
+/* HEADER BASE (stesso stile tutte le pagine) */
 header {
   position:sticky;
   top:0;
@@ -35,60 +44,36 @@ header {
   margin:0 auto;
   padding:18px 22px;
   display:flex;
-  align-items:center;           /* <-- allinea tutto sul centro verticale */
+  align-items:center; /* centra verticalmente nomi/data/menu */
   justify-content:space-between;
   gap:12px;
 }
 
-/* LAVANDA Principale */
-
-.hero-img-wrapper {
-  max-width: 500px;  /* <– cambia qui */
-  margin: 0 auto 20px;
-}
-
-.hero-img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-@media (max-width:700px){
-  .hero-img-wrapper {
-    max-width: 500px; /* <– anche questa puoi aumentarla, se vuoi più grande anche su mobile */
-    margin-bottom: 16px;
-  }
-}
-
-  
-/* BLOCCO A SINISTRA (logo/testo) */
+/* brand = blocco sinistra header */
 .brand {
   display:flex;
-  align-items:center;           /* <-- anche qui center */
+  align-items:center;
   flex-wrap:nowrap;
   gap:8px;
 }
 
-/* Nomi */
 .names {
   font-family:"Allura", cursive;
-  font-size:36px;               /* cambia qui per ingrandire o ridurre */
+  font-size:36px;
   line-height:1.1;
   color:var(--accent);
   white-space:nowrap;
 }
 
-/* Puntino separatore */
 .dot {
   color:var(--muted);
   font-size:20px;
   line-height:1.1;
 }
 
-/* Data */
 .date {
   color:var(--muted);
-  font-size:20px;               /* cambia qui per farla più grande/piccola */
+  font-size:20px;
   line-height:1.1;
   letter-spacing:.4px;
   font-weight:500;
@@ -120,7 +105,7 @@ nav a:hover {
   border-bottom:1px solid var(--accent);
 }
 
-/* RSVP evidenziato */
+/* Bottone RSVP nel menu */
 nav li.cta a {
   background:var(--accent);
   color:#fff;
@@ -179,85 +164,136 @@ nav li.cta a:hover {
   background:rgba(116,101,173,.08);
 }
 
-/* HERO TITLE DELLA PAGINA (Our story, RSVP, ecc.) */
-.page-head {
-  text-align: center;
-  padding: 60px 20px 40px;
+/* HERO (blocco principale con lavanda, data, countdown) */
+.hero {
+  text-align:center;
+  padding:60px 20px 30px;
 }
 
-.page-head h1 {
-  font-family: "Allura", cursive;
-  font-size: 56px;
-  color: var(--accent);
-  margin: 0 0 10px;
-  line-height: 1.2;
+.hero-img-wrapper {
+  max-width:500px;     /* puoi aumentare tipo 600px */
+  margin:0 auto 20px;  /* centra l'immagine e aggiunge spazio sotto */
 }
 
-.page-head p {
-  font-family: "Cormorant", serif;
-  font-size: 22px;
-  color: var(--muted);
-  margin: 0;
-  font-style: italic; /* <-- corsivo per il sottotitolo */
+.hero-img {
+  display:block;
+  width:100%;
+  height:auto;
 }
 
-  
+.date-line {
+  font-family:"Cormorant", serif;
+  font-size:20px;
+  color:var(--muted);
+  margin:0 0 18px;
+  font-style:italic;
+}
+
+/* Countdown */
+.countdown{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.cd-box{
+  min-width:110px;
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:14px;
+  padding:12px 14px;
+  text-align:center;
+  box-shadow:0 10px 28px rgba(0,0,0,.06);
+}
+.cd-num{
+  font-size:30px;
+  font-weight:600;
+  color:var(--accent);
+  line-height:1;
+}
+.cd-label{
+  font-size:12px;
+  color:var(--muted);
+  letter-spacing:.4px;
+  text-transform:uppercase;
+  margin-top:4px;
+}
+
+/* bottone RSVP sotto il countdown */
+.btn{
+  display:inline-block;
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+  padding:12px 22px;
+  border-radius:16px;
+  font-weight:600;
+  font-family:"Cormorant", serif;
+}
+.btn:hover{opacity:.95}
+
+/* Sezione lingue con blocchi */
+.section{
+  max-width:900px;
+  margin:0 auto;
+  padding:40px 20px 80px;
+  text-align:center;
+}
+
+.lang-block{
+  background:#fff;
+  border-radius:18px;
+  border:1px solid #eee;
+  padding:24px;
+  margin-top:24px;
+}
+
+/* Titolo tipo Benvenuti / Welcome / Bienvenue */
+.lang-block h2{
+  margin:0 0 10px;
+  font-family:"Allura", cursive;
+  font-size:42px;
+  font-weight:400;
+  color:var(--accent);
+  line-height:1.2;
+}
+
+.lang-block p{
+  margin:0 0 14px;
+  font-family:"Cormorant", serif;
+  font-size:18px;
+  color:var(--ink);
+  line-height:1.4;
+}
+
+/* Footer */
+footer{
+  text-align:center;
+  color:#6b6b6b;
+  padding:40px 20px;
+  font-size:14px;
+}
+
 /* RESPONSIVE */
 @media(max-width:600px){
   .nav {
-    width: 100%;              /* evita overflow */
-    padding: 16px 12px;       /* leggermente meno padding laterale */
+    width:100%;
+    padding:16px 12px;
   }
   .hamburger { display:block; }
   nav ul { display:none; }
   .names { font-size:30px; }
   .date  { font-size:17px; }
-  .mobile-menu { top:58px; right:12px; } /* leggermente più dentro */
-}
+  .mobile-menu { top:58px; right:12px; }
 
+  .hero-img-wrapper {
+    max-width:500px;
+    margin-bottom:16px;
+  }
 
-
-/* Countdown */
-.countdown{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:10px}
-.cd-box{min-width:110px;background:#fff;border:1px solid #eee;border-radius:14px;padding:12px 14px;text-align:center;box-shadow:0 10px 28px rgba(0,0,0,.06)}
-.cd-num{font-size:30px;font-weight:600;color:var(--accent);line-height:1}
-.cd-label{font-size:12px;color:var(--muted);letter-spacing:.4px;text-transform:uppercase;margin-top:4px}
-
-/* Sections */
-.section{max-width:900px;margin:0 auto;padding:40px 20px 80px;text-align:center}
-.lang-block{background:#fff;border-radius:18px;border:1px solid #eee;padding:24px;margin-top:24px}
-.lang-block h2{margin:0 0 10px;font-family:"Allura Script",cursive;font-size:42px;color:var(--accent)}
-p{margin:0 0 14px}
-.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 22px;border-radius:16px;font-weight:600}
-.btn:hover{opacity:.95}
-
-/* Footer */
-footer{text-align:center;color:#6b6b6b;padding:40px 20px;font-size:14px}
-
-/* FOnt Benevenuti ecc */  
-h2 {
-  font-family: "Allura", cursive;
-  font-size: 38px;
-  font-weight: 400;
-  color: var(--text);
-  text-align: center;
-  margin-top: 32px;
-  margin-bottom: 16px;
-}
-
-
-/* Mobile */
-@media (max-width:900px){
-  .hamburger{display:block}
-  nav ul{display:none}
-}
-@media (max-width:700px){
-  .hero h1{font-size:48px}
-  .nav{padding:20px 16px}
-  .brand .names{font-size:31px}
-  .mobile-menu{top:60px}
-  .cd-box{min-width:44%}
-  nav a{font-size:18px;padding:10px 8px}
+  .cd-box{ min-width:44%; }
+  nav a{ font-size:18px; padding:10px 8px; }
 }
 </style>
 </head>
@@ -266,9 +302,14 @@ h2 {
 <header>
   <div class="nav">
     <div class="brand">
-      <button id="hambBtn" class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
-      <div class="names">Charlotte &amp; Gianluca</div><div class="dot">·</div><div class="date">June 20, 2026</div>
+      <button id="hambBtn" class="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="names">Charlotte &amp; Gianluca</div>
+      <div class="dot">·</div>
+      <div class="date">June 20, 2026</div>
     </div>
+
     <nav>
       <ul>
         <li><a href="/home.html">Home</a></li>
@@ -279,6 +320,7 @@ h2 {
       </ul>
     </nav>
   </div>
+
   <div id="mobileMenu" class="mobile-menu">
     <a href="/home.html">Home</a>
     <a href="/story.html">Our story</a>
@@ -289,10 +331,10 @@ h2 {
 </header>
 
 <main>
-  <div class="hero">
-    <!-- Immagine lavanda con nomi -->
+  <section class="hero">
+    <!-- immagine lavanda + nomi -->
     <div class="hero-img-wrapper">
-      <img+
+      <img
         src="/assets/hero-lavanda.jpg"
         alt="Charlotte & Gianluca"
         class="hero-img"
@@ -326,9 +368,9 @@ h2 {
     <div style="margin-top:18px">
       <a href="/rsvp.html" class="btn">RSVP</a>
     </div>
-  </div>
+  </section>
 
-  <div class="section">
+  <section class="section">
     <div class="lang-block">
       <h2>🇮🇹 Benvenuti</h2>
       <p>Siamo felicissimi di invitarvi al nostro matrimonio in Provenza! 🌿</p>
@@ -347,9 +389,9 @@ h2 {
       <h2>🇫🇷 Bienvenue</h2>
       <p>Nous sommes ravis de vous inviter à notre mariage en Provence ! 💜</p>
       <p>Un week-end de fête, de lavande et de moments inoubliables sous les étoiles.</p>
-      <p><a class="btn" href="/stay.html">Organisez votre voyage!</a></p>
+      <p><a class="btn" href="/stay.html">Organisez votre voyage !</a></p>
     </div>
-  </div>
+  </section>
 </main>
 
 <footer>
@@ -373,6 +415,7 @@ h2 {
     });
   }
 })();
+
 /* Countdown to 2026-06-20 16:30 Europe/Rome */
 (function(){
   const dEl=document.getElementById('cd-days');
@@ -386,7 +429,10 @@ h2 {
     const h=Math.floor(diff/3600000);  diff-=h*3600000;
     const m=Math.floor(diff/60000);    diff-=m*60000;
     const s=Math.floor(diff/1000);
-    dEl.textContent=d; hEl.textContent=String(h).padStart(2,'0'); mEl.textContent=String(m).padStart(2,'0'); sEl.textContent=String(s).padStart(2,'0');
+    dEl.textContent=d;
+    hEl.textContent=String(h).padStart(2,'0');
+    mEl.textContent=String(m).padStart(2,'0');
+    sEl.textContent=String(s).padStart(2,'0');
   }
   tick(); setInterval(tick,1000);
 })();
