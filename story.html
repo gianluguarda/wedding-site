@@ -175,15 +175,42 @@ nav li.cta a:hover {
   background:rgba(116,101,173,.08);
 }
 
+/* HERO TITLE DELLA PAGINA (Our story, RSVP, ecc.) */
+.page-head {
+  text-align: center;
+  padding: 60px 20px 40px;
+}
+
+.page-head h1 {
+  font-family: "Allura", cursive;
+  font-size: 56px;
+  color: var(--accent);
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+
+.page-head p {
+  font-family: "Cormorant", serif;
+  font-size: 22px;
+  color: var(--muted);
+  margin: 0;
+  font-style: italic; /* <-- corsivo per il sottotitolo */
+}
+
+  
 /* RESPONSIVE */
 @media(max-width:900px){
+  .nav {
+    width: 100%;              /* evita overflow */
+    padding: 16px 12px;       /* leggermente meno padding laterale */
+  }
   .hamburger { display:block; }
   nav ul { display:none; }
-  .names { font-size:32px; }
-  .date  { font-size:18px; }
-  .nav   { padding:18px 16px; }
-  .mobile-menu { top:60px; }
+  .names { font-size:30px; }
+  .date  { font-size:17px; }
+  .mobile-menu { top:58px; right:12px; } /* leggermente più dentro */
 }
+
 
 
 /* LANG TOC (selettore lingua) */
