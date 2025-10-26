@@ -13,16 +13,29 @@
 <style>
 :root{
   --accent:#7465ad;
-  --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b;
+  --beige:#f7f4ef;
+  --ink:#242424;
+  --muted:#6b6b6b;
 }
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:"Cormorant",serif;color:var(--ink);background:var(--beige);
-  background-image:radial-gradient(1200px 700px at 100% -10%, rgba(116,101,173,.10), transparent 60%),
-                   radial-gradient(900px 500px at -10% 10%, rgba(116,101,173,.06), transparent 55%);
-  background-attachment:fixed}
 
+/* RESET BASE */
+*{box-sizing:border-box;}
+html,body{
+  height:100%;
+  margin:0;
+  font-family:"Cormorant", serif;
+  color:var(--ink);
+  background:var(--beige);
+  background-image:
+    radial-gradient(1200px 700px at 100% -10%, rgba(116,101,173,.10), transparent 60%),
+    radial-gradient(900px 500px at -10% 10%, rgba(116,101,173,.06), transparent 55%);
+  background-attachment:fixed;
+}
+
+/* ======================= */
 /* HEADER BASE */
-header {
+/* ======================= */
+header{
   position:sticky;
   top:0;
   z-index:10;
@@ -32,44 +45,38 @@ header {
   font-family:"Cormorant", serif;
 }
 
-.nav {
+.nav{
   max-width:1100px;
   margin:0 auto;
   padding:18px 22px;
   display:flex;
-  align-items:center;           /* <-- allinea tutto sul centro verticale */
+  align-items:center;
   justify-content:space-between;
   gap:12px;
 }
 
-/* BLOCCO A SINISTRA (logo/testo) */
-.brand {
+/* BLOCCO A SINISTRA (nomi e data) */
+.brand{
   display:flex;
-  align-items:center;           /* <-- anche qui center */
+  align-items:center;
   flex-wrap:nowrap;
   gap:8px;
 }
-
-/* Nomi */
-.names {
+.names{
   font-family:"Allura", cursive;
-  font-size:36px;               /* cambia qui per ingrandire o ridurre */
+  font-size:36px;
   line-height:1.1;
   color:var(--accent);
   white-space:nowrap;
 }
-
-/* Puntino separatore */
-.dot {
+.dot{
   color:var(--muted);
   font-size:20px;
   line-height:1.1;
 }
-
-/* Data */
-.date {
+.date{
   color:var(--muted);
-  font-size:20px;               /* cambia qui per farla più grande/piccola */
+  font-size:20px;
   line-height:1.1;
   letter-spacing:.4px;
   font-weight:500;
@@ -77,15 +84,14 @@ header {
 }
 
 /* MENU DESKTOP */
-nav ul {
+nav ul{
   list-style:none;
   display:flex;
   gap:24px;
   margin:0;
   padding:0;
 }
-
-nav a {
+nav a{
   text-decoration:none;
   color:var(--ink);
   opacity:.95;
@@ -95,14 +101,13 @@ nav a {
   border-radius:10px;
   font-family:"Cormorant", serif;
 }
-
-nav a:hover {
+nav a:hover{
   opacity:1;
   border-bottom:1px solid var(--accent);
 }
 
 /* RSVP evidenziato */
-nav li.cta a {
+nav li.cta a{
   background:var(--accent);
   color:#fff;
   padding:10px 14px;
@@ -111,14 +116,13 @@ nav li.cta a {
   font-weight:500;
   line-height:1.1;
 }
-
-nav li.cta a:hover {
+nav li.cta a:hover{
   opacity:.95;
   transform:translateY(-1px);
 }
 
-/* HAMBURGER (mobile) */
-.hamburger {
+/* HAMBURGER MOBILE */
+.hamburger{
   display:none;
   border:1px solid rgba(0,0,0,.1);
   background:#fff;
@@ -126,7 +130,7 @@ nav li.cta a:hover {
   padding:8px 10px;
   cursor:pointer;
 }
-.hamburger span {
+.hamburger span{
   display:block;
   width:20px;
   height:2px;
@@ -134,8 +138,8 @@ nav li.cta a:hover {
   margin:4px 0;
 }
 
-/* MENU MOBILE POPUP */
-.mobile-menu {
+/* MENU MOBILE */
+.mobile-menu{
   display:none;
   position:fixed;
   top:64px;
@@ -147,7 +151,7 @@ nav li.cta a:hover {
   padding:12px;
   z-index:40;
 }
-.mobile-menu a {
+.mobile-menu a{
   display:block;
   padding:10px 12px;
   border-radius:10px;
@@ -156,47 +160,139 @@ nav li.cta a:hover {
   font-family:"Cormorant", serif;
   font-size:18px;
 }
-.mobile-menu a:hover {
+.mobile-menu a:hover{
   background:rgba(116,101,173,.08);
 }
 
-/* HERO TITLE DELLA PAGINA (Our story, RSVP, ecc.) */
-.page-head {
-  text-align: center;
-  padding: 60px 20px 40px;
+/* ======================= */
+/* SEZIONE TITOLO PAGINA */
+/* ======================= */
+.page-head{
+  text-align:center;
+  padding:60px 20px 40px;
+}
+.page-head h1{
+  font-family:"Allura", cursive;
+  font-size:56px;
+  color:var(--accent);
+  margin:0 0 10px;
+  line-height:1.2;
+}
+.page-head p{
+  font-family:"Cormorant", serif;
+  font-size:22px;
+  color:var(--muted);
+  margin:0;
+  font-style:italic;
 }
 
-.page-head h1 {
-  font-family: "Allura", cursive;
-  font-size: 56px;
-  color: var(--accent);
-  margin: 0 0 10px;
-  line-height: 1.2;
+/* ======================= */
+/* ELEMENTI HOME */
+/* ======================= */
+.hero-img-wrapper{
+  max-width:520px;
+  margin:0 auto 20px;
+}
+.hero-img{
+  display:block;
+  width:100%;
+  height:auto;
 }
 
-.page-head p {
-  font-family: "Cormorant", serif;
-  font-size: 22px;
-  color: var(--muted);
-  margin: 0;
-  font-style: italic; /* <-- corsivo per il sottotitolo */
+/* Countdown */
+.countdown{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.cd-box{
+  min-width:110px;
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:14px;
+  padding:12px 14px;
+  text-align:center;
+  box-shadow:0 10px 28px rgba(0,0,0,.06);
+}
+.cd-num{
+  font-size:30px;
+  font-weight:600;
+  color:var(--accent);
+  line-height:1;
+}
+.cd-label{
+  font-size:12px;
+  color:var(--muted);
+  letter-spacing:.4px;
+  text-transform:uppercase;
+  margin-top:4px;
 }
 
-  
+/* Blocchi sezioni lingue */
+.section{
+  max-width:900px;
+  margin:0 auto;
+  padding:40px 20px 80px;
+  text-align:center;
+}
+.lang-block{
+  background:#fff;
+  border-radius:18px;
+  border:1px solid #eee;
+  padding:24px;
+  margin-top:24px;
+}
+.lang-block h2{
+  font-family:"Allura", cursive;
+  font-size:42px;
+  color:var(--accent);
+  margin:0 0 10px;
+}
+
+/* Bottoni */
+.btn{
+  display:inline-block;
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+  padding:12px 22px;
+  border-radius:16px;
+  font-weight:600;
+}
+.btn:hover{opacity:.95;}
+
+/* Footer */
+footer{
+  text-align:center;
+  color:#6b6b6b;
+  padding:40px 20px;
+  font-size:14px;
+}
+
+/* ======================= */
 /* RESPONSIVE */
+/* ======================= */
 @media(max-width:900px){
-  .nav {
-    width: 100%;              /* evita overflow */
-    padding: 16px 12px;       /* leggermente meno padding laterale */
+  .nav{
+    width:100%;
+    padding:16px 12px;
   }
-  .hamburger { display:block; }
-  nav ul { display:none; }
-  .names { font-size:30px; }
-  .date  { font-size:17px; }
-  .mobile-menu { top:58px; right:12px; } /* leggermente più dentro */
+  .hamburger{display:block;}
+  nav ul{display:none;}
+  .names{font-size:30px;}
+  .date{font-size:17px;}
+  .mobile-menu{top:58px;right:12px;}
 }
 
-
+@media(max-width:700px){
+  .hero-img-wrapper{max-width:400px;}
+  .page-head h1{font-size:48px;}
+  .page-head p{font-size:20px;}
+  .cd-box{min-width:46%;}
+  nav a{font-size:18px;}
+}
 
 /* Sezioni lingue */
 .box{
