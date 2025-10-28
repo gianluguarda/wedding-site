@@ -529,65 +529,111 @@ iframe{width:100%; border:0; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,
 <main class="section">
   <h1 class="h1">RSVP</h1>
 
-  <!-- Indice con ancore -->
+  <!-- Indice lingue -->
   <nav class="lang-toc">
     <a href="#it">🇮🇹 Italiano</a>
     <a href="#en">🇬🇧 English</a>
     <a href="#fr">🇫🇷 Français</a>
   </nav>
 
-  <!-- 🇮🇹 ITALIANO -->
-  <section id="it" class="box">
+  <!-- ─────────────────────────────── -->
+  <!-- SEZIONI STANDARD (NON VIP)     -->
+  <!-- ─────────────────────────────── -->
+  <!-- ITALIANO NON VIP -->
+  <section id="it" class="box non-vip-only">
     <div class="tag">
-      <span>🇮🇹 Italiano</span>
+      <span class="h2">RSVP</span>
+      <span>· 🇮🇹 Italiano</span>
     </div>
-    <p class="note">Compila il modulo per confermare la tua presenza (mappa, dinner, brunch, allergie, ecc.). <strong> E' sufficiente farlo una volta per coppia rispondendo all'apposita domanda. </strong> </p>
+    <p class="note">
+      Conferma la tua presenza al matrimonio di sabato, indicaci eventuali intolleranze,
+      se vuoi usare la navetta ecc. 💜
+    </p>
 
-    <!-- ⤵️ Incolla l'iframe del Google Form IT -->
     <iframe
-      src="https://docs.google.com/forms/d/e/1FAIpQLSch-IIVOjsbcQOGh7nsRIPOQoUoEgjWxc73-QmQC9ZA4gvO7A/viewform?embedded=true"
+      src="https://forms.gle/Eafdg9XHaNFrVhft5"
       height="1400"
       allowfullscreen
       referrerpolicy="no-referrer-when-downgrade">
-      Loading…
+      Caricamento…
     </iframe>
-</section>
+  </section>
 
-  <!-- 🇬🇧 ENGLISH -->
-  <section id="en" class="box">
+  <!-- ENGLISH NON VIP -->
+  <section id="en" class="box non-vip-only">
     <div class="tag">
-      <span>🇬🇧 English</span>
+      <span class="h2">RSVP</span>
+      <span>· 🇬🇧 English</span>
     </div>
-    <p class="note">Please fill in the form to confirm your attendance. <strong> You can fill it once per couple. </strong> </p>
+    <p class="note">
+      Please confirm your attendance for Saturday, tell us about dietary needs
+      and if you’d like to use the shuttle.
+    </p>
 
-    <!-- ⤵️ Incolla l'iframe del Google Form EN -->
     <iframe
-      src="https://docs.google.com/forms/d/e/1FAIpQLScYSph46Msf-c0H8EG-PJmnae5afgD5lC0zV1lYCtxL9jA49w/viewform?embedded=true"
+      src="https://forms.gle/6UDNAWp1udvXgg4i9"
       height="1400"
       allowfullscreen
       referrerpolicy="no-referrer-when-downgrade">
       Loading…
     </iframe>
   </section>
-<!-- rebuild rsvp -->
 
-  <!-- 🇫🇷 FRANÇAIS -->
-  <section id="fr" class="box">
+  <!-- FRANÇAIS NON VIP -->
+  <section id="fr" class="box non-vip-only">
     <div class="tag">
-      <span>🇫🇷 Français</span>
+      <span class="h2">RSVP</span>
+      <span>· 🇫🇷 Français</span>
     </div>
-    <p class="note">Merci de remplir le formulaire pour confirmer votre présence.<strong> Vous pouvez remplir une fois par couple. </strong></p>
+    <p class="note">
+      Merci de confirmer votre présence pour le samedi, vos besoins alimentaires,
+      et si vous souhaitez utiliser la navette.
+    </p>
 
-    <!-- ⤵️ Incolla l'iframe du Google Form FR -->
     <iframe
-      src="https://docs.google.com/forms/d/e/1FAIpQLScKrVH8t148eBzXZ53ypeTA6hGyoshqxCzPsc1pKGbPKvJfBQ/viewform?embedded=true"
+      src="https://forms.gle/DY9pH1s5cTpetJzC7"
       height="1400"
       allowfullscreen
       referrerpolicy="no-referrer-when-downgrade">
       Chargement…
     </iframe>
   </section>
+
+  <!-- ─────────────────────────────── -->
+  <!-- BLOCCO VIP (SOLO VIP)          -->
+  <!-- ─────────────────────────────── -->
+  <section class="box vip-only" style="display:none;">
+    <div class="tag">
+      <span class="h2">Welcome Dinner & Brunch</span>
+      <span>· VIP only</span>
+    </div>
+
+    <p class="note">
+      Questo form include anche la conferma alla cena di benvenuto del venerdì
+      e al brunch della domenica 🥂<br>
+      Ce formulaire inclut aussi la soirée du vendredi et le brunch du dimanche 🥐
+    </p>
+
+    <!-- FORM VIP ITALIANO -->
+    <iframe
+      src="https://forms.gle/oNowhEGJMPs4ZYhd8"
+      height="1600"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade">
+      Caricamento…
+    </iframe>
+
+    <!-- FORM VIP FRANCESE -->
+    <iframe
+      src="https://forms.gle/6Cm8hyHaX7hZ33To6"
+      height="1600"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade">
+      Chargement…
+    </iframe>
+  </section>
 </main>
+
 
 <footer style="text-align:center;color:#6b6b6b;padding:40px 20px">
   <small>© Charlotte &amp; Gianluca — 2026</small>
