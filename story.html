@@ -637,7 +637,7 @@ footer{
 <!-- ============================= -->
 <section id="it" class="timeline-wrapper">
 
-  <div class="lang-section-title">La nostra storia · 🇮🇹 Italiano</div>
+  <div class="lang-section-title">La nostra storia · 🇮🇹 </div>
   <div class="lang-section-note">Dal primo ballo a Mykonos fino alla Provenza. Anni, città, voli low-cost e tanti “a presto”.</div>
 
   <div class="timeline-line"></div>
@@ -885,7 +885,7 @@ footer{
 <!-- ============================= -->
 <section id="en" class="timeline-wrapper">
 
-  <div class="lang-section-title">Our story · 🇬🇧 English</div>
+  <div class="lang-section-title">Our story · 🇬🇧 </div>
   <div class="lang-section-note">
     From our first dance in Mykonos to a wedding in Provence.
     Years, cities, distance — and still us.
@@ -1146,7 +1146,7 @@ footer{
 <!-- ============================= -->
 <section id="fr" class="timeline-wrapper">
 
-  <div class="lang-section-title">Notre histoire · 🇫🇷 Français</div>
+  <div class="lang-section-title">Notre histoire · 🇫🇷 </div>
   <div class="lang-section-note">
     De notre première danse à Mykonos jusqu’à la Provence.
     Des années de distance, de voyages, et toujours nous deux.
@@ -1411,38 +1411,36 @@ footer{
 </footer>
 
 <script>
-/* hamburger mobile menu */
+// ========================
+// 1. MENU MOBILE
+// ========================
 (function(){
-  const btn=document.getElementById('hambBtn');
-  const menu=document.getElementById('mobileMenu');
+  const btn = document.getElementById('hambBtn');
+  const menu = document.getElementById('mobileMenu');
   if(btn && menu){
     btn.addEventListener('click', e=>{
       e.stopPropagation();
-      menu.style.display = (menu.style.display==='block')?'none':'block';
+      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
     });
     document.addEventListener('click', e=>{
-      if(menu.style.display==='block' && !menu.contains(e.target) && e.target!==btn){
-        menu.style.display='none';
+      if(menu.style.display === 'block' && !menu.contains(e.target) && e.target !== btn){
+        menu.style.display = 'none';
       }
     });
   }
 })();
-</script>
 
-  <script>
-/* ===========================================================
-   LISTA INVITATI "VIP" (quelli che vedranno welcome dinner & brunch)
-   - Qui normalizziamo i nomi in minuscolo e senza accenti/puntini
-   - IMPORTANTE: se aggiungi qualcuno, aggiungilo seguendo questo formato:
-     "nome cognome"
-     Se il cognome è vuoto (tipo "Bénédict"), metti solo il nome.
-   =========================================================== */
 
-const VIP_GUESTS = [
+// ========================
+// 2. LISTA VIP
+//    (usa questa lista aggiornata)
+// ========================
+const VIP_LIST = [
   "charlotte francis",
   "yves francis",
   "laurence hoppe",
   "chloe francis",
+  "chloé francis",
   "maya mertens",
   "chiara regalia",
   "matteo biroli",
@@ -1467,16 +1465,24 @@ const VIP_GUESTS = [
   "baptiste charvat",
   "liza bibakova",
   "iphigenie loukakis",
+  "iphigénie loukakis",
   "sara nyssen",
   "koen slingerland",
-  "gianluca guardala",      // guardalà → guardala
+  "gianluca guardala",
+  "gianluca guardalà",
   "francesca arduini",
-  "benedict",               // Bénédict → benedict
+  "benedict",
+  "bénédict",
   "isidoro guardala",
+  "isidoro guardalà",
   "simona guardala",
+  "simona guardalà",
   "alessando guardala",
+  "alessando guardalà",
   "irene guardala",
+  "irene guardalà",
   "patrick guardala",
+  "patrick guardalà",
   "emanuela zannetti",
   "andrea perozziello",
   "ragazza perroz",
@@ -1492,7 +1498,7 @@ const VIP_GUESTS = [
   "lucrezia piracci",
   "davide bellotto",
   "silvia oltrabella",
-  "ludovico sibani",        // Sìbani → sibani
+  "ludovico sibani",
   "silvia pignotti",
   "benedetta testoni",
   "giovanni de maria",
@@ -1501,289 +1507,148 @@ const VIP_GUESTS = [
   "beatrice villa",
   "luca caravaggi",
   "mara moschino",
-  "marzia camapnile",       // campanile?
+  "marzia camapnile",
+  "marzia campanile",
   "nikola calic",
-  "filippo sugla",          // sug|lia -> gestiamolo più robusto sotto
+  "filippo sugla",
+  "filippo sugli",
+  "filippo suglià",
+  "filippo sugia",
+  "filippo sugia",
+  "filippo sugia",
+  "filippo sugia", /* (nel caso ci fossero errori battitura, lascialo così) */
   "camilla russo",
   "laerte adami",
   "noemi",
   "alberto garlaschelli",
   "jacopo guarneri",
   "lorenzo cederna",
-  "benedetta pintus"
+  "benedetta pintus",
+  "laura gomez martin",
+  "anna garruto"
 ];
 
-/* Per sicurezza, aggiungiamo una funzione per normalizzare accenti,
-   spazi multipli, casi speciali tipo "Suglia" / "Sugla".
-   Usiamo una funzione di "slugify" molto semplice.
-*/
+// ========================
+// 3. NORMALIZZA IL NOME
+//    (toglie accenti, spazi extra, tutto minuscolo)
+// ========================
 function normalizeName(str){
   if(!str) return "";
-  // minuscolo
-  let s = str.toLowerCase().trim();
-
-  // normalizza accenti
-  s = s.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // rimuove diacritici
-
-  // sostituzioni manuali: se vogliamo sistemare errori tipo "suglia" / "sugla"
-  s = s.replace(/\bsuglia\b/g,"sugla");
-  s = s.replace(/\bguardalà\b/g,"guardala");
-  s = s.replace(/\bguardalà\b/g,"guardala");
-
-  // togli spazi doppi
-  s = s.replace(/\s+/g," ");
-
-  return s;
+  return str
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")              // separa gli accenti
+    .replace(/[\u0300-\u036f]/g,"") // rimuove accenti tipo à -> a
+    .replace(/\s+/g," ");           // spazi multipli -> spazio singolo
 }
 
-/* ===========================================================
-   LOGIN LOGICA
-   - Mostriamo il popup se NON abbiamo già salvato lo stato
-   - Quando confermano, salviamo in localStorage:
-     { guestName: "nome cognome", isVIP: true/false }
-   - Se uno fa logout, cancelliamo e ri-mostriamo popup
-   - In base a isVIP mostriamo blocchi VIP nelle pagine
-   =========================================================== */
+// ========================
+// 4. MOSTRA POPUP SE NON ABBIAMO ANCORA IL NOME
+// ========================
 
-const STORAGE_KEY = "weddingGuestInfo"; // localStorage key
+// Questa funzione restituisce true se l'utente è VIP
+function isVIP(){
+  return localStorage.getItem("isVIP") === "true";
+}
 
-function getGuestInfo(){
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || null;
-  } catch(e){
-    return null;
+// Questa funzione dice se abbiamo già fatto login
+function hasIdentification(){
+  return !!localStorage.getItem("guestName");
+}
+
+// Apre il popup
+function openLoginModal(){
+  const modal = document.getElementById("loginModal");
+  if(modal){
+    modal.style.display = "flex";
   }
 }
 
-function setGuestInfo(obj){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
-}
-
-function clearGuestInfo(){
-  localStorage.removeItem(STORAGE_KEY);
-}
-
-/* Mostra popup login */
-function showLoginModal(){
-  const overlay = document.getElementById("guestLoginOverlay");
-  const errorMsg = document.getElementById("guestError");
-  const logoutBtn = document.getElementById("guestLogoutBtn");
-
-  if(overlay){
-    overlay.style.display = "flex";
-  }
-  if(errorMsg){
-    errorMsg.style.display = "none";
-  }
-  if(logoutBtn){
-    logoutBtn.style.display = "none";
+// Chiude il popup
+function closeLoginModal(){
+  const modal = document.getElementById("loginModal");
+  if(modal){
+    modal.style.display = "none";
   }
 }
 
-/* Mostra popup logout (cioè "sei loggato, vuoi uscire?") */
-function showLogoutModal(guest){
-  const overlay = document.getElementById("guestLoginOverlay");
-  const modal   = document.getElementById("guestLoginModal");
-  const errorMsg= document.getElementById("guestError");
-  const first   = document.getElementById("guestFirst");
-  const last    = document.getElementById("guestLast");
-  const confirm = document.getElementById("guestConfirmBtn");
-  const logout  = document.getElementById("guestLogoutBtn");
+// ========================
+// 5. APPLICA LA VISIBILITÀ
+//    - VIP vede solo blocchi con .vip-only
+//    - NON VIP vede solo blocchi con .non-vip-only
+// ========================
+function applyVIPVisibility(){
+  const vipBlocks = document.querySelectorAll(".vip-only");
+  const nonVipBlocks = document.querySelectorAll(".non-vip-only");
 
-  if(!overlay||!modal) return;
-
-  // Cambiamo leggermente il testo per dire chi è loggato
-  modal.querySelector("h2").textContent = guest.guestName;
-  modal.querySelector("p").innerHTML = `
-    You are signed in.<br>
-    Vous êtes connecté(e).<br>
-    Sei collegato/a.
-  `;
-
-  // Nascondiamo i campi nome/cognome perché sei già loggato
-  if(first) first.parentElement.style.display = "none";
-  if(last)  last.parentElement.style.display  = "none";
-
-  // Nascondi eventuale errore
-  if(errorMsg) errorMsg.style.display = "none";
-
-  // Mostra bottone logout
-  if(logout) logout.style.display = "block";
-
-  // Cambia testo bottone principale:
-  if(confirm) {
-    confirm.textContent = "Close / Fermer / Chiudi";
-  }
-
-  overlay.style.display = "flex";
-}
-
-/* Ripristina il popup in modalità LOGIN (nomi visibili) */
-function resetModalToLogin(){
-  const overlay = document.getElementById("guestLoginOverlay");
-  const modal   = document.getElementById("guestLoginModal");
-  const first   = document.getElementById("guestFirst");
-  const last    = document.getElementById("guestLast");
-  const confirm = document.getElementById("guestConfirmBtn");
-  const logout  = document.getElementById("guestLogoutBtn");
-  const errorMsg= document.getElementById("guestError");
-
-  if(!overlay||!modal) return;
-
-  modal.querySelector("h2").textContent = "Welcome · Bienvenue · Benvenuti";
-  modal.querySelector("p").innerHTML = `
-    Please enter your first and last name.<br>
-    Veuillez saisir votre prénom et nom.<br>
-    Inserisci nome e cognome.
-  `;
-
-  // Mostra campi
-  if(first) {
-    first.parentElement.style.display = "block";
-    first.value = "";
-  }
-  if(last) {
-    last.parentElement.style.display  = "block";
-    last.value = "";
-  }
-
-  // Nascondi messaggio errore
-  if(errorMsg) errorMsg.style.display="none";
-
-  // Bottone principale "OK"
-  if(confirm){
-    confirm.textContent = "OK";
-  }
-
-  // Nascondi logout
-  if(logout){
-    logout.style.display = "none";
-  }
-}
-
-/* Prova login */
-function tryLogin(){
-  const first = document.getElementById("guestFirst").value || "";
-  const last  = document.getElementById("guestLast").value  || "";
-  const errorMsg = document.getElementById("guestError");
-  const overlay  = document.getElementById("guestLoginOverlay");
-
-  const fullNameNormalized = normalizeName(first + " " + last);
-
-  // Controllo se il nome è nella lista VIP
-  const isVIP = VIP_GUESTS.includes(fullNameNormalized);
-
-  // Salviamo comunque anche se non VIP,
-  // così chi non è in lista può navigare il sito senza rivedere il popup ogni volta
-  if(fullNameNormalized.length < 2){
-    // nome troppo corto
-    if(errorMsg){
-      errorMsg.style.display = "block";
-    }
-    return;
-  }
-
-  // Salva stato in localStorage
-  setGuestInfo({
-    guestName: first.trim() + " " + last.trim(),
-    isVIP: isVIP
-  });
-
-  // Chiudi overlay
-  if(overlay){
-    overlay.style.display = "none";
-  }
-
-  // Ora che sappiamo se è VIP, mostriamo eventuali sezioni VIP
-  revealVIPSections(isVIP);
-}
-
-/* Logout */
-function logoutGuest(){
-  clearGuestInfo();
-  resetModalToLogin();
-  // Dopo il logout, ri-mostriamo in versione LOGIN
-  showLoginModal();
-  // Nascondiamo sezioni VIP per sicurezza
-  revealVIPSections(false);
-}
-
-/* Mostra/nascondi le sezioni VIP nella pagina corrente */
-function revealVIPSections(isVIP){
-  const vipEls = document.querySelectorAll(".vip-only");
-  vipEls.forEach(el=>{
-    el.style.display = isVIP ? "" : "none";
-  });
-}
-
-/* Setup iniziale quando la pagina carica */
-document.addEventListener("DOMContentLoaded", function(){
-
-  const overlay  = document.getElementById("guestLoginOverlay");
-  const confirm  = document.getElementById("guestConfirmBtn");
-  const logout   = document.getElementById("guestLogoutBtn");
-
-  // 1. Leggi dal localStorage se c'è già un ospite
-  const info = getGuestInfo();
-
-  if(info){
-    // Abbiamo già un utente
-    // - NON mostriamo il popup subito
-    // - ma mostriamo/nascondiamo blocchi VIP
-    revealVIPSections(!!info.isVIP);
-
-    // Aggiungiamo listener sul brand (o su qualcosa) per poter riaprire popup e fare logout
-    // Suggerimento: click sul nome in header apre modal logout
-    const brand = document.querySelector(".brand");
-    if(brand){
-      brand.style.cursor = "pointer";
-      brand.addEventListener("click", ()=>{
-        showLogoutModal(info);
-      });
-    }
-
+  if(isVIP()){
+    // Se è VIP: mostra .vip-only, nascondi .non-vip-only
+    vipBlocks.forEach(el => el.style.display = "");
+    nonVipBlocks.forEach(el => el.style.display = "none");
   } else {
-    // Nessun utente noto -> mostriamo subito popup in modalità LOGIN
-    resetModalToLogin();
-    showLoginModal();
+    // Se NON è VIP: mostra .non-vip-only, nascondi .vip-only
+    vipBlocks.forEach(el => el.style.display = "none");
+    nonVipBlocks.forEach(el => el.style.display = "");
+  }
+}
+
+// ========================
+// 6. AL SUBMIT DEL POPUP
+//    controlla se è VIP → salva in localStorage
+// ========================
+function handleLoginSubmit(e){
+  e.preventDefault();
+
+  const nameInput = document.getElementById("guestNameInput");
+  const surnameInput = document.getElementById("guestSurnameInput");
+
+  if(!nameInput || !surnameInput) return;
+
+  const rawFullName = nameInput.value + " " + surnameInput.value;
+  const normFullName = normalizeName(rawFullName);
+
+  // Controllo se è nella lista VIP
+  const guestIsVIP = VIP_LIST.includes(normFullName);
+
+  // Salvo info nel browser
+  localStorage.setItem("guestName", rawFullName.trim());
+  localStorage.setItem("isVIP", guestIsVIP ? "true" : "false");
+
+  // Chiudi popup
+  closeLoginModal();
+
+  // Applica visibilità (così subito aggiorna la pagina senza refresh)
+  applyVIPVisibility();
+}
+
+// ========================
+// 7. INIZIALIZZAZIONE ALL'APERTURA DELLA PAGINA
+//    - se non c'è login → apri popup
+//    - poi applica visibilità
+// ========================
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Se non abbiamo ancora nome/surname salvati, chiedili
+  if(!hasIdentification()){
+    openLoginModal();
   }
 
-  // Listener "OK" nel popup (fa login o chiude se già loggato)
-  if(confirm){
-    confirm.addEventListener("click", ()=>{
-      const currentInfo = getGuestInfo();
-      if(currentInfo){
-        // se sei già loggato e stai vedendo popup "sei collegato"
-        // chiudiamo semplicemente
-        if(overlay) overlay.style.display="none";
-      } else {
-        // stai cercando di loggarti
-        tryLogin();
-      }
-    });
+  // 2. Applica subito la visibilità dei blocchi
+  applyVIPVisibility();
+
+  // 3. Attacca listener al bottone "Submit" del popup
+  const loginForm = document.getElementById("loginForm");
+  if(loginForm){
+    loginForm.addEventListener("submit", handleLoginSubmit);
   }
 
-  // Listener "Logout"
-  if(logout){
-    logout.addEventListener("click", ()=>{
-      logoutGuest();
-    });
-  }
-
-  // Se clicchi fuori dal box, chiudi SOLO se già loggato
-  if(overlay){
-    overlay.addEventListener("click", (e)=>{
-      if(e.target===overlay){
-        const currentInfo = getGuestInfo();
-        // se NON loggato non chiudere
-        if(currentInfo){
-          overlay.style.display="none";
-        }
-      }
-    });
+  // 4. Chiudi popup se clicchi sulla X
+  const closeBtn = document.getElementById("closeLoginModal");
+  if(closeBtn){
+    closeBtn.addEventListener("click", closeLoginModal);
   }
 });
 </script>
+
 
 
 </body>
