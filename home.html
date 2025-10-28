@@ -610,7 +610,6 @@ footer{
 
 // ========================
 // 2. LISTA VIP
-//    (usa questa lista aggiornata)
 // ========================
 const VIP_LIST = [
   "charlotte francis",
@@ -691,9 +690,6 @@ const VIP_LIST = [
   "filippo sugli",
   "filippo suglià",
   "filippo sugia",
-  "filippo sugia",
-  "filippo sugia",
-  "filippo sugia", /* (nel caso ci fossero errori battitura, lascialo così) */
   "camilla russo",
   "laerte adami",
   "noemi",
@@ -706,125 +702,194 @@ const VIP_LIST = [
 ];
 
 // ========================
-// 3. NORMALIZZA IL NOME
-//    (toglie accenti, spazi extra, tutto minuscolo)
+// 3. FUNZIONI UTILI
 // ========================
 function normalizeName(str){
   if(!str) return "";
   return str
     .trim()
     .toLowerCase()
-    .normalize("NFD")              // separa gli accenti
-    .replace(/[\u0300-\u036f]/g,"") // rimuove accenti tipo à -> a
-    .replace(/\s+/g," ");           // spazi multipli -> spazio singolo
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"") // rimuove accenti
+    .replace(/\s+/g," ");           // compatta spazi
 }
 
-// ========================
-// 4. MOSTRA POPUP SE NON ABBIAMO ANCORA IL NOME
-// ========================
-
-// Questa funzione restituisce true se l'utente è VIP
 function isVIP(){
   return localStorage.getItem("isVIP") === "true";
 }
 
-// Questa funzione dice se abbiamo già fatto login
 function hasIdentification(){
   return !!localStorage.getItem("guestName");
 }
 
-// Apre il popup
-function openLoginModal(){
-  const modal = document.getElementById("loginModal");
-  if(modal){
-    modal.style.display = "flex";
-  }
-}
-
-// Chiude il popup
-function closeLoginModal(){
-  const modal = document.getElementById("loginModal");
-  if(modal){
-    modal.style.display = "none";
-  }
-}
-
-// ========================
-// 5. APPLICA LA VISIBILITÀ
-//    - VIP vede solo blocchi con .vip-only
-//    - NON VIP vede solo blocchi con .non-vip-only
-// ========================
 function applyVIPVisibility(){
   const vipBlocks = document.querySelectorAll(".vip-only");
   const nonVipBlocks = document.querySelectorAll(".non-vip-only");
 
   if(isVIP()){
-    // Se è VIP: mostra .vip-only, nascondi .non-vip-only
     vipBlocks.forEach(el => el.style.display = "");
     nonVipBlocks.forEach(el => el.style.display = "none");
   } else {
-    // Se NON è VIP: mostra .non-vip-only, nascondi .vip-only
     vipBlocks.forEach(el => el.style.display = "none");
     nonVipBlocks.forEach(el => el.style.display = "");
   }
 }
 
 // ========================
-// 6. AL SUBMIT DEL POPUP
-//    controlla se è VIP → salva in localStorage
+// 4. MODAL CONTROL
+//    (ATTENZIONE: qui uso i TUOI ID reali nel DOM!)
 // ========================
-function handleLoginSubmit(e){
-  e.preventDefault();
+function openLoginModal(){
+  const overlay = document.getElementById("guestLoginOverlay");
+  if(overlay){
+    overlay.style.display = "flex";
+  }
+}
 
-  const nameInput = document.getElementById("guestNameInput");
-  const surnameInput = document.getElementById("guestSurnameInput");
+function closeLoginModal(){
+  const overlay = document.getElementById("guestLoginOverlay");
+  if(overlay){
+    overlay.style.display = "none";
+  }
+}
 
-  if(!nameInput || !surnameInput) return;
+// Logout: cancella i dati e riapre il popup
+function doLogout(){
+  localStorage.removeItem("guestName");
+  localStorage.removeItem("isVIP");
+  // mostro di nuovo popup per forzare re-identificazione
+  openLoginModal();
+  // dopo logout, i blocchi tornano allo stato "non loggato" (che per noi è non VIP finché non rifanno login)
+  applyVIPVisibility();
+  // nel popup ora nascondiamo il bottone logout perché non ha senso prima di reinserire
+  const logoutBtn = document.getElementById("guestLogoutBtn");
+  if(logoutBtn){
+    logoutBtn.style.display = "none";
+  }
+}
 
-  const rawFullName = nameInput.value + " " + surnameInput.value;
+// Salvataggio quando cliccano OK
+function submitGuestData(){
+  const firstEl = document.getElementById("guestFirst");
+  const lastEl  = document.getElementById("guestLast");
+  const errEl   = document.getElementById("guestError");
+
+  if(!firstEl || !lastEl) return;
+
+  const rawFullName = (firstEl.value || "") + " " + (lastEl.value || "");
   const normFullName = normalizeName(rawFullName);
 
-  // Controllo se è nella lista VIP
+  if(!firstEl.value.trim() || !lastEl.value.trim()){
+    // se lasciano vuoto
+    if(errEl){
+      errEl.innerHTML = "Please enter both fields.<br>Veuillez remplir les deux champs.<br>Inserisci nome e cognome.";
+      errEl.style.display = "block";
+    }
+    return;
+  }
+
+  // Sei VIP?
   const guestIsVIP = VIP_LIST.includes(normFullName);
 
-  // Salvo info nel browser
+  // Salvo
   localStorage.setItem("guestName", rawFullName.trim());
   localStorage.setItem("isVIP", guestIsVIP ? "true" : "false");
 
-  // Chiudi popup
+  // Chiudo popup
   closeLoginModal();
 
-  // Applica visibilità (così subito aggiorna la pagina senza refresh)
+  // Aggiorna visibilità dei blocchi subito
   applyVIPVisibility();
 }
 
+
 // ========================
-// 7. INIZIALIZZAZIONE ALL'APERTURA DELLA PAGINA
-//    - se non c'è login → apri popup
-//    - poi applica visibilità
+// 5. INIT
 // ========================
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Se non abbiamo ancora nome/surname salvati, chiedili
-  if(!hasIdentification()){
-    openLoginModal();
+  // Riferimenti bottoni e overlay
+  const confirmBtn = document.getElementById("guestConfirmBtn");
+  const logoutBtn  = document.getElementById("guestLogoutBtn");
+  const overlay    = document.getElementById("guestLoginOverlay");
+  const errEl      = document.getElementById("guestError");
+
+  // Se già identificato:
+  if(hasIdentification()){
+    // nascondo popup
+    if(overlay) overlay.style.display = "none";
+
+    // mostro il bottone logout nel popup (se riaperto)
+    if(logoutBtn){
+      logoutBtn.style.display = "inline-block";
+      logoutBtn.addEventListener("click", doLogout);
+    }
+  } else {
+    // se NON identificato: apri popup subito
+    if(overlay) overlay.style.display = "flex";
+
+    // nascondo eventuali errori
+    if(errEl) errEl.style.display = "none";
+
+    // logout in questa fase non serve
+    if(logoutBtn){
+      logoutBtn.style.display = "none";
+      logoutBtn.addEventListener("click", doLogout);
+    }
   }
 
-  // 2. Applica subito la visibilità dei blocchi
+  // collega il pulsante OK → salva nome, salva VIP, chiudi popup
+  if(confirmBtn){
+    confirmBtn.addEventListener("click", (e)=>{
+      e.preventDefault();
+      submitGuestData();
+    });
+  }
+
+  // Applica subito visibilità dei blocchi giusti
   applyVIPVisibility();
-
-  // 3. Attacca listener al bottone "Submit" del popup
-  const loginForm = document.getElementById("loginForm");
-  if(loginForm){
-    loginForm.addEventListener("submit", handleLoginSubmit);
-  }
-
-  // 4. Chiudi popup se clicchi sulla X
-  const closeBtn = document.getElementById("closeLoginModal");
-  if(closeBtn){
-    closeBtn.addEventListener("click", closeLoginModal);
-  }
 });
 </script>
+
+
+  <script>
+// COUNTDOWN to 2026-06-20 16:30 local time
+(function(){
+  const dEl = document.getElementById('cd-days');
+  const hEl = document.getElementById('cd-hours');
+  const mEl = document.getElementById('cd-mins');
+  const sEl = document.getElementById('cd-secs');
+
+  if (!dEl || !hEl || !mEl || !sEl) return; // sicurezza se usi stesso script in altre pagine
+
+  // Data target (matrimonio) — uso orario 16:30 con timezone italiana (CEST in estate)
+  const target = new Date('2026-06-20T16:30:00+02:00').getTime();
+
+  function tick(){
+    const now = Date.now();
+    let diff = Math.max(0, target - now);
+
+    const days = Math.floor(diff / 86400000); // ms in un giorno
+    diff -= days * 86400000;
+
+    const hours = Math.floor(diff / 3600000);
+    diff -= hours * 3600000;
+
+    const mins = Math.floor(diff / 60000);
+    diff -= mins * 60000;
+
+    const secs = Math.floor(diff / 1000);
+
+    dEl.textContent = days;
+    hEl.textContent = String(hours).padStart(2,'0');
+    mEl.textContent = String(mins).padStart(2,'0');
+    sEl.textContent = String(secs).padStart(2,'0');
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
 
 
   
