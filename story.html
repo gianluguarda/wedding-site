@@ -547,6 +547,49 @@ footer{
 
 <body>
 
+  <!-- === LOGIN MODAL OVERLAY (popup iniziale e per logout) === -->
+<div id="guestLoginOverlay" role="dialog" aria-modal="true">
+  <div id="guestLoginModal">
+
+    <!-- Titolo -->
+    <h2>Welcome · Bienvenue · Benvenuti</h2>
+
+    <!-- Testo: chiediamo nome e cognome, senza spiegare il motivo -->
+    <p>
+      Please enter your first and last name.<br>
+      Veuillez saisir votre prénom et nom.<br>
+      Inserisci nome e cognome.
+    </p>
+
+    <!-- CAMPO NOME -->
+    <div class="guest-field">
+      <label for="guestFirst">Name · Prénom · Nome</label>
+      <input type="text" id="guestFirst" placeholder="Charlotte / Gianluca / ..." />
+    </div>
+
+    <!-- CAMPO COGNOME -->
+    <div class="guest-field">
+      <label for="guestLast">Surname · Nom · Cognome</label>
+      <input type="text" id="guestLast" placeholder="Francis / Guardalà / ..." />
+    </div>
+
+    <!-- ERROR MSG -->
+    <div id="guestError">
+      Name not recognized.<br>
+      Nom non reconnu.<br>
+      Nome non trovato.
+    </div>
+
+    <!-- AZIONI -->
+    <div id="guestLoginActions">
+      <button id="guestConfirmBtn">OK</button>
+      <button id="guestLogoutBtn" style="display:none;">Log out / Déconnexion / Esci</button>
+    </div>
+
+  </div>
+</div>
+
+
 <header>
   <div class="nav">
     <div class="brand">
