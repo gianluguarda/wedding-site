@@ -1429,5 +1429,362 @@ footer{
 })();
 </script>
 
+  <script>
+/* ===========================================================
+   LISTA INVITATI "VIP" (quelli che vedranno welcome dinner & brunch)
+   - Qui normalizziamo i nomi in minuscolo e senza accenti/puntini
+   - IMPORTANTE: se aggiungi qualcuno, aggiungilo seguendo questo formato:
+     "nome cognome"
+     Se il cognome è vuoto (tipo "Bénédict"), metti solo il nome.
+   =========================================================== */
+
+const VIP_GUESTS = [
+  "charlotte francis",
+  "yves francis",
+  "laurence hoppe",
+  "chloe francis",
+  "maya mertens",
+  "chiara regalia",
+  "matteo biroli",
+  "chiara sestini",
+  "riccardo magri",
+  "marta vitro",
+  "mattia marco",
+  "andrea rodriguez",
+  "piero giuriolo",
+  "pietro favari",
+  "elisa ferrantelli",
+  "francesco santermosi",
+  "viviana serdoz",
+  "francesca garoia",
+  "malve malvestio",
+  "attilia la vecchia",
+  "stefano de looper",
+  "clara simon",
+  "marine lesage",
+  "thomas hulet",
+  "nicola delle foglie",
+  "baptiste charvat",
+  "liza bibakova",
+  "iphigenie loukakis",
+  "sara nyssen",
+  "koen slingerland",
+  "gianluca guardala",      // guardalà → guardala
+  "francesca arduini",
+  "benedict",               // Bénédict → benedict
+  "isidoro guardala",
+  "simona guardala",
+  "alessando guardala",
+  "irene guardala",
+  "patrick guardala",
+  "emanuela zannetti",
+  "andrea perozziello",
+  "ragazza perroz",
+  "fabio tarricone",
+  "gisella martino capeda",
+  "edoardo cutolo",
+  "giorgia piras",
+  "edoardo papini",
+  "vittorio corti",
+  "benedetta barbaresi",
+  "giacomo gussoni",
+  "matteo rossi",
+  "lucrezia piracci",
+  "davide bellotto",
+  "silvia oltrabella",
+  "ludovico sibani",        // Sìbani → sibani
+  "silvia pignotti",
+  "benedetta testoni",
+  "giovanni de maria",
+  "edoardo ferrario",
+  "alessandro bianchi",
+  "beatrice villa",
+  "luca caravaggi",
+  "mara moschino",
+  "marzia camapnile",       // campanile?
+  "nikola calic",
+  "filippo sugla",          // sug|lia -> gestiamolo più robusto sotto
+  "camilla russo",
+  "laerte adami",
+  "noemi",
+  "alberto garlaschelli",
+  "jacopo guarneri",
+  "lorenzo cederna",
+  "benedetta pintus"
+];
+
+/* Per sicurezza, aggiungiamo una funzione per normalizzare accenti,
+   spazi multipli, casi speciali tipo "Suglia" / "Sugla".
+   Usiamo una funzione di "slugify" molto semplice.
+*/
+function normalizeName(str){
+  if(!str) return "";
+  // minuscolo
+  let s = str.toLowerCase().trim();
+
+  // normalizza accenti
+  s = s.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // rimuove diacritici
+
+  // sostituzioni manuali: se vogliamo sistemare errori tipo "suglia" / "sugla"
+  s = s.replace(/\bsuglia\b/g,"sugla");
+  s = s.replace(/\bguardalà\b/g,"guardala");
+  s = s.replace(/\bguardalà\b/g,"guardala");
+
+  // togli spazi doppi
+  s = s.replace(/\s+/g," ");
+
+  return s;
+}
+
+/* ===========================================================
+   LOGIN LOGICA
+   - Mostriamo il popup se NON abbiamo già salvato lo stato
+   - Quando confermano, salviamo in localStorage:
+     { guestName: "nome cognome", isVIP: true/false }
+   - Se uno fa logout, cancelliamo e ri-mostriamo popup
+   - In base a isVIP mostriamo blocchi VIP nelle pagine
+   =========================================================== */
+
+const STORAGE_KEY = "weddingGuestInfo"; // localStorage key
+
+function getGuestInfo(){
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || null;
+  } catch(e){
+    return null;
+  }
+}
+
+function setGuestInfo(obj){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
+}
+
+function clearGuestInfo(){
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+/* Mostra popup login */
+function showLoginModal(){
+  const overlay = document.getElementById("guestLoginOverlay");
+  const errorMsg = document.getElementById("guestError");
+  const logoutBtn = document.getElementById("guestLogoutBtn");
+
+  if(overlay){
+    overlay.style.display = "flex";
+  }
+  if(errorMsg){
+    errorMsg.style.display = "none";
+  }
+  if(logoutBtn){
+    logoutBtn.style.display = "none";
+  }
+}
+
+/* Mostra popup logout (cioè "sei loggato, vuoi uscire?") */
+function showLogoutModal(guest){
+  const overlay = document.getElementById("guestLoginOverlay");
+  const modal   = document.getElementById("guestLoginModal");
+  const errorMsg= document.getElementById("guestError");
+  const first   = document.getElementById("guestFirst");
+  const last    = document.getElementById("guestLast");
+  const confirm = document.getElementById("guestConfirmBtn");
+  const logout  = document.getElementById("guestLogoutBtn");
+
+  if(!overlay||!modal) return;
+
+  // Cambiamo leggermente il testo per dire chi è loggato
+  modal.querySelector("h2").textContent = guest.guestName;
+  modal.querySelector("p").innerHTML = `
+    You are signed in.<br>
+    Vous êtes connecté(e).<br>
+    Sei collegato/a.
+  `;
+
+  // Nascondiamo i campi nome/cognome perché sei già loggato
+  if(first) first.parentElement.style.display = "none";
+  if(last)  last.parentElement.style.display  = "none";
+
+  // Nascondi eventuale errore
+  if(errorMsg) errorMsg.style.display = "none";
+
+  // Mostra bottone logout
+  if(logout) logout.style.display = "block";
+
+  // Cambia testo bottone principale:
+  if(confirm) {
+    confirm.textContent = "Close / Fermer / Chiudi";
+  }
+
+  overlay.style.display = "flex";
+}
+
+/* Ripristina il popup in modalità LOGIN (nomi visibili) */
+function resetModalToLogin(){
+  const overlay = document.getElementById("guestLoginOverlay");
+  const modal   = document.getElementById("guestLoginModal");
+  const first   = document.getElementById("guestFirst");
+  const last    = document.getElementById("guestLast");
+  const confirm = document.getElementById("guestConfirmBtn");
+  const logout  = document.getElementById("guestLogoutBtn");
+  const errorMsg= document.getElementById("guestError");
+
+  if(!overlay||!modal) return;
+
+  modal.querySelector("h2").textContent = "Welcome · Bienvenue · Benvenuti";
+  modal.querySelector("p").innerHTML = `
+    Please enter your first and last name.<br>
+    Veuillez saisir votre prénom et nom.<br>
+    Inserisci nome e cognome.
+  `;
+
+  // Mostra campi
+  if(first) {
+    first.parentElement.style.display = "block";
+    first.value = "";
+  }
+  if(last) {
+    last.parentElement.style.display  = "block";
+    last.value = "";
+  }
+
+  // Nascondi messaggio errore
+  if(errorMsg) errorMsg.style.display="none";
+
+  // Bottone principale "OK"
+  if(confirm){
+    confirm.textContent = "OK";
+  }
+
+  // Nascondi logout
+  if(logout){
+    logout.style.display = "none";
+  }
+}
+
+/* Prova login */
+function tryLogin(){
+  const first = document.getElementById("guestFirst").value || "";
+  const last  = document.getElementById("guestLast").value  || "";
+  const errorMsg = document.getElementById("guestError");
+  const overlay  = document.getElementById("guestLoginOverlay");
+
+  const fullNameNormalized = normalizeName(first + " " + last);
+
+  // Controllo se il nome è nella lista VIP
+  const isVIP = VIP_GUESTS.includes(fullNameNormalized);
+
+  // Salviamo comunque anche se non VIP,
+  // così chi non è in lista può navigare il sito senza rivedere il popup ogni volta
+  if(fullNameNormalized.length < 2){
+    // nome troppo corto
+    if(errorMsg){
+      errorMsg.style.display = "block";
+    }
+    return;
+  }
+
+  // Salva stato in localStorage
+  setGuestInfo({
+    guestName: first.trim() + " " + last.trim(),
+    isVIP: isVIP
+  });
+
+  // Chiudi overlay
+  if(overlay){
+    overlay.style.display = "none";
+  }
+
+  // Ora che sappiamo se è VIP, mostriamo eventuali sezioni VIP
+  revealVIPSections(isVIP);
+}
+
+/* Logout */
+function logoutGuest(){
+  clearGuestInfo();
+  resetModalToLogin();
+  // Dopo il logout, ri-mostriamo in versione LOGIN
+  showLoginModal();
+  // Nascondiamo sezioni VIP per sicurezza
+  revealVIPSections(false);
+}
+
+/* Mostra/nascondi le sezioni VIP nella pagina corrente */
+function revealVIPSections(isVIP){
+  const vipEls = document.querySelectorAll(".vip-only");
+  vipEls.forEach(el=>{
+    el.style.display = isVIP ? "" : "none";
+  });
+}
+
+/* Setup iniziale quando la pagina carica */
+document.addEventListener("DOMContentLoaded", function(){
+
+  const overlay  = document.getElementById("guestLoginOverlay");
+  const confirm  = document.getElementById("guestConfirmBtn");
+  const logout   = document.getElementById("guestLogoutBtn");
+
+  // 1. Leggi dal localStorage se c'è già un ospite
+  const info = getGuestInfo();
+
+  if(info){
+    // Abbiamo già un utente
+    // - NON mostriamo il popup subito
+    // - ma mostriamo/nascondiamo blocchi VIP
+    revealVIPSections(!!info.isVIP);
+
+    // Aggiungiamo listener sul brand (o su qualcosa) per poter riaprire popup e fare logout
+    // Suggerimento: click sul nome in header apre modal logout
+    const brand = document.querySelector(".brand");
+    if(brand){
+      brand.style.cursor = "pointer";
+      brand.addEventListener("click", ()=>{
+        showLogoutModal(info);
+      });
+    }
+
+  } else {
+    // Nessun utente noto -> mostriamo subito popup in modalità LOGIN
+    resetModalToLogin();
+    showLoginModal();
+  }
+
+  // Listener "OK" nel popup (fa login o chiude se già loggato)
+  if(confirm){
+    confirm.addEventListener("click", ()=>{
+      const currentInfo = getGuestInfo();
+      if(currentInfo){
+        // se sei già loggato e stai vedendo popup "sei collegato"
+        // chiudiamo semplicemente
+        if(overlay) overlay.style.display="none";
+      } else {
+        // stai cercando di loggarti
+        tryLogin();
+      }
+    });
+  }
+
+  // Listener "Logout"
+  if(logout){
+    logout.addEventListener("click", ()=>{
+      logoutGuest();
+    });
+  }
+
+  // Se clicchi fuori dal box, chiudi SOLO se già loggato
+  if(overlay){
+    overlay.addEventListener("click", (e)=>{
+      if(e.target===overlay){
+        const currentInfo = getGuestInfo();
+        // se NON loggato non chiudere
+        if(currentInfo){
+          overlay.style.display="none";
+        }
+      }
+    });
+  }
+});
+</script>
+
+
 </body>
 </html>
