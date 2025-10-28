@@ -8,6 +8,124 @@
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Allura&display=swap" rel="stylesheet">
 
+  <!-- === GLOBAL LOGIN STYLE & MODAL (popup) === -->
+<style>
+/* Overlay scuro dietro al popup */
+#guestLoginOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: none; /* nascosto di default */
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  font-family: "Cormorant", serif;
+}
+
+/* Box popup */
+#guestLoginModal {
+  background: #fff;
+  max-width: 360px;
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  padding: 24px 20px 20px;
+  position: relative;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+/* Titolo popup */
+#guestLoginModal h2 {
+  font-family: "Allura", cursive;
+  font-size: 32px;
+  line-height: 1.2;
+  color: var(--accent);
+  margin: 0 0 10px;
+}
+
+/* Testo descrizione */
+#guestLoginModal p {
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0 0 16px;
+  color: var(--ink);
+  font-style: italic;
+}
+
+/* Form campi */
+.guest-field {
+  text-align: left;
+  margin-bottom: 14px;
+}
+.guest-field label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: var(--muted);
+}
+.guest-field input {
+  width: 100%;
+  font-size: 18px;
+  font-family: "Cormorant", serif;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+.guest-field input:focus {
+  border-color: var(--accent);
+}
+
+/* Pulsanti nel popup */
+#guestLoginActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* Bottone Conferma */
+#guestConfirmBtn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px;
+  cursor: pointer;
+  font-family: "Cormorant", serif;
+}
+#guestConfirmBtn:hover {
+  opacity: .95;
+}
+
+/* Link Esci / Logout */
+#guestLogoutBtn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 16px;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: "Cormorant", serif;
+}
+
+/* Messaggio di errore nome non trovato */
+#guestError {
+  color: #b00020;
+  font-size: 16px;
+  text-align: center;
+  display: none;
+  margin-top: 8px;
+  line-height: 1.4;
+  font-family: "Cormorant", serif;
+}
+</style>
+
+  
 <style>
 :root{
   --accent:#7465ad;
