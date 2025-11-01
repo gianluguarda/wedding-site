@@ -5,10 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Plan your trip — Charlotte & Gianluca</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Allura&display=swap" rel="stylesheet">
 
-<!-- === POPUP LOGIN (stile) === -->
 <style>
 :root{
   --accent:#7465ad; --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b; --card-bg:#ffffff;
@@ -24,7 +22,7 @@ html,body{
 /* Header */
 header{position:sticky; top:0; z-index:10; background:rgba(247,244,239,.88); backdrop-filter:blur(6px);
   border-bottom:1px solid rgba(0,0,0,.06)}
-.nav{max-width:1100px; margin:0 auto; padding:18px 22px; display:flex; align-items:center; justify-content:space-between; gap:12px}
+.nav{max-width:1200px; margin:0 auto; padding:18px 22px; display:flex; align-items:center; justify-content:space-between; gap:12px}
 .brand{display:flex; align-items:center; gap:8px}
 .names{font-family:"Allura",cursive; font-size:36px; line-height:1.1; color:var(--accent); white-space:nowrap}
 .dot{color:var(--muted); font-size:20px; line-height:1.1}
@@ -47,27 +45,32 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
 }
 
 /* Page */
-.section{max-width:1100px; margin:0 auto; padding:60px 20px 80px}
+.section{max-width:1200px; margin:0 auto; padding:60px 20px 80px}
 .h1{font-family:"Allura",cursive; font-size:56px; color:var(--accent); text-align:center; margin:0 0 20px}
 
-/* Language toc */
-.lang-toc{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:0 auto 40px}
+/* Language toc + hard separators */
+.lang-toc{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:0 auto 24px}
 .lang-toc a{text-decoration:none; color:var(--ink); border:1px solid #ddd; background:#fff; padding:8px 12px; border-radius:12px; font-size:17px; line-height:1.2}
 .lang-toc a:hover{border-color:var(--accent); color:var(--accent)}
-.langtitle{ text-align:center; font-size:32px; line-height:1.2; font-family:"Allura",cursive; color:var(--accent); font-weight:400; margin:50px 0 20px }
+.langblock{padding:32px 0; border-top:2px dashed rgba(0,0,0,.08); margin-top:24px}
+.langtitle{ text-align:center; font-size:32px; line-height:1.2; font-family:"Allura",cursive; color:var(--accent); font-weight:400; margin:32px 0 14px }
 
-/* Cards */
-.cards-grid{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px; margin:16px 0 8px }
-@media(max-width:900px){ .cards-grid{ grid-template-columns:1fr } }
+/* Card & grids */
 .card{background:#fff; border:1px solid #eee; border-radius:18px; padding:18px 20px; box-shadow:0 8px 30px rgba(0,0,0,.04)}
 .card h3{margin:0 0 10px; font-size:22px; line-height:1.3; font-weight:600; color:var(--ink)}
-.card p{margin:0 0 10px; font-size:18px; line-height:1.5; color:var(--ink)}
+.card p{margin:0 10px 8px 0; font-size:18px; line-height:1.5; color:var(--ink)}
 .card ul{margin:0; padding-left:20px; font-size:18px; line-height:1.5}
 .card li{margin-bottom:6px}
 .card-img{width:100%; display:block; border-radius:12px; margin:0 0 12px; box-shadow:0 8px 24px rgba(0,0,0,.08)}
 .link{color:var(--accent); text-decoration:none; border-bottom:1px dotted rgba(0,0,0,.25)}
 .link:hover{border-bottom-color:var(--accent)}
 .note{background:#fff; border:1px solid #eee; border-radius:16px; padding:16px 20px; margin-top:18px; font-size:16px; line-height:1.45; color:var(--muted)}
+
+/* Flexible grids that avoid holes */
+.cards-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:16px; margin:16px 0 8px }
+.cards-3{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px; margin:16px 0 8px }
+@media(max-width:1024px){ .cards-3{ grid-template-columns:repeat(2, minmax(0,1fr)) } }
+@media(max-width:700px){ .cards-3{ grid-template-columns:1fr } }
 
 /* Footer */
 footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
@@ -91,7 +94,7 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
 </head>
 <body>
 
-<!-- === POPUP LOGIN === -->
+<!-- POPUP LOGIN -->
 <div id="guestLoginOverlay" role="dialog" aria-modal="true">
   <div id="guestLoginModal">
     <h2>Welcome · Bienvenue · Benvenuti</h2>
@@ -141,7 +144,7 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
 <main class="section">
   <h1 class="h1">Plan your trip</h1>
 
-  <!-- Indice lingue -->
+  <!-- Lingue -->
   <nav class="lang-toc">
     <a href="#it">🇮🇹 Italiano</a>
     <a href="#en">🇬🇧 English</a>
@@ -149,309 +152,345 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
   </nav>
 
   <!-- ================= ITALIANO ================= -->
-  <section id="it">
-    <!-- Sezione 1: Qual è il piano -->
+  <section id="it" class="langblock">
     <h2 class="langtitle">🇮🇹 Qual è il piano</h2>
 
-    <!-- VIP: 3 card -->
+    <!-- VIP: 3 card; Non-VIP: solo centrale -->
     <div class="cards-grid vip-only" style="display:none;">
       <!-- Welcome Dinner -->
       <div class="card">
         <img src="/assets/stay/terre-ugo.jpg" class="card-img" alt="Terre Ugo">
         <h3>🍷 Welcome Dinner — Venerdì 19 giugno</h3>
-        <p>
-          19:00–23:00 · <a class="link" href="https://maps.app.goo.gl/EfaRfCRqPdVTzZKaA" target="_blank">Terre Ugo</a><br>
-          Dress code: <strong>elegante rilassato</strong> (evitare tacchi a spillo), <strong>no bianco</strong> per le donne.
-        </p>
+        <ul>
+          <li><strong>Orario</strong>: 19:00–23:00</li>
+          <li><strong>Location</strong>: <a class="link" href="https://maps.app.goo.gl/EfaRfCRqPdVTzZKaA" target="_blank">Terre Ugo</a></li>
+          <li><strong>Dress code</strong>: elegante rilassato (evitare tacchi a spillo), <strong>no bianco</strong> per le donne</li>
+        </ul>
       </div>
+
       <!-- Cerimonia & Ricevimento -->
       <div class="card">
         <img src="/assets/chateau.jpg" class="card-img" alt="Château de Pradines">
-        <h3>💒 Cerimonia &amp; ricevimento — Sabato 20 giugno</h3>
-        <p>
-          📍 <strong>Château de Pradines</strong>, Grambois (≈45’ da Aix) ·
-          <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Google Maps</a><br>
-          16:30 (TBC) — festa fino alle 4:00 · <strong>Navette A/R</strong> da Aix (secondo pick-up TBC).<br>
-          Dress code: <strong>formale</strong>, cravatta suggerita; donne: <strong>vestito lungo</strong>, <strong>no lilla</strong> e <strong>no bianco</strong>.
-        </p>
+        <h3>💒 Cerimonia &amp; Ricevimento — Sabato 20 giugno</h3>
+        <ul>
+          <li><strong>Orario</strong>: 16:30 (TBC) — festa fino alle 4:00</li>
+          <li><strong>Location</strong>: <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Château de Pradines, Grambois</a></li>
+          <li><strong>Dress code</strong>: formale; cravatta suggerita. Donne: vestito lungo, <strong>no lilla</strong> e <strong>no bianco</strong></li>
+        </ul>
       </div>
+
       <!-- Brunch -->
       <div class="card">
         <img src="/assets/stay/brunch.jpg" class="card-img" alt="Brunch in piscina">
         <h3>☀️ Brunch — Domenica 21 giugno (TBC)</h3>
-        <p>
-          In piscina allo Château · Dress code: da piscina.<br>
-          <strong>Portare asciugamano</strong> e necessario.
-        </p>
+        <ul>
+          <li><strong>Orario</strong>: TBC</li>
+          <li><strong>Location</strong>: Piscina dello Château de Pradines</li>
+          <li><strong>Dress code</strong>: da piscina; <strong>portare asciugamano</strong></li>
+        </ul>
       </div>
     </div>
 
-    <!-- Non VIP: solo card centrale -->
     <div class="cards-grid non-vip-only">
+      <!-- Solo la card centrale per non VIP, ma si allarga a tutta riga -->
       <div class="card">
         <img src="/assets/chateau.jpg" class="card-img" alt="Château de Pradines">
-        <h3>💒 Cerimonia &amp; ricevimento — Sabato 20 giugno</h3>
-        <p>
-          📍 <strong>Château de Pradines</strong>, Grambois (≈45’ da Aix) ·
-          <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Google Maps</a><br>
-          16:30 (TBC) — festa fino alle 4:00 · <strong>Navette A/R</strong> da Aix (secondo pick-up TBC).<br>
-          Dress code: <strong>formale</strong>, cravatta suggerita; donne: <strong>vestito lungo</strong>, <strong>no lilla</strong> e <strong>no bianco</strong>.
-        </p>
+        <h3>💒 Cerimonia &amp; Ricevimento — Sabato 20 giugno</h3>
+        <ul>
+          <li><strong>Orario</strong>: 16:30 (TBC) — festa fino alle 4:00</li>
+          <li><strong>Location</strong>: <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Château de Pradines, Grambois</a></li>
+          <li><strong>Dress code</strong>: formale; cravatta suggerita. Donne: vestito lungo, <strong>no lilla</strong> e <strong>no bianco</strong></li>
+        </ul>
       </div>
     </div>
 
     <div class="note">👶 Per motivi legati alla location, non potremo ospitare bambini piccoli. Scriveteci se serve una mano 💜</div>
 
     <!-- Sezione 2: Come arrivare & Dove alloggiare -->
-    <h2 class="langtitle" style="margin-top:40px">🚗 Come arrivare &amp; 🏡 Dove alloggiare</h2>
+    <h2 class="langtitle">🚗 Come arrivare &amp; 🏡 Dove alloggiare</h2>
 
-    <div class="card">
-      <h3>🚆 In treno</h3>
-      <p>
-        <strong>Da Milano:</strong> Frecciarossa fino a Lione + TGV per Aix-en-Provence TGV (~6h).<br>
-        <strong>Dal Belgio / Lussemburgo:</strong> AV fino a Parigi + TGV per Aix (~6–7h).<br><br>
-        🔎 Controlla orari e prezzi su <a class="link" href="https://www.thetrainline.com" target="_blank">Trainline</a>.
-      </p>
+    <!-- Trasporti in 3 colonne -->
+    <div class="cards-3">
+      <div class="card">
+        <h3>🚆 In treno</h3>
+        <p><strong>Da Milano:</strong> Frecciarossa → Lione + TGV → Aix-en-Provence TGV (~6h).</p>
+        <p><strong>Da Belgio/Lussemburgo:</strong> AV → Parigi + TGV → Aix (~6–7h).</p>
+        <p>🔎 Orari e prezzi: <a class="link" href="https://www.thetrainline.com" target="_blank">Trainline</a></p>
+      </div>
+      <div class="card">
+        <h3>✈️ In aereo</h3>
+        <p><strong>Marsiglia (MRS)</strong>: ~1h dallo Château, ~30 min da Aix. Diretti da Milano, Roma, Napoli, Catania, Barcellona, Madrid, Bruxelles.</p>
+        <p><strong>Nizza (NCE)</strong>: ~2h d’auto.</p>
+      </div>
+      <div class="card">
+        <h3>🚗 In auto</h3>
+        <p><strong>Da Milano</strong>: ~5h30 via Liguria.</p>
+        <p><strong>Da Belgio/Lussemburgo</strong>: ~10–11h via Lione.</p>
+        <p>Parcheggio gratuito in location.</p>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>✈️ In aereo</h3>
-      <p>
-        <strong>Marsiglia (MRS)</strong> → ~1h dallo Château, ~30 min da Aix. Voli diretti da Milano, Roma, Napoli, Catania, Barcellona, Madrid, Bruxelles.<br>
-        <strong>Nizza (NCE)</strong> → ~2h d’auto.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>🚗 In auto &amp; parcheggio</h3>
-      <p>
-        <strong>Da Milano:</strong> ~5h30 via Liguria.<br>
-        <strong>Da Belgio / Lussemburgo:</strong> ~10–11h in auto (via Lione).<br><br>
-        Parcheggio gratuito in location.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>🏨 Dove alloggiare</h3>
-      <p><strong>Aix-en-Provence</strong> — città viva, molti ristoranti e hotel; base comoda con navette per la venue.</p>
-      <p><strong>Grambois e dintorni</strong> — il paese della location, quiete totale; alcune case/Airbnb a ~20’ a piedi dal Château.</p>
-      <p><strong>Pertuis</strong> — a ~15–20 minuti in auto dallo Château de Pradines; soluzione pratica “di mezzo”.</p>
+    <!-- Alloggi + Navette affiancati -->
+    <div class="cards-3">
+      <div class="card">
+        <h3>🏨 Dove alloggiare</h3>
+        <ul>
+          <li><strong>Aix-en-Provence</strong> — città viva; base comoda con navette per la venue.</li>
+          <li><strong>Grambois & dintorni</strong> — quiete totale; alcune case/Airbnb a ~20’ a piedi.</li>
+          <li><strong>Pertuis</strong> — ~15–20 min d’auto; soluzione pratica “di mezzo”.</li>
+          <li><strong>La Tour d’Aigues</strong> — borgo carino a pochi km; buona base nel Luberon meridionale.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🚌 Navette (solo 20 giugno)</h3>
+        <p>Navetta A/R per il ricevimento di sabato 20/06:</p>
+        <ul>
+          <li><strong>Da</strong>: Aix-en-Provence</li>
+          <li><strong>Tappe</strong>: Pertuis e La Tour d’Aigues (TBC)</li>
+          <li>Per favore <strong>conferma nel form RSVP</strong> se vuoi usarla</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ℹ️ Info utili</h3>
+        <p>Meteo serale fresco: portate un leggero coprispalle/giacca.</p>
+        <p>Strade di campagna: valutate scarpe comode per gli spostamenti.</p>
+      </div>
     </div>
 
     <!-- Sezione 3: Cosa vedere -->
-    <h2 class="langtitle" style="margin-top:40px">🌿 Cosa vedere</h2>
+    <h2 class="langtitle">🌿 Cosa vedere</h2>
     <div class="card">
       <ul>
         <li><strong>Sentier des Ocres (Roussillon)</strong> — paesaggi rosso/arancio iconici.</li>
         <li><strong>Lourmarin</strong> — boutique, ceramiche, gallerie, café.</li>
         <li><strong>Aix-en-Provence</strong> — mercati, piazzette, fontane.</li>
-        <li><strong>L’Isle-sur-la-Sorgue</strong> — canali e mercato dell’antiquariato.</li>
-        <li><strong>Saignon, Cucuron, Gordes, Avignon</strong> — borghi e città da cartolina.</li>
-        <li><strong>Marsiglia</strong> — pesce e porto vecchio, la “Napoli di Francia”.</li>
-        <li><strong>Montagne Sainte-Victoire</strong> — hiking e panorami di Cézanne.</li>
-        <li><strong>Calanques</strong> — mare turchese fra Cassis e Marsiglia.</li>
-        <li><strong>Cantine</strong> — rosé e bianchi di Provenza nei domaines locali.</li>
+        <li><strong>L’Isle-sur-la-Sorgue</strong> — canali e mercato antiquariato.</li>
+        <li><strong>Saignon, Cucuron, Gordes, Avignon</strong> — borghi da cartolina.</li>
+        <li><strong>Marsiglia</strong> — pesce e Vieux-Port.</li>
+        <li><strong>Montagne Sainte-Victoire</strong> — hiking e panorami.</li>
+        <li><strong>Calanques</strong> — mare turchese tra Cassis e Marsiglia.</li>
+        <li><strong>Cantine</strong> — rosé e bianchi di Provenza.</li>
       </ul>
     </div>
   </section>
 
   <!-- ================= ENGLISH ================= -->
-  <section id="en">
+  <section id="en" class="langblock">
     <h2 class="langtitle">🇬🇧 What’s the plan</h2>
 
-    <!-- VIP -->
     <div class="cards-grid vip-only" style="display:none;">
       <div class="card">
         <img src="/assets/stay/terre-ugo.jpg" class="card-img" alt="Terre Ugo">
         <h3>🍷 Welcome Dinner — Friday, June 19</h3>
-        <p>
-          7:00–11:00 PM · <a class="link" href="https://maps.app.goo.gl/EfaRfCRqPdVTzZKaA" target="_blank">Terre Ugo</a><br>
-          Dress code: <strong>smart-casual</strong> (please avoid stilettos), <strong>no white</strong> for women.
-        </p>
+        <ul>
+          <li><strong>Time</strong>: 7:00–11:00 PM</li>
+          <li><strong>Location</strong>: <a class="link" href="https://maps.app.goo.gl/EfaRfCRqPdVTzZKaA" target="_blank">Terre Ugo</a></li>
+          <li><strong>Dress code</strong>: smart-casual (avoid stilettos), <strong>no white</strong> for women</li>
+        </ul>
       </div>
       <div class="card">
         <img src="/assets/chateau.jpg" class="card-img" alt="Château de Pradines">
         <h3>💒 Ceremony &amp; Reception — Saturday, June 20</h3>
-        <p>
-          📍 <strong>Château de Pradines</strong>, Grambois (~45’ from Aix) ·
-          <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Google Maps</a><br>
-          4:30 PM (TBC) — party until 4:00 AM · <strong>Round-trip shuttles</strong> from Aix (2nd pick-up TBC).<br>
-          Dress code: <strong>formal</strong>, tie suggested; women: <strong>long dress</strong>, <strong>no lilac</strong> and <strong>no white</strong>.
-        </p>
+        <ul>
+          <li><strong>Time</strong>: 4:30 PM (TBC) — party until 4:00 AM</li>
+          <li><strong>Location</strong>: <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Château de Pradines, Grambois</a></li>
+          <li><strong>Dress code</strong>: formal, tie suggested; women: long dress, <strong>no lilac</strong> and <strong>no white</strong></li>
+        </ul>
       </div>
       <div class="card">
         <img src="/assets/stay/brunch.jpg" class="card-img" alt="Pool brunch">
         <h3>☀️ Brunch — Sunday, June 21 (TBC)</h3>
-        <p>
-          Poolside at the Château · Dress code: pool attire.<br>
-          Please <strong>bring a towel</strong>.
-        </p>
+        <ul>
+          <li><strong>Time</strong>: TBC</li>
+          <li><strong>Location</strong>: Château pool</li>
+          <li><strong>Dress code</strong>: pool attire; please <strong>bring a towel</strong></li>
+        </ul>
       </div>
     </div>
 
-    <!-- Non VIP -->
     <div class="cards-grid non-vip-only">
       <div class="card">
         <img src="/assets/chateau.jpg" class="card-img" alt="Château de Pradines">
         <h3>💒 Ceremony &amp; Reception — Saturday, June 20</h3>
-        <p>
-          📍 <strong>Château de Pradines</strong>, Grambois (~45’ from Aix) ·
-          <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Google Maps</a><br>
-          4:30 PM (TBC) — party until 4:00 AM · <strong>Round-trip shuttles</strong> from Aix (2nd pick-up TBC).<br>
-          Dress code: <strong>formal</strong>, tie suggested; women: <strong>long dress</strong>, <strong>no lilac</strong> and <strong>no white</strong>.
-        </p>
+        <ul>
+          <li><strong>Time</strong>: 4:30 PM (TBC) — party until 4:00 AM</li>
+          <li><strong>Location</strong>: <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Château de Pradines, Grambois</a></li>
+          <li><strong>Dress code</strong>: formal, tie suggested; women: long dress, <strong>no lilac</strong> and <strong>no white</strong></li>
+        </ul>
       </div>
     </div>
 
     <div class="note">👶 Due to venue constraints, we’re unable to host very small children. Reach out if you need help 💜</div>
 
-    <h2 class="langtitle" style="margin-top:40px">🚗 Getting there &amp; 🏡 Where to stay</h2>
+    <h2 class="langtitle">🚗 Getting there &amp; 🏡 Where to stay</h2>
 
-    <div class="card">
-      <h3>🚆 By train</h3>
-      <p>
-        <strong>From Milan:</strong> Frecciarossa to Lyon + TGV to Aix-en-Provence TGV (~6h).<br>
-        <strong>From Belgium / Luxembourg:</strong> high-speed to Paris + TGV to Aix (~6–7h).<br><br>
-        🔎 Check schedules and prices on <a class="link" href="https://www.thetrainline.com" target="_blank">Trainline</a>.
-      </p>
+    <div class="cards-3">
+      <div class="card">
+        <h3>🚆 By train</h3>
+        <p><strong>From Milan</strong>: Frecciarossa → Lyon + TGV → Aix-en-Provence TGV (~6h).</p>
+        <p><strong>From Belgium/Luxembourg</strong>: High-speed → Paris + TGV → Aix (~6–7h).</p>
+        <p>🔎 Check: <a class="link" href="https://www.thetrainline.com" target="_blank">Trainline</a></p>
+      </div>
+      <div class="card">
+        <h3>✈️ By plane</h3>
+        <p><strong>Marseille (MRS)</strong>: ~1h from the venue, ~30 min from Aix. Direct from Milan, Rome, Naples, Catania, Barcelona, Madrid, Brussels.</p>
+        <p><strong>Nice (NCE)</strong>: ~2h drive.</p>
+      </div>
+      <div class="card">
+        <h3>🚗 By car</h3>
+        <p><strong>From Milan</strong>: ~5h30 via Liguria.</p>
+        <p><strong>From Belgium/Luxembourg</strong>: ~10–11h via Lyon.</p>
+        <p>Free parking at the venue.</p>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>✈️ By plane</h3>
-      <p>
-        <strong>Marseille (MRS)</strong> ~1h from the venue, ~30 min from Aix. Direct flights from Milan, Rome, Naples, Catania, Barcelona, Madrid, Brussels.<br>
-        <strong>Nice (NCE)</strong> ~2h drive.
-      </p>
+    <div class="cards-3">
+      <div class="card">
+        <h3>🏨 Where to stay</h3>
+        <ul>
+          <li><strong>Aix-en-Provence</strong> — lively town; easy base with shuttles.</li>
+          <li><strong>Grambois & nearby</strong> — countryside quiet; some homes within ~20’ walk.</li>
+          <li><strong>Pertuis</strong> — ~15–20 min drive; practical middle-ground.</li>
+          <li><strong>La Tour d’Aigues</strong> — charming village nearby; good Luberon base.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🚌 Shuttles (June 20 only)</h3>
+        <ul>
+          <li><strong>From</strong>: Aix-en-Provence</li>
+          <li><strong>Stops</strong>: Pertuis & La Tour d’Aigues (TBC)</li>
+          <li>Please <strong>confirm in the RSVP form</strong> if you want to use it</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ℹ️ Tips</h3>
+        <p>Evenings can be fresh: bring a light layer.</p>
+        <p>Country roads: consider comfy shoes for transfers.</p>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>🚗 By car &amp; parking</h3>
-      <p>
-        <strong>From Milan:</strong> ~5h30 via Liguria.<br>
-        <strong>From Belgium / Luxembourg:</strong> ~10–11h by car (via Lyon).<br><br>
-        Free parking at the venue.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>🏨 Where to stay</h3>
-      <p><strong>Aix-en-Provence</strong> — lively town, lots of restaurants and hotels; easy base with shuttles to the venue.</p>
-      <p><strong>Grambois & nearby</strong> — the village of the venue, very quiet; some houses/Airbnbs within ~20’ walk.</p>
-      <p><strong>Pertuis</strong> — ~15–20 minutes by car from the Château de Pradines; practical middle-ground.</p>
-    </div>
-
-    <h2 class="langtitle" style="margin-top:40px">🌿 What to see</h2>
+    <h2 class="langtitle">🌿 What to see</h2>
     <div class="card">
       <ul>
         <li><strong>Sentier des Ocres (Roussillon)</strong> — surreal red/orange landscapes.</li>
         <li><strong>Lourmarin</strong> — boutiques, pottery, cafés.</li>
-        <li><strong>Aix-en-Provence</strong> — markets, fountains, Cézanne vibes.</li>
+        <li><strong>Aix-en-Provence</strong> — markets, fountains.</li>
         <li><strong>L’Isle-sur-la-Sorgue</strong> — canals + antique market.</li>
-        <li><strong>Saignon, Cucuron, Gordes, Avignon</strong> — postcard villages and views.</li>
-        <li><strong>Marseille</strong> — seafood and the Vieux-Port, “Naples of France”.</li>
-        <li><strong>Montagne Sainte-Victoire</strong> — hikes and classic viewpoints.</li>
-        <li><strong>Calanques</strong> — turquoise coves between Cassis and Marseille.</li>
-        <li><strong>Local wineries</strong> — Provençal rosé and whites.</li>
+        <li><strong>Saignon, Cucuron, Gordes, Avignon</strong> — postcard villages.</li>
+        <li><strong>Marseille</strong> — seafood, Vieux-Port.</li>
+        <li><strong>Montagne Sainte-Victoire</strong> — hikes & views.</li>
+        <li><strong>Calanques</strong> — turquoise coves near Cassis/Marseille.</li>
+        <li><strong>Wineries</strong> — Provençal rosé and whites.</li>
       </ul>
     </div>
   </section>
 
   <!-- ================= FRANÇAIS ================= -->
-  <section id="fr">
+  <section id="fr" class="langblock">
     <h2 class="langtitle">🇫🇷 Quel est le programme</h2>
 
-    <!-- VIP -->
     <div class="cards-grid vip-only" style="display:none;">
       <div class="card">
         <img src="/assets/stay/terre-ugo.jpg" class="card-img" alt="Terre Ugo">
         <h3>🍷 Dîner de bienvenue — Vendredi 19 juin</h3>
-        <p>
-          19h00–23h00 · <a class="link" href="https://maps.app.goo.gl/EfaRfCRqPdVTzZKaA" target="_blank">Terre Ugo</a><br>
-          Tenue : <strong>élégante et décontractée</strong> (éviter les talons aiguilles), <strong>pas de blanc</strong> pour les femmes.
-        </p>
+        <ul>
+          <li><strong>Horaires</strong> : 19h00–23h00</li>
+          <li><strong>Lieu</strong> : <a class="link" href="https://maps.app.goo.gl/EfaRfCRqPdVTzZKaA" target="_blank">Terre Ugo</a></li>
+          <li><strong>Tenue</strong> : élégante décontractée (éviter les talons aiguilles), <strong>pas de blanc</strong> pour les femmes</li>
+        </ul>
       </div>
       <div class="card">
         <img src="/assets/chateau.jpg" class="card-img" alt="Château de Pradines">
         <h3>💒 Cérémonie &amp; Réception — Samedi 20 juin</h3>
-        <p>
-          📍 <strong>Château de Pradines</strong>, Grambois (~45’ d’Aix) ·
-          <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Google Maps</a><br>
-          16h30 (TBC) — fête jusqu’à 4h00 · <strong>Navettes A/R</strong> depuis Aix (2ᵉ point TBC).<br>
-          Tenue : <strong>formelle</strong>, cravate conseillée ; femmes : <strong>robe longue</strong>, <strong>pas de lilas</strong> ni <strong>de blanc</strong>.
-        </p>
+        <ul>
+          <li><strong>Horaires</strong> : 16h30 (TBC) — fête jusqu’à 4h00</li>
+          <li><strong>Lieu</strong> : <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Château de Pradines, Grambois</a></li>
+          <li><strong>Tenue</strong> : formelle, cravate conseillée ; femmes : robe longue, <strong>pas de lilas</strong> ni <strong>de blanc</strong></li>
+        </ul>
       </div>
       <div class="card">
         <img src="/assets/stay/brunch.jpg" class="card-img" alt="Brunch piscine">
         <h3>☀️ Brunch — Dimanche 21 juin (TBC)</h3>
-        <p>
-          Au bord de la piscine du Château · Tenue : de piscine.<br>
-          Merci d’<strong>apporter une serviette</strong>.
-        </p>
+        <ul>
+          <li><strong>Horaires</strong> : à confirmer</li>
+          <li><strong>Lieu</strong> : piscine du Château</li>
+          <li><strong>Tenue</strong> : de piscine ; merci d’<strong>apporter une serviette</strong></li>
+        </ul>
       </div>
     </div>
 
-    <!-- Non VIP -->
     <div class="cards-grid non-vip-only">
       <div class="card">
         <img src="/assets/chateau.jpg" class="card-img" alt="Château de Pradines">
         <h3>💒 Cérémonie &amp; Réception — Samedi 20 juin</h3>
-        <p>
-          📍 <strong>Château de Pradines</strong>, Grambois (~45’ d’Aix) ·
-          <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Google Maps</a><br>
-          16h30 (TBC) — fête jusqu’à 4h00 · <strong>Navettes A/R</strong> depuis Aix (2ᵉ point TBC).<br>
-          Tenue : <strong>formelle</strong>, cravate conseillée ; femmes : <strong>robe longue</strong>, <strong>pas de lilas</strong> ni <strong>de blanc</strong>.
-        </p>
+        <ul>
+          <li><strong>Horaires</strong> : 16h30 (TBC) — fête jusqu’à 4h00</li>
+          <li><strong>Lieu</strong> : <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Château de Pradines, Grambois</a></li>
+          <li><strong>Tenue</strong> : formelle, cravate conseillée ; femmes : robe longue, <strong>pas de lilas</strong> ni <strong>de blanc</strong></li>
+        </ul>
       </div>
     </div>
 
     <div class="note">👶 Pour des raisons liées au lieu, nous ne pourrons pas accueillir de très jeunes enfants. Écrivez-nous si besoin 💜</div>
 
-    <h2 class="langtitle" style="margin-top:40px">🚗 S’y rendre &amp; 🏡 Où dormir</h2>
+    <h2 class="langtitle">🚗 S’y rendre &amp; 🏡 Où dormir</h2>
 
-    <div class="card">
-      <h3>🚆 En train</h3>
-      <p>
-        <strong>Depuis Milan :</strong> Frecciarossa jusqu’à Lyon + TGV vers Aix-en-Provence TGV (~6h).<br>
-        <strong>Depuis Belgique / Luxembourg :</strong> grande vitesse jusqu’à Paris + TGV vers Aix (~6–7h).<br><br>
-        🔎 Vérifiez horaires et tarifs sur <a class="link" href="https://www.thetrainline.com" target="_blank">Trainline</a>.
-      </p>
+    <div class="cards-3">
+      <div class="card">
+        <h3>🚆 En train</h3>
+        <p><strong>Depuis Milan</strong> : Frecciarossa → Lyon + TGV → Aix-en-Provence TGV (~6h).</p>
+        <p><strong>Depuis Belgique/Luxembourg</strong> : GV → Paris + TGV → Aix (~6–7h).</p>
+        <p>🔎 Horaires/tarifs : <a class="link" href="https://www.thetrainline.com" target="_blank">Trainline</a></p>
+      </div>
+      <div class="card">
+        <h3>✈️ En avion</h3>
+        <p><strong>Marseille (MRS)</strong> : ~1h du Château, ~30 min d’Aix. Vols directs depuis Milan, Rome, Naples, Catane, Barcelone, Madrid, Bruxelles.</p>
+        <p><strong>Nice (NCE)</strong> : ~2h de route.</p>
+      </div>
+      <div class="card">
+        <h3>🚗 En voiture</h3>
+        <p><strong>Depuis Milan</strong> : ~5h30 via la Ligurie.</p>
+        <p><strong>Depuis Belgique/Luxembourg</strong> : ~10–11h via Lyon.</p>
+        <p>Parking gratuit sur place.</p>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>✈️ En avion</h3>
-      <p>
-        <strong>Marseille (MRS)</strong> ~1h du Château, ~30 min d’Aix. Vols directs depuis Milan, Rome, Naples, Catane, Barcelone, Madrid, Bruxelles.<br>
-        <strong>Nice (NCE)</strong> ~2h de route.
-      </p>
+    <div class="cards-3">
+      <div class="card">
+        <h3>🏨 Où dormir</h3>
+        <ul>
+          <li><strong>Aix-en-Provence</strong> — ville animée; base pratique avec navettes.</li>
+          <li><strong>Grambois & alentours</strong> — très calme; quelques logements à ~20’ à pied.</li>
+          <li><strong>Pertuis</strong> — ~15–20 min en voiture; option pratique.</li>
+          <li><strong>La Tour d’Aigues</strong> — joli bourg à proximité; bonne base dans le sud Luberon.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🚌 Navettes (20 juin uniquement)</h3>
+        <ul>
+          <li><strong>Depuis</strong> : Aix-en-Provence</li>
+          <li><strong>Arrêts</strong> : Pertuis & La Tour d’Aigues (TBC)</li>
+          <li>Merci de <strong>confirmer dans le formulaire RSVP</strong> si vous l’utilisez</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ℹ️ Conseils</h3>
+        <p>Soirées parfois fraîches : prévoyez une petite couche.</p>
+        <p>Routes de campagne : chaussures confortables utiles.</p>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>🚗 En voiture &amp; parking</h3>
-      <p>
-        <strong>Depuis Milan :</strong> ~5h30 via la Ligurie.<br>
-        <strong>Depuis Belgique / Luxembourg :</strong> ~10–11h de route (via Lyon).<br><br>
-        Parking gratuit sur place.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>🏨 Où dormir</h3>
-      <p><strong>Aix-en-Provence</strong> — ville animée avec restaurants et hôtels; base pratique avec navettes pour la réception.</p>
-      <p><strong>Grambois & alentours</strong> — le village du Château, très calme; quelques maisons/Airbnbs à ~20’ à pied.</p>
-      <p><strong>Pertuis</strong> — à ~15–20 minutes en voiture du Château de Pradines; option pratique “au milieu”.</p>
-    </div>
-
-    <h2 class="langtitle" style="margin-top:40px">🌿 À voir</h2>
+    <h2 class="langtitle">🌿 À voir</h2>
     <div class="card">
       <ul>
         <li><strong>Sentier des Ocres (Roussillon)</strong> — paysages ocre rouge/orangé.</li>
-        <li><strong>Lourmarin</strong> — boutiques, céramiques, galeries, cafés.</li>
-        <li><strong>Aix-en-Provence</strong> — marchés, fontaines, esprit Cézanne.</li>
-        <li><strong>L’Isle-sur-la-Sorgue</strong> — canaux et marché aux antiquaires.</li>
+        <li><strong>Lourmarin</strong> — boutiques, céramiques, cafés.</li>
+        <li><strong>Aix-en-Provence</strong> — marchés, fontaines.</li>
+        <li><strong>L’Isle-sur-la-Sorgue</strong> — canaux + marché aux antiquaires.</li>
         <li><strong>Saignon, Cucuron, Gordes, Avignon</strong> — villages perchés.</li>
         <li><strong>Marseille</strong> — poisson frais, Vieux-Port.</li>
-        <li><strong>Montagne Sainte-Victoire</strong> — randos et points de vue.</li>
-        <li><strong>Calanques</strong> — criques turquoise entre Cassis et Marseille.</li>
+        <li><strong>Montagne Sainte-Victoire</strong> — randonnées & points de vue.</li>
+        <li><strong>Calanques</strong> — criques turquoise Cassis/Marseille.</li>
         <li><strong>Domaines viticoles</strong> — rosé et blancs de Provence.</li>
       </ul>
     </div>
@@ -466,7 +505,6 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
   <small>© Charlotte &amp; Gianluca — 2026</small>
 </footer>
 
-<!-- === SCRIPT: menu + login VIP === -->
 <script>
 // Mobile menu
 (function(){
@@ -485,7 +523,7 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
   }
 })();
 
-// VIP list (normalizzata)
+// VIP list
 const VIP_LIST = [
   "charlotte francis","yves francis","laurence hoppe","chloe francis","chloé francis","maya mertens",
   "chiara regalia","matteo biroli","chiara sestini","riccardo magri","marta vitro","mattia marco",
@@ -507,7 +545,7 @@ const VIP_LIST = [
 function normalizeName(str){
   if(!str) return "";
   return str.trim().toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g,"") // togli accenti
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
     .replace(/\s+/g," ");
 }
 function isVIP(){ return localStorage.getItem("isVIP")==="true"; }
@@ -525,7 +563,6 @@ function applyVIPVisibility(){
   }
 }
 
-// Popup helpers
 function openLogin(){ const o=document.getElementById("guestLoginOverlay"); if(o) o.style.display="flex"; }
 function closeLogin(){ const o=document.getElementById("guestLoginOverlay"); if(o) o.style.display="none"; }
 function doLogout(){
@@ -554,7 +591,6 @@ function submitGuest(){
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
-  // login popup lifecycle
   const confirmBtn=document.getElementById("guestConfirmBtn");
   const logoutBtn =document.getElementById("guestLogoutBtn");
   const overlay   =document.getElementById("guestLoginOverlay");
@@ -570,7 +606,6 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
   if(confirmBtn){ confirmBtn.addEventListener("click", e=>{ e.preventDefault(); submitGuest(); }); }
 
-  // apply VIP visibility on load
   applyVIPVisibility();
 });
 </script>
