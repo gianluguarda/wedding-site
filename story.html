@@ -200,44 +200,49 @@ footer{ text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px; bac
   .mobile-menu{ top:58px; left:12px; right:auto; }
 }
 
-<style id="story-polaroid-uniform">
-/* Dimensione uniforme + crop elegante */
-.polaroid{
-  /* scala in modo fluido: min 180px, max 240px */
-  width: clamp(180px, 19vw, 240px);
-  max-width:none;           /* sovrascrive i max-width precedenti */
+<style id="story-polaroid-fix">
+/* === UNIFORM POLAROID STYLE === */
+.polaroid {
+  width: clamp(180px, 20vw, 250px);
+  max-width: none;
 }
-.polaroid img{
-  width:100%;
-  /* imposta un formato verticale coerente (3:4) */
-  aspect-ratio: 3 / 4;
-  height:auto;
-  object-fit: cover;        /* riempie e ritaglia senza deformare */
+.polaroid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;      /* 👈 foto quadrate */
+  height: auto;
+  object-fit: contain;      /* mostra tutta l’immagine senza tagliarla */
+  object-position: center;
+  border-radius: 4px;
 }
-/* Spazi un filo più compatti tra foto */
-@media(min-width:900px){
-  .photos{ gap:14px; }
+
+/* Centra i blocchi di 2 o 3 foto */
+.photos {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
 }
-@media(min-width:1200px){
-  .photos{ gap:16px; }
+
+/* Le sezioni con solo 2 foto: un po’ più grandi */
+.two-photos .polaroid {
+  width: clamp(200px, 25vw, 300px);
+}
+
+/* Allarga la timeline su schermi grandi */
+@media (min-width: 900px) {
+  .timeline-wrapper {
+    max-width: 1280px;       /* prima 1100px */
+    padding: 10px 20px 70px;
+  }
+  .moment-left .content { padding-left: 24px; }
+  .moment-right .content { padding-right: 24px; }
+}
+
+/* Ultra-wide screen → foto più grandi */
+@media (min-width: 1400px) {
+  .polaroid { width: clamp(220px, 18vw, 320px); }
 }
 </style>
 
-<style id="story-page-wide">
-/* Allarga la timeline e riduci i margini laterali */
-.timeline-wrapper{
-  max-width: 1280px;    /* prima 1100px */
-  padding: 10px 12px 70px;
-}
-/* Stringe un filo il padding testo per recuperare spazio alle foto */
-.moment-left .content{  padding-left:22px; }
-.moment-right .content{ padding-right:22px; }
-
-/* (opzionale) Se vuoi ancora più grandi le foto su schermi larghi */
-@media(min-width:1400px){
-  .polaroid{ width: clamp(200px, 16vw, 280px); }
-}
-</style>
 
   
 </style>
