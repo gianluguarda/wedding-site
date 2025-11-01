@@ -471,6 +471,27 @@ nav li.cta a:hover {
   }
 }
 
+/* MOBILE: mostra prima il testo, poi le foto */
+@media (max-width:800px){
+  .moment{ 
+    display:flex;
+    flex-direction:column;
+    padding-left:50px;
+  }
+  .content{ 
+    order:1 !important; 
+    padding:0 !important; 
+    text-align:left !important;
+    margin-bottom:16px;
+  }
+  .photos{ 
+    order:2 !important; 
+    margin:0 0 8px 0; 
+    justify-content:flex-start !important;
+  }
+}
+
+
 /* Singola polaroid */
 .polaroid{
   position:relative;
