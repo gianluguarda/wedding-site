@@ -10,624 +10,230 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Allura&display=swap" rel="stylesheet">
 
-  <!-- === GLOBAL LOGIN STYLE & MODAL (popup) === -->
+<!-- === GLOBAL LOGIN STYLE & MODAL (popup) === -->
 <style>
 /* Overlay scuro dietro al popup */
 #guestLoginOverlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  display: none; /* nascosto di default */
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 20px;
-  font-family: "Cormorant", serif;
+  position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+  display: none; align-items: center; justify-content: center;
+  z-index: 1000; padding: 20px; font-family: "Cormorant", serif;
 }
-
 /* Box popup */
 #guestLoginModal {
-  background: #fff;
-  max-width: 360px;
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0,0,0,.25);
-  padding: 24px 20px 20px;
-  position: relative;
-  text-align: center;
+  background: #fff; max-width: 360px; width: 100%;
+  border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  padding: 24px 20px 20px; position: relative; text-align: center;
   border: 1px solid rgba(0,0,0,.06);
 }
-
-/* Titolo popup */
 #guestLoginModal h2 {
-  font-family: "Allura", cursive;
-  font-size: 32px;
-  line-height: 1.2;
-  color: var(--accent);
-  margin: 0 0 10px;
+  font-family: "Allura", cursive; font-size: 32px; color: var(--accent);
+  line-height: 1.2; margin: 0 0 10px;
 }
-
-/* Testo descrizione */
 #guestLoginModal p {
-  font-size: 18px;
-  line-height: 1.4;
-  margin: 0 0 16px;
-  color: var(--ink);
-  font-style: italic;
+  font-size: 18px; line-height: 1.4; margin: 0 0 16px; color: var(--ink); font-style: italic;
 }
-
-/* Form campi */
-.guest-field {
-  text-align: left;
-  margin-bottom: 14px;
-}
-.guest-field label {
-  display: block;
-  font-size: 16px;
-  margin-bottom: 4px;
-  color: var(--muted);
-}
+.guest-field { text-align: left; margin-bottom: 14px; }
+.guest-field label { display:block; font-size:16px; margin-bottom:4px; color:var(--muted); }
 .guest-field input {
-  width: 100%;
-  font-size: 18px;
-  font-family: "Cormorant", serif;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  outline: none;
+  width:100%; font-size:18px; font-family:"Cormorant",serif; padding:10px 12px;
+  border-radius:10px; border:1px solid #ccc; outline:none;
 }
-.guest-field input:focus {
-  border-color: var(--accent);
+.guest-field input:focus { border-color: var(--accent); }
+#guestLoginActions{ display:flex; flex-direction:column; gap:10px; margin-top:18px; }
+#guestConfirmBtn{
+  background:var(--accent); color:#fff; border:none; border-radius:12px;
+  font-size:18px; font-weight:600; padding:12px; cursor:pointer; font-family:"Cormorant",serif;
 }
-
-/* Pulsanti nel popup */
-#guestLoginActions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 18px;
+#guestConfirmBtn:hover{ opacity:.95; }
+#guestLogoutBtn{
+  background:none; border:none; color:var(--muted); font-size:16px;
+  text-decoration:underline; cursor:pointer; font-family:"Cormorant",serif;
 }
-
-/* Bottone Conferma */
-#guestConfirmBtn {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: 600;
-  padding: 12px;
-  cursor: pointer;
-  font-family: "Cormorant", serif;
-}
-#guestConfirmBtn:hover {
-  opacity: .95;
-}
-
-/* Link Esci / Logout */
-#guestLogoutBtn {
-  background: none;
-  border: none;
-  color: var(--muted);
-  font-size: 16px;
-  text-decoration: underline;
-  cursor: pointer;
-  font-family: "Cormorant", serif;
-}
-
-/* Messaggio di errore nome non trovato */
-#guestError {
-  color: #b00020;
-  font-size: 16px;
-  text-align: center;
-  display: none;
-  margin-top: 8px;
-  line-height: 1.4;
-  font-family: "Cormorant", serif;
+#guestError{
+  color:#b00020; font-size:16px; text-align:center; display:none; margin-top:8px; line-height:1.4; font-family:"Cormorant",serif;
 }
 </style>
 
-
 <style>
 :root{
-  --accent:#7465ad;
-  --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b;
+  --accent:#7465ad; --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b; --card-bg:#ffffff;
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:"Cormorant",serif;color:var(--ink);background:var(--beige);
-  background-image:radial-gradient(1200px 700px at 100% -10%, rgba(116,101,173,.10), transparent 60%),
-                   radial-gradient(900px 500px at -10% 10%, rgba(116,101,173,.06), transparent 55%);
-  background-attachment:fixed}
-:root{
-  --accent:#7465ad;
-  --beige:#f7f4ef;
-  --ink:#242424;
-  --muted:#6b6b6b;
-  --card-bg:#ffffff;
-}
-
-*{ box-sizing:border-box; }
 html,body{
-  margin:0;
-  background:var(--beige);
-  color:var(--ink);
-  font-family:"Cormorant", serif;
+  height:100%; margin:0; font-family:"Cormorant",serif; color:var(--ink); background:var(--beige);
+  background-image:
+    radial-gradient(1200px 700px at 100% -10%, rgba(116,101,173,.10), transparent 60%),
+    radial-gradient(900px 500px at -10% 10%, rgba(116,101,173,.06), transparent 55%);
+  background-attachment:fixed;
 }
 
 /* HEADER BASE */
-header {
-  position:sticky;
-  top:0;
-  z-index:10;
-  background:rgba(247,244,239,.88);
-  backdrop-filter:blur(6px);
-  border-bottom:1px solid rgba(0,0,0,.06);
-  font-family:"Cormorant", serif;
-}
+header{ position:sticky; top:0; z-index:10; background:rgba(247,244,239,.88);
+  backdrop-filter:blur(6px); border-bottom:1px solid rgba(0,0,0,.06); font-family:"Cormorant",serif; }
+.nav{ max-width:1100px; margin:0 auto; padding:18px 22px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.brand{ display:flex; align-items:center; flex-wrap:nowrap; gap:8px; }
+.names{ font-family:"Allura",cursive; font-size:36px; line-height:1.1; color:var(--accent); white-space:nowrap; }
+.dot{ color:var(--muted); font-size:20px; line-height:1.1; }
+.date{ color:var(--muted); font-size:20px; line-height:1.1; letter-spacing:.4px; font-weight:500; white-space:nowrap; }
+nav ul{ list-style:none; display:flex; gap:24px; margin:0; padding:0; }
+nav a{ text-decoration:none; color:var(--ink); opacity:.95; font-size:19px; line-height:1; padding:8px 6px; border-radius:10px; font-family:"Cormorant",serif; }
+nav a:hover{ opacity:1; border-bottom:1px solid var(--accent); }
+nav li.cta a{ background:var(--accent); color:#fff; padding:10px 14px; border-radius:14px; border-bottom:none; font-weight:500; line-height:1.1; }
+nav li.cta a:hover{ opacity:.95; transform:translateY(-1px); }
 
-.nav {
-  max-width:1100px;
-  margin:0 auto;
-  padding:18px 22px;
-  display:flex;
-  align-items:center;           /* <-- allinea tutto sul centro verticale */
-  justify-content:space-between;
-  gap:12px;
+/* HAMBURGER + MENU MOBILE */
+.hamburger{ display:none; border:1px solid rgba(0,0,0,.1); background:#fff; border-radius:10px; padding:8px 10px; cursor:pointer; }
+.hamburger span{ display:block; width:20px; height:2px; background:#444; margin:4px 0; }
+.mobile-menu{
+  display:none; position:fixed; top:64px; left:16px; right:auto; background:#fff;
+  border:1px solid rgba(0,0,0,.06); border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,.12);
+  padding:12px; z-index:40;
 }
+.mobile-menu a{ display:block; padding:10px 12px; border-radius:10px; color:var(--ink); text-decoration:none; font-family:"Cormorant",serif; font-size:18px; }
+.mobile-menu a:hover{ background:rgba(116,101,173,.08); }
 
-/* BLOCCO A SINISTRA (logo/testo) */
-.brand {
-  display:flex;
-  align-items:center;           /* <-- anche qui center */
-  flex-wrap:nowrap;
-  gap:8px;
-}
+/* HERO DELLA PAGINA */
+.page-head{ text-align:center; padding:60px 20px 40px; }
+.page-head h1{ font-family:"Allura",cursive; font-size:56px; color:var(--accent); margin:0 0 10px; line-height:1.2; }
+.page-head p{ font-family:"Cormorant",serif; font-size:22px; color:var(--muted); margin:0; font-style:italic; }
 
-/* Nomi */
-.names {
-  font-family:"Allura", cursive;
-  font-size:36px;               /* cambia qui per ingrandire o ridurre */
-  line-height:1.1;
-  color:var(--accent);
-  white-space:nowrap;
-}
-
-/* Puntino separatore */
-.dot {
-  color:var(--muted);
-  font-size:20px;
-  line-height:1.1;
-}
-
-/* Data */
-.date {
-  color:var(--muted);
-  font-size:20px;               /* cambia qui per farla più grande/piccola */
-  line-height:1.1;
-  letter-spacing:.4px;
-  font-weight:500;
-  white-space:nowrap;
-}
-
-/* MENU DESKTOP */
-nav ul {
-  list-style:none;
-  display:flex;
-  gap:24px;
-  margin:0;
-  padding:0;
-}
-
-nav a {
-  text-decoration:none;
-  color:var(--ink);
-  opacity:.95;
-  font-size:19px;
-  line-height:1;
-  padding:8px 6px;
-  border-radius:10px;
-  font-family:"Cormorant", serif;
-}
-
-nav a:hover {
-  opacity:1;
-  border-bottom:1px solid var(--accent);
-}
-
-/* RSVP evidenziato */
-nav li.cta a {
-  background:var(--accent);
-  color:#fff;
-  padding:10px 14px;
-  border-radius:14px;
-  border-bottom:none;
-  font-weight:500;
-  line-height:1.1;
-}
-
-nav li.cta a:hover {
-  opacity:.95;
-  transform:translateY(-1px);
-}
-
-/* HAMBURGER (mobile) */
-.hamburger {
-  display:none;
-  border:1px solid rgba(0,0,0,.1);
-  background:#fff;
-  border-radius:10px;
-  padding:8px 10px;
-  cursor:pointer;
-}
-.hamburger span {
-  display:block;
-  width:20px;
-  height:2px;
-  background:#444;
-  margin:4px 0;
-}
-
-/* MENU MOBILE POPUP */
-.mobile-menu {
-  display:none;
-  position:fixed;
-  top:64px;
-  left:16px; /* <-- PRIMA era right:16px */
-  right:auto; /* <-- per sicurezza azzeriamo l'altro lato */
-  background:#fff;
-  border:1px solid rgba(0,0,0,.06);
-  border-radius:16px;
-  box-shadow:0 8px 40px rgba(0,0,0,.12);
-  padding:12px;
-  z-index:40;
-}
-
-.mobile-menu a {
-  display:block;
-  padding:10px 12px;
-  border-radius:10px;
-  color:var(--ink);
-  text-decoration:none;
-  font-family:"Cormorant", serif;
-  font-size:18px;
-}
-.mobile-menu a:hover {
-  background:rgba(116,101,173,.08);
-}
-
-/* HERO TITLE DELLA PAGINA (Our story, RSVP, ecc.) */
-.page-head {
-  text-align: center;
-  padding: 60px 20px 40px;
-}
-
-.page-head h1 {
-  font-family: "Allura", cursive;
-  font-size: 56px;
-  color: var(--accent);
-  margin: 0 0 10px;
-  line-height: 1.2;
-}
-
-.page-head p {
-  font-family: "Cormorant", serif;
-  font-size: 22px;
-  color: var(--muted);
-  margin: 0;
-  font-style: italic; /* <-- corsivo per il sottotitolo */
-}
-
-  
-/* RESPONSIVE */
-@media(max-width:600px){
-  .nav {
-    width:100%;
-    padding:16px 12px;
-  }
-  .hamburger { display:block; }
-  nav ul { display:none; }
-  .names { font-size:30px; }
-  .date  { font-size:17px; }
-
-  .mobile-menu {
-    top:58px;
-    left:12px;   /* spostato a sinistra */
-    right:auto;  /* niente più right */
-  }
-}
-
-
-/* LANG TOC (selettore lingua) */
+/* LANG TOC */
 .lang-toc{
-  max-width:1100px;
-  margin:0 auto;
-  padding:10px 20px 30px;
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
+  max-width:1100px; margin:0 auto; padding:10px 20px 30px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap;
 }
 .lang-toc a{
-  text-decoration:none;
-  color:var(--ink);
-  border:1px solid #ddd;
-  background:#fff;
-  padding:8px 12px;
-  border-radius:12px;
-  font-size:17px;
-  line-height:1.2;
+  text-decoration:none; color:var(--ink); border:1px solid #ddd; background:#fff; padding:8px 12px; border-radius:12px; font-size:17px; line-height:1.2;
 }
-.lang-toc a:hover{
-  border-color:var(--accent);
-  color:var(--accent);
-}
+.lang-toc a:hover{ border-color:var(--accent); color:var(--accent); }
 
-/* SECTION TITLE PER LINGUA */
+/* TITOLI SEZIONE LINGUA */
 .lang-section-title{
-  font-family:"Allura", cursive;
-  font-size:40px;
-  line-height:1.2;
-  color:var(--accent);
-  text-align:center;
-  margin:60px 0 30px;
+  font-family:"Allura",cursive; font-size:40px; line-height:1.2; color:var(--accent);
+  text-align:center; margin:60px 0 10px;
 }
 .lang-section-note{
-  text-align:center;
-  color:var(--muted);
-  font-size:18px;
-  max-width:800px;
-  margin:0 auto 40px;
-  line-height:1.4;
+  text-align:center; color:var(--muted); font-size:18px; max-width:800px; margin:0 auto 40px; line-height:1.4;
 }
 
-/* TIMELINE WRAPPER */
-.timeline-wrapper{
-  max-width:1100px;
-  margin:0 auto;
-  padding:20px 20px 80px;
-  position:relative;
-}
+/* TIMELINE */
+.timeline-wrapper{ max-width:1100px; margin:0 auto; padding:20px 20px 80px; position:relative; }
+.timeline-line{ position:absolute; left:50%; top:0; bottom:0; width:2px; background:rgba(0,0,0,.08); transform:translateX(-50%); }
+@media(max-width:800px){ .timeline-line{ left:24px; transform:none; } }
 
-/* Linea verticale centrale */
-.timeline-line{
-  position:absolute;
-  left:50%;
-  top:0;
-  bottom:0;
-  width:2px;
-  background:rgba(0,0,0,.08);
-  transform:translateX(-50%);
-}
-@media(max-width:800px){
-  .timeline-line{
-    left:24px;
-    transform:none;
-  }
-}
-
-/* Ogni blocco della timeline */
 .moment{
-  width:100%;
-  display:flex;
-  align-items:flex-start;
-  margin-bottom:60px;
+  width:100%; display:flex; align-items:flex-start; margin-bottom:40px; /* compattato (prima 60px) */
   position:relative;
 }
-
-/* Alterniamo destra/sinistra su desktop */
-.moment-left .content { order:2; padding-left:40px; padding-right:0; text-align:left; }
+/* alternanza su desktop */
+.moment-left .content { order:2; padding-left:28px; padding-right:0; text-align:left; }
 .moment-left .photos  { order:1; justify-content:flex-end; }
-.moment-right .content{ order:1; padding-right:40px; padding-left:0; text-align:right; }
+.moment-right .content{ order:1; padding-right:28px; padding-left:0; text-align:right; }
 .moment-right .photos { order:2; justify-content:flex-start; }
 
-/* Punto sulla linea */
+/* puntino */
 .moment .dot-year{
-  position:absolute;
-  left:50%;
-  top:10px;
-  transform:translate(-50%,0);
-  background:#fff;
-  width:14px;
-  height:14px;
-  border-radius:50%;
-  border:2px solid rgba(0,0,0,.25);
+  position:absolute; left:50%; top:10px; transform:translate(-50%,0);
+  background:#fff; width:14px; height:14px; border-radius:50%; border:2px solid rgba(0,0,0,.25);
   box-shadow:0 2px 6px rgba(0,0,0,.12);
 }
+@media(max-width:800px){ .moment .dot-year{ left:24px; transform:none; } }
+
+/* colonne */
+.photos, .content{
+  width:50%; max-width:500px; display:flex; flex-wrap:wrap; gap:20px;
+}
+.photos{ align-items:flex-start; }
+/* desktop: foto su una riga, gap ridotto */
+@media(min-width:900px){
+  .photos{ flex-wrap:nowrap; gap:14px; }
+  .polaroid{ max-width:200px; }
+}
+@media(min-width:1100px){
+  .polaroid{ max-width:190px; }
+}
+
+/* MOBILE: testo prima, foto dopo */
 @media(max-width:800px){
-  .moment .dot-year{
-    left:24px;
-    transform:none;
-  }
+  .moment{ display:flex; flex-direction:column; padding-left:50px; }
+  .content{ order:1 !important; padding:0 !important; text-align:left !important; margin-bottom:16px; }
+  .photos{ order:2 !important; margin:0 0 8px 0; justify-content:flex-start !important; }
+  .photos, .content{ width:100%; max-width:100%; }
 }
 
-/* Colonne foto e testo */
-.photos,
-.content{
-  width:50%;
-  max-width:500px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:20px;
-}
-.photos{
-  align-items:flex-start;
-}
-@media(max-width:800px){
-  .moment{
-    flex-direction:column;
-    padding-left:50px;
-  }
-  .photos,
-  .content{
-    width:100%;
-    max-width:100%;
-    text-align:left !important;
-    padding:0 !important;
-    order:unset !important;
-  }
-  .photos{
-    margin-bottom:20px;
-    justify-content:flex-start !important;
-  }
-}
-
-
-
-/* MOBILE: mostra prima il testo, poi le foto */
-@media (max-width:800px){
-  .moment{ 
-    display:flex;
-    flex-direction:column;
-    padding-left:50px;
-  }
-  .content{ 
-    order:1 !important; 
-    padding:0 !important; 
-    text-align:left !important;
-    margin-bottom:16px;
-  }
-  .photos{ 
-    order:2 !important; 
-    margin:0 0 8px 0; 
-    justify-content:flex-start !important;
-  }
-}
-
-
-/* Singola polaroid */
-.polaroid{
-  position:relative;
-  background:#fff;
-  border:10px solid #fff;
-  border-bottom-width:22px;
-  border-radius:6px;
-  box-shadow:0 10px 30px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);
-  max-width:220px;
-  transform:rotate(-1.5deg);
-}
-.polaroid img{
-  display:block;
-  width:100%;
-  height:auto;
-  border-radius:2px;
-}
-.polaroid.rotate-pos{
-  transform:rotate(2deg);
-}
-.polaroid.rotate-neg{
-  transform:rotate(-2deg);
-}
-.tape{
-  position:absolute;
-  top:-14px;
-  left:50%;
-  transform:translateX(-50%) rotate(-3deg);
-  width:120px;
-  height:28px;
-  background:rgba(255,255,200,.7);
-  box-shadow:0 4px 10px rgba(0,0,0,.15);
-  border-radius:4px;
-}
-
-
- /* Se un momento ha solo due foto, centrale su desktop */
-@media (min-width: 801px){
+/* caso 2 foto: centra le foto su desktop */
+@media(min-width:801px){
   .two-photos .photos{ justify-content:center; }
 }
 
-/* Testo del momento */
-.moment .year-label{
-  display:inline-block;
-  font-family:"Cormorant", serif;
-  font-weight:600;
-  font-size:18px; /* più visibile */
-  color:#333;
-  background:#f5f5f5;
-  border:1px solid #eee;
-  border-radius:999px;
-  padding:5px 12px;
-  margin-bottom:10px;
+/* polaroid */
+.polaroid{
+  position:relative; background:#fff; border:10px solid #fff; border-bottom-width:22px; border-radius:6px;
+  box-shadow:0 10px 30px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
+  max-width:220px; transform:rotate(-1.5deg);
 }
-.moment h2{
-  font-family:"Allura", cursive;
-  font-size:32px; /* un po' più piccolo rispetto a year-label */
-  line-height:1.25;
-  color:var(--accent);
-  margin:0 0 10px;
-}
-.moment p{
-  margin:0;
-  font-size:18px;
-  line-height:1.5;
-  color:var(--ink);
-  font-weight:400;
+.polaroid img{ display:block; width:100%; height:auto; border-radius:2px; }
+.polaroid.rotate-pos{ transform:rotate(2deg); }
+.polaroid.rotate-neg{ transform:rotate(-2deg); }
+.tape{
+  position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg);
+  width:120px; height:28px; background:rgba(255,255,200,.7); box-shadow:0 4px 10px rgba(0,0,0,.15); border-radius:4px;
 }
 
+/* testo */
+.moment .year-label{
+  display:inline-block; font-family:"Cormorant",serif; font-weight:600; font-size:18px;
+  color:#333; background:#f5f5f5; border:1px solid #eee; border-radius:999px; padding:5px 12px; margin-bottom:10px;
+}
+.moment h2{ font-family:"Allura",cursive; font-size:32px; line-height:1.25; color:var(--accent); margin:0 0 10px; }
+.moment p{ margin:0; font-size:18px; line-height:1.5; color:var(--ink); font-weight:400; }
+
 /* FOOTER */
-footer{
-  text-align:center;
-  color:#6b6b6b;
-  padding:40px 20px;
-  font-size:14px;
-  background:transparent;
+footer{ text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px; background:transparent; }
+
+/* RESPONSIVE HEADER */
+@media(max-width:600px){
+  .nav{ width:100%; padding:16px 12px; }
+  .hamburger{ display:block; }
+  nav ul{ display:none; }
+  .names{ font-size:30px; }
+  .date{ font-size:17px; }
+  .mobile-menu{ top:58px; left:12px; right:auto; }
 }
 </style>
 </head>
 
 <body>
 
-  <!-- === LOGIN MODAL OVERLAY (popup iniziale e per logout) === -->
+<!-- === LOGIN MODAL OVERLAY (popup iniziale e per logout) === -->
 <div id="guestLoginOverlay" role="dialog" aria-modal="true">
   <div id="guestLoginModal">
-
-    <!-- Titolo -->
     <h2>Welcome · Bienvenue · Benvenuti</h2>
-
-    <!-- Testo: chiediamo nome e cognome, senza spiegare il motivo -->
     <p>
       Please enter your first and last name.<br>
       Veuillez saisir votre prénom et nom.<br>
       Inserisci nome e cognome.
     </p>
-
-    <!-- CAMPO NOME -->
     <div class="guest-field">
       <label for="guestFirst">Name · Prénom · Nome</label>
       <input type="text" id="guestFirst" placeholder="Charlotte / Gianluca / ..." />
     </div>
-
-    <!-- CAMPO COGNOME -->
     <div class="guest-field">
       <label for="guestLast">Surname · Nom · Cognome</label>
       <input type="text" id="guestLast" placeholder="Francis / Guardalà / ..." />
     </div>
-
-    <!-- ERROR MSG -->
-    <div id="guestError">
-      Name not recognized.<br>
-      Nom non reconnu.<br>
-      Nome non trovato.
-    </div>
-
-    <!-- AZIONI -->
+    <div id="guestError">Name not recognized.<br>Nom non reconnu.<br>Nome non trovato.</div>
     <div id="guestLoginActions">
       <button id="guestConfirmBtn">OK</button>
       <button id="guestLogoutBtn" style="display:none;">Log out / Déconnexion / Esci</button>
     </div>
-
   </div>
 </div>
-
 
 <header>
   <div class="nav">
     <div class="brand">
-      <button id="hambBtn" class="hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-      <div class="names">Charlotte &amp; Gianluca</div>
-      <div class="dot">·</div>
-      <div class="date">June 20, 2026</div>
+      <button id="hambBtn" class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <div class="names">Charlotte &amp; Gianluca</div><div class="dot">·</div><div class="date">June 20, 2026</div>
     </div>
     <nav>
       <ul>
@@ -639,7 +245,6 @@ footer{
       </ul>
     </nav>
   </div>
-
   <div id="mobileMenu" class="mobile-menu">
     <a href="/home.html">Home</a>
     <a href="/story.html">Our story</a>
@@ -674,24 +279,11 @@ footer{
   <!-- 2014 -->
   <article class="moment moment-left">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2014.jpg" alt="Mykonos 2014">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-1.jpg" alt="Mykonos 2014 extra">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-2.jpg" alt="Mykonos 2014 ancora noi">
-      </div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2014.jpg" alt="Mykonos 2014"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2014-1.jpg" alt="Mykonos 2014 extra"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2014-2.jpg" alt="Mykonos 2014 ancora noi"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2014 · L’incontro</div>
@@ -700,7 +292,7 @@ footer{
           Tutto comincia una sera d’estate, il <strong>20 luglio 2014 a Mykonos</strong>.
           Gianluca è in viaggio di maturità con gli amici, Charlotte è in vacanza con la sua famiglia
           (e non era nemmeno così convinta di voler andare in Grecia).
-          I nostri sguardi si incrociano e balliamo insieme per la prima volta.
+          I nostri sguardi si incrociano e lì facciamo il vero nostro primo ballo.
         </p>
       </div>
     </div>
@@ -709,24 +301,11 @@ footer{
   <!-- 2014–2017 -->
   <article class="moment moment-right">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-2017.jpg" alt="Anni a distanza">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-2017-1.jpg" alt="Milano-Liegi voli e chiamate">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-2017-2.jpg" alt="Ryanair, gate, saluti veloci">
-      </div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2014-2017.jpg" alt="Anni a distanza"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2014-2017-1.jpg" alt="Milano-Liegi voli e chiamate"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2014-2017-2.jpg" alt="Ryanair, gate, saluti veloci"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2014–2017 · La relazione a distanza</div>
@@ -743,24 +322,11 @@ footer{
   <!-- 2017–2018 -->
   <article class="moment moment-left">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2017-2018.jpg" alt="Primi mesi a Milano">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2017-2018-1.jpg" alt="Bocconi e nuova vita">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2017-2018-2.jpg" alt="Charlotte diventa Carlotta">
-      </div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2017-2018.jpg" alt="Primi mesi a Milano"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2017-2018-1.jpg" alt="Bocconi e nuova vita"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2017-2018-2.jpg" alt="Charlotte diventa Carlotta"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2017–2018 · Charlotte diventa “Carlotta”</div>
@@ -777,24 +343,11 @@ footer{
   <!-- 2018–2020 -->
   <article class="moment moment-right">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2018-2020.jpg" alt="Cile, Madrid, Parigi">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2018-2020-1.jpg" alt="Tesi a Madrid">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2018-2020-2.jpg" alt="Pandemia e distanza di nuovo">
-      </div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2018-2020.jpg" alt="Cile, Madrid, Parigi"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2018-2020-1.jpg" alt="Tesi a Madrid"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2018-2020-2.jpg" alt="Pandemia e distanza di nuovo"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2018–2020 · Altri ostacoli</div>
@@ -814,24 +367,11 @@ footer{
   <!-- 2020–2024 -->
   <article class="moment moment-left">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2020-2024.jpg" alt="Porta Romana, primi 50 m²">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2020-2024-1.jpg" alt="Via Lucano">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2020-2024-2.jpg" alt="Finalmente Milano insieme">
-      </div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2020-2024.jpg" alt="Porta Romana, primi 50 m²"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2020-2024-1.jpg" alt="Via Lucano"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2020-2024-2.jpg" alt="Finalmente Milano insieme"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2020–2024 · Costruire una vita insieme</div>
@@ -847,33 +387,16 @@ footer{
     </div>
   </article>
 
-<article class="moment moment-right two-photos">
-  <div class="dot-year"></div>
-
-  <div class="photos">
-    <div class="polaroid rotate-pos">
-      <div class="tape"></div>
-      <img src="/assets/story/2025.jpg" alt="Andalo, la proposta">
-    </div>
-
-    <div class="polaroid rotate-neg">
-      <div class="tape"></div>
-      <img src="/assets/story/2025-1.jpg" alt="Dolomiti emozione">
-    </div>
-
-    <!--
-    <div class="polaroid rotate-pos">
-      <div class="tape"></div>
-      <img src="/assets/story/2025-2.jpg" alt="Lei dice sì">
-    </div>
-    -->
-  </div> <!-- 👈 CHIUSURA VERA DELLE FOTO -->
-
-  <div class="content">
-    ...
-  </div>
-</article>
-
+  <!-- 2025 (SOLO DUE FOTO, centrato) -->
+  <article class="moment moment-right two-photos">
+    <div class="dot-year"></div>
+    <div class="photos">
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2025.jpg" alt="Andalo, la proposta"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2025-1.jpg" alt="Dolomiti emozione"></div>
+      <!--
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2025-2.jpg" alt="Lei dice sì"></div>
+      -->
+    </div> <!-- chiusura reale delle foto -->
     <div class="content">
       <div>
         <div class="year-label">21 luglio 2025 · La proposta</div>
@@ -888,26 +411,21 @@ footer{
     </div>
   </article>
 
-  <!-- 2026 (SOLO 1 FOTO) -->
+  <!-- 2026 (1 foto) -->
   <article class="moment moment-left">
     <div class="dot-year"></div>
-
     <div class="photos">
       <div class="polaroid rotate-neg" style="transform:rotate(-1deg);">
-        <div class="tape"></div>
-        <img src="/assets/chateau.jpg" alt="Château de Pradines">
+        <div class="tape"></div><img src="/assets/chateau.jpg" alt="Château de Pradines">
       </div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2026 · Il matrimonio</div>
         <h2>Provenza — Château de Pradines</h2>
         <p>
-          La nostra storia ci porta qui,
-          in Provenza, tra lavanda, luce dorata e vino rosé.
-          Un brindisi con le persone che amiamo
-          e un nuovo inizio: insieme.
+          La nostra storia ci porta qui, in Provenza, tra lavanda, luce dorata e vino rosé.
+          Un brindisi con le persone che amiamo e un nuovo inizio: insieme.
         </p>
       </div>
     </div>
@@ -921,45 +439,26 @@ footer{
 <section id="en" class="timeline-wrapper">
 
   <div class="lang-section-title">Our story · 🇬🇧 </div>
-  <div class="lang-section-note">
-    From our first dance in Mykonos to a wedding in Provence.
-    Years, cities, distance — and still us.
-  </div>
+  <div class="lang-section-note">From our first dance in Mykonos to a wedding in Provence. Years, cities, distance — and still us.</div>
 
   <div class="timeline-line"></div>
 
   <!-- 2014 -->
   <article class="moment moment-left">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2014.jpg" alt="Mykonos 2014">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-1.jpg" alt="Mykonos 2014 extra">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-2.jpg" alt="More Mykonos 2014">
-      </div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2014.jpg" alt="Mykonos 2014"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2014-1.jpg" alt="Mykonos 2014 extra"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2014-2.jpg" alt="More Mykonos 2014"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2014 · The first dance</div>
         <h2>Mykonos, July 20 — where it begins</h2>
         <p>
-          It all began on a summer night,
-          <strong>July 20, 2014 in Mykonos</strong>.
-          Gianluca was on a graduation trip with friends,
-          Charlotte on holiday with her family
-          (and she wasn’t even sure she wanted to go to Greece).
-          Our eyes met — and that night we shared our first real dance.
+          It all began on a summer night, <strong>July 20, 2014 in Mykonos</strong>.
+          Gianluca was on a graduation trip with friends, Charlotte on holiday with her family.
+          Our eyes met — and we shared our first dance.
         </p>
       </div>
     </div>
@@ -968,33 +467,18 @@ footer{
   <!-- 2014–2017 -->
   <article class="moment moment-right">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-2017.jpg" alt="Long distance years">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-2017-1.jpg" alt="Liège-Milan-Liège life">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-2017-2.jpg" alt="Ryanair & late calls">
-      </div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2014-2017.jpg" alt="Long distance years"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2014-2017-1.jpg" alt="Liège-Milan-Liège life"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2014-2017-2.jpg" alt="Ryanair & late calls"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2014–2017 · Long-distance love</div>
         <h2>Liège - Milan - Liège — flights and late calls</h2>
         <p>
-          Three years apart: countless Ryanair flights,
-          endless phone calls, messages at all hours.
-          It wasn’t easy, but the will to see each other again
-          was always stronger than the distance.
+          Three years apart: countless flights, endless calls and messages.
+          It wasn’t easy, but seeing each other again was worth every kilometer.
         </p>
       </div>
     </div>
@@ -1003,33 +487,18 @@ footer{
   <!-- 2017–2018 -->
   <article class="moment moment-left">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2017-2018.jpg" alt="Milan early days">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2017-2018-1.jpg" alt="Bocconi and a new start">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2017-2018-2.jpg" alt="Charlotte becomes Carlotta">
-      </div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2017-2018.jpg" alt="Milan early days"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2017-2018-1.jpg" alt="Bocconi and a new start"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2017-2018-2.jpg" alt="Charlotte becomes Carlotta"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2017–2018 · Charlotte becomes “Carlotta”</div>
         <h2>Milan — new city, new life</h2>
         <p>
-          Our lives really start to come together when Charlotte
-          is admitted to Bocconi University.
-          She still claims she moved to Milan for “one of the best universities
-          in the world”... not for Gianluca 😉
+          Our lives come together when Charlotte is admitted to Bocconi.
+          She still says she moved to Milan for the university… not for Gianluca 😉
         </p>
       </div>
     </div>
@@ -1038,39 +507,19 @@ footer{
   <!-- 2018–2020 -->
   <article class="moment moment-right">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2018-2020.jpg" alt="Chile, Madrid, Paris">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2018-2020-1.jpg" alt="Thesis in Madrid">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2018-2020-2.jpg" alt="Pandemic keeping us apart">
-      </div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2018-2020.jpg" alt="Chile, Madrid, Paris"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2018-2020-1.jpg" alt="Thesis in Madrid"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2018-2020-2.jpg" alt="Pandemic keeping us apart"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2018–2020 · Other obstacles</div>
         <h2>Santiago, Madrid, Paris — and a pandemic</h2>
         <p>
-          Charlotte spends six months in Chile; then we live together
-          for the first time. Not for long, though —
-          Gianluca moves to Madrid for his thesis,
-          Charlotte joins him for a while,
-          then she lands an internship in Paris…
-          distance again.
-          And just when we thought we were done:
-          a global pandemic arrives — and we end up separated again,
-          in two different countries.
-          Still, we hold on. Together.
+          Six months in Chile, then our first time living together.
+          Not for long: thesis in Madrid, then an internship in Paris…
+          and a global pandemic putting us apart again. Still, we hold on.
         </p>
       </div>
     </div>
@@ -1079,79 +528,39 @@ footer{
   <!-- 2020–2024 -->
   <article class="moment moment-left">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2020-2024.jpg" alt="50 sqm in Porta Romana">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2020-2024-1.jpg" alt="Via Lucano">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2020-2024-2.jpg" alt="Finally Milan, finally us">
-      </div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2020-2024.jpg" alt="50 sqm in Porta Romana"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2020-2024-1.jpg" alt="Via Lucano"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2020-2024-2.jpg" alt="Finally Milan, finally us"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2020–2024 · Building a life together</div>
         <h2>A small flat, intense jobs, and finally “us”</h2>
         <p>
-          Our first little home: 50 m² in Porta Romana.
-          Then we move to our current place in Via Lucano.
-          Charlotte (maybe a bit nostalgic) joins the Belgian beer world;
-          Gianluca starts at Amazon… in Piacenza… with nights and weekends…
-          until he finally transfers to Milan with almost normal hours.
-          Suddenly, life feels lighter.
+          First home together in Porta Romana, then Via Lucano.
+          Belgian beer for Charlotte; Amazon for Gianluca… until milder hours.
+          Life got lighter.
         </p>
       </div>
     </div>
   </article>
 
-  <!-- 2025 -->
-<article class="moment moment-right two-photos">
-  <div class="dot-year"></div>
-
-  <div class="photos">
-    <div class="polaroid rotate-pos">
-      <div class="tape"></div>
-      <img src="/assets/story/2025.jpg" alt="Andalo, la proposta">
+  <!-- 2025 (two photos, centered) -->
+  <article class="moment moment-right two-photos">
+    <div class="dot-year"></div>
+    <div class="photos">
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2025.jpg" alt="The proposal in Andalo"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2025-1.jpg" alt="Dolomites moment"></div>
+      <!-- <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2025-2.jpg" alt="She said yes"></div> -->
     </div>
-
-    <div class="polaroid rotate-neg">
-      <div class="tape"></div>
-      <img src="/assets/story/2025-1.jpg" alt="Dolomiti emozione">
-    </div>
-
-    <!--
-    <div class="polaroid rotate-pos">
-      <div class="tape"></div>
-      <img src="/assets/story/2025-2.jpg" alt="Lei dice sì">
-    </div>
-    -->
-  </div> <!-- 👈 CHIUSURA VERA DELLE FOTO -->
-
-  <div class="content">
-    ...
-  </div>
-</article>
-
-
     <div class="content">
       <div>
         <div class="year-label">21 July 2025 · The proposal</div>
         <h2>Andalo, Dolomites — “here we go”</h2>
         <p>
           After eleven intense years, Gianluca decides it’s time.
-          In the mountains of Andalo, in the Dolomites,
-          he asks the question
-          (Charlotte almost falls off her chair 😄).
-          She says yes. 💍
+          In the Dolomites, he asks — she says yes. 💍
         </p>
       </div>
     </div>
@@ -1160,23 +569,17 @@ footer{
   <!-- 2026 -->
   <article class="moment moment-left">
     <div class="dot-year"></div>
-
     <div class="photos">
       <div class="polaroid rotate-neg" style="transform:rotate(-1deg);">
-        <div class="tape"></div>
-        <img src="/assets/chateau.jpg" alt="Provence Château">
+        <div class="tape"></div><img src="/assets/chateau.jpg" alt="Provence Château">
       </div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2026 · The wedding</div>
         <h2>Provence — Château de Pradines</h2>
         <p>
-          Our story leads us here:
-          Provence, lavender, golden light, rosé wine.
-          A toast with the people we love,
-          and a new beginning — together.
+          Provence, lavender, golden light, rosé wine — a toast with our favourite people, and a new beginning.
         </p>
       </div>
     </div>
@@ -1190,45 +593,25 @@ footer{
 <section id="fr" class="timeline-wrapper">
 
   <div class="lang-section-title">Notre histoire · 🇫🇷 </div>
-  <div class="lang-section-note">
-    De notre première danse à Mykonos jusqu’à la Provence.
-    Des années de distance, de voyages, et toujours nous deux.
-  </div>
+  <div class="lang-section-note">De notre première danse à Mykonos jusqu’à la Provence. Des années de distance, de voyages, et toujours nous deux.</div>
 
   <div class="timeline-line"></div>
 
   <!-- 2014 -->
   <article class="moment moment-left">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2014.jpg" alt="Mykonos 2014">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-1.jpg" alt="Mykonos souvenir">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-2.jpg" alt="Encore Mykonos 2014">
-      </div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2014.jpg" alt="Mykonos 2014"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2014-1.jpg" alt="Mykonos souvenir"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2014-2.jpg" alt="Encore Mykonos 2014"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2014 · La rencontre</div>
         <h2>Mykonos, 20 juillet — notre première danse</h2>
         <p>
-          Tout commence un soir d’été,
-          le <strong>20 juillet 2014 à Mykonos</strong>.
-          Gianluca est en voyage de fin d’études avec ses amis,
-          Charlotte en vacances avec sa famille
-          (et elle n’était même pas sûre de vouloir partir en Grèce !).
-          Nos regards se croisent, et on danse pour la première fois.
+          Tout commence un soir d’été, le <strong>20 juillet 2014</strong>.
+          Un regard, une danse — et l’histoire démarre.
         </p>
       </div>
     </div>
@@ -1237,36 +620,18 @@ footer{
   <!-- 2014–2017 -->
   <article class="moment moment-right">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-2017.jpg" alt="Relation à distance">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-2017-1.jpg" alt="Liège-Milan-Liège vols">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2014-2017-2.jpg" alt="Ryanair, textos, appels tard">
-      </div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2014-2017.jpg" alt="Relation à distance"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2014-2017-1.jpg" alt="Liège-Milan-Liège vols"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2014-2017-2.jpg" alt="Ryanair, textos, appels tard"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2014–2017 · L’amour à distance</div>
         <h2>Liège - Milan - Liège — vols et appels sans fin</h2>
         <p>
-          Trois ans de relation à distance :
-          d’innombrables vols Ryanair,
-          des appels interminables,
-          des messages à toute heure.
-          Ce n’était pas facile,
-          mais l’envie de se retrouver
-          a toujours été plus forte que les kilomètres.
+          Des vols, des appels, des messages… Pas facile,
+          mais l’envie de se retrouver est plus forte que tout.
         </p>
       </div>
     </div>
@@ -1275,34 +640,18 @@ footer{
   <!-- 2017–2018 -->
   <article class="moment moment-left">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2017-2018.jpg" alt="Milan, début">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2017-2018-1.jpg" alt="Bocconi">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2017-2018-2.jpg" alt="Charlotte devient Carlotta">
-      </div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2017-2018.jpg" alt="Milan, début"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2017-2018-1.jpg" alt="Bocconi"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2017-2018-2.jpg" alt="Charlotte devient Carlotta"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2017–2018 · Charlotte devient “Carlotta”</div>
         <h2>Milan — nouvelle ville, nouvelle langue</h2>
         <p>
-          Nos vies se rapprochent quand Charlotte
-          est admise à l’Université Bocconi.
-          Elle dit encore aujourd’hui
-          qu’elle est venue à Milan pour une des meilleures écoles du monde…
-          pas pour Gianluca 😉
+          Admission à la Bocconi, nouvelle vie.
+          Elle dit que ce n’était pas pour Gianluca… promis 😉
         </p>
       </div>
     </div>
@@ -1311,39 +660,18 @@ footer{
   <!-- 2018–2020 -->
   <article class="moment moment-right">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2018-2020.jpg" alt="Chili, Madrid, Paris">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2018-2020-1.jpg" alt="Mémoire à Madrid">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2018-2020-2.jpg" alt="Pandémie, séparés">
-      </div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2018-2020.jpg" alt="Chili, Madrid, Paris"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2018-2020-1.jpg" alt="Mémoire à Madrid"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2018-2020-2.jpg" alt="Pandémie, séparés"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2018–2020 · D’autres obstacles</div>
         <h2>Santiago, Madrid, Paris — et une pandémie</h2>
         <p>
-          Charlotte part six mois au Chili ; ensuite, on vit ensemble pour la première fois.
-          Pas longtemps : Gianluca part à Madrid pour sa thèse,
-          Charlotte le rejoint quelques mois,
-          puis décroche un stage à Paris…
-          distance à nouveau.
-          Et quand on pense avoir tout vécu :
-          une pandémie mondiale arrive —
-          et nous voilà à nouveau séparés,
-          chacun dans un pays différent.
-          Mais on reste soudés.
+          Chili, Madrid, Paris… et la pandémie. Séparés encore,
+          mais toujours ensemble, autrement.
         </p>
       </div>
     </div>
@@ -1352,79 +680,37 @@ footer{
   <!-- 2020–2024 -->
   <article class="moment moment-left">
     <div class="dot-year"></div>
-
     <div class="photos">
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2020-2024.jpg" alt="Premier appart Porta Romana">
-      </div>
-
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2020-2024-1.jpg" alt="Via Lucano actuel">
-      </div>
-
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2020-2024-2.jpg" alt="Enfin Milan, enfin nous">
-      </div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2020-2024.jpg" alt="Premier appart Porta Romana"></div>
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2020-2024-1.jpg" alt="Via Lucano actuel"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2020-2024-2.jpg" alt="Enfin Milan, enfin nous"></div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2020–2024 · Construire une vie ensemble</div>
-        <h2>Un petit nid, des jobs intenses… et enfin “nous”</h2>
+        <h2>Un petit nid, des jobs intenses… et “nous”</h2>
         <p>
-          Notre premier nid : 50 m² à Porta Romana.
-          Puis notre appartement actuel, Via Lucano.
-          Charlotte (un peu nostalgique ?) rejoint l’univers de la bière belge ;
-          Gianluca commence chez Amazon… à Plaisance… nuits et week-ends…
-          avant de revenir à Milan, avec des horaires (presque) normaux.
-          Et là, tout devient plus léger.
+          50 m² à Porta Romana, puis Via Lucano.
+          Bière belge pour Charlotte; Amazon pour Gianluca… puis Milan. Plus léger.
         </p>
       </div>
     </div>
   </article>
 
-  <!-- 2025 -->
-<article class="moment moment-right two-photos">
-  <div class="dot-year"></div>
-
-  <div class="photos">
-    <div class="polaroid rotate-pos">
-      <div class="tape"></div>
-      <img src="/assets/story/2025.jpg" alt="Andalo, la proposta">
+  <!-- 2025 (deux photos, centré) -->
+  <article class="moment moment-right two-photos">
+    <div class="dot-year"></div>
+    <div class="photos">
+      <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2025.jpg" alt="Demande en mariage Andalo"></div>
+      <div class="polaroid rotate-neg"><div class="tape"></div><img src="/assets/story/2025-1.jpg" alt="Emotion Dolomites"></div>
+      <!-- <div class="polaroid rotate-pos"><div class="tape"></div><img src="/assets/story/2025-2.jpg" alt="Elle dit oui"></div> -->
     </div>
-
-    <div class="polaroid rotate-neg">
-      <div class="tape"></div>
-      <img src="/assets/story/2025-1.jpg" alt="Dolomiti emozione">
-    </div>
-
-    <!--
-    <div class="polaroid rotate-pos">
-      <div class="tape"></div>
-      <img src="/assets/story/2025-2.jpg" alt="Lei dice sì">
-    </div>
-    -->
-  </div> <!-- 👈 CHIUSURA VERA DELLE FOTO -->
-
-  <div class="content">
-    ...
-  </div>
-</article>
-
-
     <div class="content">
       <div>
         <div class="year-label">21 juillet 2025 · La demande</div>
         <h2>Andalo, Dolomites — “c’est parti”</h2>
         <p>
-          Après onze années intenses, Gianluca se lance.
-          Dans les montagnes des Dolomites, à Andalo,
-          il pose la question
-          (Charlotte reste bouche bée 😄).
-          Et elle dit oui. 💍
+          Après onze années intenses, Gianluca se lance. Et elle dit oui. 💍
         </p>
       </div>
     </div>
@@ -1433,22 +719,17 @@ footer{
   <!-- 2026 -->
   <article class="moment moment-left">
     <div class="dot-year"></div>
-
     <div class="photos">
       <div class="polaroid rotate-neg" style="transform:rotate(-1deg);">
-        <div class="tape"></div>
-        <img src="/assets/chateau.jpg" alt="Château de Pradines Provence">
+        <div class="tape"></div><img src="/assets/chateau.jpg" alt="Château de Pradines Provence">
       </div>
     </div>
-
     <div class="content">
       <div>
         <div class="year-label">2026 · Le mariage</div>
         <h2>Provence — Château de Pradines</h2>
         <p>
-          Notre histoire nous amène ici,
-          en Provence, entre lavande et lumière dorée.
-          Un toast avec ceux qu’on aime,
+          Lavande, lumière dorée, rosé — un toast avec ceux qu’on aime,
           et un nouveau départ — ensemble.
         </p>
       </div>
@@ -1481,249 +762,59 @@ footer{
   }
 })();
 
-
 // ========================
-// 2. LISTA VIP
+// 2. LISTA VIP (se serve altrove)
 // ========================
 const VIP_LIST = [
-  "charlotte francis",
-  "yves francis",
-  "laurence hoppe",
-  "chloe francis",
-  "chloé francis",
-  "maya mertens",
-  "chiara regalia",
-  "matteo biroli",
-  "chiara sestini",
-  "riccardo magri",
-  "marta vitro",
-  "mattia marco",
-  "andrea rodriguez",
-  "piero giuriolo",
-  "pietro favari",
-  "elisa ferrantelli",
-  "francesco santermosi",
-  "viviana serdoz",
-  "francesca garoia",
-  "malve malvestio",
-  "attilia la vecchia",
-  "stefano de looper",
-  "clara simon",
-  "marine lesage",
-  "thomas hulet",
-  "nicola delle foglie",
-  "baptiste charvat",
-  "liza bibakova",
-  "iphigenie loukakis",
-  "iphigénie loukakis",
-  "sara nyssen",
-  "koen slingerland",
-  "gianluca guardala",
-  "gianluca guardalà",
-  "francesca arduini",
-  "benedict",
-  "bénédict",
-  "isidoro guardala",
-  "isidoro guardalà",
-  "simona guardala",
-  "simona guardalà",
-  "alessando guardala",
-  "alessando guardalà",
-  "irene guardala",
-  "irene guardalà",
-  "patrick guardala",
-  "patrick guardalà",
-  "emanuela zannetti",
-  "andrea perozziello",
-  "ragazza perroz",
-  "fabio tarricone",
-  "gisella martino capeda",
-  "edoardo cutolo",
-  "giorgia piras",
-  "edoardo papini",
-  "vittorio corti",
-  "benedetta barbaresi",
-  "giacomo gussoni",
-  "matteo rossi",
-  "lucrezia piracci",
-  "davide bellotto",
-  "silvia oltrabella",
-  "ludovico sibani",
-  "silvia pignotti",
-  "benedetta testoni",
-  "giovanni de maria",
-  "edoardo ferrario",
-  "alessandro bianchi",
-  "beatrice villa",
-  "luca caravaggi",
-  "mara moschino",
-  "marzia camapnile",
-  "marzia campanile",
-  "nikola calic",
-  "filippo sugla",
-  "filippo sugli",
-  "filippo suglià",
-  "filippo sugia",
-  "camilla russo",
-  "laerte adami",
-  "noemi",
-  "alberto garlaschelli",
-  "jacopo guarneri",
-  "lorenzo cederna",
-  "benedetta pintus",
-  "laura gomez martin",
-  "anna garruto"
+  "charlotte francis","yves francis","laurence hoppe","chloe francis","chloé francis","maya mertens","chiara regalia",
+  "matteo biroli","chiara sestini","riccardo magri","marta vitro","mattia marco","andrea rodriguez","piero giuriolo",
+  "pietro favari","elisa ferrantelli","francesco santermosi","viviana serdoz","francesca garoia","malve malvestio",
+  "attilia la vecchia","stefano de looper","clara simon","marine lesage","thomas hulet","nicola delle foglie",
+  "baptiste charvat","liza bibakova","iphigenie loukakis","iphigénie loukakis","sara nyssen","koen slingerland",
+  "gianluca guardala","gianluca guardalà","francesca arduini","benedict","bénédict","isidoro guardala","isidoro guardalà",
+  "simona guardala","simona guardalà","alessando guardala","alessando guardalà","irene guardala","irene guardalà",
+  "patrick guardala","patrick guardalà","emanuela zannetti","andrea perozziello","ragazza perroz","fabio tarricone",
+  "gisella martino capeda","edoardo cutolo","giorgia piras","edoardo papini","vittorio corti","benedetta barbaresi",
+  "giacomo gussoni","matteo rossi","lucrezia piracci","davide bellotto","silvia oltrabella","ludovico sibani",
+  "silvia pignotti","benedetta testoni","giovanni de maria","edoardo ferrario","alessandro bianchi","beatrice villa",
+  "luca caravaggi","mara moschino","marzia camapnile","marzia campanile","nikola calic","filippo sugla","filippo sugli",
+  "filippo suglià","filippo sugia","camilla russo","laerte adami","noemi","alberto garlaschelli","jacopo guarneri",
+  "lorenzo cederna","benedetta pintus","laura gomez martin","anna garruto"
 ];
 
-// ========================
-// 3. FUNZIONI UTILI
-// ========================
-function normalizeName(str){
-  if(!str) return "";
-  return str
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g,"") // rimuove accenti
-    .replace(/\s+/g," ");           // compatta spazi
-}
-
-function isVIP(){
-  return localStorage.getItem("isVIP") === "true";
-}
-
-function hasIdentification(){
-  return !!localStorage.getItem("guestName");
-}
-
+function normalizeName(str){ return (str||"").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," "); }
+function isVIP(){ return localStorage.getItem("isVIP")==="true"; }
+function hasIdentification(){ return !!localStorage.getItem("guestName"); }
 function applyVIPVisibility(){
   const vipBlocks = document.querySelectorAll(".vip-only");
   const nonVipBlocks = document.querySelectorAll(".non-vip-only");
-
-  if(isVIP()){
-    vipBlocks.forEach(el => el.style.display = "");
-    nonVipBlocks.forEach(el => el.style.display = "none");
-  } else {
-    vipBlocks.forEach(el => el.style.display = "none");
-    nonVipBlocks.forEach(el => el.style.display = "");
-  }
+  if(isVIP()){ vipBlocks.forEach(el=>el.style.display=""); nonVipBlocks.forEach(el=>el.style.display="none"); }
+  else{ vipBlocks.forEach(el=>el.style.display="none"); nonVipBlocks.forEach(el=>el.style.display=""); }
 }
-
-// ========================
-// 4. MODAL CONTROL
-//    (ATTENZIONE: qui uso i TUOI ID reali nel DOM!)
-// ========================
-function openLoginModal(){
-  const overlay = document.getElementById("guestLoginOverlay");
-  if(overlay){
-    overlay.style.display = "flex";
-  }
-}
-
-function closeLoginModal(){
-  const overlay = document.getElementById("guestLoginOverlay");
-  if(overlay){
-    overlay.style.display = "none";
-  }
-}
-
-// Logout: cancella i dati e riapre il popup
+function openLoginModal(){ const o=document.getElementById("guestLoginOverlay"); if(o) o.style.display="flex"; }
+function closeLoginModal(){ const o=document.getElementById("guestLoginOverlay"); if(o) o.style.display="none"; }
 function doLogout(){
-  localStorage.removeItem("guestName");
-  localStorage.removeItem("isVIP");
-  // mostro di nuovo popup per forzare re-identificazione
-  openLoginModal();
-  // dopo logout, i blocchi tornano allo stato "non loggato" (che per noi è non VIP finché non rifanno login)
-  applyVIPVisibility();
-  // nel popup ora nascondiamo il bottone logout perché non ha senso prima di reinserire
-  const logoutBtn = document.getElementById("guestLogoutBtn");
-  if(logoutBtn){
-    logoutBtn.style.display = "none";
-  }
+  localStorage.removeItem("guestName"); localStorage.removeItem("isVIP");
+  openLoginModal(); applyVIPVisibility();
+  const b=document.getElementById("guestLogoutBtn"); if(b) b.style.display="none";
 }
-
-// Salvataggio quando cliccano OK
 function submitGuestData(){
-  const firstEl = document.getElementById("guestFirst");
-  const lastEl  = document.getElementById("guestLast");
-  const errEl   = document.getElementById("guestError");
-
-  if(!firstEl || !lastEl) return;
-
-  const rawFullName = (firstEl.value || "") + " " + (lastEl.value || "");
-  const normFullName = normalizeName(rawFullName);
-
-  if(!firstEl.value.trim() || !lastEl.value.trim()){
-    // se lasciano vuoto
-    if(errEl){
-      errEl.innerHTML = "Please enter both fields.<br>Veuillez remplir les deux champs.<br>Inserisci nome e cognome.";
-      errEl.style.display = "block";
-    }
-    return;
-  }
-
-  // Sei VIP?
-  const guestIsVIP = VIP_LIST.includes(normFullName);
-
-  // Salvo
-  localStorage.setItem("guestName", rawFullName.trim());
-  localStorage.setItem("isVIP", guestIsVIP ? "true" : "false");
-
-  // Chiudo popup
-  closeLoginModal();
-
-  // Aggiorna visibilità dei blocchi subito
-  applyVIPVisibility();
+  const f=document.getElementById("guestFirst"), l=document.getElementById("guestLast"), e=document.getElementById("guestError");
+  if(!f||!l) return;
+  const raw=(f.value||"")+" "+(l.value||"");
+  if(!f.value.trim()||!l.value.trim()){ if(e){ e.innerHTML="Please enter both fields.<br>Veuillez remplir les deux champs.<br>Inserisci nome e cognome."; e.style.display="block"; } return; }
+  const isVip = VIP_LIST.includes(normalizeName(raw));
+  localStorage.setItem("guestName", raw.trim()); localStorage.setItem("isVIP", isVip?"true":"false");
+  closeLoginModal(); applyVIPVisibility();
 }
-
-
-// ========================
-// 5. INIT
-// ========================
-document.addEventListener("DOMContentLoaded", () => {
-  // Riferimenti bottoni e overlay
-  const confirmBtn = document.getElementById("guestConfirmBtn");
-  const logoutBtn  = document.getElementById("guestLogoutBtn");
-  const overlay    = document.getElementById("guestLoginOverlay");
-  const errEl      = document.getElementById("guestError");
-
-  // Se già identificato:
-  if(hasIdentification()){
-    // nascondo popup
-    if(overlay) overlay.style.display = "none";
-
-    // mostro il bottone logout nel popup (se riaperto)
-    if(logoutBtn){
-      logoutBtn.style.display = "inline-block";
-      logoutBtn.addEventListener("click", doLogout);
-    }
-  } else {
-    // se NON identificato: apri popup subito
-    if(overlay) overlay.style.display = "flex";
-
-    // nascondo eventuali errori
-    if(errEl) errEl.style.display = "none";
-
-    // logout in questa fase non serve
-    if(logoutBtn){
-      logoutBtn.style.display = "none";
-      logoutBtn.addEventListener("click", doLogout);
-    }
-  }
-
-  // collega il pulsante OK → salva nome, salva VIP, chiudi popup
-  if(confirmBtn){
-    confirmBtn.addEventListener("click", (e)=>{
-      e.preventDefault();
-      submitGuestData();
-    });
-  }
-
-  // Applica subito visibilità dei blocchi giusti
+document.addEventListener("DOMContentLoaded", ()=>{
+  const ok=document.getElementById("guestConfirmBtn"), lo=document.getElementById("guestLogoutBtn"), ov=document.getElementById("guestLoginOverlay"), er=document.getElementById("guestError");
+  if(hasIdentification()){ if(ov) ov.style.display="none"; if(lo){ lo.style.display="inline-block"; lo.addEventListener("click",doLogout); } }
+  else{ if(ov) ov.style.display="flex"; if(er) er.style.display="none"; if(lo){ lo.style.display="none"; lo.addEventListener("click",doLogout); } }
+  if(ok){ ok.addEventListener("click",(e)=>{ e.preventDefault(); submitGuestData(); }); }
   applyVIPVisibility();
 });
 </script>
-
 
 </body>
 </html>
