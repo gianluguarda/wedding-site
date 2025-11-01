@@ -471,6 +471,8 @@ nav li.cta a:hover {
   }
 }
 
+
+
 /* MOBILE: mostra prima il testo, poi le foto */
 @media (max-width:800px){
   .moment{ 
@@ -525,6 +527,12 @@ nav li.cta a:hover {
   background:rgba(255,255,200,.7);
   box-shadow:0 4px 10px rgba(0,0,0,.15);
   border-radius:4px;
+}
+
+
+ /* Se un momento ha solo due foto, centrale su desktop */
+@media (min-width: 801px){
+  .two-photos .photos{ justify-content:center; }
 }
 
 /* Testo del momento */
@@ -839,26 +847,32 @@ footer{
     </div>
   </article>
 
-  <!-- 2025 -->
-  <article class="moment moment-right">
-    <div class="dot-year"></div>
+<article class="moment moment-right two-photos">
+  <div class="dot-year"></div>
 
-    <div class="photos">
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2025.jpg" alt="Andalo, la proposta">
-      </div>
+  <div class="photos">
+    <div class="polaroid rotate-pos">
+      <div class="tape"></div>
+      <img src="/assets/story/2025.jpg" alt="Andalo, la proposta">
+    </div>
 
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2025-1.jpg" alt="Dolomiti emozione">
-      </div>
+    <div class="polaroid rotate-neg">
+      <div class="tape"></div>
+      <img src="/assets/story/2025-1.jpg" alt="Dolomiti emozione">
+    </div>
 
- <!--     <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2025-2.jpg" alt="Lei dice sì">
-      </div>
-    </div> -->
+    <!--
+    <div class="polaroid rotate-pos">
+      <div class="tape"></div>
+      <img src="/assets/story/2025-2.jpg" alt="Lei dice sì">
+    </div>
+    -->
+  </div> <!-- 👈 CHIUSURA VERA DELLE FOTO -->
+
+  <div class="content">
+    ...
+  </div>
+</article>
 
     <div class="content">
       <div>
@@ -1100,25 +1114,33 @@ footer{
   </article>
 
   <!-- 2025 -->
-  <article class="moment moment-right">
-    <div class="dot-year"></div>
+<article class="moment moment-right two-photos">
+  <div class="dot-year"></div>
 
-    <div class="photos">
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2025.jpg" alt="The proposal in Andalo">
-      </div>
+  <div class="photos">
+    <div class="polaroid rotate-pos">
+      <div class="tape"></div>
+      <img src="/assets/story/2025.jpg" alt="Andalo, la proposta">
+    </div>
 
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2025-1.jpg" alt="Dolomites moment">
-      </div>
+    <div class="polaroid rotate-neg">
+      <div class="tape"></div>
+      <img src="/assets/story/2025-1.jpg" alt="Dolomiti emozione">
+    </div>
 
-    <!---  <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2025-2.jpg" alt="She said yes">
-      </div>
-    </div> --->
+    <!--
+    <div class="polaroid rotate-pos">
+      <div class="tape"></div>
+      <img src="/assets/story/2025-2.jpg" alt="Lei dice sì">
+    </div>
+    -->
+  </div> <!-- 👈 CHIUSURA VERA DELLE FOTO -->
+
+  <div class="content">
+    ...
+  </div>
+</article>
+
 
     <div class="content">
       <div>
@@ -1365,25 +1387,33 @@ footer{
   </article>
 
   <!-- 2025 -->
-  <article class="moment moment-right">
-    <div class="dot-year"></div>
+<article class="moment moment-right two-photos">
+  <div class="dot-year"></div>
 
-    <div class="photos">
-      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2025.jpg" alt="Demande en mariage Andalo">
-      </div>
+  <div class="photos">
+    <div class="polaroid rotate-pos">
+      <div class="tape"></div>
+      <img src="/assets/story/2025.jpg" alt="Andalo, la proposta">
+    </div>
 
-      <div class="polaroid rotate-neg">
-        <div class="tape"></div>
-        <img src="/assets/story/2025-1.jpg" alt="Emotion Dolomites">
-      </div>
+    <div class="polaroid rotate-neg">
+      <div class="tape"></div>
+      <img src="/assets/story/2025-1.jpg" alt="Dolomiti emozione">
+    </div>
 
-<!--      <div class="polaroid rotate-pos">
-        <div class="tape"></div>
-        <img src="/assets/story/2025-2.jpg" alt="Elle dit oui">
-      </div>
-    </div> --->
+    <!--
+    <div class="polaroid rotate-pos">
+      <div class="tape"></div>
+      <img src="/assets/story/2025-2.jpg" alt="Lei dice sì">
+    </div>
+    -->
+  </div> <!-- 👈 CHIUSURA VERA DELLE FOTO -->
+
+  <div class="content">
+    ...
+  </div>
+</article>
+
 
     <div class="content">
       <div>
