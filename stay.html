@@ -47,13 +47,26 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
 /* Page */
 .section{max-width:1200px; margin:0 auto; padding:60px 20px 80px}
 .h1{font-family:"Allura",cursive; font-size:56px; color:var(--accent); text-align:center; margin:0 0 20px}
-
-/* Language toc + hard separators */
 .lang-toc{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:0 auto 24px}
 .lang-toc a{text-decoration:none; color:var(--ink); border:1px solid #ddd; background:#fff; padding:8px 12px; border-radius:12px; font-size:17px; line-height:1.2}
 .lang-toc a:hover{border-color:var(--accent); color:var(--accent)}
-.langblock{padding:32px 0; border-top:2px dashed rgba(0,0,0,.08); margin-top:24px}
-.langtitle{ text-align:center; font-size:32px; line-height:1.2; font-family:"Allura",cursive; color:var(--accent); font-weight:400; margin:32px 0 14px }
+
+/* Strong language separation */
+.langblock{margin-top:36px; padding-top:0}
+.lang-sep{
+  margin:40px 0 24px; position:relative; text-align:center;
+}
+.lang-sep::before{
+  content:""; display:block; height:2px; background:linear-gradient(90deg,transparent, rgba(116,101,173,.35), transparent);
+}
+.lang-chip{
+  display:inline-block; margin-top:-18px; background:#fff; color:var(--accent);
+  border:1px solid rgba(116,101,173,.25); padding:6px 14px; border-radius:999px;
+  font-family:"Allura",cursive; font-size:26px; box-shadow:0 4px 16px rgba(0,0,0,.06)
+}
+
+/* Titles per sezione */
+.langtitle{ text-align:center; font-size:32px; line-height:1.2; font-family:"Allura",cursive; color:var(--accent); font-weight:400; margin:28px 0 12px }
 
 /* Card & grids */
 .card{background:#fff; border:1px solid #eee; border-radius:18px; padding:18px 20px; box-shadow:0 8px 30px rgba(0,0,0,.04)}
@@ -66,11 +79,12 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
 .link:hover{border-bottom-color:var(--accent)}
 .note{background:#fff; border:1px solid #eee; border-radius:16px; padding:16px 20px; margin-top:18px; font-size:16px; line-height:1.45; color:var(--muted)}
 
-/* Flexible grids that avoid holes */
+/* Flexible grids */
 .cards-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:16px; margin:16px 0 8px }
 .cards-3{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px; margin:16px 0 8px }
+.cards-2{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; margin:16px 0 8px }
 @media(max-width:1024px){ .cards-3{ grid-template-columns:repeat(2, minmax(0,1fr)) } }
-@media(max-width:700px){ .cards-3{ grid-template-columns:1fr } }
+@media(max-width:700px){ .cards-3{ grid-template-columns:1fr } .cards-2{ grid-template-columns:1fr } }
 
 /* Footer */
 footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
@@ -153,7 +167,9 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
 
   <!-- ================= ITALIANO ================= -->
   <section id="it" class="langblock">
-    <h2 class="langtitle">🇮🇹 Qual è il piano</h2>
+    <div class="lang-sep"><span class="lang-chip">🇮🇹 Italiano</span></div>
+
+    <h2 class="langtitle">Qual è il piano</h2>
 
     <!-- VIP: 3 card; Non-VIP: solo centrale -->
     <div class="cards-grid vip-only" style="display:none;">
@@ -192,7 +208,6 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
     </div>
 
     <div class="cards-grid non-vip-only">
-      <!-- Solo la card centrale per non VIP, ma si allarga a tutta riga -->
       <div class="card">
         <img src="/assets/chateau.jpg" class="card-img" alt="Château de Pradines">
         <h3>💒 Cerimonia &amp; Ricevimento — Sabato 20 giugno</h3>
@@ -206,15 +221,13 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
 
     <div class="note">👶 Per motivi legati alla location, non potremo ospitare bambini piccoli. Scriveteci se serve una mano 💜</div>
 
-    <!-- Sezione 2: Come arrivare & Dove alloggiare -->
-    <h2 class="langtitle">🚗 Come arrivare &amp; 🏡 Dove alloggiare</h2>
-
-    <!-- Trasporti in 3 colonne -->
+    <!-- Sezione separata: Come arrivare -->
+    <h2 class="langtitle">🚗 Come arrivare</h2>
     <div class="cards-3">
       <div class="card">
         <h3>🚆 In treno</h3>
-        <p><strong>Da Milano:</strong> Frecciarossa → Lione + TGV → Aix-en-Provence TGV (~6h).</p>
-        <p><strong>Da Belgio/Lussemburgo:</strong> AV → Parigi + TGV → Aix (~6–7h).</p>
+        <p><strong>Da Milano</strong>: Frecciarossa → Lione + TGV → Aix-en-Provence TGV (~6h).</p>
+        <p><strong>Da Belgio/Lussemburgo</strong>: AV → Parigi + TGV → Aix (~6–7h).</p>
         <p>🔎 Orari e prezzi: <a class="link" href="https://www.thetrainline.com" target="_blank">Trainline</a></p>
       </div>
       <div class="card">
@@ -230,34 +243,37 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
       </div>
     </div>
 
-    <!-- Alloggi + Navette affiancati -->
-    <div class="cards-3">
-      <div class="card">
-        <h3>🏨 Dove alloggiare</h3>
-        <ul>
-          <li><strong>Aix-en-Provence</strong> — città viva; base comoda con navette per la venue.</li>
-          <li><strong>Grambois & dintorni</strong> — quiete totale; alcune case/Airbnb a ~20’ a piedi.</li>
-          <li><strong>Pertuis</strong> — ~15–20 min d’auto; soluzione pratica “di mezzo”.</li>
-          <li><strong>La Tour d’Aigues</strong> — borgo carino a pochi km; buona base nel Luberon meridionale.</li>
-        </ul>
-      </div>
+    <!-- Navette: card dedicata a tutta riga -->
+    <div class="cards-grid">
       <div class="card">
         <h3>🚌 Navette (solo 20 giugno)</h3>
-        <p>Navetta A/R per il ricevimento di sabato 20/06:</p>
         <ul>
           <li><strong>Da</strong>: Aix-en-Provence</li>
           <li><strong>Tappe</strong>: Pertuis e La Tour d’Aigues (TBC)</li>
           <li>Per favore <strong>conferma nel form RSVP</strong> se vuoi usarla</li>
         </ul>
       </div>
+    </div>
+
+    <!-- Sezione separata: Dove alloggiare (solo due card) -->
+    <h2 class="langtitle">🏡 Dove alloggiare</h2>
+    <div class="cards-2">
       <div class="card">
-        <h3>ℹ️ Info utili</h3>
-        <p>Meteo serale fresco: portate un leggero coprispalle/giacca.</p>
-        <p>Strade di campagna: valutate scarpe comode per gli spostamenti.</p>
+        <h3>🏨 Zone consigliate</h3>
+        <ul>
+          <li><strong>Aix-en-Provence</strong> — città viva; base comoda con navette per la venue.</li>
+          <li><strong>Grambois & dintorni</strong> — quiete totale; alcune case/Airbnb a ~20’ a piedi.</li>
+          <li><strong>Pertuis</strong> — ~15–20 min d’auto; soluzione pratica “di mezzo”.</li>
+          <li><strong>La Tour d’Aigues</strong> — borgo carino a pochi km; ottima base nel Luberon meridionale.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🚌 Navette & pick-up</h3>
+        <p>La navetta del 20/06 parte da Aix con fermate a <strong>Pertuis</strong> e <strong>La Tour d’Aigues</strong> (TBC). Ricorda di indicare la preferenza nell’<a class="link" href="/rsvp.html">RSVP</a>.</p>
       </div>
     </div>
 
-    <!-- Sezione 3: Cosa vedere -->
+    <!-- Cosa vedere -->
     <h2 class="langtitle">🌿 Cosa vedere</h2>
     <div class="card">
       <ul>
@@ -276,7 +292,9 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
 
   <!-- ================= ENGLISH ================= -->
   <section id="en" class="langblock">
-    <h2 class="langtitle">🇬🇧 What’s the plan</h2>
+    <div class="lang-sep"><span class="lang-chip">🇬🇧 English</span></div>
+
+    <h2 class="langtitle">What’s the plan</h2>
 
     <div class="cards-grid vip-only" style="display:none;">
       <div class="card">
@@ -322,8 +340,7 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
 
     <div class="note">👶 Due to venue constraints, we’re unable to host very small children. Reach out if you need help 💜</div>
 
-    <h2 class="langtitle">🚗 Getting there &amp; 🏡 Where to stay</h2>
-
+    <h2 class="langtitle">🚗 Getting there</h2>
     <div class="cards-3">
       <div class="card">
         <h3>🚆 By train</h3>
@@ -344,16 +361,7 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
       </div>
     </div>
 
-    <div class="cards-3">
-      <div class="card">
-        <h3>🏨 Where to stay</h3>
-        <ul>
-          <li><strong>Aix-en-Provence</strong> — lively town; easy base with shuttles.</li>
-          <li><strong>Grambois & nearby</strong> — countryside quiet; some homes within ~20’ walk.</li>
-          <li><strong>Pertuis</strong> — ~15–20 min drive; practical middle-ground.</li>
-          <li><strong>La Tour d’Aigues</strong> — charming village nearby; good Luberon base.</li>
-        </ul>
-      </div>
+    <div class="cards-grid">
       <div class="card">
         <h3>🚌 Shuttles (June 20 only)</h3>
         <ul>
@@ -362,32 +370,46 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
           <li>Please <strong>confirm in the RSVP form</strong> if you want to use it</li>
         </ul>
       </div>
+    </div>
+
+    <h2 class="langtitle">🏡 Where to stay</h2>
+    <div class="cards-2">
       <div class="card">
-        <h3>ℹ️ Tips</h3>
-        <p>Evenings can be fresh: bring a light layer.</p>
-        <p>Country roads: consider comfy shoes for transfers.</p>
+        <h3>🏨 Suggested areas</h3>
+        <ul>
+          <li><strong>Aix-en-Provence</strong> — lively town; easy base with shuttles.</li>
+          <li><strong>Grambois & nearby</strong> — countryside quiet; some homes within ~20’ walk.</li>
+          <li><strong>Pertuis</strong> — ~15–20 min drive; practical middle-ground.</li>
+          <li><strong>La Tour d’Aigues</strong> — charming village nearby; good south-Luberon base.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🚌 Shuttles & pick-up</h3>
+        <p>The June 20 shuttle departs from Aix with stops in <strong>Pertuis</strong> and <strong>La Tour d’Aigues</strong> (TBC). Please mark it in your <a class="link" href="/rsvp.html">RSVP</a>.</p>
       </div>
     </div>
 
     <h2 class="langtitle">🌿 What to see</h2>
     <div class="card">
       <ul>
-        <li><strong>Sentier des Ocres (Roussillon)</strong> — surreal red/orange landscapes.</li>
+        <li><strong>Sentier des Ocres (Roussillon)</strong> — red/orange landscapes.</li>
         <li><strong>Lourmarin</strong> — boutiques, pottery, cafés.</li>
         <li><strong>Aix-en-Provence</strong> — markets, fountains.</li>
         <li><strong>L’Isle-sur-la-Sorgue</strong> — canals + antique market.</li>
         <li><strong>Saignon, Cucuron, Gordes, Avignon</strong> — postcard villages.</li>
         <li><strong>Marseille</strong> — seafood, Vieux-Port.</li>
         <li><strong>Montagne Sainte-Victoire</strong> — hikes & views.</li>
-        <li><strong>Calanques</strong> — turquoise coves near Cassis/Marseille.</li>
-        <li><strong>Wineries</strong> — Provençal rosé and whites.</li>
+        <li><strong>Calanques</strong> — turquoise coves.</li>
+        <li><strong>Wineries</strong> — Provençal rosé & whites.</li>
       </ul>
     </div>
   </section>
 
   <!-- ================= FRANÇAIS ================= -->
   <section id="fr" class="langblock">
-    <h2 class="langtitle">🇫🇷 Quel est le programme</h2>
+    <div class="lang-sep"><span class="lang-chip">🇫🇷 Français</span></div>
+
+    <h2 class="langtitle">Quel est le programme</h2>
 
     <div class="cards-grid vip-only" style="display:none;">
       <div class="card">
@@ -433,8 +455,7 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
 
     <div class="note">👶 Pour des raisons liées au lieu, nous ne pourrons pas accueillir de très jeunes enfants. Écrivez-nous si besoin 💜</div>
 
-    <h2 class="langtitle">🚗 S’y rendre &amp; 🏡 Où dormir</h2>
-
+    <h2 class="langtitle">🚗 S’y rendre</h2>
     <div class="cards-3">
       <div class="card">
         <h3>🚆 En train</h3>
@@ -455,16 +476,7 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
       </div>
     </div>
 
-    <div class="cards-3">
-      <div class="card">
-        <h3>🏨 Où dormir</h3>
-        <ul>
-          <li><strong>Aix-en-Provence</strong> — ville animée; base pratique avec navettes.</li>
-          <li><strong>Grambois & alentours</strong> — très calme; quelques logements à ~20’ à pied.</li>
-          <li><strong>Pertuis</strong> — ~15–20 min en voiture; option pratique.</li>
-          <li><strong>La Tour d’Aigues</strong> — joli bourg à proximité; bonne base dans le sud Luberon.</li>
-        </ul>
-      </div>
+    <div class="cards-grid">
       <div class="card">
         <h3>🚌 Navettes (20 juin uniquement)</h3>
         <ul>
@@ -473,10 +485,22 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
           <li>Merci de <strong>confirmer dans le formulaire RSVP</strong> si vous l’utilisez</li>
         </ul>
       </div>
+    </div>
+
+    <h2 class="langtitle">🏡 Où dormir</h2>
+    <div class="cards-2">
       <div class="card">
-        <h3>ℹ️ Conseils</h3>
-        <p>Soirées parfois fraîches : prévoyez une petite couche.</p>
-        <p>Routes de campagne : chaussures confortables utiles.</p>
+        <h3>🏨 Zones conseillées</h3>
+        <ul>
+          <li><strong>Aix-en-Provence</strong> — ville animée; base pratique avec navettes.</li>
+          <li><strong>Grambois & alentours</strong> — très calme; quelques logements à ~20’ à pied.</li>
+          <li><strong>Pertuis</strong> — ~15–20 min en voiture; option pratique.</li>
+          <li><strong>La Tour d’Aigues</strong> — joli bourg à proximité; bonne base dans le sud Luberon.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🚌 Navettes & pick-up</h3>
+        <p>La navette du 20/06 part d’Aix avec arrêts à <strong>Pertuis</strong> et <strong>La Tour d’Aigues</strong> (TBC). Merci de l’indiquer dans votre <a class="link" href="/rsvp.html">RSVP</a>.</p>
       </div>
     </div>
 
@@ -490,8 +514,8 @@ footer{text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px}
         <li><strong>Saignon, Cucuron, Gordes, Avignon</strong> — villages perchés.</li>
         <li><strong>Marseille</strong> — poisson frais, Vieux-Port.</li>
         <li><strong>Montagne Sainte-Victoire</strong> — randonnées & points de vue.</li>
-        <li><strong>Calanques</strong> — criques turquoise Cassis/Marseille.</li>
-        <li><strong>Domaines viticoles</strong> — rosé et blancs de Provence.</li>
+        <li><strong>Calanques</strong> — criques turquoise.</li>
+        <li><strong>Domaines viticoles</strong> — rosé & blancs de Provence.</li>
       </ul>
     </div>
   </section>
