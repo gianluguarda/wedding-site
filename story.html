@@ -241,9 +241,42 @@ footer{ text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px; bac
 @media (min-width: 1400px) {
   .polaroid { width: clamp(220px, 18vw, 320px); }
 }
-</style>
 
+/* ——— FIX: 3 foto sempre su una riga in desktop ——— */
 
+/* 1) Le colonne non devono avere max-width che costringe il wrapping */
+.photos, .content{
+  max-width: 100% !important;
+}
+
+/* 2) In desktop non andare a capo e usa gap piccolo */
+@media (min-width: 900px){
+  .photos{
+    flex-wrap: nowrap !important;
+    gap: 12px !important;
+  }
+}
+
+/* 3) Riduci leggermente la larghezza delle polaroid per farci stare 3+gap dentro metà pagina */
+@media (min-width: 900px){
+  .polaroid{
+    max-width: 180px !important;  /* prima erano 190–220 */
+  }
+}
+
+/* 4) Se lo schermo è molto ampio, puoi tornare a 190 senza andare a capo */
+@media (min-width: 1200px){
+  .polaroid{
+    max-width: 190px !important;
+  }
+}
+
+/* 5) Caso con due foto (la sezione 2025): tienile centrate */
+@media (min-width: 801px){
+  .two-photos .photos{
+    justify-content: center !important;
+  }
+}
   
 </style>
 </head>
