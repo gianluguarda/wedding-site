@@ -180,6 +180,36 @@ footer{ text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px; }
   }
 </style>
 
+<style id="story-langtitle-hotfix">
+  /* Titoli delle sezioni lingua: centrati + Allura */
+  .lang-section-title{
+    text-align:center !important;
+    font-family:"Allura", cursive !important;
+    font-size:44px !important;
+    font-weight:400 !important;
+    font-style:normal !important;  /* Allura di suo è "corsivo/script", non serve italic */
+    color:var(--accent) !important;
+    margin:60px 0 14px !important;
+    line-height:1.2 !important;
+  }
+
+  /* Eventuale nota sotto il titolo (se usi .lang-section-note) */
+  .lang-section-note{
+    text-align:center !important;
+    font-family:"Cormorant", serif !important;
+    font-style:italic !important;
+    color:var(--muted) !important;
+    font-size:18px !important;
+    margin:0 0 36px !important;
+  }
+
+  /* Assicura che non ci sia qualche layout che spinga a sinistra */
+  #it.lang-section-title, #en.lang-section-title, #fr.lang-section-title{ 
+    display:block !important;
+  }
+</style>
+
+
 </head>
 
 
