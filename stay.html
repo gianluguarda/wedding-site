@@ -124,6 +124,14 @@ nav li.cta a:hover{ opacity:.95; transform:translateY(-1px) }
   width:120px; height:28px; background:rgba(255,255,200,.7); box-shadow:0 4px 10px rgba(0,0,0,.15); border-radius:4px;
 }
 
+/* testo */
+.year-label{ display:inline-block; font-weight:600; font-size:18px; color:#333; background:#f5f5f5; border:1px solid #eee; border-radius:999px; padding:5px 12px; margin-bottom:10px; }
+.moment h2{ font-family:"Allura",cursive; font-size:32px; line-height:1.25; color:var(--accent); margin:0 0 10px; }
+.moment p{ margin:0; font-size:18px; line-height:1.5; color:var(--ink); }
+
+/* FOOTER */
+footer{ text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px; }
+</style>
 
 <style id="polaroid-uniform-fix">
   /* Larghezza costante delle polaroid (desktop) */
@@ -137,16 +145,16 @@ nav li.cta a:hover{ opacity:.95; transform:translateY(-1px) }
     flex: 0 0 var(--polaroid-w) !important;
   }
 
-  /* Foto quadrate e riempite in modo uniforme (niente “piccola/grande”) */
+  /* Foto quadrate e riempite in modo uniforme */
   .polaroid img{
     width: 100% !important;
     height: auto !important;
     aspect-ratio: 1 / 1 !important;
-    object-fit: cover !important;      /* riempie senza deformare */
+    object-fit: cover !important;
     object-position: center !important;
   }
 
-  /* Mantieni sempre le 3 foto su una riga in desktop */
+  /* Mantieni sempre 3 foto su una riga in desktop */
   @media (min-width: 900px){
     .photos{
       flex-wrap: nowrap !important;
@@ -155,28 +163,20 @@ nav li.cta a:hover{ opacity:.95; transform:translateY(-1px) }
     }
   }
 
-  /* Mobile: due colonne pulite per evitare “scalini” */
+  /* Mobile: due colonne per evitare “scalini” */
   @media (max-width: 800px){
     .photos{
       flex-wrap: wrap !important;
       gap: 14px !important;
     }
     .polaroid{
-      width: 46% !important;   /* 2 per riga con gap */
+      width: 46% !important;
       flex: 0 0 46% !important;
     }
   }
 </style>
 
-
-/* testo */
-.year-label{ display:inline-block; font-weight:600; font-size:18px; color:#333; background:#f5f5f5; border:1px solid #eee; border-radius:999px; padding:5px 12px; margin-bottom:10px; }
-.moment h2{ font-family:"Allura",cursive; font-size:32px; line-height:1.25; color:var(--accent); margin:0 0 10px; }
-.moment p{ margin:0; font-size:18px; line-height:1.5; color:var(--ink); }
-
-/* FOOTER */
-footer{ text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px; }
-</style>
+  
 </head>
 
 <body>
