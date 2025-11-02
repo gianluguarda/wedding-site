@@ -240,6 +240,39 @@ footer{ text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px; }
   }
 }
 
+/* === TIMELINE PHOTO ALIGNMENT FIX === */
+
+/* Sposta i blocchi foto ancora un po' verso l’esterno */
+.moment-left  .photos { 
+  transform: translateX(-18px) !important; /* sposta a sinistra */
+}
+.moment-right .photos { 
+  transform: translateX(18px) !important;  /* sposta a destra */
+}
+
+/* Mantieni i testi in posizione corretta */
+.moment-left  .content { 
+  transform: translateX(0) !important;
+}
+.moment-right .content { 
+  transform: translateX(0) !important;
+}
+
+/* Assicurati che la linea centrale resti visibile sopra i bordi */
+.timeline-line { 
+  z-index: 3 !important; 
+}
+.moment .dot-year { 
+  z-index: 4 !important; 
+}
+
+/* Su mobile: disattiva questo spostamento per evitare disallineamenti */
+@media (max-width: 800px){
+  .moment-left .photos,
+  .moment-right .photos {
+    transform: none !important;
+  }
+}
 
   
 </style>
