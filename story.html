@@ -9,18 +9,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Allura&display=swap" rel="stylesheet">
 
-<!-- === GLOBAL LOGIN STYLE & MODAL === -->
+<!-- ====== STILI PRINCIPALI ====== -->
 <style>
 :root{ --accent:#7465ad; --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b; --card:#fff; }
 *{box-sizing:border-box}
 html,body{
   margin:0; height:100%;
   font-family:"Cormorant",serif; color:var(--ink); background:var(--beige);
-  background-image:radial-gradient(1200px 700px at 100% -10%, rgba(116,101,173,.10), transparent 60%),
-                   radial-gradient(900px 500px at -10% 10%, rgba(116,101,173,.06), transparent 55%);
+  background-image:
+    radial-gradient(1200px 700px at 100% -10%, rgba(116,101,173,.10), transparent 60%),
+    radial-gradient(900px 500px at -10% 10%, rgba(116,101,173,.06), transparent 55%);
   background-attachment:fixed;
 }
-/* popup */
+
+/* ===== Popup login ===== */
 #guestLoginOverlay{ position:fixed; inset:0; background:rgba(0,0,0,.45); display:none; align-items:center; justify-content:center; z-index:1000; padding:20px; }
 #guestLoginModal{ background:#fff; max-width:360px; width:100%; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.25); padding:24px 20px 20px; text-align:center; border:1px solid rgba(0,0,0,.06); }
 #guestLoginModal h2{ font-family:"Allura",cursive; font-size:32px; color:var(--accent); margin:0 0 10px; }
@@ -34,7 +36,8 @@ html,body{
 #guestConfirmBtn:hover{opacity:.95}
 #guestLogoutBtn{ background:none; border:none; color:var(--muted); font-size:16px; text-decoration:underline; cursor:pointer; }
 #guestError{ color:#b00020; font-size:16px; text-align:center; display:none; margin-top:8px; line-height:1.4; }
-/* header */
+
+/* ===== Header ===== */
 header{ position:sticky; top:0; z-index:10; background:rgba(247,244,239,.88); backdrop-filter:blur(6px); border-bottom:1px solid rgba(0,0,0,.06); }
 .nav{ max-width:1100px; margin:0 auto; padding:18px 22px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
 .brand{ display:flex; align-items:center; gap:8px; }
@@ -51,30 +54,43 @@ nav li.cta a:hover{ opacity:.95; transform:translateY(-1px); }
 .mobile-menu{ display:none; position:fixed; top:64px; left:16px; background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,.12); padding:12px; z-index:40; }
 .mobile-menu a{ display:block; padding:10px 12px; border-radius:10px; color:var(--ink); text-decoration:none; font-size:18px; }
 .mobile-menu a:hover{ background:rgba(116,101,173,.08); }
-/* head */
+
+/* ===== Head della pagina ===== */
 .page-head{ text-align:center; padding:60px 20px 40px; }
 .page-head h1{ font-family:"Allura",cursive; font-size:56px; color:var(--accent); margin:0 0 10px; line-height:1.2; }
 .page-head p{ font-size:22px; color:var(--muted); margin:0; font-style:italic; }
-/* lang toc */
+
+/* ===== Selettore lingua ===== */
 .lang-toc{ max-width:1100px; margin:0 auto; padding:10px 20px 30px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
 .lang-toc a{ text-decoration:none; color:var(--ink); border:1px solid #ddd; background:#fff; padding:8px 12px; border-radius:12px; font-size:17px; }
 .lang-toc a:hover{ border-color:var(--accent); color:var(--accent); }
-/* timeline */
+
+/* ===== Timeline ===== */
 .timeline-wrapper{ max-width:1100px; margin:0 auto; padding:20px 20px 80px; position:relative; }
 .timeline-line{ position:absolute; left:50%; top:0; bottom:0; width:2px; background:rgba(0,0,0,.08); transform:translateX(-50%); }
 @media(max-width:800px){ .timeline-line{ left:24px; transform:none; } }
+
 .moment{ width:100%; display:flex; align-items:flex-start; margin-bottom:42px; position:relative; }
 .moment-left .content{ order:2; padding-left:28px; text-align:left; }
 .moment-left .photos{ order:1; justify-content:flex-end; }
 .moment-right .content{ order:1; padding-right:28px; text-align:right; }
 .moment-right .photos{ order:2; justify-content:flex-start; }
-.moment .dot-year{ position:absolute; left:50%; top:10px; transform:translate(-50%,0); background:#fff; width:14px; height:14px; border-radius:50%; border:2px solid rgba(0,0,0,.25); box-shadow:0 2px 6px rgba(0,0,0,.12); }
+
+.moment .dot-year{
+  position:absolute; left:50%; top:10px; transform:translate(-50%,0);
+  background:#fff; width:14px; height:14px; border-radius:50%; border:2px solid rgba(0,0,0,.25); box-shadow:0 2px 6px rgba(0,0,0,.12);
+  z-index:3; /* il pallino deve stare sopra */
+}
+
 @media(max-width:800px){ .moment .dot-year{ left:24px; transform:none; } }
+
 .photos,.content{ width:50%; display:flex; flex-wrap:wrap; gap:16px; }
 .photos{ align-items:flex-start; }
+
 /* desktop: 3 foto sempre in riga */
 @media(min-width:900px){ .photos{ flex-wrap:nowrap; gap:12px; } .polaroid{ max-width:180px; } }
 @media(min-width:1200px){ .polaroid{ max-width:190px; } }
+
 /* mobile: testo prima, foto dopo */
 @media(max-width:800px){
   .moment{ flex-direction:column; padding-left:50px; }
@@ -82,65 +98,65 @@ nav li.cta a:hover{ opacity:.95; transform:translateY(-1px); }
   .photos{ order:2 !important; justify-content:flex-start !important; }
   .photos,.content{ width:100%; }
 }
+
 /* 2 foto → centrato in desktop */
 @media(min-width:801px){ .two-photos .photos{ justify-content:center; } }
-/* polaroid */
+
+/* Polaroid */
 .polaroid{ position:relative; background:#fff; border:10px solid #fff; border-bottom-width:22px; border-radius:6px; box-shadow:0 10px 30px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06); transform:rotate(-1.5deg); }
 .polaroid img{ display:block; width:100%; height:auto; border-radius:2px; }
 .polaroid.rotate-pos{ transform:rotate(2deg); }
 .polaroid.rotate-neg{ transform:rotate(-2deg); }
 .tape{ position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:120px; height:28px; background:rgba(255,255,200,.7); box-shadow:0 4px 10px rgba(0,0,0,.15); border-radius:4px; }
-/* testo */
+
+/* Testo dei momenti */
 .year-label{ display:inline-block; font-weight:600; font-size:18px; color:#333; background:#f5f5f5; border:1px solid #eee; border-radius:999px; padding:5px 12px; margin-bottom:10px; }
 .moment h2{ font-family:"Allura",cursive; font-size:32px; line-height:1.25; color:var(--accent); margin:0 0 10px; }
 .moment p{ margin:0; font-size:18px; line-height:1.5; }
-/* footer */
+
+/* Footer */
 footer{ text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px; }
-/* responsive header */
+
+/* Header responsive */
 @media(max-width:600px){
-  .nav{ padding:16px 12px; } .hamburger{ display:block; } nav ul{ display:none; }
-  .names{ font-size:30px; } .date{ font-size:17px; }
+  .nav{ padding:16px 12px; }
+  .hamburger{ display:block; }
+  nav ul{ display:none; }
+  .names{ font-size:30px; }
+  .date{ font-size:17px; }
   .mobile-menu{ top:58px; left:12px; }
-
-  <style id="story-hotfix">
-/* 1) Titoli lingua: centrati, font Allura come sempre */
-.lang-section-title {
-  text-align: center !important;
-  font-family: "Allura", cursive !important;
-  font-size: 44px !important;
-  font-weight: 400;
-  color: var(--accent);
-  line-height: 1.2;
-  margin: 60px 0 20px !important; /* spazio equilibrato sopra e sotto */
-}
-
-/* eventuale sottotitolo (nota) */
-.lang-section-note {
-  text-align: center !important;
-  font-family: "Cormorant", serif !important;
-  font-style: italic;
-  color: var(--muted);
-  font-size: 18px;
-  margin-bottom: 40px;
-}
-
-/* 2) Allinea le foto un po' più in basso rispetto al pallino della timeline */
-.moment {
-  padding-top: 28px; /* crea più aria sotto il pallino */
-}
-
-.moment .dot-year {
-  z-index: 2; /* il pallino resta sopra */
-}
-
-.photos {
-  margin-top: 4px; /* piccolo margine per armonizzare con il testo */
 }
 </style>
 
+<!-- ====== HOTFIX: titoli lingua & foto più in basso ====== -->
+<style id="story-hotfix">
+/* Titoli lingua centrati, font Allura */
+section.timeline-wrapper > .lang-section-title{
+  text-align:center !important;
+  font-family:"Allura", cursive !important;
+  font-size:44px !important;
+  font-weight:400;
+  color:var(--accent);
+  line-height:1.2;
+  margin:60px 0 20px !important;
 }
+
+/* (opzionale) nota sotto il titolo */
+section.timeline-wrapper > .lang-section-note{
+  text-align:center !important;
+  font-family:"Cormorant", serif !important;
+  font-style:italic;
+  color:var(--muted);
+  font-size:18px;
+  margin:0 auto 40px !important;
+}
+
+/* Foto un po’ più in basso rispetto al pallino */
+.moment{ padding-top:28px !important; }
+.moment .photos{ margin-top:6px !important; }
 </style>
 </head>
+
 
 <body>
 <!-- LOGIN MODAL -->
