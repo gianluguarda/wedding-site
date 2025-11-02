@@ -101,6 +101,43 @@ footer{ text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px; }
   .nav{ padding:16px 12px; } .hamburger{ display:block; } nav ul{ display:none; }
   .names{ font-size:30px; } .date{ font-size:17px; }
   .mobile-menu{ top:58px; left:12px; }
+
+  <style id="story-hotfix">
+/* 1) Titoli lingua: centrati, font Allura come sempre */
+.lang-section-title {
+  text-align: center !important;
+  font-family: "Allura", cursive !important;
+  font-size: 44px !important;
+  font-weight: 400;
+  color: var(--accent);
+  line-height: 1.2;
+  margin: 60px 0 20px !important; /* spazio equilibrato sopra e sotto */
+}
+
+/* eventuale sottotitolo (nota) */
+.lang-section-note {
+  text-align: center !important;
+  font-family: "Cormorant", serif !important;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+/* 2) Allinea le foto un po' più in basso rispetto al pallino della timeline */
+.moment {
+  padding-top: 28px; /* crea più aria sotto il pallino */
+}
+
+.moment .dot-year {
+  z-index: 2; /* il pallino resta sopra */
+}
+
+.photos {
+  margin-top: 4px; /* piccolo margine per armonizzare con il testo */
+}
+</style>
+
 }
 </style>
 </head>
