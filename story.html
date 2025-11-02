@@ -128,33 +128,58 @@ footer{ text-align:center; color:#6b6b6b; padding:40px 20px; font-size:14px; }
 }
 </style>
 
-<!-- ====== HOTFIX: titoli lingua & foto più in basso ====== -->
-<style id="story-hotfix">
-/* Titoli lingua centrati, font Allura */
-section.timeline-wrapper > .lang-section-title{
-  text-align:center !important;
-  font-family:"Allura", cursive !important;
-  font-size:44px !important;
-  font-weight:400;
-  color:var(--accent);
-  line-height:1.2;
-  margin:60px 0 20px !important;
-}
+<style id="polaroid-uniform-fix">
+  /* Larghezza fissa e proporzioni coerenti per tutte le polaroid */
+  :root{ --polaroid-w: 190px; }
 
-/* (opzionale) nota sotto il titolo */
-section.timeline-wrapper > .lang-section-note{
-  text-align:center !important;
-  font-family:"Cormorant", serif !important;
-  font-style:italic;
-  color:var(--muted);
-  font-size:18px;
-  margin:0 auto 40px !important;
-}
+  .photos{
+    display:flex !important;
+    flex-wrap:wrap !important;
+    gap:14px !important;
+    justify-content:center !important;
+    align-items:flex-start !important;
+  }
 
-/* Foto un po’ più in basso rispetto al pallino */
-.moment{ padding-top:28px !important; }
-.moment .photos{ margin-top:6px !important; }
+  .polaroid{
+    width:var(--polaroid-w) !important;
+    flex:0 0 var(--polaroid-w) !important;
+    background:#fff;
+    border:10px solid #fff;
+    border-bottom-width:22px;
+    border-radius:6px;
+    box-shadow:0 8px 24px rgba(0,0,0,.12);
+    overflow:hidden;
+    position:relative;
+  }
+
+  .polaroid img{
+    width:100%;
+    height:190px;                /* altezza costante */
+    object-fit:contain;          /* mostra tutto (non taglia) */
+    background-color:#fff;       /* bordi bianchi dove serve */
+    display:block;
+  }
+
+  /* Mobile: due per riga */
+  @media(max-width:800px){
+    .polaroid{
+      width:47% !important;
+      flex:0 0 47% !important;
+    }
+    .polaroid img{
+      height:150px;
+    }
+  }
+
+  /* 3 foto per riga su desktop */
+  @media(min-width:900px){
+    .photos{
+      flex-wrap:nowrap !important;
+      justify-content:center !important;
+    }
+  }
 </style>
+
 </head>
 
 
