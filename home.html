@@ -199,45 +199,11 @@ header {
 }
 
 /* MENU DESKTOP */
-nav ul {
-  list-style:none;
-  display:flex;
-  gap:24px;
-  margin:0;
-  padding:0;
-}
-
-nav a {
-  text-decoration:none;
-  color:var(--ink);
-  opacity:.95;
-  font-size:19px;
-  line-height:1;
-  padding:8px 6px;
-  border-radius:10px;
-  font-family:"Cormorant", serif;
-}
-
-nav a:hover {
-  opacity:1;
-  border-bottom:1px solid var(--accent);
-}
-
-/* Bottone RSVP nel menu */
-nav li.cta a {
-  background:var(--accent);
-  color:#fff;
-  padding:10px 14px;
-  border-radius:14px;
-  border-bottom:none;
-  font-weight:500;
-  line-height:1.1;
-}
-
-nav li.cta a:hover {
-  opacity:.95;
-  transform:translateY(-1px);
-}
+nav ul{ list-style:none; display:flex; gap:24px; margin:0; padding:0; }
+nav a{ text-decoration:none; color:var(--ink); opacity:.95; font-size:19px; padding:8px 6px; border-radius:10px; }
+nav a:hover{ opacity:1; border-bottom:1px solid var(--accent); }
+nav li.cta a{ background:var(--accent); color:#fff; padding:10px 14px; border-radius:14px; border-bottom:none; font-weight:500; }
+nav li.cta a:hover{ opacity:.95; transform:translateY(-1px); }
 
 /* HAMBURGER (mobile) */
 .hamburger {
