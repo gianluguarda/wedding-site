@@ -573,99 +573,119 @@ footer{
   }
 })();
 
-
 // ========================
-// 2. LISTA VIP
+// 2. DATASET VIP (+ matching rules)
 // ========================
-const VIP_LIST = [
-  "charlotte francis",
-  "yves francis",
-  "laurence hoppe",
-  "chloe francis",
-  "chloé francis",
-  "maya mertens",
-  "chiara regalia",
-  "matteo biroli",
-  "chiara sestini",
-  "riccardo magri",
-  "marta vitro",
-  "mattia marco",
-  "andrea rodriguez",
-  "piero giuriolo",
-  "pietro favari",
-  "elisa ferrantelli",
-  "francesco santermosi",
-  "viviana serdoz",
-  "francesca garoia",
-  "malve malvestio",
-  "attilia la vecchia",
-  "stefano de looper",
-  "clara simon",
-  "marine lesage",
-  "thomas hulet",
-  "nicola delle foglie",
-  "baptiste charvat",
-  "liza bibakova",
-  "iphigenie loukakis",
-  "iphigénie loukakis",
-  "sara nyssen",
-  "koen slingerland",
-  "gianluca guardala",
-  "gianluca guardalà",
-  "francesca arduini",
-  "benedict",
-  "bénédict",
-  "isidoro guardala",
-  "isidoro guardalà",
-  "simona guardala",
-  "simona guardalà",
-  "alessando guardala",
-  "alessando guardalà",
-  "irene guardala",
-  "irene guardalà",
-  "patrick guardala",
-  "patrick guardalà",
-  "emanuela zannetti",
-  "andrea perozziello",
-  "ragazza perroz",
-  "fabio tarricone",
-  "gisella martino capeda",
-  "edoardo cutolo",
-  "giorgia piras",
-  "edoardo papini",
-  "vittorio corti",
-  "benedetta barbaresi",
-  "giacomo gussoni",
-  "matteo rossi",
-  "lucrezia piracci",
-  "davide bellotto",
-  "silvia oltrabella",
-  "ludovico sibani",
-  "silvia pignotti",
-  "benedetta testoni",
-  "giovanni de maria",
-  "edoardo ferrario",
-  "alessandro bianchi",
-  "beatrice villa",
-  "luca caravaggi",
-  "mara moschino",
-  "marzia camapnile",
-  "marzia campanile",
-  "nikola calic",
-  "filippo sugla",
-  "filippo sugli",
-  "filippo suglià",
-  "filippo sugia",
-  "camilla russo",
-  "laerte adami",
-  "noemi",
-  "alberto garlaschelli",
-  "jacopo guarneri",
-  "lorenzo cederna",
-  "benedetta pintus",
-  "laura gomez martin",
-  "anna garruto"
+const VIP_DATA = [
+  { first:"Charlotte",  last:"Francis" },
+  { first:"Yves",       last:"Francis" },
+  { first:"Laurence",   last:"Hoppe" },
+  { first:"Chloé",      last:"Francis" },
+  { first:"Maya",       last:"Mertens" },
+  { first:"Chiara",     last:"Regalia" },
+  { first:"Matteo",     last:"Biroli" },
+  { first:"Chiara",     last:"Sestini" },
+  { first:"Riccardo",   last:"Magri" },
+  { first:"Marta",      last:"Vitro" },
+  { first:"Mattia",     last:"Marco" },
+  { first:"Andrea",     last:"Rodriguez" },
+  { first:"Piero",      last:"Giuriolo" },
+  { first:"Pietro",     last:"Favari" },
+  { first:"Elisa",      last:"Ferrantelli" },
+  { first:"Francesco",  last:"Santermosi" },
+  { first:"Viviana",    last:"Serdoz" },
+  { first:"Francesca",  last:"Garoia" },
+  { first:"Malve",      last:"Malvestio" },
+  { first:"Attilia",    last:"La Vecchia" },
+  { first:"Stefano",    last:"de Looper" },
+  { first:"Clara",      last:"Simon" },
+  { first:"Marine",     last:"Lesage" },
+  { first:"Thomas",     last:"Hulet" },
+  { first:"Nicola",     last:"delle Foglie" },
+  { first:"Baptiste",   last:"Charvat" },
+  { first:"Liza",       last:"Bibakova" },
+  { first:"Iphigénie",  last:"Loukakis" },
+  { first:"Sara",       last:"Nyssen" },
+  { first:"Koen",       last:"Slingerland" },
+  { first:"Gianluca",   last:"Guardalà" },
+  { first:"Francesca",  last:"Arduini" },
+  { first:"Benedict",   last:"Fritz" },
+  { first:"Isidoro",    last:"Guardalà" },
+  { first:"Simona",     last:"Guardalà" },
+  { first:"Alessando",  last:"Guardalà" },
+  { first:"Irene",      last:"Guardalà" },
+  { first:"Patrick",    last:"" },
+  { first:"Emanuela",   last:"Zannetti" },
+  { first:"Andrea",     last:"Perozziello" },
+  { first:"Chiara",     last:"" },
+  { first:"Fabio",      last:"Tarricone" },
+  { first:"Gisella",    last:"Martino Capeda" },
+  { first:"Edoardo",    last:"Cutolo" },
+  { first:"Giorgia",    last:"Piras" },
+  { first:"Edoardo",    last:"Papini" },
+  { first:"Vittorio",   last:"Corti" },
+  { first:"Benedetta",  last:"Barbaresi" },
+  { first:"Giacomo",    last:"Gussoni" },
+  { first:"Matteo",     last:"Rossi" },
+  { first:"Lucrezia",   last:"Piracci" },
+  { first:"Davide",     last:"Bellotto" },
+  { first:"Silvia",     last:"Oltrabella" },
+  { first:"Ludovico",   last:"SIbani" },
+  { first:"Silvia",     last:"Pignotti" },
+  { first:"Benedetta",  last:"Testoni" },
+  { first:"Giovanni",   last:"De Maria" },
+  { first:"Edoardo",    last:"Ferrario" },
+  { first:"Alessandro", last:"Bianchi" },
+  { first:"Beatrice",   last:"Villa" },
+  { first:"Luca",       last:"Caravaggi" },
+  { first:"Mara",       last:"Moschino" },
+  { first:"Marzia",     last:"Campanile" },
+  { first:"Nikola",     last:"Calic" },
+  { first:"Filippo",    last:"Suglia" },
+  { first:"Camilla",    last:"Russo" },
+  { first:"Laerte",     last:"Adami" },
+  { first:"Noemi",      last:"" },
+  { first:"Alberto",    last:"Garlaschelli" },
+  { first:"Jacopo",     last:"Guarneri" },
+  { first:"Lorenzo",    last:"Cederna" },
+  { first:"Benedetta",  last:"Pintus" }
+  // ➕ Quando li hai, aggiungi qui i due cognomi mancanti
 ];
+
+// --- Normalizzazione robusta (accents/case/punteggiatura/spazi) ---
+function normalize(str){
+  return (str || "")
+    .trim()
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // toglie accenti
+    .replace(/[^\p{L}\p{N}\s'-]/gu, "")               // rimuove simboli non utili
+    .replace(/\s+/g, " ");                             // compatta spazi
+}
+
+// split dei cognomi composti/doppi (spazi o trattini)
+function surnameTokens(str){
+  return normalize(str).split(/[\s-]+/).filter(Boolean);
+}
+
+// regola cognome: match se coincide TUTTO oppure basta UNO dei token (stile doppio cognome spagnolo)
+function surnameMatches(userLast, vipLast){
+  const vipHasLast = !!normalize(vipLast);
+  if(!vipHasLast) return true;           // nel dataset manca cognome → basta il nome
+
+  const u = surnameTokens(userLast);
+  const v = surnameTokens(vipLast);
+  if(u.length === 0) return false;
+
+  if (u.join(" ") === v.join(" ")) return true;  // match completo
+  return u.some(tok => v.includes(tok));         // match parziale su almeno un token
+}
+
+// match finale: nome esatto + cognome (con regola sopra)
+function isVipName(userFirst, userLast){
+  const nf = normalize(userFirst);
+  const nl = normalize(userLast);
+  return VIP_DATA.some(({first, last}) => normalize(first) === nf && surnameMatches(nl, last));
+}
 
 // ========================
 // 3. FUNZIONI UTILI
@@ -739,20 +759,28 @@ function submitGuestData(){
   const firstEl = document.getElementById("guestFirst");
   const lastEl  = document.getElementById("guestLast");
   const errEl   = document.getElementById("guestError");
-
   if(!firstEl || !lastEl) return;
 
-  const rawFullName = (firstEl.value || "") + " " + (lastEl.value || "");
-  const normFullName = normalizeName(rawFullName);
+  const first = firstEl.value || "";
+  const last  = lastEl.value || "";
 
-  if(!firstEl.value.trim() || !lastEl.value.trim()){
-    // se lasciano vuoto
+  if(!first.trim() || !last.trim()){
     if(errEl){
       errEl.innerHTML = "Please enter both fields.<br>Veuillez remplir les deux champs.<br>Inserisci nome e cognome.";
       errEl.style.display = "block";
     }
     return;
   }
+
+  const guestIsVIP = isVipName(first, last);
+
+  localStorage.setItem("guestName", (first + " " + last).trim());
+  localStorage.setItem("isVIP", guestIsVIP ? "true" : "false");
+
+  closeLoginModal();
+  applyVIPVisibility();
+}
+
 
   // Sei VIP?
   const guestIsVIP = VIP_LIST.includes(normFullName);
