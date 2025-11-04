@@ -555,10 +555,10 @@ footer{
 
 <script>
 // ========================
-// 1. MENU MOBILE
+// 1) MENU MOBILE
 // ========================
 (function(){
-  const btn = document.getElementById('hambBtn');
+  const btn  = document.getElementById('hambBtn');
   const menu = document.getElementById('mobileMenu');
   if(btn && menu){
     btn.addEventListener('click', e=>{
@@ -573,109 +573,144 @@ footer{
   }
 })();
 
+
 // ========================
-// 2. LISTA VIP
+// 2) LISTA VIP (stringhe "Nome Cognome")
 // ========================
 const VIP_LIST = [
-"Charlotte Francis",
-"Yves Francis",
-"Laurence Hoppe",
-"Chloé Francis",
-"Maya Mertens",
-"Chiara Regalia",
-"Matteo Biroli",
-"Chiara Sestini",
-"Riccardo Magri",
-"Marta Vitro",
-"Mattia Marco",
-"Andrea Rodriguez",
-"Piero Giuriolo",
-"Pietro Favari",
-"Elisa Ferrantelli",
-"Francesco Santermosi",
-"Viviana Serdoz",
-"Francesca Garoia",
-"Malve Malvestio",
-"Attilia La Vecchia",
-"Stefano de Looper",
-"Clara Simon",
-"Marine Lesage",
-"Thomas Hulet",
-"Nicola delle Foglie",
-"Baptiste Charvat",
-"Liza Bibakova",
-"Iphigénie Loukakis",
-"Sara Nyssen",
-"Koen Slingerland",
-"Gianluca Guardalà",
-"Francesca Arduini",
-"Benedict Fritz",
-"Isidoro Guardalà",
-"Simona Guardalà",
-"Alessando Guardalà",
-"Irene Guardalà",
-"Patrick ",
-"Emanuela Zannetti",
-"Andrea Perozziello",
-"Chiara ",  
-"Fabio Tarricone",
-"Gisella Martino Capeda",
-"Gisella Martino", 
-"Edoardo Cutolo",
-"Giorgia Piras",
-"Edoardo Papini",
-"Vittorio Corti",
-"Benedetta Barbaresi",
-"Giacomo Gussoni",
-"Matteo Rossi",
-"Lucrezia Piracci",
-"Davide Bellotto",
-"Silvia Oltrabella",
-"Ludovico SIbani",
-"Silvia Pignotti",
-"Benedetta Testoni",
-"Giovanni De Maria",
-"Edoardo Ferrario",
-"Alessandro Bianchi",
-"Beatrice Villa",
-"Luca Caravaggi",
-"Mara Moschino",
-"Marzia Campanile",
-"Nikola Calic",
-"Filippo Suglia",
-"Camilla Russo",
-"Laerte Adami",
-"Noemi ",
-"Alberto Garlaschelli",
-"Jacopo Guarneri",
-"Lorenzo Cederna",
-"Benedetta Pintus"]
+  "Charlotte Francis",
+  "Yves Francis",
+  "Laurence Hoppe",
+  "Chloé Francis",
+  "Maya Mertens",
+  "Chiara Regalia",
+  "Matteo Biroli",
+  "Chiara Sestini",
+  "Riccardo Magri",
+  "Marta Vitro",
+  "Mattia Marco",
+  "Andrea Rodriguez",
+  "Piero Giuriolo",
+  "Pietro Favari",
+  "Elisa Ferrantelli",
+  "Francesco Santermosi",
+  "Viviana Serdoz",
+  "Francesca Garoia",
+  "Malve Malvestio",
+  "Attilia La Vecchia",
+  "Stefano de Looper",
+  "Clara Simon",
+  "Marine Lesage",
+  "Thomas Hulet",
+  "Nicola delle Foglie",
+  "Baptiste Charvat",
+  "Liza Bibakova",
+  "Iphigénie Loukakis",
+  "Sara Nyssen",
+  "Koen Slingerland",
+  "Gianluca Guardalà",
+  "Francesca Arduini",
+  "Benedict Fritz",
+  "Isidoro Guardalà",
+  "Simona Guardalà",
+  "Alessando Guardalà",
+  "Irene Guardalà",
+  "Patrick",
+  "Emanuela Zannetti",
+  "Andrea Perozziello",
+  "Chiara",
+  "Fabio Tarricone",
+  "Gisella Martino Capeda",
+  "Gisella Martino",
+  "Edoardo Cutolo",
+  "Giorgia Piras",
+  "Edoardo Papini",
+  "Vittorio Corti",
+  "Benedetta Barbaresi",
+  "Giacomo Gussoni",
+  "Matteo Rossi",
+  "Lucrezia Piracci",
+  "Davide Bellotto",
+  "Silvia Oltrabella",
+  "Ludovico SIbani",
+  "Silvia Pignotti",
+  "Benedetta Testoni",
+  "Giovanni De Maria",
+  "Edoardo Ferrario",
+  "Alessandro Bianchi",
+  "Beatrice Villa",
+  "Luca Caravaggi",
+  "Mara Moschino",
+  "Marzia Campanile",
+  "Nikola Calic",
+  "Filippo Suglia",
+  "Camilla Russo",
+  "Laerte Adami",
+  "Noemi",
+  "Alberto Garlaschelli",
+  "Jacopo Guarneri",
+  "Lorenzo Cederna",
+  "Benedetta Pintus"
+];
+
 
 // ========================
-// 3. FUNZIONI UTILI
+// 3) UTILS (normalize + parsing + match cognomi doppi)
 // ========================
-function normalizeName(str){
-  if(!str) return "";
-  return str
+function normalize(str){
+  return (str || "")
     .trim()
     .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g,"") // rimuove accenti
-    .replace(/\s+/g," ");           // compatta spazi
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")    // togli accenti
+    .replace(/[^\p{L}\p{N}\s'-]/gu, "")                 // leva simboli strani
+    .replace(/\s+/g, " ");                               // compatta spazi
 }
 
+function splitName(full){
+  const parts = normalize(full).split(" ").filter(Boolean);
+  if(parts.length === 0) return { first:"", last:"" };
+  const first = parts[0];
+  const last  = parts.slice(1).join(" "); // può essere vuoto o multiplo (doppi cognomi)
+  return { first, last };
+}
+
+const VIP_PARSED = VIP_LIST.map(splitName);
+
+function surnameTokens(str){
+  return normalize(str).split(/[\s-]+/).filter(Boolean);
+}
+
+// Regola: cognome VIP vuoto → basta il nome.
+// Altrimenti: match totale OPPURE almeno 1 token in comune (gestisce doppi cognomi stile spagnolo).
+function surnameMatches(userLast, vipLast){
+  const v = surnameTokens(vipLast);
+  if(v.length === 0) return true;
+  const u = surnameTokens(userLast);
+  if(u.length === 0) return false;
+
+  if(u.join(" ") === v.join(" ")) return true;          // match completo
+  return u.some(tok => v.includes(tok));                // almeno un token combacia
+}
+
+function isVipName(userFirst, userLast){
+  const nf = normalize(userFirst);
+  const nl = normalize(userLast);
+  return VIP_PARSED.some(v => v.first === nf && surnameMatches(nl, v.last));
+}
+
+
+// ========================
+// 4) VIP STATE & VISIBILITÀ
+// ========================
 function isVIP(){
   return localStorage.getItem("isVIP") === "true";
 }
-
 function hasIdentification(){
   return !!localStorage.getItem("guestName");
 }
-
 function applyVIPVisibility(){
-  const vipBlocks = document.querySelectorAll(".vip-only");
+  const vipBlocks    = document.querySelectorAll(".vip-only");
   const nonVipBlocks = document.querySelectorAll(".non-vip-only");
-
   if(isVIP()){
     vipBlocks.forEach(el => el.style.display = "");
     nonVipBlocks.forEach(el => el.style.display = "none");
@@ -685,52 +720,41 @@ function applyVIPVisibility(){
   }
 }
 
+
 // ========================
-// 4. MODAL CONTROL
-//    (ATTENZIONE: qui uso i TUOI ID reali nel DOM!)
+// 5) MODAL CONTROL
 // ========================
 function openLoginModal(){
   const overlay = document.getElementById("guestLoginOverlay");
-  if(overlay){
-    overlay.style.display = "flex";
-  }
+  if(overlay) overlay.style.display = "flex";
 }
-
 function closeLoginModal(){
   const overlay = document.getElementById("guestLoginOverlay");
-  if(overlay){
-    overlay.style.display = "none";
-  }
+  if(overlay) overlay.style.display = "none";
 }
-
-// Logout: cancella i dati e riapre il popup
 function doLogout(){
   localStorage.removeItem("guestName");
   localStorage.removeItem("isVIP");
-  // mostro di nuovo popup per forzare re-identificazione
   openLoginModal();
-  // dopo logout, i blocchi tornano allo stato "non loggato" (che per noi è non VIP finché non rifanno login)
   applyVIPVisibility();
-  // nel popup ora nascondiamo il bottone logout perché non ha senso prima di reinserire
   const logoutBtn = document.getElementById("guestLogoutBtn");
-  if(logoutBtn){
-    logoutBtn.style.display = "none";
-  }
+  if(logoutBtn) logoutBtn.style.display = "none";
 }
 
-// Salvataggio quando cliccano OK
+
+// ========================
+// 6) SUBMIT LOGIN
+// ========================
 function submitGuestData(){
   const firstEl = document.getElementById("guestFirst");
   const lastEl  = document.getElementById("guestLast");
   const errEl   = document.getElementById("guestError");
-
   if(!firstEl || !lastEl) return;
 
-  const rawFullName = (firstEl.value || "") + " " + (lastEl.value || "");
-  const normFullName = normalizeName(rawFullName);
+  const first = (firstEl.value || "");
+  const last  = (lastEl.value  || "");
 
-  if(!firstEl.value.trim() || !lastEl.value.trim()){
-    // se lasciano vuoto
+  if(!first.trim() || !last.trim()){
     if(errEl){
       errEl.innerHTML = "Please enter both fields.<br>Veuillez remplir les deux champs.<br>Inserisci nome e cognome.";
       errEl.style.display = "block";
@@ -748,56 +772,30 @@ function submitGuestData(){
 }
 
 
-  // Sei VIP?
-  const guestIsVIP = VIP_LIST.includes(normFullName);
-
-  // Salvo
-  localStorage.setItem("guestName", rawFullName.trim());
-  localStorage.setItem("isVIP", guestIsVIP ? "true" : "false");
-
-  // Chiudo popup
-  closeLoginModal();
-
-  // Aggiorna visibilità dei blocchi subito
-  applyVIPVisibility();
-}
-
-
 // ========================
-// 5. INIT
+// 7) INIT
 // ========================
 document.addEventListener("DOMContentLoaded", () => {
-  // Riferimenti bottoni e overlay
   const confirmBtn = document.getElementById("guestConfirmBtn");
   const logoutBtn  = document.getElementById("guestLogoutBtn");
   const overlay    = document.getElementById("guestLoginOverlay");
   const errEl      = document.getElementById("guestError");
 
-  // Se già identificato:
   if(hasIdentification()){
-    // nascondo popup
     if(overlay) overlay.style.display = "none";
-
-    // mostro il bottone logout nel popup (se riaperto)
     if(logoutBtn){
       logoutBtn.style.display = "inline-block";
       logoutBtn.addEventListener("click", doLogout);
     }
   } else {
-    // se NON identificato: apri popup subito
     if(overlay) overlay.style.display = "flex";
-
-    // nascondo eventuali errori
-    if(errEl) errEl.style.display = "none";
-
-    // logout in questa fase non serve
+    if(errEl)   errEl.style.display = "none";
     if(logoutBtn){
       logoutBtn.style.display = "none";
       logoutBtn.addEventListener("click", doLogout);
     }
   }
 
-  // collega il pulsante OK → salva nome, salva VIP, chiudi popup
   if(confirmBtn){
     confirmBtn.addEventListener("click", (e)=>{
       e.preventDefault();
@@ -805,10 +803,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Applica subito visibilità dei blocchi giusti
   applyVIPVisibility();
 });
 </script>
+
 
 
   <script>
