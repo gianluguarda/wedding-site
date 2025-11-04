@@ -738,12 +738,14 @@ function submitGuestData(){
   const firstEl = document.getElementById("guestFirst");
   const lastEl  = document.getElementById("guestLast");
   const errEl   = document.getElementById("guestError");
+
   if(!firstEl || !lastEl) return;
 
-  const first = firstEl.value || "";
-  const last  = lastEl.value || "";
+  const rawFullName = (firstEl.value || "") + " " + (lastEl.value || "");
+  const normFullName = normalizeName(rawFullName);
 
-  if(!first.trim() || !last.trim()){
+  if(!firstEl.value.trim() || !lastEl.value.trim()){
+    // se lasciano vuoto
     if(errEl){
       errEl.innerHTML = "Please enter both fields.<br>Veuillez remplir les deux champs.<br>Inserisci nome e cognome.";
       errEl.style.display = "block";
