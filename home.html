@@ -847,6 +847,113 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
+<!-- Falling White Petals (3–4s burst) -->
+<style>
+  @keyframes petal-fall {
+    0%   { transform: translate3d(var(--x,0), -10vh, 0) rotate(var(--r0,0deg)); opacity: 0; }
+    5%   { opacity: var(--op,0.9); }
+    100% { transform: translate3d(var(--xend,0), 110vh, 0) rotate(var(--r1,360deg)); opacity: 0; }
+  }
+  .petal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    pointer-events: none;
+    width: var(--sz,14px);
+    height: calc(var(--sz,14px) * 1.2);
+    /* forma "petalo" con bordi morbidi */
+    border-radius: 70% 30% 70% 30% / 60% 40% 60% 40%;
+    /* bianco con leggero rilievo */
+    background: radial-gradient(ellipse at 30% 30%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.92) 60%, rgba(255,255,255,0.8) 100%);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    will-change: transform, opacity;
+    animation: petal-fall linear forwards;
+  }
+  /* riduci o disattiva per chi preferisce meno motion */
+  @media (prefers-reduced-motion: reduce) {
+    .petal { animation-duration: 6s !important; }
+  }
+</style>
+
+<script>
+  // Tiny "plugin": startPetals({spawnForMs, maxPerSecond})
+  (function(){
+    function rand(min, max){ return Math.random()*(max-min)+min; }
+
+    function createPetal(viewW){
+      const el = document.createElement('span');
+      el.className = 'petal';
+
+      // dimensioni e opacità
+      const size = rand(10,18); // px
+      el.style.setProperty('--sz', size + 'px');
+      el.style.setProperty('--op', rand(0.7, 0.95));
+
+      // punto di partenza e “sway” orizzontale
+      const startX = rand(0, viewW);
+      const drift   = rand(-120, 120); // deviazione orizzontale
+      el.style.setProperty('--x',  startX + 'px');
+      el.style.setProperty('--xend', (startX + drift) + 'px');
+
+      // rotazioni random
+      el.style.setProperty('--r0', rand(-90, 90) + 'deg');
+      el.style.setProperty('--r1', rand(180, 1080) + 'deg');
+
+      // durata e delay per varietà
+      const dur = rand(7, 12); // s
+      const delay = rand(-2, 0); // alcuni già "in aria"
+      el.style.animationDuration = dur + 's';
+      el.style.animationDelay = delay + 's';
+
+      // rimozione a fine animazione
+      el.addEventListener('animationend', () => el.remove());
+      return el;
+    }
+
+    function startPetals(opts){
+      const settings = Object.assign({
+        spawnForMs: 3500,     // quanto tempo generare nuovi petali
+        maxPerSecond: 22,     // intensità (desktop). Su mobile scaleremo
+      }, opts || {});
+
+      // Rispetta prefers-reduced-motion
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(reduce){ settings.maxPerSecond = Math.min(6, settings.maxPerSecond); settings.spawnForMs = Math.min(1500, settings.spawnForMs); }
+
+      const isMobile = Math.max(window.innerWidth, window.innerHeight) < 820;
+      const intensity = Math.round(settings.maxPerSecond * (isMobile ? 0.6 : 1));
+
+      const start = performance.now();
+      let rafId;
+
+      (function loop(now){
+        const elapsed = now - start;
+        // genera un piccolo "burst" per frame (Poisson-like)
+        const petalsThisFrame = Math.random() < 0.9 ? 1 : 2; // variazione
+        if(elapsed <= settings.spawnForMs){
+          for(let i=0;i<petalsThisFrame;i++){
+            // probabilità in base all'intensità e al frame (~60fps)
+            if(Math.random() < intensity/60){
+              document.body.appendChild(createPetal(window.innerWidth));
+            }
+          }
+          rafId = requestAnimationFrame(loop);
+        } else {
+          cancelAnimationFrame(rafId);
+        }
+      })(performance.now());
+    }
+
+    // Esporta globalmente per riuso (es. su click di un bottone)
+    window.startPetals = startPetals;
+
+    // Avvio automatico all'ingresso pagina (3.5s)
+    document.addEventListener('DOMContentLoaded', function(){
+      startPetals({ spawnForMs: 3500, maxPerSecond: 22 });
+    });
+  })();
+</script>
 
 
   
