@@ -48,7 +48,10 @@
 .question{
   font-size:28px; margin:8px 0 18px; text-align:center; font-weight:600;
 }
-.options{ display:grid; grid-template-columns:1fr; gap:14px; max-width:720px; margin:0 auto 8px; }
+.options{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:720px; margin:14px auto 8px; }
+@media (max-width:719px){ .options{ grid-template-columns:1fr; } }
+.btn.half{ min-height:100px; }
+.btn.selected{ outline:3px solid var(--lavender-600); box-shadow:0 0 0 4px rgba(157,135,209,.15); }
 @media (min-width:720px){ .options{ grid-template-columns:1fr 1fr; } }
 .btn.half{ min-height:84px; }
 @media (min-width:720px){ .options{ grid-template-columns:1fr 1fr; } }
@@ -110,7 +113,7 @@
   <div class="options" id="options"></div>
   <div class="nav">
     <button id="prevBtn" aria-label="Previous question">⟵ Back</button>
-    <button id="nextBtn" class="primary" aria-label="Next question">Next ⟶</button>
+    <button id="nextBtn" class="primary" aria-label="Next question" disabled>Next ⟶</button>
   </div>
   <p class="footer-note">Your picks are private — we’ll reveal your team only at the end 💌</p>
 </section>
@@ -181,8 +184,8 @@
       // Title with emoji
       $('#qMeta').textContent = data.t || '';
 
-      // Clear central prompt for the split layout
-      $('#questionText').textContent = '';
+      // Small helper prompt to ensure something is visible between progress and buttons
+      $('#questionText').textContent = 'Choose one:';
 
       const cont = $('#options');
       cont.innerHTML = '';
@@ -199,16 +202,36 @@
       rightBtn.textContent = data.right;
 
       // Restore selection if already chosen
-      if (answers[index] === 0) leftBtn.classList.add('selected');
-      if (answers[index] === 1) rightBtn.classList.add('selected');
+      if (answers[index] === 0) {
+        leftBtn.classList.add('selected');
+        $('#nextBtn').disabled = false;
+      } else if (answers[index] === 1) {
+        rightBtn.classList.add('selected');
+        $('#nextBtn').disabled = false;
+      } else {
+        $('#nextBtn').disabled = true;
+      }
 
-      // Click handlers: select, highlight, enable Next (no auto-advance)
+      // Click handlers: select, highlight, enable Next
       leftBtn.addEventListener('click', () => {
         answers[index] = 0;
         leftBtn.classList.add('selected');
         rightBtn.classList.remove('selected');
         $('#nextBtn').disabled = false;
       });
+      rightBtn.addEventListener('click', () => {
+        answers[index] = 1;
+        rightBtn.classList.add('selected');
+        leftBtn.classList.remove('selected');
+        $('#nextBtn').disabled = false;
+      });
+
+      cont.appendChild(leftBtn);
+      cont.appendChild(rightBtn);
+
+      $('#prevBtn').disabled = index === 0;
+      updateProgress();
+    });
       rightBtn.addEventListener('click', () => {
         answers[index] = 1;
         rightBtn.classList.add('selected');
