@@ -92,23 +92,27 @@
     .hidden{ display:none !important; }
 
 .exit-wrap{
-  text-align:left;
-  padding:8px 28px 0;
+  display:flex;
+  justify-content:center;  /* centra orizzontalmente */
+  padding:12px 0 0;
 }
+
 .exit-btn{
   background:#fff;
   border:1px solid rgba(157,135,209,.35);
   border-radius:14px;
-  padding:8px 14px;
+  padding:8px 16px;
   font-size:16px;
   color:var(--muted);
   cursor:pointer;
   transition:all .2s ease;
+  box-shadow:0 2px 6px rgba(157,135,209,.1);
 }
+
 .exit-btn:hover{
   background:#f7f1ff;
   color:var(--ink);
-  box-shadow:0 2px 6px rgba(157,135,209,.2);
+  box-shadow:0 4px 12px rgba(157,135,209,.15);
 }
 
     
@@ -160,7 +164,7 @@
       </section>
 
     <div class="exit-wrap">
-  <button id="exitBtn" class="exit-btn" aria-label="Exit game">⟵ Back to Home</button>
+  <button id="exitBtn" class="exit-btn" aria-label="Exit game">EXIT</button>
 </div>
 
   </main>
