@@ -37,7 +37,7 @@
       color:var(--lavender-600);
       text-align:center;
     }
-    .subtitle{ text-align:center; margin:0; color:var(--muted); font-size:18px; }
+    .subtitle{ text-align:center; margin:0; color:var(--muted); font-size:20px; }
 
     .progress-wrap{ padding:12px 28px 0; }
     .progress{
@@ -105,7 +105,7 @@
 <body>
   <main class="card" role="main" aria-labelledby="game-title">
     <header>
-      <h1 id="game-title" class="title">Team Cha 💜 vs Team Gianlu 🧢</h1>
+      <h1 id="game-title" class="title">Vibe Cha 💜 vs Vibe Gianlu 🧢</h1>
       <p class="subtitle">This or That — Pick your vibe. Discover your team at the end!</p>
     </header>
 
@@ -122,7 +122,6 @@
         <button id="prevBtn" aria-label="Previous question">⟵ Back</button>
         <button id="nextBtn" class="primary" aria-label="Next question">Next ⟶</button>
       </div>
-      <p class="footer-note">Your picks are private — we’ll reveal your team only at the end 💌</p>
     </section>
 
     <section class="content result" id="result">
@@ -154,18 +153,18 @@
     // --- Data model ---------------------------------------------------------
     const QUESTIONS = [
       { t: "🎬 Movies", left: "I fall asleep after 10 minutes", right: "I watch it till the end" },
-      { t: "😴 Sleep habits", left: "I’m asleep instantly", right: "I count sheep for an hour" },
       { t: "🛏️ Bed", left: "Bed must be made", right: "Who cares — I’ll get back in tonight" },
       { t: "🪥 Toothpaste", left: "Squeeze from the bottom", right: "Squeeze from the middle" },
-      { t: "💧 Hydration", left: "First glass of water at night", right: "2L of water a day, no excuses" },
-      { t: "🍳 Cooking", left: "I cook", right: "I get cooked for" },
+      { t: "💧 Hydration", left: "Sometimes the first glass is in the afternoon", right: "2L of water a day, no excuses" },
+      { t: "🍳 Cooking", left: "I cook, and I like", right: "Someone else cook for me, and I like" },
       { t: "✉️ Emails", left: "I write it in one go", right: "I reread it 10 times before sending" },
       { t: "🧳 Packing", left: "30 minutes before", right: "One week ahead" },
       { t: "⏱️ Eating pace", left: "I finish first", right: "People wait for me" },
       { t: "🏔️ / 🏖️ Outdoors", left: "Mountain trek", right: "Beach day" },
-      { t: "💳 Prices", left: "Discover the price when paying", right: "Check price first" },
+      { t: "💳 Prices", left: "Check price first" , right: "Discover the price when paying" },
+      { t: "😴 Sleep habits", left: "I’m asleep instantly", right: "I count sheep for an hour" },
       { t: "☎️ Parents call", left: "2‑minute call (if I answer)", right: "2‑hour call" },
-      { t: "🎿 Ski day", left: "Sandwiches in the backpack", right: "Lunch in the mountain hut" },
+      { t: "🎿 Ski day", left: "All-day skipass and sandwiches in the backpack", right: "2-hours skipass, and lunch in the mountain hut" },
       { t: "🎢 Adrenaline", left: "Bungee jump", right: "Not even if you pay me" },
     ];
 
