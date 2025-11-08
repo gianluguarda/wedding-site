@@ -90,6 +90,28 @@
     .share{ margin-top:14px; }
 
     .hidden{ display:none !important; }
+
+.exit-wrap{
+  text-align:left;
+  padding:8px 28px 0;
+}
+.exit-btn{
+  background:#fff;
+  border:1px solid rgba(157,135,209,.35);
+  border-radius:14px;
+  padding:8px 14px;
+  font-size:16px;
+  color:var(--muted);
+  cursor:pointer;
+  transition:all .2s ease;
+}
+.exit-btn:hover{
+  background:#f7f1ff;
+  color:var(--ink);
+  box-shadow:0 2px 6px rgba(157,135,209,.2);
+}
+
+    
   </style>
 </head>
 <body>
@@ -327,6 +349,12 @@
     }
     setTimeout(() => { feedback.textContent = ''; }, 3200);
   });
+
+
+  document.getElementById('exitBtn').addEventListener('click', () => {
+  window.location.href = 'https://www.charlottegianluca.it/home.html'; // <-- metti qui il link della tua home
+});
+
 
   // Init
   shuffleOrder();
