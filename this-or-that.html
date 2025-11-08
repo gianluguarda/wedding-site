@@ -52,6 +52,9 @@
 @media (max-width:719px){ .options{ grid-template-columns:1fr; } }
 .btn.half{ min-height:100px; }
 .btn.selected{ outline:3px solid var(--lavender-600); box-shadow:0 0 0 4px rgba(157,135,209,.15); }
+/* shake feedback */
+@keyframes shake { 10%, 90% {transform: translateX(-1px);} 20%,80% {transform: translateX(2px);} 30%,50%,70% {transform: translateX(-4px);} 40%,60% {transform: translateX(4px);} }
+.need-pick { animation: shake .4s; }
 @media (min-width:720px){ .options{ grid-template-columns:1fr 1fr; } }
 .btn.half{ min-height:84px; }
 @media (min-width:720px){ .options{ grid-template-columns:1fr 1fr; } }
@@ -113,7 +116,7 @@
   <div class="options" id="options"></div>
   <div class="nav">
     <button id="prevBtn" aria-label="Previous question">⟵ Back</button>
-    <button id="nextBtn" class="primary" aria-label="Next question" disabled>Next ⟶</button>
+    <button id="nextBtn" class="primary" aria-label="Next question">Next ⟶</button>
   </div>
   <p class="footer-note">Your picks are private — we’ll reveal your team only at the end 💌</p>
 </section>
@@ -181,16 +184,12 @@
 
     function renderQuestion(){
       const data = QUESTIONS[index];
-      // Title with emoji
       $('#qMeta').textContent = data.t || '';
-
-      // Small helper prompt to ensure something is visible between progress and buttons
       $('#questionText').textContent = 'Choose one:';
 
       const cont = $('#options');
       cont.innerHTML = '';
 
-      // Two fixed halves: LEFT (Gianlu) and RIGHT (Cha)
       const leftBtn = document.createElement('button');
       leftBtn.className = 'btn half left';
       leftBtn.type = 'button';
@@ -201,11 +200,20 @@
       rightBtn.type = 'button';
       rightBtn.textContent = data.right;
 
-      // Restore selection if already chosen
-      if (answers[index] === 0) {
-        leftBtn.classList.add('selected');
-        $('#nextBtn').disabled = false;
-      } else if (answers[index] === 1) {
+      // Restore selection highlight
+      if (answers[index] === 0) leftBtn.classList.add('selected');
+      if (answers[index] === 1) rightBtn.classList.add('selected');
+
+      // Click = select and auto-advance
+      leftBtn.addEventListener('click', () => { answers[index] = 0; goNext(); });
+      rightBtn.addEventListener('click', () => { answers[index] = 1; goNext(); });
+
+      cont.appendChild(leftBtn);
+      cont.appendChild(rightBtn);
+
+      $('#prevBtn').disabled = index === 0;
+      updateProgress();
+    } else if (answers[index] === 1) {
         rightBtn.classList.add('selected');
         $('#nextBtn').disabled = false;
       } else {
@@ -328,8 +336,16 @@
 
     // --- Events -------------------------------------------------------------
     $('#nextBtn').addEventListener('click', () => {
-      if (answers[index] === null) return; // require a pick
+      if (answers[index] === null) {
+        const cont = $('#options');
+        cont.classList.remove('need-pick');
+        // trigger reflow for animation restart
+        void cont.offsetWidth;
+        cont.classList.add('need-pick');
+        return;
+      }
       goNext();
+    });
     });
     $('#prevBtn').addEventListener('click', goPrev);
     $('#restartBtn').addEventListener('click', () => {
