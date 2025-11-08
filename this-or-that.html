@@ -93,8 +93,8 @@
 
 .exit-wrap{
   display:flex;
-  justify-content:center;  /* centra orizzontalmente */
-  padding:20px 0 0;
+  justify-content:center;
+  padding:20px 0 32px; /* ↑ spazio sotto visibile sempre */
 }
 
 .exit-btn{
@@ -107,13 +107,13 @@
   cursor:pointer;
   transition:all .2s ease;
   box-shadow:0 2px 6px rgba(157,135,209,.1);
+  margin-bottom:0; /* niente qui */
 }
 
 .exit-btn:hover{
   background:#f7f1ff;
   color:var(--ink);
   box-shadow:0 4px 12px rgba(157,135,209,.15);
- margin-bottom:16px; /* spazio extra sotto il bottone */
 }
 
     
