@@ -3,350 +3,300 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vibe Cha vs Vibe Gianlu</title>
+  <title>Team Cha 💜 vs Team Gianlu 🧢 – This or That</title>
   <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{
-      --lavender:#bca9e0;      /* soft lavender */
-      --lavender-600:#9d87d1;  /* darker shade */
-      --beige:#f7f3eb;         /* warm beige background */
-      --ink:#2a2438;           /* deep ink for text */
-      --muted:#7b6f8e;         /* muted for subtext */
-      --white:#ffffff;         /* clean white */
+      --lavender:#bca9e0;
+      --lavender-600:#9d87d1;
+      --beige:#f7f3eb;
+      --ink:#2a2438;
+      --muted:#7b6f8e;
+      --white:#ffffff;
     }
-
-    *, *::before, *::after{ box-sizing:border-box; }
-    html, body { height:100%; }
+    *{ box-sizing: border-box; }
+    html, body{ height:100%; }
     body{
-      margin:0;
-      background:var(--beige);
+      margin:0; background:var(--beige);
       color:var(--ink);
-      font-family:"Cormorant", serif;
-      line-height:1.4;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
+      font-family:'Cormorant', serif;
+      display:flex; align-items:center; justify-content:center; padding:24px;
     }
-
     .card{
-      width:min(960px, 100%);
+      width:min(880px, 100%);
       background:var(--white);
-      border:1px solid rgba(0,0,0,.06);
-      border-radius:24px;
-      box-shadow:0 10px 30px rgba(42,36,56,.08);
-      overflow:hidden;
+      border-radius:24px; box-shadow:0 10px 30px rgba(42,36,56,.12);
+      overflow:hidden; border:1px solid rgba(157,135,209,.18);
     }
-
     header{
-      padding:28px 28px 14px;
-      text-align:center;
-      border-bottom:1px solid rgba(0,0,0,.06);
-      background:linear-gradient(180deg, var(--lavender) 0%, #d6cbed 100%);
-      color:#1f1536;
+      padding:28px 28px 16px;
+      background:linear-gradient(135deg, var(--beige), #fff 40%, var(--beige));
     }
-    .subtitle{
-      font-family:"Allura", cursive;
-      font-size:30px;
-      opacity:.95;
-    }
-    h1{
-      margin:6px 0 0;
-      font-size:40px;
-      letter-spacing:.3px;
-      font-weight:600;
-    }
-
-    .content{ padding:22px; }
-
-    .meta{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      margin-bottom:16px;
-      color:var(--muted);
-      font-size:18px;
-    }
-
-    .pill{
-      background:var(--beige);
-      border:1px solid rgba(0,0,0,.06);
-      border-radius:999px;
-      padding:6px 12px;
-    }
-
-    .question-box{
-      border:1px solid rgba(0,0,0,.06);
-      border-radius:20px;
-      padding:22px;
-      margin:12px 0 18px;
-      background:#fff;
-    }
-    .question{
-      font-size:28px;
-      margin:0 0 18px;
+    .title{
+      font-family:'Allura', cursive; font-size:48px; line-height:1; margin:0 0 8px;
+      color:var(--lavender-600);
       text-align:center;
     }
+    .subtitle{ text-align:center; margin:0; color:var(--muted); font-size:20px; }
 
-    .options{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-
-    .option{
-      border:2px solid var(--lavender);
-      border-radius:18px;
-      padding:18px;
-      text-align:center;
-      font-size:22px;
-      cursor:pointer;
-      user-select:none;
-      transition:transform .06s ease, box-shadow .06s ease, background .2s ease, border-color .2s ease;
-      background:#fff;
-    }
-    .option:hover{ transform:translateY(-1px); box-shadow:0 8px 20px rgba(188,169,224,.3); }
-    .option:active{ transform:translateY(0); }
-    .option.left { border-color: var(--lavender-600); }
-    .option.right{ border-color: var(--lavender); }
-
-    .footer-actions{
-      display:flex; gap:10px; justify-content:center; margin-top:18px; flex-wrap:wrap;
-    }
-    button{
-      border:none; cursor:pointer; padding:10px 14px; border-radius:12px; font-size:18px;
-      background:var(--lavender-600); color:#fff; transition:filter .2s ease;
-    }
-    button.secondary{ background:#efe9fb; color:#3b2f5e; border:1px solid #e1d9f8; }
-    button:hover{ filter:brightness(.95); }
-
+    .progress-wrap{ padding:12px 28px 0; }
     .progress{
-      height:8px; background:#efe9fb; border-radius:999px; overflow:hidden; margin:12px 0 6px;
+      width:100%; height:10px; background:#efeaf8; border-radius:999px; overflow:hidden; position:relative;
     }
-    .bar{ height:100%; width:0%; background:var(--lavender-600); transition:width .25s ease; }
+    .progress > span{ display:block; height:100%; width:0%; background:var(--lavender-600); transition:width .35s ease; }
+    .progress-text{ text-align:right; font-size:14px; color:var(--muted); margin-top:6px; }
 
-    .result{
-      text-align:center; padding:8px 10px 2px;
-    }
-    .result h2{ font-size:34px; margin:0 0 6px; }
-    .badges{ display:flex; gap:10px; justify-content:center; margin:10px 0 12px; flex-wrap:wrap; }
-    .badge{ border:1px solid rgba(0,0,0,.08); background:var(--beige); padding:6px 10px; border-radius:999px; font-size:16px; }
+    .content{ padding:24px 28px 32px; }
 
-    .percent-wrap{ display:flex; gap:10px; align-items:center; justify-content:center; margin-top:14px; }
-    .pct{
-      min-width:120px; border:1px solid rgba(0,0,0,.08); background:#fff; padding:8px 10px; border-radius:14px; font-size:20px;
-    }
+    /* question header + two big split buttons */
+    .qmeta{ text-align:center; font-size:28px; color:var(--muted); margin-bottom:10px; }
+    .question{ font-size:28px; margin:8px 0 18px; text-align:center; font-weight:600; }
+    .options{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:720px; margin:14px auto 8px; }
+    @media (max-width:719px){ .options{ grid-template-columns:1fr; } }
 
-    footer{
-      padding:16px 20px 22px; text-align:center; color:var(--muted); font-size:16px;
+    .btn{
+      appearance:none; border:none; cursor:pointer; border-radius:16px; padding:18px 16px; font-size:18px; line-height:1.2;
+      background:#faf7ff; color:var(--ink); box-shadow:0 4px 14px rgba(157,135,209,.18);
+      transition: transform .06s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+      border:1px solid rgba(157,135,209,.22);
     }
+    .btn.half{ min-height:100px; }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(157,135,209,.22); background:#f7f1ff; }
+    .btn:active{ transform:translateY(0); }
+    .btn.selected{ outline:3px solid var(--lavender-600); box-shadow:0 0 0 4px rgba(157,135,209,.15); background:#efeaf8; border-color: var(--lavender-600); }
 
-    @media (max-width:640px){
-      h1{ font-size:32px; }
-      .question{ font-size:24px; }
-      .option{ font-size:20px; }
+    /* shake feedback when pressing Next without a pick */
+    @keyframes shake { 10%, 90% {transform: translateX(-1px);} 20%,80% {transform: translateX(2px);} 30%,50%,70% {transform: translateX(-4px);} 40%,60% {transform: translateX(4px);} }
+    .need-pick { animation: shake .4s; }
+
+    .nav{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:18px; }
+    .nav button{
+      padding:12px 16px; border-radius:14px; border:1px solid rgba(157,135,209,.35);
+      background:var(--white); font-size:16px; cursor:pointer; color:var(--ink);
     }
+    .nav button.primary{ background:var(--lavender-600); color:#fff; border-color:transparent; }
+    .nav button[disabled]{ opacity:.45; cursor:not-allowed; }
+
+    .footer-note{ text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+
+    /* Result */
+    .result{ display:none; text-align:center; padding:8px 0; }
+    .score-wrap{ display:flex; align-items:center; gap:8px; margin:18px auto; max-width:520px; }
+    .bar{ height:16px; width:100%; background:#efeaf8; border-radius:999px; overflow:hidden; display:flex; }
+    .bar .cha{ background:#f3d8ee; height:100%; width:50%; transition:width .6s ease; }
+    .bar .gianlu{ background:#cfd4ff; height:100%; width:50%; transition:width .6s ease; }
+    .legend{ display:flex; justify-content:space-between; font-size:16px; color:var(--muted); }
+    .pill{ display:inline-block; padding:6px 10px; background:#efeaf8; border-radius:999px; font-size:14px; color:var(--muted); margin:4px; }
+    .share{ margin-top:14px; }
+
+    .hidden{ display:none !important; }
   </style>
 </head>
 <body>
-  <div class="card" id="app">
+  <main class="card" role="main" aria-labelledby="game-title">
     <header>
-      <div class="subtitle">Cha & Gianlu</div>
-      <h1>Vibe Cha vs Vibe Gianlu</h1>
+      <h1 id="game-title" class="title">Vibe Cha 💜 vs Vibe Gianlu 🧢</h1>
+      <p class="subtitle">This or That — Pick your vibe. Discover your team at the end!</p>
     </header>
 
-    <div class="content">
-      <div class="meta">
-        <div class="pill" id="counterPill">Question <span id="qIndex">1</span>/<span id="qTotal">10</span></div>
-        <div class="pill">Left = Gianlu 🧢 · Right = Cha 💜</div>
-      </div>
-
-      <div class="progress"><div class="bar" id="progressBar"></div></div>
-
-      <div class="question-box" id="qBox">
-        <p class="question" id="question">Loading…</p>
-        <div class="options">
-          <div class="option left" id="optLeft"></div>
-          <div class="option right" id="optRight"></div>
-        </div>
-      </div>
-
-      <div class="footer-actions">
-        <button class="secondary" id="restartBtn" type="button">Restart (shuffle)</button>
-        <button id="shareBtn" type="button">Share result</button>
-      </div>
-
-      <div class="result" id="result" hidden>
-        <h2 id="winner"></h2>
-        <div class="percent-wrap">
-          <div class="pct" id="gPct">Gianlu: 0%</div>
-          <div class="pct" id="cPct">Cha: 0%</div>
-        </div>
-        <div class="badges" id="summary"></div>
-      </div>
+    <div class="progress-wrap">
+      <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+      <div class="progress-text" id="progressText">Question 1 of 14</div>
     </div>
 
-    <footer>
-      Crafted with 💜 & lavender vibes
-    </footer>
-  </div>
+    <section class="content" id="quiz">
+      <div class="qmeta" id="qMeta"></div>
+      <div class="question" id="questionText"></div>
+      <div class="options" id="options"></div>
+      <div class="nav">
+        <button id="prevBtn" aria-label="Previous question">⟵ Back</button>
+        <button id="nextBtn" class="primary" aria-label="Next question">Next ⟶</button>
+      </div>
+      <p class="footer-note">Your picks are private — we’ll reveal your team only at the end 💌</p>
+    </section>
+
+    <section class="content result" id="result">
+      <h2 class="question" style="margin-top:0">Your Result</h2>
+      <div class="score-wrap">
+        <div class="bar" aria-hidden="true">
+          <div class="gianlu" id="gBar" title="Gianlu"></div>
+          <div class="cha" id="cBar" title="Cha"></div>
+        </div>
+      </div>
+      <div class="legend" id="legend"> 
+        <span>🧢 Gianlu: <strong id="gPct">50%</strong></span>
+        <span>💜 Cha: <strong id="cPct">50%</strong></span>
+      </div>
+      <p id="summaryText" style="font-size:20px; margin-top:10px"></p>
+      <div id="traits" style="margin:8px 0 2px"></div>
+
+      <div class="share">
+        <button id="shareBtn" class="primary" style="margin-right:8px">Share result</button>
+        <button id="restartBtn">Play again</button>
+        <div id="shareFeedback" class="footer-note" aria-live="polite" style="margin-top:8px; min-height:1.2em"></div>
+      </div>
+      <p class="footer-note">Psst… Want to compare with the couple? They’ll see the scoreboard at the wedding 😉</p>
+    </section>
+  </main>
 
   <script>
-    // ------------------ Data ------------------
-    // NOTE: Keep left = Gianlu, right = Cha. Mapping decides who each option belongs to.
-    const QUESTIONS_MASTER = [
-      { q:"Morning energy?", left:"Sunrise run", right:"Slow coffee ritual", mapLeft:"g", mapRight:"c" },
-      { q:"Trip style?", left:"Spontaneous road-trip", right:"Planned city-break", mapLeft:"g", mapRight:"c" },
-      { q:"Dinner hero?", left:"Pasta night", right:"Sushi date", mapLeft:"g", mapRight:"c" },
-      { q:"Weekend mood?", left:"Mountains & hikes", right:"Art museums", mapLeft:"g", mapRight:"c" },
-      { q:"Holiday home?", left:"Sea-view cottage", right:"Provençal mas", mapLeft:"g", mapRight:"c" },
-      { q:"Romance cue?", left:"Surprise getaway", right:"Handwritten note", mapLeft:"g", mapRight:"c" },
-      { q:"Party move?", left:"DJ requests", right:"Dance floor queen", mapLeft:"g", mapRight:"c" },
-      { q:"Travel bag?", left:"Backpack", right:"Carry-on with cubes", mapLeft:"g", mapRight:"c" },
-      { q:"Evening chill?", left:"Tennis highlights", right:"Book + tea", mapLeft:"g", mapRight:"c" },
-      { q:"Sweet tooth?", left:"Tiramisù", right:"Macarons", mapLeft:"g", mapRight:"c" }
+    // --- Data model ---------------------------------------------------------
+    const QUESTIONS = [
+      { t: "🎬 Movies", left: "I fall asleep after 10 minutes", right: "I watch it till the end" },
+      { t: "🛏️ Bed", left: "Bed must be made", right: "Who cares — I’ll get back in tonight" },
+      { t: "🪥 Toothpaste", left: "Squeeze from the bottom", right: "Squeeze from the middle" },
+      { t: "💧 Hydration", left: "Sometimes the first glass is in the afternoon", right: "2L of water a day, no excuses" },
+      { t: "🍳 Cooking", left: "I cook, and I like", right: "Someone else cook for me, and I like" },
+      { t: "✉️ Emails", left: "I write it in one go", right: "I reread it 10 times before sending" },
+      { t: "🧳 Packing", left: "30 minutes before", right: "One week ahead" },
+      { t: "⏱️ Eating pace", left: "I finish first", right: "People wait for me" },
+      { t: "🏔️ / 🏖️ Outdoors", left: "Mountain trek", right: "Beach day" },
+      { t: "💳 Prices", left: "Check price first" , right: "Discover the price when paying" },
+      { t: "😴 Sleep habits", left: "I’m asleep instantly", right: "I count sheep for an hour" },
+      { t: "☎️ Parents call", left: "2-minute call (if I answer)", right: "2-hour call" },
+      { t: "🎿 Ski day", left: "All-day skipass and sandwiches in the backpack", right: "2-hours skipass, and lunch in the mountain hut" },
+      { t: "🎢 Adrenaline", left: "Bungee jump", right: "Not even if you pay me" }
     ];
 
-    // ------------------ Utilities ------------------
-    function shuffleInPlace(arr){
-      // Fisher–Yates for unbiased random order
-      for(let i = arr.length - 1; i > 0; i--){
+    // --- State --------------------------------------------------------------
+    // Keep QUESTIONS immutable; shuffle an index order so left/right mapping stays intact
+    let index = 0;
+    let QUESTION_ORDER = [];
+    const answers = Array(QUESTIONS.length).fill(null); // 0 = left (Gianlu), 1 = right (Cha)
+    let currentShareText = '';
+
+    function shuffleOrder(){
+      QUESTION_ORDER = Array.from({length: QUESTIONS.length}, (_, i) => i);
+      for (let i = QUESTION_ORDER.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+        [QUESTION_ORDER[i], QUESTION_ORDER[j]] = [QUESTION_ORDER[j], QUESTION_ORDER[i]];
       }
-      return arr;
+    }
+    function currentQuestion(){ return QUESTIONS[QUESTION_ORDER[index]]; }
+
+    // --- Helpers ------------------------------------------------------------
+    const $ = sel => document.querySelector(sel);
+
+    function updateProgress(){
+      const pct = (index / QUESTIONS.length) * 100;
+      $('#progressBar').style.width = pct + '%';
+      $('#progressText').textContent = `Question ${index+1} of ${QUESTIONS.length}`;
     }
 
-    // ------------------ State ------------------
-    let state = {
-      questions: [],    // will be a shuffled copy of QUESTIONS_MASTER
-      idx: 0,
-      gScore: 0,
-      cScore: 0,
-      answers: []       // keep a compact log like {i, pick:"g"|"c"}
-    };
+    function renderQuestion(){
+      const data = currentQuestion();
+      $('#qMeta').textContent = data.t || '';
+      $('#questionText').textContent = '';
 
-    // ------------------ DOM ------------------
-    const qIndex = document.getElementById('qIndex');
-    const qTotal = document.getElementById('qTotal');
-    const progressBar = document.getElementById('progressBar');
-    const questionEl = document.getElementById('question');
-    const optLeft = document.getElementById('optLeft');
-    const optRight = document.getElementById('optRight');
-    const resultBox = document.getElementById('result');
-    const gPct = document.getElementById('gPct');
-    const cPct = document.getElementById('cPct');
-    const winner = document.getElementById('winner');
-    const summary = document.getElementById('summary');
-    const restartBtn = document.getElementById('restartBtn');
-    const shareBtn = document.getElementById('shareBtn');
+      const cont = $('#options');
+      cont.innerHTML = '';
 
-    qTotal.textContent = QUESTIONS_MASTER.length;
+      const leftBtn = document.createElement('button');
+      leftBtn.className = 'btn half left';
+      leftBtn.type = 'button';
+      leftBtn.textContent = data.left;
 
-    // ------------------ Logic ------------------
-    function startGame(){
-      // fresh shuffled copy every time
-      state.questions = shuffleInPlace([...QUESTIONS_MASTER]);
-      state.idx = 0;
-      state.gScore = 0;
-      state.cScore = 0;
-      state.answers = [];
-      resultBox.hidden = true;
-      document.getElementById('qBox').hidden = false;
-      updateUI();
+      const rightBtn = document.createElement('button');
+      rightBtn.className = 'btn half right';
+      rightBtn.type = 'button';
+      rightBtn.textContent = data.right;
+
+      if (answers[index] === 0) leftBtn.classList.add('selected');
+      if (answers[index] === 1) rightBtn.classList.add('selected');
+
+      leftBtn.addEventListener('click', () => { answers[index] = 0; goNext(); });
+      rightBtn.addEventListener('click', () => { answers[index] = 1; goNext(); });
+
+      cont.appendChild(leftBtn);
+      cont.appendChild(rightBtn);
+
+      $('#prevBtn').disabled = index === 0;
+      updateProgress();
     }
 
-    function updateUI(){
-      const total = state.questions.length;
-      const i = state.idx;
-      qIndex.textContent = Math.min(i+1, total);
-      const pct = Math.floor((i/total) * 100);
-      progressBar.style.width = pct + '%';
-
-      if(i >= total){
-        showResult();
+    function goNext(){
+      if (answers[index] === null) {
+        const cont = $('#options');
+        cont.classList.remove('need-pick');
+        void cont.offsetWidth; // restart animation
+        cont.classList.add('need-pick');
         return;
       }
-
-      const item = state.questions[i];
-      questionEl.textContent = item.q;
-      optLeft.textContent = item.left;
-      optRight.textContent = item.right;
-
-      // enable clicks
-      optLeft.onclick = () => pick('g');
-      optRight.onclick = () => pick('c');
-    }
-
-    function pick(side){
-      const item = state.questions[state.idx];
-      // safety: respect mapping (left:Gianlu, right:Cha)
-      if(side === 'g'){ state.gScore++; state.answers.push({i:state.idx, pick:'g', q:item.q}); }
-      if(side === 'c'){ state.cScore++; state.answers.push({i:state.idx, pick:'c', q:item.q}); }
-      state.idx++;
-      updateUI();
-    }
-
-    function showResult(){
-      // lock question box
-      document.getElementById('qBox').hidden = true;
-
-      const total = state.questions.length;
-      const g = state.gScore;
-      const c = state.cScore;
-      const gPerc = Math.round((g/total)*100);
-      const cPerc = Math.round((c/total)*100);
-
-      gPct.textContent = `Gianlu: ${gPerc}%`;
-      cPct.textContent = `Cha: ${cPerc}%`;
-      winner.textContent = (gPerc === cPerc)
-        ? "You're a perfect blend of Cha & Gianlu!"
-        : (gPerc > cPerc ? "You vibe more like Gianlu 🧢" : "You vibe more like Cha 💜");
-
-      // quick playful summary (top 3 picks)
-      summary.innerHTML = '';
-      const pickedG = state.answers.filter(a => a.pick==='g').slice(0,3).map(a=>a.q);
-      const pickedC = state.answers.filter(a => a.pick==='c').slice(0,3).map(a=>a.q);
-      if(pickedG.length){
-        const b = document.createElement('div');
-        b.className = 'badge';
-        b.textContent = `Gianlu picks: ${pickedG.join(' • ')}`;
-        summary.appendChild(b);
+      if (index < QUESTIONS.length - 1){
+        index++;
+        renderQuestion();
+      } else {
+        finish();
       }
-      if(pickedC.length){
-        const b = document.createElement('div');
-        b.className = 'badge';
-        b.textContent = `Cha picks: ${pickedC.join(' • ')}`;
-        summary.appendChild(b);
-      }
-
-      // full bar
-      progressBar.style.width = '100%';
-      qIndex.textContent = total;
-
-      resultBox.hidden = false;
     }
 
-    restartBtn.addEventListener('click', startGame);
+    function goPrev(){
+      if (index > 0){ index--; renderQuestion(); }
+    }
 
-    shareBtn.addEventListener('click', async () => {
-      const url = location.href.split('#')[0];
-      const title = 'Vibe Cha vs Vibe Gianlu';
-      const text = winner.textContent + ` — ${gPct.textContent} · ${cPct.textContent}`;
-      try{
-        if(navigator.share){
-          await navigator.share({ title, text, url });
+    function finish(){
+      let g = 0, c = 0;
+      answers.forEach(v => { if (v === 0) g++; else c++; });
+      const total = g + c;
+      const gPct = Math.round((g/total)*100);
+      const cPct = 100 - gPct;
+
+      $('#gPct').textContent = gPct + '%';
+      $('#cPct').textContent = cPct + '%';
+      $('#gBar').style.width = gPct + '%';
+      $('#cBar').style.width = cPct + '%';
+
+      const summary = gPct > cPct
+        ? "You’re more Team Gianlu 🧢 — chill, spontaneous, and a bit last-minute."
+        : gPct < cPct
+          ? "You’re more Team Cha 💜 — organized, caring, and always on top of things."
+          : "It’s a perfect tie — a balanced duo of spontaneity and elegance!";
+      $('#summaryText').textContent = summary;
+
+      currentShareText = `I got ${gPct}% Gianlu 🧢 and ${cPct}% Cha 💜 on “Team Cha vs Team Gianlu – This or That”. ${summary} ${window.location.href}`;
+
+      $('#quiz').classList.add('hidden');
+      $('#result').style.display = 'block';
+      $('#progressBar').style.width = '100%';
+      $('#progressText').textContent = 'All done!';
+    }
+
+    // --- Events -------------------------------------------------------------
+    $('#nextBtn').addEventListener('click', goNext);
+    $('#prevBtn').addEventListener('click', goPrev);
+    $('#restartBtn').addEventListener('click', () => {
+      index = 0;
+      for (let i=0;i<answers.length;i++) answers[i] = null;
+      shuffleOrder(); // shuffle again on replay
+      $('#result').style.display = 'none';
+      $('#quiz').classList.remove('hidden');
+      $('#shareFeedback').textContent = '';
+      renderQuestion();
+    });
+    $('#shareBtn').addEventListener('click', async () => {
+      const feedback = $('#shareFeedback');
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: 'Team Cha vs Team Gianlu', text: currentShareText });
+          feedback.textContent = 'Shared!';
+        } else if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(currentShareText);
+          feedback.textContent = 'Copied to clipboard!';
         } else {
-          await navigator.clipboard.writeText(`${title}\n${text}\n${url}`);
-          shareBtn.textContent = 'Copied!';
-          setTimeout(()=>shareBtn.textContent='Share result', 1200);
+          const ta = document.createElement('textarea');
+          ta.value = currentShareText; document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); document.body.removeChild(ta);
+          feedback.textContent = 'Copied to clipboard!';
         }
-      }catch(e){ /* user cancelled */ }
+      } catch (e) {
+        feedback.textContent = 'Could not share. Try copying manually.';
+      }
+      setTimeout(() => { feedback.textContent = ''; }, 3200);
     });
 
-    // kick off
-    startGame();
+    // Init
+    shuffleOrder();
+    renderQuestion();
   </script>
 </body>
 </html>
