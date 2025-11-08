@@ -1,0 +1,15 @@
+/* Nascondi le altre lingue in base alla classe su <html> */
+html.lang-it .en, html.lang-it .fr { display:none !important; }
+html.lang-en .it, html.lang-en .fr { display:none !important; }
+html.lang-fr .it, html.lang-fr .en { display:none !important; }
+
+/* Stili base del modal (iniettato via JS) */
+#lang-gate{ position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.35); z-index:9999; }
+#lang-gate .box{ background:#fff; padding:22px 20px; border-radius:16px; min-width:280px;
+  text-align:center; font-family:Cormorant, serif; box-shadow:0 10px 30px rgba(0,0,0,.15); }
+#lang-gate .actions{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:12px; }
+#lang-gate button{ border:1px solid #ccc; padding:8px 12px; border-radius:10px; cursor:pointer; background:#fff; }
+
+/* Optional: switcher footer */
+.lang-switch{ text-align:center; margin-top:12px; font-family:Cormorant, serif; }
