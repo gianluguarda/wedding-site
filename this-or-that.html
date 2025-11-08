@@ -277,10 +277,10 @@
     $('#cBar').style.width = cPct + '%';
 
     const summary = gPct > cPct
-      ? "You’re more Team Gianlu 🧢 — chill, spontaneous, and a bit last-minute."
+      ? "You’re more Team Gianlu 🧢"
       : gPct < cPct
-        ? "You’re more Team Cha 💜 — organized, caring, and always on top of things."
-        : "It’s a perfect tie — a balanced duo of spontaneity and elegance!";
+        ? "You’re more Team Cha 💜"
+        : "It’s a perfect tie!";
     $('#summaryText').textContent = summary;
 
     currentShareText = `I got ${gPct}% Gianlu 🧢 and ${cPct}% Cha 💜 on “Team Cha vs Team Gianlu – This or That”. ${summary} ${window.location.href}`;
