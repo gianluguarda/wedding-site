@@ -169,9 +169,26 @@
     ];
 
     // --- State --------------------------------------------------------------
-    let index = 0;
-    const answers = Array(QUESTIONS.length).fill(null); // 0 = left (Gianlu), 1 = right (Cha)
-    let currentShareText = '';
+// --- State --------------------------------------------------------------
+// We'll keep QUESTIONS immutable and create a shuffled order of indices so left/right mapping stays intact
+let index = 0;
+let QUESTION_ORDER = [];
+const answers = Array(QUESTIONS.length).fill(null); // 0 = left (Gianlu), 1 = right (Cha) in the displayed order
+let currentShareText = '';
+
+
+function shuffleOrder(){
+QUESTION_ORDER = Array.from({length: QUESTIONS.length}, (_, i) => i);
+for (let i = QUESTION_ORDER.length - 1; i > 0; i--) {
+const j = Math.floor(Math.random() * (i + 1));
+[QUESTION_ORDER[i], QUESTION_ORDER[j]] = [QUESTION_ORDER[j], QUESTION_ORDER[i]];
+}
+}
+
+
+function currentQuestion(){
+return QUESTIONS[QUESTION_ORDER[index]];
+}
 
     // --- Helpers ------------------------------------------------------------
     const $ = sel => document.querySelector(sel);
