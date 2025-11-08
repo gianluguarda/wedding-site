@@ -53,6 +53,8 @@
     }
     .options{ display:grid; grid-template-columns:1fr; gap:14px; max-width:720px; margin:0 auto 8px; }
     @media (min-width:720px){ .options{ grid-template-columns:1fr 1fr; } }
+    .btn.half{ min-height:84px; }
+    @media (min-width:720px){ .options{ grid-template-columns:1fr 1fr; } }
 
     .btn{
       appearance:none; border:none; cursor:pointer; border-radius:16px; padding:18px 16px; font-size:18px; line-height:1.2;
@@ -104,7 +106,8 @@
     </div>
 
     <section class="content" id="quiz">
-      <div class="question" id="questionText">Loading…</div>
+      <div class="qmeta" id="qMeta" style="text-align:center; font-size:18px; color:var(--muted); margin-bottom:6px;"></div>
+      <div class="question" id="questionText"></div>
       <div class="options" id="options"></div>
       <div class="nav">
         <button id="prevBtn" aria-label="Previous question">⟵ Back</button>
@@ -142,20 +145,20 @@
     // --- Data model ---------------------------------------------------------
     // Note: We keep the association hidden in the UI until the end.
     const QUESTIONS = [
-      { q: "I fall asleep 10 minutes into a movie / I watch it till the end", A: 1, B: 0 }, // A = Gianlu, B = Cha
-      { q: "I’m asleep as soon as I touch the bed / I count sheep for an hour", A: 1, B: 0 },
-      { q: "Bed must be made / Who cares, I’m getting back in tonight", A: 1, B: 0 },
-      { q: "Squeeze toothpaste from the bottom / From the middle", A: 1, B: 0 },
-      { q: "My first glass of water is at night / 2L of water a day, no excuses", A: 1, B: 0 },
-      { q: "I cook / I get cooked for", A: 1, B: 0 },
-      { q: "I write the email in one go / I reread it 10 times before sending", A: 1, B: 0 },
-      { q: "Pack 30 minutes before / Pack one week ahead", A: 1, B: 0 },
-      { q: "I finish eating first / Everyone’s waiting for me", A: 1, B: 0 },
-      { q: "Mountain trek / Beach day", A: 1, B: 0 },
-      { q: "Discover the price when paying / Check it first", A: 1, B: 0 },
-      { q: "2-minute call with parents (if I answer) / 2-hour call", A: 1, B: 0 },
-      { q: "Bring sandwiches to ski / Lunch in the mountain hut", A: 1, B: 0 },
-      { q: "Bungee jump / Not even if you pay me", A: 1, B: 0 },
+      { t: "🎬 Movies", left: "I fall asleep after 10 minutes", right: "I watch it till the end" },
+      { t: "😴 Sleep habits", left: "I’m asleep instantly", right: "I count sheep for an hour" },
+      { t: "🛏️ Bed", left: "Bed must be made", right: "Who cares — I’ll get back in tonight" },
+      { t: "🪥 Toothpaste", left: "Squeeze from the bottom", right: "Squeeze from the middle" },
+      { t: "💧 Hydration", left: "First glass of water at night", right: "2L of water a day, no excuses" },
+      { t: "🍳 Cooking", left: "I cook", right: "I get cooked for" },
+      { t: "✉️ Emails", left: "I write it in one go", right: "I reread it 10 times before sending" },
+      { t: "🧳 Packing", left: "30 minutes before", right: "One week ahead" },
+      { t: "⏱️ Eating pace", left: "I finish first", right: "People wait for me" },
+      { t: "🏔️ / 🏖️ Outdoors", left: "Mountain trek", right: "Beach day" },
+      { t: "💳 Prices", left: "Discover the price when paying", right: "Check price first" },
+      { t: "☎️ Parents call", left: "2‑minute call (if I answer)", right: "2‑hour call" },
+      { t: "🎿 Ski day", left: "Sandwiches in the backpack", right: "Lunch in the mountain hut" },
+      { t: "🎢 Adrenaline", left: "Bungee jump", right: "Not even if you pay me" },
     ];
 
     // From each question's string, we will split by ' / ' to generate two neutral options.
@@ -177,26 +180,35 @@
 
     function renderQuestion(){
       const data = QUESTIONS[index];
-      const [left, right] = data.q.split(' / ');
+      // Title with emoji
+      $('#qMeta').textContent = data.t || '';
 
-      // Randomize option order per render (but keep consistent once chosen)
-      // We generate a fresh order but do not store it globally; we only need to know which was chosen.
-      const options = Math.random() < 0.5 ? [left, right] : [right, left];
-
-      $('#questionText').textContent = options[0] + '  or  ' + options[1];
+      // Keep the center prompt empty for a clean two-halves layout
+      $('#questionText').textContent = '';
 
       const cont = $('#options');
       cont.innerHTML = '';
 
-      options.forEach((text, i) => {
-        const btn = document.createElement('button');
-        btn.className = 'btn';
-        btn.type = 'button';
-        btn.textContent = text;
-        btn.addEventListener('click', () => {
-          answers[index] = text === left ? 0 : 1; // store which side (0=left(original A), 1=right(original B)) was chosen relative to the *original* split
-          goNext();
-        });
+      // Two fixed halves: LEFT (Gianlu) and RIGHT (Cha)
+      const leftBtn = document.createElement('button');
+      leftBtn.className = 'btn half left';
+      leftBtn.type = 'button';
+      leftBtn.textContent = data.left;
+      leftBtn.addEventListener('click', () => { answers[index] = 0; goNext(); });
+
+      const rightBtn = document.createElement('button');
+      rightBtn.className = 'btn half right';
+      rightBtn.type = 'button';
+      rightBtn.textContent = data.right;
+      rightBtn.addEventListener('click', () => { answers[index] = 1; goNext(); });
+
+      cont.appendChild(leftBtn);
+      cont.appendChild(rightBtn);
+
+      $('#prevBtn').disabled = index === 0;
+      $('#nextBtn').disabled = answers[index] === null;
+      updateProgress();
+    });
         cont.appendChild(btn);
       });
 
