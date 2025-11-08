@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,6 +27,7 @@
       background:var(--white);
       border-radius:24px; box-shadow:0 10px 30px rgba(42,36,56,.12);
       overflow:hidden; border:1px solid rgba(157,135,209,.18);
+      position:relative;
     }
     header{
       padding:28px 28px 16px;
@@ -48,7 +49,6 @@
 
     .content{ padding:24px 28px 32px; }
 
-    /* question header + two big split buttons */
     .qmeta{ text-align:center; font-size:28px; color:var(--muted); margin-bottom:10px; }
     .question{ font-size:28px; margin:8px 0 18px; text-align:center; font-weight:600; }
     .options{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:720px; margin:14px auto 8px; }
@@ -65,7 +65,6 @@
     .btn:active{ transform:translateY(0); }
     .btn.selected{ outline:3px solid var(--lavender-600); box-shadow:0 0 0 4px rgba(157,135,209,.15); background:#efeaf8; border-color: var(--lavender-600); }
 
-    /* shake feedback when pressing Next without a pick */
     @keyframes shake { 10%, 90% {transform: translateX(-1px);} 20%,80% {transform: translateX(2px);} 30%,50%,70% {transform: translateX(-4px);} 40%,60% {transform: translateX(4px);} }
     .need-pick { animation: shake .4s; }
 
@@ -79,7 +78,6 @@
 
     .footer-note{ text-align:center; color:var(--muted); font-size:16px; margin-top:8px; }
 
-    /* Result */
     .result{ display:none; text-align:center; padding:8px 0; }
     .score-wrap{ display:flex; align-items:center; gap:8px; margin:18px auto; max-width:520px; }
     .bar{ height:16px; width:100%; background:#efeaf8; border-radius:999px; overflow:hidden; display:flex; }
@@ -91,39 +89,55 @@
 
     .hidden{ display:none !important; }
 
-.exit-wrap{
-  display:flex;
-  justify-content:center;
-  padding:20px 0 32px; /* ↑ spazio sotto visibile sempre */
-}
+    .exit-wrap{
+      display:flex; justify-content:center; padding:20px 0 32px;
+    }
+    .exit-btn{
+      background:#fff; border:1px solid rgba(157,135,209,.35); border-radius:14px;
+      padding:8px 16px; font-size:16px; color:var(--muted); cursor:pointer;
+      transition:all .2s ease; box-shadow:0 2px 6px rgba(157,135,209,.1); margin-bottom:0;
+    }
+    .exit-btn:hover{ background:#f7f1ff; color:var(--ink); box-shadow:0 4px 12px rgba(157,135,209,.15); }
 
-.exit-btn{
-  background:#fff;
-  border:1px solid rgba(157,135,209,.35);
-  border-radius:14px;
-  padding:8px 16px;
-  font-size:16px;
-  color:var(--muted);
-  cursor:pointer;
-  transition:all .2s ease;
-  box-shadow:0 2px 6px rgba(157,135,209,.1);
-  margin-bottom:0; /* niente qui */
-}
-
-.exit-btn:hover{
-  background:#f7f1ff;
-  color:var(--ink);
-  box-shadow:0 4px 12px rgba(157,135,209,.15);
-}
-
-    
+    /* Language overlay */
+    .lang-overlay{
+      position:fixed; inset:0; background:rgba(247,243,235,.92);
+      display:flex; align-items:center; justify-content:center; padding:24px; z-index:50;
+      backdrop-filter: blur(2px);
+    }
+    .lang-modal{
+      width:min(560px, 100%); background:#fff; border:1px solid rgba(157,135,209,.35);
+      border-radius:20px; padding:24px; box-shadow:0 12px 30px rgba(42,36,56,.12); text-align:center;
+    }
+    .lang-modal h2{
+      margin:0 0 6px; font-family:'Allura', cursive; font-size:42px; color:var(--lavender-600);
+    }
+    .lang-modal p{ margin:0 0 18px; color:var(--muted); font-size:18px; }
+    .lang-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .lang-btn{
+      border:1px solid rgba(157,135,209,.35); background:#faf7ff; border-radius:14px; padding:14px 16px;
+      font-size:18px; cursor:pointer; transition:.2s; box-shadow:0 4px 10px rgba(157,135,209,.15);
+    }
+    .lang-btn:hover{ background:#f7f1ff; transform:translateY(-1px); }
   </style>
 </head>
 <body>
+  <!-- Language chooser -->
+  <div id="langOverlay" class="lang-overlay" role="dialog" aria-modal="true">
+    <div class="lang-modal">
+      <h2>Benvenutə • Bienvenue</h2>
+      <p>Scegli la lingua • Choisis la langue</p>
+      <div class="lang-grid">
+        <button class="lang-btn" data-lang="it" aria-label="Italiano">🇮🇹 Italiano</button>
+        <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 Français</button>
+      </div>
+    </div>
+  </div>
+
   <main class="card" role="main" aria-labelledby="game-title">
     <header>
       <h1 id="game-title" class="title">Vibe Cha 💜 vs Vibe Gianlu 🧢</h1>
-      <p class="subtitle">This or That — Pick your vibe. Discover your team at the end!</p>
+      <p id="subtitle" class="subtitle">This or That — Pick your vibe. Discover your team at the end!</p>
     </header>
 
     <div class="progress-wrap">
@@ -131,7 +145,7 @@
       <div class="progress-text" id="progressText">Question 1 of 14</div>
     </div>
 
-    <section class="content" id="quiz">
+    <section class="content" id="quiz" aria-live="polite">
       <div class="qmeta" id="qMeta"></div>
       <div class="question" id="questionText"></div>
       <div class="options" id="options"></div>
@@ -142,7 +156,7 @@
     </section>
 
     <section class="content result" id="result">
-      <h2 class="question" style="margin-top:0">Your Result</h2>
+      <h2 id="resultTitle" class="question" style="margin-top:0">Your Result</h2>
       <div class="score-wrap">
         <div class="bar" aria-hidden="true">
           <div class="gianlu" id="gBar" title="Gianlu"></div>
@@ -161,43 +175,96 @@
         <button id="restartBtn">Play again</button>
         <div id="shareFeedback" class="footer-note" aria-live="polite" style="margin-top:8px; min-height:1.2em"></div>
       </div>
-
-      </section>
+    </section>
 
     <div class="exit-wrap">
-  <button id="exitBtn" class="exit-btn" aria-label="Exit game">EXIT</button>
-</div>
-
+      <button id="exitBtn" class="exit-btn" aria-label="Exit game">EXIT</button>
+    </div>
   </main>
 
 <script>
-  // --- Data model ---------------------------------------------------------
-  const QUESTIONS = [
-    { t: "🎬 Movies", left: "I fall asleep after 10 minutes", right: "I watch it till the end" },
-    { t: "🛏️ Bed", left: "Bed must be made", right: "Who cares — I’ll get back in tonight" },
-    { t: "🪥 Toothpaste", left: "Squeeze from the bottom", right: "Squeeze from the middle" },
-    { t: "💧 Hydration", left: "Sometimes the first glass is in the afternoon", right: "2L of water a day, no excuses" },
-    { t: "🍳 Cooking", left: "I cook, and I like", right: "Someone else cook for me, and I like" },
-    { t: "✉️ Emails", left: "I write it in one go", right: "I reread it 10 times before sending" },
-    { t: "🧳 Packing", left: "30 minutes before", right: "One week ahead" },
-    { t: "⏱️ Eating pace", left: "I finish first", right: "People wait for me" },
-    { t: "🏔️ / 🏖️ Outdoors", left: "Mountain trek", right: "Beach day" },
-    { t: "💳 Shopping", left: "Check price first" , right: "Discover the price when paying" },
-    { t: "😴 Sleep habits", left: "I’m asleep instantly", right: "I count sheep for an hour" },
-    { t: "☎️ Parents call", left: "2-minute call (if I answer)", right: "2-hour call" },
-    { t: "🎿 Ski day", left: "All-day skipass and sandwiches in the backpack", right: "2-hours skipass, and lunch in the mountain hut" },
-    { t: "🎢 Adrenaline", left: "Bungee jumping, why not?", right: "Not even if you pay me" }
-  ];
+  // -------------------- i18n strings --------------------
+  const STRINGS = {
+    it: {
+      subtitle: "This or That — Scegli il tuo vibe. Scopri il tuo team alla fine!",
+      progress: (i,n) => `Domanda ${i} di ${n}`,
+      back: "⟵ Indietro",
+      next: "Avanti ⟶",
+      resultTitle: "Il tuo risultato",
+      moreG: "Sei più Team Gianlu 🧢",
+      moreC: "Sei più Team Cha 💜",
+      tie: "Parità perfetta!",
+      share: "Condividi risultato",
+      playAgain: "Rigioca",
+      allDone: "Tutto fatto!",
+      exit: "ESCI",
+      shareText: (g,c,summary,url) => `Ho ottenuto ${g}% Gianlu 🧢 e ${c}% Cha 💜 in “Team Cha vs Team Gianlu – This or That”. ${summary} ${url}`
+    },
+    fr: {
+      subtitle: "This or That — Choisis ton vibe. Découvre ton équipe à la fin !",
+      progress: (i,n) => `Question ${i} sur ${n}`,
+      back: "⟵ Retour",
+      next: "Suivant ⟶",
+      resultTitle: "Ton résultat",
+      moreG: "Tu es plutôt Team Gianlu 🧢",
+      moreC: "Tu es plutôt Team Cha 💜",
+      tie: "Égalité parfaite !",
+      share: "Partager le résultat",
+      playAgain: "Rejouer",
+      allDone: "C'est terminé !",
+      exit: "QUITTER",
+      shareText: (g,c,summary,url) => `J’ai eu ${g}% Gianlu 🧢 et ${c}% Cha 💜 sur “Team Cha vs Team Gianlu – This or That”. ${summary} ${url}`
+    }
+  };
 
-  // --- Stato --------------------------------------------------------------
-  // QUESTION_ORDER = ordine domande (puoi tenerlo fisso o mescolarlo)
-  // SIDE_MAP[i] = 0 mostra left=Gianlu / right=Cha (ordine originale)
-  // SIDE_MAP[i] = 1 swap (sinistra mostra il testo di 'right', destra mostra 'left')
+  // -------------------- Questions by language --------------------
+  const QUESTIONS_BY_LANG = {
+    it: [
+      { t: "🎬 Film", left: "Mi addormento dopo 10 minuti", right: "Lo guardo fino alla fine" },
+      { t: "🛏️ Letto", left: "Il letto va rifatto", right: "Chi se ne importa — stasera ci rientro" },
+      { t: "🪥 Dentifricio", left: "Spremo dal fondo", right: "Spremo dal centro" },
+      { t: "💧 Idratazione", left: "A volte il primo bicchiere è nel pomeriggio", right: "2L al giorno, senza scuse" },
+      { t: "🍳 Cucina", left: "Cucino io, e mi piace", right: "Cucina qualcun altro, e mi piace" },
+      { t: "✉️ Email", left: "La scrivo di getto", right: "La rileggo 10 volte prima di inviare" },
+      { t: "🧳 Valigia", left: "30 minuti prima", right: "Una settimana prima" },
+      { t: "⏱️ Ritmo a tavola", left: "Finisco per primo", right: "Gli altri mi aspettano" },
+      { t: "🏔️ / 🏖️ Outdoor", left: "Trekking in montagna", right: "Giornata in spiaggia" },
+      { t: "💳 Shopping", left: "Controllo prima il prezzo", right: "Lo scopro alla cassa" },
+      { t: "😴 Sonno", left: "Mi addormento subito", right: "Conto le pecore per un’ora" },
+      { t: "☎️ Chiamata ai genitori", left: "Telefonata da 2 minuti (se rispondo)", right: "Telefonata da 2 ore" },
+      { t: "🎿 Giornata sugli sci", left: "Skipass giornaliero + panini nello zaino", right: "Skipass 2 ore + pranzo in baita" },
+      { t: "🎢 Adrenalina", left: "Bungee jumping? Perché no!", right: "Neanche se mi paghi" }
+    ],
+    fr: [
+      { t: "🎬 Films", left: "Je m’endors après 10 minutes", right: "Je regarde jusqu’au bout" },
+      { t: "🛏️ Lit", left: "Le lit doit être fait", right: "On s’en fiche — j’y retourne ce soir" },
+      { t: "🪥 Dentifrice", left: "Je presse par le bas", right: "Je presse au milieu" },
+      { t: "💧 Hydratation", left: "Parfois le premier verre est l’après-midi", right: "2 L par jour, pas d’excuses" },
+      { t: "🍳 Cuisine", left: "Je cuisine, et j’aime", right: "Quelqu’un cuisine pour moi, et j’aime" },
+      { t: "✉️ Emails", left: "J’écris d’un seul jet", right: "Je relis 10 fois avant d’envoyer" },
+      { t: "🧳 Bagage", left: "30 minutes avant", right: "Une semaine à l’avance" },
+      { t: "⏱️ À table", left: "Je finis en premier", right: "On m’attend" },
+      { t: "🏔️ / 🏖️ Plein air", left: "Randonnée en montagne", right: "Journée plage" },
+      { t: "💳 Shopping", left: "Je vérifie le prix d’abord", right: "Je le découvre à la caisse" },
+      { t: "😴 Sommeil", left: "Je m’endors tout de suite", right: "Je compte les moutons une heure" },
+      { t: "☎️ Appel aux parents", left: "Appel de 2 minutes (si je réponds)", right: "Appel de 2 heures" },
+      { t: "🎿 Journée ski", left: "Forfait journée + sandwichs dans le sac", right: "Forfait 2 h + déjeuner au refuge" },
+      { t: "🎢 Adrénaline", left: "Saut à l’élastique ? Pourquoi pas !", right: "Même payé, jamais" }
+    ]
+  };
+
+  // --------------- State ---------------
+  let LANG = null;
+  let QUESTIONS = [];
   let index = 0;
   let QUESTION_ORDER = [];
   let SIDE_MAP = [];
-  const answers = Array(QUESTIONS.length).fill(null); // 0 = scelto sinistra, 1 = scelto destra
+  const answers = [];
   let currentShareText = '';
+
+  // Helpers
+  const $ = sel => document.querySelector(sel);
+  function tkey() { return STRINGS[LANG]; }
 
   function shuffle(arr){
     for (let i = arr.length - 1; i > 0; i--) {
@@ -206,30 +273,23 @@
     }
     return arr;
   }
-
   function shuffleOrder(){
     QUESTION_ORDER = Array.from({length: QUESTIONS.length}, (_, i) => i);
-    // Se vuoi anche randomizzare l'ordine delle DOMANDE, lascia la riga sotto.
-    // Se NON vuoi, commentala.
     shuffle(QUESTION_ORDER);
-
-    // Per ogni domanda generiamo una mappa lato (0 = normale, 1 = swap)
     SIDE_MAP = QUESTION_ORDER.map(() => Math.random() < 0.5 ? 0 : 1);
   }
-
   function currentIndex(){ return QUESTION_ORDER[index]; }
   function currentQuestion(){ return QUESTIONS[currentIndex()]; }
-  const $ = sel => document.querySelector(sel);
 
   function updateProgress(){
     const pct = (index / QUESTIONS.length) * 100;
     $('#progressBar').style.width = pct + '%';
-    $('#progressText').textContent = `Question ${index+1} of ${QUESTIONS.length}`;
+    $('#progressText').textContent = tkey().progress(index+1, QUESTIONS.length);
   }
 
   function renderQuestion(){
     const data = currentQuestion();
-    const flip = SIDE_MAP[index] === 1; // true = scambio i lati
+    const flip = SIDE_MAP[index] === 1;
 
     $('#qMeta').textContent = data.t || '';
     $('#questionText').textContent = '';
@@ -245,11 +305,9 @@
     rightBtn.className = 'btn half right';
     rightBtn.type = 'button';
 
-    // Se flip è true, invertiamo i testi mostrati a schermo
     leftBtn.textContent  = flip ? data.right : data.left;
     rightBtn.textContent = flip ? data.left  : data.right;
 
-    // Evidenziazione della scelta precedente (answers[index] = 0/1 su lato visivo)
     if (answers[index] === 0) leftBtn.classList.add('selected');
     if (answers[index] === 1) rightBtn.classList.add('selected');
 
@@ -264,10 +322,10 @@
   }
 
   function goNext(){
-    if (answers[index] === null) {
+    if (answers[index] == null) {
       const cont = $('#options');
       cont.classList.remove('need-pick');
-      void cont.offsetWidth; // restart anim
+      void cont.offsetWidth;
       cont.classList.add('need-pick');
       return;
     }
@@ -286,14 +344,9 @@
   function finish(){
     let g = 0, c = 0;
 
-    // Traduco ogni risposta lato-visivo (0/1) in persona (G/C) usando SIDE_MAP
     for (let i = 0; i < QUESTIONS.length; i++){
-      const pickSide = answers[i];     // 0=sinistra, 1=destra (come visto dall'utente)
+      const pickSide = answers[i];
       const flipped = SIDE_MAP[i] === 1;
-
-      // Mappatura: i testi originali sono left=Gianlu, right=Cha
-      // Se non flippo: sinistra=G, destra=C
-      // Se flippo:    sinistra=C, destra=G
       const pickedIsGianlu = flipped ? (pickSide === 1) : (pickSide === 0);
       if (pickedIsGianlu) g++; else c++;
     }
@@ -307,33 +360,58 @@
     $('#gBar').style.width = gPct + '%';
     $('#cBar').style.width = cPct + '%';
 
-    const summary = gPct > cPct
-      ? "You’re more Team Gianlu 🧢"
-      : gPct < cPct
-        ? "You’re more Team Cha 💜"
-        : "It’s a perfect tie!";
+    const summary = gPct > cPct ? tkey().moreG : gPct < cPct ? tkey().moreC : tkey().tie;
     $('#summaryText').textContent = summary;
 
-    currentShareText = `I got ${gPct}% Gianlu 🧢 and ${cPct}% Cha 💜 on “Team Cha vs Team Gianlu – This or That”. ${summary} ${window.location.href}`;
+    currentShareText = tkey().shareText(gPct, cPct, summary, window.location.href);
 
     $('#quiz').classList.add('hidden');
     $('#result').style.display = 'block';
     $('#progressBar').style.width = '100%';
-    $('#progressText').textContent = 'All done!';
+    $('#progressText').textContent = tkey().allDone;
   }
 
-  // --- Events -------------------------------------------------------------
+  function applyUIStrings(){
+    $('#subtitle').textContent = tkey().subtitle;
+    $('#prevBtn').textContent = tkey().back;
+    $('#nextBtn').textContent = tkey().next;
+    $('#resultTitle').textContent = tkey().resultTitle;
+    $('#shareBtn').textContent = tkey().share;
+    $('#restartBtn').textContent = tkey().playAgain;
+    $('#exitBtn').textContent = tkey().exit;
+    document.documentElement.lang = LANG;
+  }
+
+  function startGameWithLanguage(lang){
+    LANG = lang;
+    QUESTIONS = QUESTIONS_BY_LANG[LANG].slice();
+    index = 0;
+    QUESTION_ORDER = [];
+    SIDE_MAP = [];
+    answers.length = QUESTIONS.length;
+    for (let i=0;i<answers.length;i++) answers[i] = null;
+
+    applyUIStrings();
+    shuffleOrder();
+    $('#result').style.display = 'none';
+    $('#quiz').classList.remove('hidden');
+    $('#shareFeedback').textContent = '';
+    renderQuestion();
+  }
+
+  // -------------------- Events --------------------
   $('#nextBtn').addEventListener('click', goNext);
   $('#prevBtn').addEventListener('click', goPrev);
   $('#restartBtn').addEventListener('click', () => {
     index = 0;
     for (let i=0;i<answers.length;i++) answers[i] = null;
-    shuffleOrder(); // rimescola sia ordine domande (se attivo) sia lato risposte
+    shuffleOrder();
     $('#result').style.display = 'none';
     $('#quiz').classList.remove('hidden');
     $('#shareFeedback').textContent = '';
     renderQuestion();
   });
+
   $('#shareBtn').addEventListener('click', async () => {
     const feedback = $('#shareFeedback');
     try {
@@ -349,22 +427,27 @@
         document.execCommand('copy'); document.body.removeChild(ta);
         feedback.textContent = 'Copied to clipboard!';
       }
-    } catch (e) {
+    } catch {
       feedback.textContent = 'Could not share. Try copying manually.';
     }
     setTimeout(() => { feedback.textContent = ''; }, 3200);
   });
 
-
   document.getElementById('exitBtn').addEventListener('click', () => {
-  window.location.href = 'https://www.charlottegianluca.it/home.html'; // <-- metti qui il link della tua home
-});
+    window.location.href = 'https://www.charlottegianluca.it/home.html'; // <-- tua home
+  });
 
+  // Language overlay handlers
+  document.querySelectorAll('.lang-btn').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      const lang = e.currentTarget.dataset.lang;
+      $('#langOverlay').style.display = 'none';
+      startGameWithLanguage(lang);
+    });
+  });
 
-  // Init
-  shuffleOrder();
-  renderQuestion();
+  // Start: show overlay, wait for selection
+  // (Se vuoi un default automatico, togli l’overlay e chiama startGameWithLanguage('it'))
 </script>
-
 </body>
 </html>
