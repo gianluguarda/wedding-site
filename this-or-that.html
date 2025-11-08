@@ -139,164 +139,195 @@
     </section>
   </main>
 
-  <script>
-    // --- Data model ---------------------------------------------------------
-    const QUESTIONS = [
-      { t: "🎬 Movies", left: "I fall asleep after 10 minutes", right: "I watch it till the end" },
-      { t: "🛏️ Bed", left: "Bed must be made", right: "Who cares — I’ll get back in tonight" },
-      { t: "🪥 Toothpaste", left: "Squeeze from the bottom", right: "Squeeze from the middle" },
-      { t: "💧 Hydration", left: "Sometimes the first glass is in the afternoon", right: "2L of water a day, no excuses" },
-      { t: "🍳 Cooking", left: "I cook, and I like", right: "Someone else cook for me, and I like" },
-      { t: "✉️ Emails", left: "I write it in one go", right: "I reread it 10 times before sending" },
-      { t: "🧳 Packing", left: "30 minutes before", right: "One week ahead" },
-      { t: "⏱️ Eating pace", left: "I finish first", right: "People wait for me" },
-      { t: "🏔️ / 🏖️ Outdoors", left: "Mountain trek", right: "Beach day" },
-      { t: "💳 Prices", left: "Check price first" , right: "Discover the price when paying" },
-      { t: "😴 Sleep habits", left: "I’m asleep instantly", right: "I count sheep for an hour" },
-      { t: "☎️ Parents call", left: "2-minute call (if I answer)", right: "2-hour call" },
-      { t: "🎿 Ski day", left: "All-day skipass and sandwiches in the backpack", right: "2-hours skipass, and lunch in the mountain hut" },
-      { t: "🎢 Adrenaline", left: "Bungee jump", right: "Not even if you pay me" }
-    ];
+<script>
+  // --- Data model ---------------------------------------------------------
+  const QUESTIONS = [
+    { t: "🎬 Movies", left: "I fall asleep after 10 minutes", right: "I watch it till the end" },
+    { t: "🛏️ Bed", left: "Bed must be made", right: "Who cares — I’ll get back in tonight" },
+    { t: "🪥 Toothpaste", left: "Squeeze from the bottom", right: "Squeeze from the middle" },
+    { t: "💧 Hydration", left: "Sometimes the first glass is in the afternoon", right: "2L of water a day, no excuses" },
+    { t: "🍳 Cooking", left: "I cook, and I like", right: "Someone else cook for me, and I like" },
+    { t: "✉️ Emails", left: "I write it in one go", right: "I reread it 10 times before sending" },
+    { t: "🧳 Packing", left: "30 minutes before", right: "One week ahead" },
+    { t: "⏱️ Eating pace", left: "I finish first", right: "People wait for me" },
+    { t: "🏔️ / 🏖️ Outdoors", left: "Mountain trek", right: "Beach day" },
+    { t: "💳 Prices", left: "Check price first" , right: "Discover the price when paying" },
+    { t: "😴 Sleep habits", left: "I’m asleep instantly", right: "I count sheep for an hour" },
+    { t: "☎️ Parents call", left: "2-minute call (if I answer)", right: "2-hour call" },
+    { t: "🎿 Ski day", left: "All-day skipass and sandwiches in the backpack", right: "2-hours skipass, and lunch in the mountain hut" },
+    { t: "🎢 Adrenaline", left: "Bungee jump", right: "Not even if you pay me" }
+  ];
 
-    // --- State --------------------------------------------------------------
-    // Keep QUESTIONS immutable; shuffle an index order so left/right mapping stays intact
-    let index = 0;
-    let QUESTION_ORDER = [];
-    const answers = Array(QUESTIONS.length).fill(null); // 0 = left (Gianlu), 1 = right (Cha)
-    let currentShareText = '';
+  // --- Stato --------------------------------------------------------------
+  // QUESTION_ORDER = ordine domande (puoi tenerlo fisso o mescolarlo)
+  // SIDE_MAP[i] = 0 mostra left=Gianlu / right=Cha (ordine originale)
+  // SIDE_MAP[i] = 1 swap (sinistra mostra il testo di 'right', destra mostra 'left')
+  let index = 0;
+  let QUESTION_ORDER = [];
+  let SIDE_MAP = [];
+  const answers = Array(QUESTIONS.length).fill(null); // 0 = scelto sinistra, 1 = scelto destra
+  let currentShareText = '';
 
-    function shuffleOrder(){
-      QUESTION_ORDER = Array.from({length: QUESTIONS.length}, (_, i) => i);
-      for (let i = QUESTION_ORDER.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [QUESTION_ORDER[i], QUESTION_ORDER[j]] = [QUESTION_ORDER[j], QUESTION_ORDER[i]];
-      }
+  function shuffle(arr){
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    function currentQuestion(){ return QUESTIONS[QUESTION_ORDER[index]]; }
+    return arr;
+  }
 
-    // --- Helpers ------------------------------------------------------------
-    const $ = sel => document.querySelector(sel);
+  function shuffleOrder(){
+    QUESTION_ORDER = Array.from({length: QUESTIONS.length}, (_, i) => i);
+    // Se vuoi anche randomizzare l'ordine delle DOMANDE, lascia la riga sotto.
+    // Se NON vuoi, commentala.
+    shuffle(QUESTION_ORDER);
 
-    function updateProgress(){
-      const pct = (index / QUESTIONS.length) * 100;
-      $('#progressBar').style.width = pct + '%';
-      $('#progressText').textContent = `Question ${index+1} of ${QUESTIONS.length}`;
-    }
+    // Per ogni domanda generiamo una mappa lato (0 = normale, 1 = swap)
+    SIDE_MAP = QUESTION_ORDER.map(() => Math.random() < 0.5 ? 0 : 1);
+  }
 
-    function renderQuestion(){
-      const data = currentQuestion();
-      $('#qMeta').textContent = data.t || '';
-      $('#questionText').textContent = '';
+  function currentIndex(){ return QUESTION_ORDER[index]; }
+  function currentQuestion(){ return QUESTIONS[currentIndex()]; }
+  const $ = sel => document.querySelector(sel);
 
+  function updateProgress(){
+    const pct = (index / QUESTIONS.length) * 100;
+    $('#progressBar').style.width = pct + '%';
+    $('#progressText').textContent = `Question ${index+1} of ${QUESTIONS.length}`;
+  }
+
+  function renderQuestion(){
+    const data = currentQuestion();
+    const flip = SIDE_MAP[index] === 1; // true = scambio i lati
+
+    $('#qMeta').textContent = data.t || '';
+    $('#questionText').textContent = '';
+
+    const cont = $('#options');
+    cont.innerHTML = '';
+
+    const leftBtn = document.createElement('button');
+    leftBtn.className = 'btn half left';
+    leftBtn.type = 'button';
+
+    const rightBtn = document.createElement('button');
+    rightBtn.className = 'btn half right';
+    rightBtn.type = 'button';
+
+    // Se flip è true, invertiamo i testi mostrati a schermo
+    leftBtn.textContent  = flip ? data.right : data.left;
+    rightBtn.textContent = flip ? data.left  : data.right;
+
+    // Evidenziazione della scelta precedente (answers[index] = 0/1 su lato visivo)
+    if (answers[index] === 0) leftBtn.classList.add('selected');
+    if (answers[index] === 1) rightBtn.classList.add('selected');
+
+    leftBtn.addEventListener('click', () => { answers[index] = 0; goNext(); });
+    rightBtn.addEventListener('click', () => { answers[index] = 1; goNext(); });
+
+    cont.appendChild(leftBtn);
+    cont.appendChild(rightBtn);
+
+    $('#prevBtn').disabled = index === 0;
+    updateProgress();
+  }
+
+  function goNext(){
+    if (answers[index] === null) {
       const cont = $('#options');
-      cont.innerHTML = '';
-
-      const leftBtn = document.createElement('button');
-      leftBtn.className = 'btn half left';
-      leftBtn.type = 'button';
-      leftBtn.textContent = data.left;
-
-      const rightBtn = document.createElement('button');
-      rightBtn.className = 'btn half right';
-      rightBtn.type = 'button';
-      rightBtn.textContent = data.right;
-
-      if (answers[index] === 0) leftBtn.classList.add('selected');
-      if (answers[index] === 1) rightBtn.classList.add('selected');
-
-      leftBtn.addEventListener('click', () => { answers[index] = 0; goNext(); });
-      rightBtn.addEventListener('click', () => { answers[index] = 1; goNext(); });
-
-      cont.appendChild(leftBtn);
-      cont.appendChild(rightBtn);
-
-      $('#prevBtn').disabled = index === 0;
-      updateProgress();
+      cont.classList.remove('need-pick');
+      void cont.offsetWidth; // restart anim
+      cont.classList.add('need-pick');
+      return;
     }
-
-    function goNext(){
-      if (answers[index] === null) {
-        const cont = $('#options');
-        cont.classList.remove('need-pick');
-        void cont.offsetWidth; // restart animation
-        cont.classList.add('need-pick');
-        return;
-      }
-      if (index < QUESTIONS.length - 1){
-        index++;
-        renderQuestion();
-      } else {
-        finish();
-      }
-    }
-
-    function goPrev(){
-      if (index > 0){ index--; renderQuestion(); }
-    }
-
-    function finish(){
-      let g = 0, c = 0;
-      answers.forEach(v => { if (v === 0) g++; else c++; });
-      const total = g + c;
-      const gPct = Math.round((g/total)*100);
-      const cPct = 100 - gPct;
-
-      $('#gPct').textContent = gPct + '%';
-      $('#cPct').textContent = cPct + '%';
-      $('#gBar').style.width = gPct + '%';
-      $('#cBar').style.width = cPct + '%';
-
-      const summary = gPct > cPct
-        ? "You’re more Team Gianlu 🧢 — chill, spontaneous, and a bit last-minute."
-        : gPct < cPct
-          ? "You’re more Team Cha 💜 — organized, caring, and always on top of things."
-          : "It’s a perfect tie — a balanced duo of spontaneity and elegance!";
-      $('#summaryText').textContent = summary;
-
-      currentShareText = `I got ${gPct}% Gianlu 🧢 and ${cPct}% Cha 💜 on “Team Cha vs Team Gianlu – This or That”. ${summary} ${window.location.href}`;
-
-      $('#quiz').classList.add('hidden');
-      $('#result').style.display = 'block';
-      $('#progressBar').style.width = '100%';
-      $('#progressText').textContent = 'All done!';
-    }
-
-    // --- Events -------------------------------------------------------------
-    $('#nextBtn').addEventListener('click', goNext);
-    $('#prevBtn').addEventListener('click', goPrev);
-    $('#restartBtn').addEventListener('click', () => {
-      index = 0;
-      for (let i=0;i<answers.length;i++) answers[i] = null;
-      shuffleOrder(); // shuffle again on replay
-      $('#result').style.display = 'none';
-      $('#quiz').classList.remove('hidden');
-      $('#shareFeedback').textContent = '';
+    if (index < QUESTIONS.length - 1){
+      index++;
       renderQuestion();
-    });
-    $('#shareBtn').addEventListener('click', async () => {
-      const feedback = $('#shareFeedback');
-      try {
-        if (navigator.share) {
-          await navigator.share({ title: 'Team Cha vs Team Gianlu', text: currentShareText });
-          feedback.textContent = 'Shared!';
-        } else if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(currentShareText);
-          feedback.textContent = 'Copied to clipboard!';
-        } else {
-          const ta = document.createElement('textarea');
-          ta.value = currentShareText; document.body.appendChild(ta); ta.select();
-          document.execCommand('copy'); document.body.removeChild(ta);
-          feedback.textContent = 'Copied to clipboard!';
-        }
-      } catch (e) {
-        feedback.textContent = 'Could not share. Try copying manually.';
-      }
-      setTimeout(() => { feedback.textContent = ''; }, 3200);
-    });
+    } else {
+      finish();
+    }
+  }
 
-    // Init
-    shuffleOrder();
+  function goPrev(){
+    if (index > 0){ index--; renderQuestion(); }
+  }
+
+  function finish(){
+    let g = 0, c = 0;
+
+    // Traduco ogni risposta lato-visivo (0/1) in persona (G/C) usando SIDE_MAP
+    for (let i = 0; i < QUESTIONS.length; i++){
+      const pickSide = answers[i];     // 0=sinistra, 1=destra (come visto dall'utente)
+      const flipped = SIDE_MAP[i] === 1;
+
+      // Mappatura: i testi originali sono left=Gianlu, right=Cha
+      // Se non flippo: sinistra=G, destra=C
+      // Se flippo:    sinistra=C, destra=G
+      const pickedIsGianlu = flipped ? (pickSide === 1) : (pickSide === 0);
+      if (pickedIsGianlu) g++; else c++;
+    }
+
+    const total = g + c;
+    const gPct = Math.round((g/total)*100);
+    const cPct = 100 - gPct;
+
+    $('#gPct').textContent = gPct + '%';
+    $('#cPct').textContent = cPct + '%';
+    $('#gBar').style.width = gPct + '%';
+    $('#cBar').style.width = cPct + '%';
+
+    const summary = gPct > cPct
+      ? "You’re more Team Gianlu 🧢 — chill, spontaneous, and a bit last-minute."
+      : gPct < cPct
+        ? "You’re more Team Cha 💜 — organized, caring, and always on top of things."
+        : "It’s a perfect tie — a balanced duo of spontaneity and elegance!";
+    $('#summaryText').textContent = summary;
+
+    currentShareText = `I got ${gPct}% Gianlu 🧢 and ${cPct}% Cha 💜 on “Team Cha vs Team Gianlu – This or That”. ${summary} ${window.location.href}`;
+
+    $('#quiz').classList.add('hidden');
+    $('#result').style.display = 'block';
+    $('#progressBar').style.width = '100%';
+    $('#progressText').textContent = 'All done!';
+  }
+
+  // --- Events -------------------------------------------------------------
+  $('#nextBtn').addEventListener('click', goNext);
+  $('#prevBtn').addEventListener('click', goPrev);
+  $('#restartBtn').addEventListener('click', () => {
+    index = 0;
+    for (let i=0;i<answers.length;i++) answers[i] = null;
+    shuffleOrder(); // rimescola sia ordine domande (se attivo) sia lato risposte
+    $('#result').style.display = 'none';
+    $('#quiz').classList.remove('hidden');
+    $('#shareFeedback').textContent = '';
     renderQuestion();
-  </script>
+  });
+  $('#shareBtn').addEventListener('click', async () => {
+    const feedback = $('#shareFeedback');
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: 'Team Cha vs Team Gianlu', text: currentShareText });
+        feedback.textContent = 'Shared!';
+      } else if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(currentShareText);
+        feedback.textContent = 'Copied to clipboard!';
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = currentShareText; document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta);
+        feedback.textContent = 'Copied to clipboard!';
+      }
+    } catch (e) {
+      feedback.textContent = 'Could not share. Try copying manually.';
+    }
+    setTimeout(() => { feedback.textContent = ''; }, 3200);
+  });
+
+  // Init
+  shuffleOrder();
+  renderQuestion();
+</script>
+
 </body>
 </html>
