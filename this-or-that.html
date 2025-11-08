@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,68 +37,69 @@
       color:var(--lavender-600);
       text-align:center;
     }
-    .subtitle{ text-align:center; margin:0; color:var(--muted); font-size:18px; }.progress-wrap{ padding:12px 28px 0; }
-.progress{
-  width:100%; height:10px; background:#efeaf8; border-radius:999px; overflow:hidden; position:relative;
-}
-.progress > span{ display:block; height:100%; width:0%; background:var(--lavender-600); transition:width .35s ease; }
-.progress-text{ text-align:right; font-size:14px; color:var(--muted); margin-top:6px; }
+    .subtitle{ text-align:center; margin:0; color:var(--muted); font-size:18px; }
 
-.content{ padding:24px 28px 32px; }
+    .progress-wrap{ padding:12px 28px 0; }
+    .progress{
+      width:100%; height:10px; background:#efeaf8; border-radius:999px; overflow:hidden; position:relative;
+    }
+    .progress > span{ display:block; height:100%; width:0%; background:var(--lavender-600); transition:width .35s ease; }
+    .progress-text{ text-align:right; font-size:14px; color:var(--muted); margin-top:6px; }
 
-.question{
-  font-size:28px; margin:8px 0 18px; text-align:center; font-weight:600;
-}
-.options{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:720px; margin:14px auto 8px; }
-@media (max-width:719px){ .options{ grid-template-columns:1fr; } }
-.btn.half{ min-height:100px; }
-.btn.selected{ outline:3px solid var(--lavender-600); box-shadow:0 0 0 4px rgba(157,135,209,.15); }
-/* shake feedback */
-@keyframes shake { 10%, 90% {transform: translateX(-1px);} 20%,80% {transform: translateX(2px);} 30%,50%,70% {transform: translateX(-4px);} 40%,60% {transform: translateX(4px);} }
-.need-pick { animation: shake .4s; }
-@media (min-width:720px){ .options{ grid-template-columns:1fr 1fr; } }
-.btn.half{ min-height:84px; }
-@media (min-width:720px){ .options{ grid-template-columns:1fr 1fr; } }
+    .content{ padding:24px 28px 32px; }
 
-.btn{
-  appearance:none; border:none; cursor:pointer; border-radius:16px; padding:18px 16px; font-size:18px; line-height:1.2;
-  background:#faf7ff; color:var(--ink); box-shadow:0 4px 14px rgba(157,135,209,.18);
-  transition: transform .06s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
-  border:1px solid rgba(157,135,209,.22);
-}
-.btn:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(157,135,209,.22); background:#f7f1ff; }
-.btn:active{ transform:translateY(0); }
-.btn.selected{ background:#efeaf8; border-color: var(--lavender-600); box-shadow:0 0 0 2px rgba(157,135,209,.25) inset; }
-.btn:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(157,135,209,.22); background:#f7f1ff; }
-.btn:active{ transform:translateY(0); }
+    .question{
+      font-size:28px; margin:8px 0 18px; text-align:center; font-weight:600;
+    }
+    .options{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:720px; margin:14px auto 8px; }
+    @media (max-width:719px){ .options{ grid-template-columns:1fr; } }
+    .btn.half{ min-height:100px; }
+    .btn.selected{ outline:3px solid var(--lavender-600); box-shadow:0 0 0 4px rgba(157,135,209,.15); }
+    /* shake feedback */
+    @keyframes shake { 10%, 90% {transform: translateX(-1px);} 20%,80% {transform: translateX(2px);} 30%,50%,70% {transform: translateX(-4px);} 40%,60% {transform: translateX(4px);} }
+    .need-pick { animation: shake .4s; }
+    @media (min-width:720px){ .options{ grid-template-columns:1fr 1fr; } }
+    .btn.half{ min-height:84px; }
+    @media (min-width:720px){ .options{ grid-template-columns:1fr 1fr; } }
 
-.nav{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:18px; }
-.nav button{
-  padding:12px 16px; border-radius:14px; border:1px solid rgba(157,135,209,.35);
-  background:var(--white); font-size:16px; cursor:pointer; color:var(--ink);
-}
-.nav button.primary{ background:var(--lavender-600); color:#fff; border-color:transparent; }
-.nav button[disabled]{ opacity:.45; cursor:not-allowed; }
+    .btn{
+      appearance:none; border:none; cursor:pointer; border-radius:16px; padding:18px 16px; font-size:18px; line-height:1.2;
+      background:#faf7ff; color:var(--ink); box-shadow:0 4px 14px rgba(157,135,209,.18);
+      transition: transform .06s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+      border:1px solid rgba(157,135,209,.22);
+    }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(157,135,209,.22); background:#f7f1ff; }
+    .btn:active{ transform:translateY(0); }
+    .btn.selected{ background:#efeaf8; border-color: var(--lavender-600); box-shadow:0 0 0 2px rgba(157,135,209,.25) inset; }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(157,135,209,.22); background:#f7f1ff; }
+    .btn:active{ transform:translateY(0); }
 
-.footer-note{ text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    .nav{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:18px; }
+    .nav button{
+      padding:12px 16px; border-radius:14px; border:1px solid rgba(157,135,209,.35);
+      background:var(--white); font-size:16px; cursor:pointer; color:var(--ink);
+    }
+    .nav button.primary{ background:var(--lavender-600); color:#fff; border-color:transparent; }
+    .nav button[disabled]{ opacity:.45; cursor:not-allowed; }
 
-/* Result */
-.result{
-  display:none; text-align:center; padding:8px 0;
-}
-.score-wrap{ display:flex; align-items:center; gap:8px; margin:18px auto; max-width:520px; }
-.bar{
-  height:16px; width:100%; background:#efeaf8; border-radius:999px; overflow:hidden; display:flex;
-}
-.bar .cha{ background:#f3d8ee; height:100%; width:50%; transition:width .6s ease; }
-.bar .gianlu{ background:#cfd4ff; height:100%; width:50%; transition:width .6s ease; }
-.legend{ display:flex; justify-content:space-between; font-size:16px; color:var(--muted); }
+    .footer-note{ text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
 
-.pill{ display:inline-block; padding:6px 10px; background:#efeaf8; border-radius:999px; font-size:14px; color:var(--muted); margin:4px; }
-.share{ margin-top:14px; }
+    /* Result */
+    .result{
+      display:none; text-align:center; padding:8px 0;
+    }
+    .score-wrap{ display:flex; align-items:center; gap:8px; margin:18px auto; max-width:520px; }
+    .bar{
+      height:16px; width:100%; background:#efeaf8; border-radius:999px; overflow:hidden; display:flex;
+    }
+    .bar .cha{ background:#f3d8ee; height:100%; width:50%; transition:width .6s ease; }
+    .bar .gianlu{ background:#cfd4ff; height:100%; width:50%; transition:width .6s ease; }
+    .legend{ display:flex; justify-content:space-between; font-size:16px; color:var(--muted); }
 
-.hidden{ display:none !important; }
+    .pill{ display:inline-block; padding:6px 10px; background:#efeaf8; border-radius:999px; font-size:14px; color:var(--muted); margin:4px; }
+    .share{ margin-top:14px; }
 
+    .hidden{ display:none !important; }
   </style>
 </head>
 <body>
@@ -105,49 +107,51 @@
     <header>
       <h1 id="game-title" class="title">Team Cha 💜 vs Team Gianlu 🧢</h1>
       <p class="subtitle">This or That — Pick your vibe. Discover your team at the end!</p>
-    </header><div class="progress-wrap">
-  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
-  <div class="progress-text" id="progressText">Question 1 of 14</div>
-</div>
+    </header>
 
-<section class="content" id="quiz">
-  <div class="qmeta" id="qMeta" style="text-align:center; font-size:18px; color:var(--muted); margin-bottom:6px;"></div>
-  <div class="question" id="questionText"></div>
-  <div class="options" id="options"></div>
-  <div class="nav">
-    <button id="prevBtn" aria-label="Previous question">⟵ Back</button>
-    <button id="nextBtn" class="primary" aria-label="Next question">Next ⟶</button>
-  </div>
-  <p class="footer-note">Your picks are private — we’ll reveal your team only at the end 💌</p>
-</section>
-
-<section class="content result" id="result">
-  <h2 class="question" style="margin-top:0">Your Result</h2>
-  <div class="score-wrap">
-    <div class="bar" aria-hidden="true">
-      <div class="gianlu" id="gBar" title="Gianlu"></div>
-      <div class="cha" id="cBar" title="Cha"></div>
+    <div class="progress-wrap">
+      <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+      <div class="progress-text" id="progressText">Question 1 of 14</div>
     </div>
-  </div>
-  <div class="legend" id="legend"> 
-    <span>🧢 Gianlu: <strong id="gPct">50%</strong></span>
-    <span>💜 Cha: <strong id="cPct">50%</strong></span>
-  </div>
-  <p id="summaryText" style="font-size:20px; margin-top:10px"></p>
 
-  <div id="traits" style="margin:8px 0 2px"></div>
+    <section class="content" id="quiz">
+      <div class="qmeta" id="qMeta" style="text-align:center; font-size:18px; color:var(--muted); margin-bottom:6px;"></div>
+      <div class="question" id="questionText"></div>
+      <div class="options" id="options"></div>
+      <div class="nav">
+        <button id="prevBtn" aria-label="Previous question">⟵ Back</button>
+        <button id="nextBtn" class="primary" aria-label="Next question">Next ⟶</button>
+      </div>
+      <p class="footer-note">Your picks are private — we’ll reveal your team only at the end 💌</p>
+    </section>
 
-  <div class="share">
-    <button id="shareBtn" class="primary" style="margin-right:8px">Share result</button>
-    <button id="restartBtn">Play again</button>
-    <div id="shareFeedback" class="footer-note" aria-live="polite" style="margin-top:8px; min-height:1.2em"></div>
-  </div>
-  <p class="footer-note">Psst… Want to compare with the couple? They’ll see the scoreboard at the wedding 😉</p>
-</section>
+    <section class="content result" id="result">
+      <h2 class="question" style="margin-top:0">Your Result</h2>
+      <div class="score-wrap">
+        <div class="bar" aria-hidden="true">
+          <div class="gianlu" id="gBar" title="Gianlu"></div>
+          <div class="cha" id="cBar" title="Cha"></div>
+        </div>
+      </div>
+      <div class="legend" id="legend"> 
+        <span>🧢 Gianlu: <strong id="gPct">50%</strong></span>
+        <span>💜 Cha: <strong id="cPct">50%</strong></span>
+      </div>
+      <p id="summaryText" style="font-size:20px; margin-top:10px"></p>
 
-  </main>  <script>
+      <div id="traits" style="margin:8px 0 2px"></div>
+
+      <div class="share">
+        <button id="shareBtn" class="primary" style="margin-right:8px">Share result</button>
+        <button id="restartBtn">Play again</button>
+        <div id="shareFeedback" class="footer-note" aria-live="polite" style="margin-top:8px; min-height:1.2em"></div>
+      </div>
+      <p class="footer-note">Psst… Want to compare with the couple? They’ll see the scoreboard at the wedding 😉</p>
+    </section>
+  </main>
+
+  <script>
     // --- Data model ---------------------------------------------------------
-    // Note: We keep the association hidden in the UI until the end.
     const QUESTIONS = [
       { t: "🎬 Movies", left: "I fall asleep after 10 minutes", right: "I watch it till the end" },
       { t: "😴 Sleep habits", left: "I’m asleep instantly", right: "I count sheep for an hour" },
@@ -165,19 +169,16 @@
       { t: "🎢 Adrenaline", left: "Bungee jump", right: "Not even if you pay me" },
     ];
 
-    // From each question's string, we will split by ' / ' to generate two neutral options.
-    // Mapping: optionIndex 0 -> A (Gianlu), optionIndex 1 -> B (Cha)
-
     // --- State --------------------------------------------------------------
     let index = 0;
-    const answers = Array(QUESTIONS.length).fill(null);
-    let currentShareText = ''; // stores 0 or 1 (chosen option position *after* shuffle), not affiliation yet
+    const answers = Array(QUESTIONS.length).fill(null); // 0 = left (Gianlu), 1 = right (Cha)
+    let currentShareText = '';
 
     // --- Helpers ------------------------------------------------------------
     const $ = sel => document.querySelector(sel);
 
     function updateProgress(){
-      const pct = ((index) / QUESTIONS.length) * 100;
+      const pct = (index / QUESTIONS.length) * 100; // start at 0%
       $('#progressBar').style.width = pct + '%';
       $('#progressText').textContent = `Question ${index+1} of ${QUESTIONS.length}`;
     }
@@ -185,7 +186,7 @@
     function renderQuestion(){
       const data = QUESTIONS[index];
       $('#qMeta').textContent = data.t || '';
-      $('#questionText').textContent = 'Choose one:';
+      $('#questionText').textContent = '';
 
       const cont = $('#options');
       cont.innerHTML = '';
@@ -200,11 +201,11 @@
       rightBtn.type = 'button';
       rightBtn.textContent = data.right;
 
-      // Restore selection highlight
+      // restore visual selection when navigating back
       if (answers[index] === 0) leftBtn.classList.add('selected');
       if (answers[index] === 1) rightBtn.classList.add('selected');
 
-      // Click = select and auto-advance
+      // click = save + auto-advance
       leftBtn.addEventListener('click', () => { answers[index] = 0; goNext(); });
       rightBtn.addEventListener('click', () => { answers[index] = 1; goNext(); });
 
@@ -213,70 +214,16 @@
 
       $('#prevBtn').disabled = index === 0;
       updateProgress();
-    } else if (answers[index] === 1) {
-        rightBtn.classList.add('selected');
-        $('#nextBtn').disabled = false;
-      } else {
-        $('#nextBtn').disabled = true;
-      }
-
-      // Click handlers: select, highlight, enable Next
-      leftBtn.addEventListener('click', () => {
-        answers[index] = 0;
-        leftBtn.classList.add('selected');
-        rightBtn.classList.remove('selected');
-        $('#nextBtn').disabled = false;
-      });
-      rightBtn.addEventListener('click', () => {
-        answers[index] = 1;
-        rightBtn.classList.add('selected');
-        leftBtn.classList.remove('selected');
-        $('#nextBtn').disabled = false;
-      });
-
-      cont.appendChild(leftBtn);
-      cont.appendChild(rightBtn);
-
-      $('#prevBtn').disabled = index === 0;
-      updateProgress();
-    });
-      rightBtn.addEventListener('click', () => {
-        answers[index] = 1;
-        rightBtn.classList.add('selected');
-        leftBtn.classList.remove('selected');
-        $('#nextBtn').disabled = false;
-      });
-
-      cont.appendChild(leftBtn);
-      cont.appendChild(rightBtn);
-
-      $('#prevBtn').disabled = index === 0;
-      $('#nextBtn').disabled = answers[index] === null;
-      updateProgress();
-    });
-      rightBtn.addEventListener('click', () => {
-        answers[index] = 1;
-        rightBtn.classList.add('selected');
-        leftBtn.classList.remove('selected');
-        $('#nextBtn').disabled = false;
-      });
-
-      cont.appendChild(leftBtn);
-      cont.appendChild(rightBtn);
-
-      $('#prevBtn').disabled = index === 0;
-      $('#nextBtn').disabled = answers[index] === null;
-      updateProgress();
-    });
-        cont.appendChild(btn);
-      });
-
-      $('#prevBtn').disabled = index === 0;
-      $('#nextBtn').disabled = answers[index] === null;
-      updateProgress();
     }
 
     function goNext(){
+      if (answers[index] === null) {
+        const cont = $('#options');
+        cont.classList.remove('need-pick');
+        void cont.offsetWidth; // restart animation
+        cont.classList.add('need-pick');
+        return;
+      }
       if (index < QUESTIONS.length - 1){
         index++;
         renderQuestion();
@@ -290,24 +237,17 @@
     }
 
     function finish(){
-      // Compute Gianlu vs Cha based on original affiliation:
-      // If user selected the left-half text from original split => choice 0 => Gianlu
-      // Otherwise => choice 1 => Cha.
       let g = 0, c = 0;
-      answers.forEach(v => {
-        if (v === 0) g++; else c++;
-      });
+      answers.forEach(v => { if (v === 0) g++; else c++; });
       const total = g + c;
       const gPct = Math.round((g/total)*100);
       const cPct = 100 - gPct;
 
-      // Update bars and text
       $('#gPct').textContent = gPct + '%';
       $('#cPct').textContent = cPct + '%';
       $('#gBar').style.width = gPct + '%';
       $('#cBar').style.width = cPct + '%';
 
-      // Build a playful summary based on the majority
       const summary = gPct > cPct
         ? "You’re more Team Gianlu 🧢 — chill, spontaneous, and a bit last‑minute."
         : gPct < cPct
@@ -315,19 +255,8 @@
           : "It’s a perfect tie — a balanced duo of spontaneity and elegance!";
       $('#summaryText').textContent = summary;
 
-      // Prepare share text content for Web Share API / clipboard
       currentShareText = `I got ${gPct}% Gianlu 🧢 and ${cPct}% Cha 💜 on “Team Cha vs Team Gianlu – This or That”. ${summary} ${window.location.href}`;
 
-      // Optional traits based on question clusters (light touch, still neutral)
-      const traits = [];
-      if (gPct >= 60) traits.push('⚡ Spontaneous spirit');
-      if (cPct >= 60) traits.push('✨ Elegantly organized');
-      if (gPct > 50 && cPct > 30) traits.push('😄 Laid‑back but caring');
-      if (cPct > 50 && gPct > 30) traits.push('💬 Thoughtful & detail‑oriented');
-
-      $('#traits').innerHTML = traits.map(t => `<span class="pill">${t}</span>`).join('');
-
-      // Toggle screens
       $('#quiz').classList.add('hidden');
       $('#result').style.display = 'block';
       $('#progressBar').style.width = '100%';
@@ -335,18 +264,7 @@
     }
 
     // --- Events -------------------------------------------------------------
-    $('#nextBtn').addEventListener('click', () => {
-      if (answers[index] === null) {
-        const cont = $('#options');
-        cont.classList.remove('need-pick');
-        // trigger reflow for animation restart
-        void cont.offsetWidth;
-        cont.classList.add('need-pick');
-        return;
-      }
-      goNext();
-    });
-    });
+    $('#nextBtn').addEventListener('click', goNext);
     $('#prevBtn').addEventListener('click', goPrev);
     $('#restartBtn').addEventListener('click', () => {
       index = 0; for (let i=0;i<answers.length;i++) answers[i] = null;
@@ -378,5 +296,6 @@
 
     // Init
     renderQuestion();
-  </script></body>
+  </script>
+</body>
 </html>
