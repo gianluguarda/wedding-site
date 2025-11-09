@@ -149,7 +149,6 @@
       <div class="options" id="options"></div>
       <div class="nav">
         <button id="prevBtn" aria-label="Previous question">⟵ Back</button>
-        <button id="nextBtn" class="primary" aria-label="Next question">Next ⟶</button>
       </div>
     </section>
 
@@ -349,7 +348,7 @@ fr: [
     if (answers[index] === 1) rightBtn.classList.add('selected');
 
     leftBtn.addEventListener('click', () => { answers[index] = 0; goNext(); });
-    rightBtn.addEventListener('click', () => { answers[index] = 1; goNext(); });
+//     rightBtn.addEventListener('click', () => { answers[index] = 1; goNext(); });
 
     cont.appendChild(leftBtn);
     cont.appendChild(rightBtn);
@@ -412,7 +411,7 @@ fr: [
   function applyUIStrings(){
     $('#subtitle').textContent = tkey().subtitle;
     $('#prevBtn').textContent = tkey().back;
-    $('#nextBtn').textContent = tkey().next;
+//     $('#nextBtn').textContent = tkey().next;
     $('#resultTitle').textContent = tkey().resultTitle;
     $('#shareBtn').textContent = tkey().share;
     $('#restartBtn').textContent = tkey().playAgain;
@@ -438,7 +437,7 @@ fr: [
   }
 
   // -------------------- Events --------------------
-  $('#nextBtn').addEventListener('click', goNext);
+//   $('#nextBtn').addEventListener('click', goNext);
   $('#prevBtn').addEventListener('click', goPrev);
   $('#restartBtn').addEventListener('click', () => {
     index = 0;
