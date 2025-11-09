@@ -348,7 +348,7 @@ fr: [
     if (answers[index] === 1) rightBtn.classList.add('selected');
 
     leftBtn.addEventListener('click', () => { answers[index] = 0; goNext(); });
-//     rightBtn.addEventListener('click', () => { answers[index] = 1; goNext(); });
+ rightBtn.addEventListener('click', () => { answers[index] = 1; goNext(); });
 
     cont.appendChild(leftBtn);
     cont.appendChild(rightBtn);
