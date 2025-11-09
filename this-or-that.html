@@ -49,8 +49,8 @@
 
     .content{ padding:24px 28px 32px; }
 
-    .qmeta{ text-align:center; font-size:28px; color:var(--muted); margin-bottom:10px; }
-    .question{ font-size:28px; margin:8px 0 18px; text-align:center; font-weight:600;  color: var(--ink); }
+    .qmeta{ text-align:center; font-size:28px; color:var(--ink); margin-bottom:10px; } /* <- SCURITO */
+    .question{ font-size:28px; margin:8px 0 18px; text-align:center; font-weight:600; color:var(--ink); }
     .options{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:720px; margin:14px auto 8px; }
     @media (max-width:719px){ .options{ grid-template-columns:1fr; } }
 
@@ -85,13 +85,21 @@
     .bar .gianlu{ background:#cfd4ff; height:100%; width:50%; transition:width .6s ease; }
     .legend{ display:flex; justify-content:space-between; font-size:18px; color:var(--muted); }
     .pill{ display:inline-block; padding:6px 10px; background:#efeaf8; border-radius:999px; font-size:16px; color:var(--muted); margin:4px; }
-    .share{ margin-top:14px; }
+
+    .share{ margin-top:14px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    /* Stile per i bottoni Share / Play again */
+    .share button{
+      padding:10px 16px; border-radius:999px; border:1px solid rgba(157,135,209,.35);
+      background:#fff; color:var(--lavender-600); font-weight:600; cursor:pointer; transition:.2s;
+      box-shadow:0 4px 10px rgba(157,135,209,.12);
+    }
+    #shareBtn{ background:var(--lavender-600); color:#fff; border-color:transparent; }
+    .share button:hover{ transform:translateY(-1px); background:#f7f1ff; }
+    #shareBtn:hover{ background:var(--lavender); }
 
     .hidden{ display:none !important; }
 
-    .exit-wrap{
-      display:flex; justify-content:center; padding:20px 0 32px;
-    }
+    .exit-wrap{ display:flex; justify-content:center; padding:20px 0 32px; }
     .exit-btn{
       background:#fff; border:1px solid rgba(157,135,209,.35); border-radius:14px;
       padding:8px 16px; font-size:16px; color:var(--muted); cursor:pointer;
@@ -122,13 +130,12 @@
   </style>
 </head>
 <body>
-  <!-- Language chooser -->
+  <!-- Language chooser (FIX: rimosso il </div> extra) -->
   <div id="langOverlay" class="lang-overlay" role="dialog" aria-modal="true">
-      <div class="lang-grid">
-        <button class="lang-btn" data-lang="it" aria-label="Italiano">🇮🇹 Italiano</button>
-        <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 Français</button>
-        <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 English</button>
-      </div>
+    <div class="lang-grid">
+      <button class="lang-btn" data-lang="it" aria-label="Italiano">🇮🇹 Italiano</button>
+      <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 Français</button>
+      <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 English</button>
     </div>
   </div>
 
@@ -253,40 +260,38 @@
       { t: "La mia gironata ideale sugli sci è:", left: "Giornaliero + panini nello zaino", right: "2 ore skipass + pranzo in baita" },
       { t: "Faresti mai bungee jumping?", left: "Subito!", right: "Neanche se mi paghi" }
     ],
-fr: [
-  { t: "Quand je regarde un film", left: "Je m’endors après 10 minutes", right: "Je le regarde jusqu’à la fin" },
-  { t: "Le lit", left: "Doit toujours être fait", right: "Inutile, je vais le défaire ce soir !" },
-  { t: "Le tube de dentifrice", left: "Je le presse du bas jusqu’à la dernière goutte", right: "Je le presse n’importe où" },
-  { t: "Combien d’eau bois-tu ?", left: "Parfois mon premier verre est l’après-midi", right: "2 L par jour, pas d’excuses" },
-  { t: "Tu cuisines ?", left: "Toujours, et j’adore ça", right: "Quelqu’un d’autre le fait pour moi" },
-  { t: "Quand j’écris un e-mail", left: "Je l’écris d’un seul jet", right: "Je le relis dix fois avant d’envoyer" },
-  { t: "La valise avant un voyage", left: "Je la fais 30 minutes avant de partir", right: "Je commence à la préparer une semaine avant" },
-  { t: "Quand je sors dîner avec des amis", left: "Je finis toujours en premier", right: "Les autres m’attendent pour finir mon assiette" },
-  { t: "Ma journée de vacances parfaite", left: "Randonnée en montagne", right: "Journée à la plage avec un livre au soleil" },
-  { t: "Quand je fais du shopping", left: "Je regarde le prix d’abord", right: "Je découvre le prix à la caisse" },
-  { t: "Quand je vais me coucher", left: "Je m’endors en 2 secondes", right: "Je compte les moutons pendant une heure" },
-  { t: "Un appel avec mes parents", left: "Dure 2 minutes en moyenne (si je réponds)", right: "Dure une heure, je dois tout leur raconter" },
-  { t: "Ma journée de ski idéale", left: "Forfait journée + sandwichs dans le sac à dos", right: "2 heures de ski + déjeuner au chalet" },
-  { t: "Tu ferais du saut à l’élastique ?", left: "Tout de suite !", right: "Même pas payé !" }
-],
-
+    fr: [
+      { t: "Quand je regarde un film", left: "Je m’endors après 10 minutes", right: "Je le regarde jusqu’à la fin" },
+      { t: "Le lit", left: "Doit toujours être fait", right: "Inutile, je vais le défaire ce soir !" },
+      { t: "Le tube de dentifrice", left: "Je le presse du bas jusqu’à la dernière goutte", right: "Je le presse n’importe où" },
+      { t: "Combien d’eau bois-tu ?", left: "Parfois mon premier verre est l’après-midi", right: "2 L par jour, pas d’excuses" },
+      { t: "Tu cuisines ?", left: "Toujours, et j’adore ça", right: "Quelqu’un d’autre le fait pour moi" },
+      { t: "Quand j’écris un e-mail", left: "Je l’écris d’un seul jet", right: "Je le relis dix fois avant d’envoyer" },
+      { t: "La valise avant un voyage", left: "Je la fais 30 minutes avant de partir", right: "Je commence à la préparer une semaine avant" },
+      { t: "Quand je sors dîner avec des amis", left: "Je finis toujours en premier", right: "Les autres m’attendent pour finir mon assiette" },
+      { t: "Ma journée de vacances parfaite", left: "Randonnée en montagne", right: "Journée à la plage avec un livre au soleil" },
+      { t: "Quand je fais du shopping", left: "Je regarde le prix d’abord", right: "Je découvre le prix à la caisse" },
+      { t: "Quand je vais me coucher", left: "Je m’endors en 2 secondes", right: "Je compte les moutons pendant une heure" },
+      { t: "Un appel avec mes parents", left: "Dure 2 minutes en moyenne (si je réponds)", right: "Dure une heure, je dois tout leur raconter" },
+      { t: "Ma journée de ski idéale", left: "Forfait journée + sandwichs dans le sac à dos", right: "2 heures de ski + déjeuner au chalet" },
+      { t: "Tu ferais du saut à l’élastique ?", left: "Tout de suite !", right: "Même pas payé !" }
+    ],
     en: [
-  { t: "When I watch a movie", left: "I fall asleep after 10 minutes", right: "I watch it till the end" },
-  { t: "The bed", left: "Must always be made", right: "Why bother, I’ll mess it up again tonight!" },
-  { t: "The toothpaste tube", left: "I squeeze it from the bottom till the very last gram", right: "I squeeze it wherever my hand lands" },
-  { t: "How much water do you drink?", left: "Sometimes my first glass is in the afternoon", right: "2L a day, no excuses" },
-  { t: "Do you cook?", left: "Always, and I love it", right: "Someone else does it for me" },
-  { t: "When I write an email", left: "I write it in one go", right: "I reread it 10 times before sending" },
-  { t: "Packing before a trip", left: "I do it 30 minutes before leaving", right: "I start a week in advance" },
-  { t: "When I go out for dinner with friends", left: "I’m the first to finish", right: "Everyone’s waiting for me to finish" },
-  { t: "My perfect vacation day is", left: "Hiking in the mountains", right: "A beach day reading under the sun" },
-  { t: "When I go shopping", left: "I check the price first", right: "I discover the price at the checkout" },
-  { t: "When I go to bed", left: "I fall asleep in 2 seconds", right: "I count sheep for an hour" },
-  { t: "A call with my parents", left: "Lasts 2 minutes on average (if I answer)", right: "Lasts an hour, I have to update them on everything" },
-  { t: "My ideal ski day is", left: "Full day + sandwiches in the backpack", right: "2-hour skipass + lunch at the chalet" },
-  { t: "Would you ever go bungee jumping?", left: "Absolutely!", right: "Not even if you paid me" }
-],
-
+      { t: "When I watch a movie", left: "I fall asleep after 10 minutes", right: "I watch it till the end" },
+      { t: "The bed", left: "Must always be made", right: "Why bother, I’ll mess it up again tonight!" },
+      { t: "The toothpaste tube", left: "I squeeze it from the bottom till the very last gram", right: "I squeeze it wherever my hand lands" },
+      { t: "How much water do you drink?", left: "Sometimes my first glass is in the afternoon", right: "2L a day, no excuses" },
+      { t: "Do you cook?", left: "Always, and I love it", right: "Someone else does it for me" },
+      { t: "When I write an email", left: "I write it in one go", right: "I reread it 10 times before sending" },
+      { t: "Packing before a trip", left: "I do it 30 minutes before leaving", right: "I start a week in advance" },
+      { t: "When I go out for dinner with friends", left: "I’m the first to finish", right: "Everyone’s waiting for me to finish" },
+      { t: "My perfect vacation day is", left: "Hiking in the mountains", right: "A beach day reading under the sun" },
+      { t: "When I go shopping", left: "I check the price first", right: "I discover the price at the checkout" },
+      { t: "When I go to bed", left: "I fall asleep in 2 seconds", right: "I count sheep for an hour" },
+      { t: "A call with my parents", left: "Lasts 2 minutes on average (if I answer)", right: "Lasts an hour, I have to update them on everything" },
+      { t: "My ideal ski day is", left: "Full day + sandwiches in the backpack", right: "2-hour skipass + lunch at the chalet" },
+      { t: "Would you ever go bungee jumping?", left: "Absolutely!", right: "Not even if you paid me" }
+    ],
   };
 
   // --------------- State ---------------
@@ -303,7 +308,7 @@ fr: [
   function tkey() { return STRINGS[LANG]; }
 
   function shuffle(arr){
-    for (let i = arr.length - 1; i > 0; i--) {
+    for (let i = arr.length - 1; i > 0; i++) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
@@ -348,7 +353,7 @@ fr: [
     if (answers[index] === 1) rightBtn.classList.add('selected');
 
     leftBtn.addEventListener('click', () => { answers[index] = 0; goNext(); });
- rightBtn.addEventListener('click', () => { answers[index] = 1; goNext(); });
+    rightBtn.addEventListener('click', () => { answers[index] = 1; goNext(); });
 
     cont.appendChild(leftBtn);
     cont.appendChild(rightBtn);
@@ -360,9 +365,7 @@ fr: [
   function goNext(){
     if (answers[index] == null) {
       const cont = $('#options');
-      cont.classList.remove('need-pick');
-      void cont.offsetWidth;
-      cont.classList.add('need-pick');
+      cont.classList.remove('need-pick'); void cont.offsetWidth; cont.classList.add('need-pick');
       return;
     }
     if (index < QUESTIONS.length - 1){
@@ -379,11 +382,10 @@ fr: [
 
   function finish(){
     let g = 0, c = 0;
-
     for (let i = 0; i < QUESTIONS.length; i++){
       const pickSide = answers[i];
       const flipped = SIDE_MAP[i] === 1;
-      // Original mapping: left = Gianlu, right = Cha
+      // Mapping: left = Gianlu, right = Cha (con flip casuale per la UI)
       const pickedIsGianlu = flipped ? (pickSide === 1) : (pickSide === 0);
       if (pickedIsGianlu) g++; else c++;
     }
@@ -411,7 +413,6 @@ fr: [
   function applyUIStrings(){
     $('#subtitle').textContent = tkey().subtitle;
     $('#prevBtn').textContent = tkey().back;
-//     $('#nextBtn').textContent = tkey().next;
     $('#resultTitle').textContent = tkey().resultTitle;
     $('#shareBtn').textContent = tkey().share;
     $('#restartBtn').textContent = tkey().playAgain;
@@ -437,8 +438,8 @@ fr: [
   }
 
   // -------------------- Events --------------------
-//   $('#nextBtn').addEventListener('click', goNext);
   $('#prevBtn').addEventListener('click', goPrev);
+
   $('#restartBtn').addEventListener('click', () => {
     index = 0;
     for (let i=0;i<answers.length;i++) answers[i] = null;
@@ -453,7 +454,7 @@ fr: [
     const feedback = $('#shareFeedback');
     try {
       if (navigator.share) {
-        await navigator.share({ title: 'Team Cha vs Team Gianlu', text: currentShareText });
+        await navigator.share({ title: 'Team Cha vs Team Gianlu', text: currentShareText, url: window.location.href });
         feedback.textContent = tkey().shared;
       } else if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(currentShareText);
@@ -471,19 +472,24 @@ fr: [
   });
 
   document.getElementById('exitBtn').addEventListener('click', () => {
-    window.location.href = 'https://www.charlottegianluca.it/home.html'; // <-- tua home
+    window.location.href = 'https://www.charlottegianluca.it/home.html';
   });
 
   // Language overlay handlers
   document.querySelectorAll('.lang-btn').forEach(btn=>{
     btn.addEventListener('click', (e)=>{
       const lang = e.currentTarget.dataset.lang;
-      $('#langOverlay').style.display = 'none';
+      document.getElementById('langOverlay').style.display = 'none';
       startGameWithLanguage(lang);
     });
   });
 
-  // Start: show overlay, wait for selection
+  // Opzionale: scelta con tastiera
+  document.addEventListener('keydown', (e)=>{
+    if (document.getElementById('quiz').classList.contains('hidden')) return;
+    if (e.key === 'ArrowLeft') { answers[index] = 0; goNext(); }
+    if (e.key === 'ArrowRight'){ answers[index] = 1; goNext(); }
+  });
 </script>
 </body>
 </html>
