@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Team Cha 💜 vs Team Gianlu 🧢 – This or That</title>
+  <title>Team Cha vs Team Gianlu</title>
   <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -49,7 +49,7 @@
 
     .content{ padding:24px 28px 32px; }
 
-    .qmeta{ text-align:center; font-size:28px; color:var(--ink); margin-bottom:10px; } /* <- SCURITO */
+    .qmeta{ text-align:center; font-size:28px; color:var(--ink); margin-bottom:10px; }
     .question{ font-size:28px; margin:8px 0 18px; text-align:center; font-weight:600; color:var(--ink); }
     .options{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:720px; margin:14px auto 8px; }
     @media (max-width:719px){ .options{ grid-template-columns:1fr; } }
@@ -87,7 +87,6 @@
     .pill{ display:inline-block; padding:6px 10px; background:#efeaf8; border-radius:999px; font-size:16px; color:var(--muted); margin:4px; }
 
     .share{ margin-top:14px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-    /* Stile per i bottoni Share / Play again */
     .share button{
       padding:10px 16px; border-radius:999px; border:1px solid rgba(157,135,209,.35);
       background:#fff; color:var(--lavender-600); font-weight:600; cursor:pointer; transition:.2s;
@@ -99,38 +98,30 @@
 
     .hidden{ display:none !important; }
 
-    .exit-wrap{ display:flex; justify-content:center; padding:20px 0 32px; }
-    .exit-btn{
-      background:#fff; border:1px solid rgba(157,135,209,.35); border-radius:14px;
-      padding:8px 16px; font-size:16px; color:var(--muted); cursor:pointer;
-      transition:all .2s ease; box-shadow:0 2px 6px rgba(157,135,209,.1); margin-bottom:0;
-    }
-    .exit-btn:hover{ background:#f7f1ff; color:var(--ink); box-shadow:0 4px 12px rgba(157,135,209,.15); }
-
     /* Language overlay */
     .lang-overlay{
       position:fixed; inset:0; background:rgba(247,243,235,.92);
       display:flex; align-items:center; justify-content:center; padding:24px; z-index:50;
       backdrop-filter: blur(2px);
     }
-    .lang-modal{
-      width:min(560px, 100%); background:#fff; border:1px solid rgba(157,135,209,.35);
-      border-radius:20px; padding:24px; box-shadow:0 12px 30px rgba(42,36,56,.12); text-align:center;
-    }
-    .lang-modal h2{
-      margin:0 0 6px; font-family:'Allura', cursive; font-size:42px; color:var(--lavender-600);
-    }
-    .lang-modal p{ margin:0 0 18px; color:var(--muted); font-size:18px; }
     .lang-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
     .lang-btn{
       border:1px solid rgba(157,135,209,.35); background:#faf7ff; border-radius:14px; padding:14px 16px;
       font-size:18px; cursor:pointer; transition:.2s; box-shadow:0 4px 10px rgba(157,135,209,.15);
     }
     .lang-btn:hover{ background:#f7f1ff; transform:translateY(-1px); }
+
+    .exit-wrap{ display:flex; justify-content:center; padding:0 0 28px; }
+    .exit-btn{
+      background:#fff; border:1px solid rgba(157,135,209,.35); border-radius:14px;
+      padding:8px 16px; font-size:16px; color:var(--muted); cursor:pointer;
+      transition:all .2s ease; box-shadow:0 2px 6px rgba(157,135,209,.1); margin-bottom:0;
+    }
+    .exit-btn:hover{ background:#f7f1ff; color:var(--ink); box-shadow:0 4px 12px rgba(157,135,209,.15); }
   </style>
 </head>
 <body>
-  <!-- Language chooser (FIX: rimosso il </div> extra) -->
+  <!-- Language chooser -->
   <div id="langOverlay" class="lang-overlay" role="dialog" aria-modal="true">
     <div class="lang-grid">
       <button class="lang-btn" data-lang="it" aria-label="Italiano">🇮🇹 Italiano</button>
@@ -167,18 +158,18 @@
           <div class="cha" id="cBar" title="Cha"></div>
         </div>
       </div>
-      <div class="legend" id="legend"> 
-        <span>🧢 Gianlu: <strong id="gPct">50%</strong></span>
-        <span>💜 Cha: <strong id="cPct">50%</strong></span>
+      <div class="legend">
+        <span>Gianlu: <strong id="gPct">50%</strong></span>
+        <span>Cha: <strong id="cPct">50%</strong></span>
       </div>
       <p id="summaryText" style="font-size:22px; margin-top:10px"></p>
       <div id="traits" style="margin:8px 0 2px"></div>
 
       <div class="share">
-        <button id="shareBtn" class="primary" style="margin-right:8px">Share result</button>
+        <button id="shareBtn" class="primary">Share result</button>
         <button id="restartBtn">Play again</button>
-        <div id="shareFeedback" class="footer-note" aria-live="polite" style="margin-top:8px; min-height:1.2em"></div>
       </div>
+      <div id="shareFeedback" class="footer-note" aria-live="polite" style="margin-top:8px; min-height:1.2em"></div>
     </section>
 
     <div class="exit-wrap">
@@ -187,6 +178,7 @@
   </main>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
   // -------------------- i18n strings --------------------
   const STRINGS = {
     it: {
@@ -194,8 +186,8 @@
       progress: (i,n) => `Domanda ${i} di ${n}`,
       back: "⟵ Indietro",
       resultTitle: "Il tuo risultato",
-      moreG: "Sei più Team Gianlu 🧢",
-      moreC: "Sei più Team Cha 💜",
+      moreG: "Sei più Team Gianlu",
+      moreC: "Sei più Team Cha",
       tie: "Parità perfetta!",
       share: "Condividi risultato",
       playAgain: "Rigioca",
@@ -204,15 +196,15 @@
       shared: "Condiviso!",
       copied: "Copiato negli appunti!",
       shareFail: "Condivisione non riuscita. Copia manualmente.",
-      shareText: (g,c,summary,url) => `Ho ottenuto ${g}% Gianlu 🧢 e ${c}% Cha 💜 in “Team Cha vs Team Gianlu – This or That”. ${summary} ${url}`
+      shareText: (g,c,summary,url) => `Ho ottenuto ${g}% Gianlu e ${c}% Cha in “Team Cha vs Team Gianlu”. ${summary} ${url}`
     },
     fr: {
       subtitle: "Choisis ton vibe. Découvre ton équipe à la fin !",
       progress: (i,n) => `Question ${i} sur ${n}`,
       back: "⟵ Retour",
       resultTitle: "Ton résultat",
-      moreG: "Tu es plutôt Team Gianlu 🧢",
-      moreC: "Tu es plutôt Team Cha 💜",
+      moreG: "Tu es plutôt Team Gianlu",
+      moreC: "Tu es plutôt Team Cha",
       tie: "Égalité parfaite !",
       share: "Partager le résultat",
       playAgain: "Rejouer",
@@ -221,15 +213,15 @@
       shared: "Partagé !",
       copied: "Copié dans le presse-papiers !",
       shareFail: "Partage impossible. Copie manuelle.",
-      shareText: (g,c,summary,url) => `J’ai eu ${g}% Gianlu 🧢 et ${c}% Cha 💜 sur “Team Cha vs Team Gianlu – This or That”. ${summary} ${url}`
+      shareText: (g,c,summary,url) => `J’ai eu ${g}% Gianlu et ${c}% Cha sur “Team Cha vs Team Gianlu”. ${summary} ${url}`
     },
     en: {
       subtitle: "Pick your vibe. Discover your team at the end!",
       progress: (i,n) => `Question ${i} of ${n}`,
       back: "⟵ Back",
       resultTitle: "Your Result",
-      moreG: "You’re more Team Gianlu 🧢",
-      moreC: "You’re more Team Cha 💜",
+      moreG: "You’re more Team Gianlu",
+      moreC: "You’re more Team Cha",
       tie: "It’s a perfect tie!",
       share: "Share result",
       playAgain: "Play again",
@@ -238,7 +230,7 @@
       shared: "Shared!",
       copied: "Copied to clipboard!",
       shareFail: "Could not share. Try copying manually.",
-      shareText: (g,c,summary,url) => `I got ${g}% Gianlu 🧢 and ${c}% Cha 💜 on “Team Cha vs Team Gianlu – This or That”. ${summary} ${url}`
+      shareText: (g,c,summary,url) => `I got ${g}% Gianlu and ${c}% Cha on “Team Cha vs Team Gianlu”. ${summary} ${url}`
     }
   };
 
@@ -246,18 +238,18 @@
   const QUESTIONS_BY_LANG = {
     it: [
       { t: "Quando guardo un film", left: "Mi addormento dopo 10 minuti", right: "Lo guardo fino alla fine" },
-      { t: "Il letto", left: "Va sempre rifatto", right: "Tanto stasera lo devo ridisfare!" },
-      { t: "Il tubetto di dentifricio", left: "lo spremo dal fondo fino all'ultimo grammo", right: "lo spremo come capita" },
+      { t: "Il letto", left: "Va sempre rifatto", right: "Tanto stasera lo devo rifare!" },
+      { t: "Il tubetto di dentifricio", left: "Lo spremo dal fondo fino all'ultimo grammo", right: "Lo spremo come capita" },
       { t: "Quanta acqua bevi?", left: "A volte bevo il primo bicchiere nel pomeriggio", right: "2L al giorno, no scuse" },
       { t: "Cucini?", left: "Sempre, e mi piace", right: "Qualcun altro lo fa per me" },
       { t: "Quando scrivo una email", left: "La scrivo di getto", right: "La rileggo 10 volte prima di inviare" },
-      { t: "La valigia prima di un viaggio", left: "La faccio 30 minuti prima", right: "Inzio a prepararla una settimana prima" },
+      { t: "La valigia prima di un viaggio", left: "La faccio 30 minuti prima", right: "Inizio a prepararla una settimana prima" },
       { t: "Quando vado a cena con amici", left: "Sono il primo a finire", right: "Gli altri mi guardano finire il mio piatto" },
-      { t: "La mia giornata di vacanza perfetta eé", left: "Hikiking in montagna", right: "Giornata in spiaggia a prendere il sole con un libro" },
+      { t: "La mia giornata di vacanza perfetta è", left: "Hiking in montagna", right: "Giornata in spiaggia a prendere il sole con un libro" },
       { t: "Quando vado a fare shopping", left: "Guardo prima il prezzo", right: "Scopro il prezzo alla cassa" },
-      { t: "Quando vado a eltto a dormire", left: "Mi addormento in 2 secondi", right: "Conto le pecore per un’ora" },
-      { t: "Una chiamata con i miei gentoru", left: "Dura in media 2 minuti (se rispondo)", right: "Dura un'ora, devo aggiornarli su tutto" },
-      { t: "La mia gironata ideale sugli sci è:", left: "Giornaliero + panini nello zaino", right: "2 ore skipass + pranzo in baita" },
+      { t: "Quando vado a letto", left: "Mi addormento in 2 secondi", right: "Conto le pecore per un’ora" },
+      { t: "Una chiamata con i miei genitori", left: "Dura in media 2 minuti (se rispondo)", right: "Dura un'ora, devo aggiornarli su tutto" },
+      { t: "La mia giornata ideale sugli sci è", left: "Giornaliero + panini nello zaino", right: "2 ore di skipass + pranzo in baita" },
       { t: "Faresti mai bungee jumping?", left: "Subito!", right: "Neanche se mi paghi" }
     ],
     fr: [
@@ -305,7 +297,7 @@
 
   // Helpers
   const $ = sel => document.querySelector(sel);
-  function tkey() { return STRINGS[LANG]; }
+  function tkey() { return STRINGS[LANG] || STRINGS.en; }
 
   function shuffle(arr){
     for (let i = arr.length - 1; i > 0; i++) {
@@ -385,7 +377,7 @@
     for (let i = 0; i < QUESTIONS.length; i++){
       const pickSide = answers[i];
       const flipped = SIDE_MAP[i] === 1;
-      // Mapping: left = Gianlu, right = Cha (con flip casuale per la UI)
+      // Mapping: left = Gianlu, right = Cha (con flip casuale in UI)
       const pickedIsGianlu = flipped ? (pickSide === 1) : (pickSide === 0);
       if (pickedIsGianlu) g++; else c++;
     }
@@ -421,7 +413,7 @@
   }
 
   function startGameWithLanguage(lang){
-    LANG = lang;
+    LANG = (STRINGS[lang] ? lang : 'en');
     QUESTIONS = QUESTIONS_BY_LANG[LANG].slice();
     index = 0;
     QUESTION_ORDER = [];
@@ -431,27 +423,36 @@
 
     applyUIStrings();
     shuffleOrder();
-    $('#result').style.display = 'none';
-    $('#quiz').classList.remove('hidden');
-    $('#shareFeedback').textContent = '';
+    document.getElementById('result').style.display = 'none';
+    document.getElementById('quiz').classList.remove('hidden');
+    document.getElementById('shareFeedback').textContent = '';
     renderQuestion();
   }
 
   // -------------------- Events --------------------
-  $('#prevBtn').addEventListener('click', goPrev);
+  document.querySelectorAll('.lang-btn').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      const lang = e.currentTarget.dataset.lang || 'en';
+      document.getElementById('langOverlay').classList.add('hidden');
+      startGameWithLanguage(lang);
+    });
+  });
 
-  $('#restartBtn').addEventListener('click', () => {
+  document.getElementById('prevBtn').addEventListener('click', goPrev);
+
+  document.getElementById('restartBtn').addEventListener('click', () => {
     index = 0;
     for (let i=0;i<answers.length;i++) answers[i] = null;
     shuffleOrder();
-    $('#result').style.display = 'none';
-    $('#quiz').classList.remove('hidden');
-    $('#shareFeedback').textContent = '';
+    document.getElementById('result').style.display = 'none';
+    document.getElementById('quiz').classList.remove('hidden');
+    document.getElementById('shareFeedback').textContent = '';
     renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  $('#shareBtn').addEventListener('click', async () => {
-    const feedback = $('#shareFeedback');
+  document.getElementById('shareBtn').addEventListener('click', async () => {
+    const feedback = document.getElementById('shareFeedback');
     try {
       if (navigator.share) {
         await navigator.share({ title: 'Team Cha vs Team Gianlu', text: currentShareText, url: window.location.href });
@@ -475,21 +476,13 @@
     window.location.href = 'https://www.charlottegianluca.it/home.html';
   });
 
-  // Language overlay handlers
-  document.querySelectorAll('.lang-btn').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      const lang = e.currentTarget.dataset.lang;
-      document.getElementById('langOverlay').style.display = 'none';
-      startGameWithLanguage(lang);
-    });
-  });
-
-  // Opzionale: scelta con tastiera
+  // Tastiera (opzionale)
   document.addEventListener('keydown', (e)=>{
     if (document.getElementById('quiz').classList.contains('hidden')) return;
     if (e.key === 'ArrowLeft') { answers[index] = 0; goNext(); }
     if (e.key === 'ArrowRight'){ answers[index] = 1; goNext(); }
   });
+});
 </script>
 </body>
 </html>
