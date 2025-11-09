@@ -184,10 +184,9 @@
   // -------------------- i18n strings --------------------
   const STRINGS = {
     it: {
-      subtitle: "This or That — Scegli il tuo vibe. Scopri il tuo team alla fine!",
+      subtitle: "Scegli il tuo vibe. Scopri il tuo team alla fine!",
       progress: (i,n) => `Domanda ${i} di ${n}`,
       back: "⟵ Indietro",
-      next: "Avanti ⟶",
       resultTitle: "Il tuo risultato",
       moreG: "Sei più Team Gianlu 🧢",
       moreC: "Sei più Team Cha 💜",
@@ -202,10 +201,9 @@
       shareText: (g,c,summary,url) => `Ho ottenuto ${g}% Gianlu 🧢 e ${c}% Cha 💜 in “Team Cha vs Team Gianlu – This or That”. ${summary} ${url}`
     },
     fr: {
-      subtitle: "This or That — Choisis ton vibe. Découvre ton équipe à la fin !",
+      subtitle: "Choisis ton vibe. Découvre ton équipe à la fin !",
       progress: (i,n) => `Question ${i} sur ${n}`,
       back: "⟵ Retour",
-      next: "Suivant ⟶",
       resultTitle: "Ton résultat",
       moreG: "Tu es plutôt Team Gianlu 🧢",
       moreC: "Tu es plutôt Team Cha 💜",
@@ -220,10 +218,9 @@
       shareText: (g,c,summary,url) => `J’ai eu ${g}% Gianlu 🧢 et ${c}% Cha 💜 sur “Team Cha vs Team Gianlu – This or That”. ${summary} ${url}`
     },
     en: {
-      subtitle: "This or That — Pick your vibe. Discover your team at the end!",
+      subtitle: "Pick your vibe. Discover your team at the end!",
       progress: (i,n) => `Question ${i} of ${n}`,
       back: "⟵ Back",
-      next: "Next ⟶",
       resultTitle: "Your Result",
       moreG: "You’re more Team Gianlu 🧢",
       moreC: "You’re more Team Cha 💜",
@@ -242,53 +239,55 @@
   // -------------------- Questions by language --------------------
   const QUESTIONS_BY_LANG = {
     it: [
-      { t: "🎬 Film", left: "Mi addormento dopo 10 minuti", right: "Lo guardo fino alla fine" },
-      { t: "🛏️ Letto", left: "Il letto va rifatto", right: "Tanto stasera lo devo ridisfare!" },
-      { t: "🪥 Dentifricio", left: "Spremo dal fondo fino all'ultimo grammo", right: "Stritolo il tubetto dal centro" },
-      { t: "💧 Idratazione", left: "A volte bevo il primo bicchiere nel pomeriggio", right: "2L al giorno, no scuse" },
-      { t: "🍳 Cucina", left: "Cucino io, e mi piace", right: "Cucina qualcun altro, e mi piace" },
-      { t: "✉️ Email", left: "La scrivo di getto", right: "La rileggo 10 volte prima di inviare" },
-      { t: "🧳 Valigia", left: "30 minuti prima", right: "Una settimana prima" },
-      { t: "⏱️ Ritmo a tavola", left: "SOno il primo a finire", right: "Gli altri mi guardano finire" },
-      { t: "🏔️ / 🏖️ Outdoor", left: "Hikiking in montagna", right: "Giornata in spiaggia a prendere il sole con un libro" },
-      { t: "💳 Shopping", left: "Guardo prima il prezzo", right: "Scopro il prezzo alla cassa" },
-      { t: "😴 Sonno", left: "Mi addormento in 2 secondi", right: "Conto le pecore per un’ora" },
-      { t: "☎️ Chiamata ai genitori", left: "Telefonata di 2 minuti (se rispondo)", right: "Telefonata di 2 ore" },
-      { t: "🎿 Giornata sugli sci", left: "Giornaliero + panini nello zaino", right: "2 ore skipass + pranzo in baita" },
-      { t: "🎢 Adrenalina", left: "Bungee jumping? Subito!", right: "Neanche se mi paghi" }
+      { t: "Quando guardo un film", left: "Mi addormento dopo 10 minuti", right: "Lo guardo fino alla fine" },
+      { t: "Il letto", left: "Va sempre rifatto", right: "Tanto stasera lo devo ridisfare!" },
+      { t: "Il tubetto di dentifricio", left: "lo spremo dal fondo fino all'ultimo grammo", right: "lo spremo come capita" },
+      { t: "Quanta acqua bevi?", left: "A volte bevo il primo bicchiere nel pomeriggio", right: "2L al giorno, no scuse" },
+      { t: "Cucini?", left: "Sempre, e mi piace", right: "Qualcun altro lo fa per me" },
+      { t: "Quando scrivo una email", left: "La scrivo di getto", right: "La rileggo 10 volte prima di inviare" },
+      { t: "La valigia prima di un viaggio", left: "La faccio 30 minuti prima", right: "Inzio a prepararla una settimana prima" },
+      { t: "Quando vado a cena con amici", left: "Sono il primo a finire", right: "Gli altri mi guardano finire il mio piatto" },
+      { t: "La mia giornata di vacanza perfetta eé", left: "Hikiking in montagna", right: "Giornata in spiaggia a prendere il sole con un libro" },
+      { t: "Quando vado a fare shopping", left: "Guardo prima il prezzo", right: "Scopro il prezzo alla cassa" },
+      { t: "Quando vado a eltto a dormire", left: "Mi addormento in 2 secondi", right: "Conto le pecore per un’ora" },
+      { t: "Una chiamata con i miei gentoru", left: "Dura in media 2 minuti (se rispondo)", right: "Dura un'ora, devo aggiornarli su tutto" },
+      { t: "La mia gironata ideale sugli sci è:", left: "Giornaliero + panini nello zaino", right: "2 ore skipass + pranzo in baita" },
+      { t: "Faresti mai bungee jumping?", left: "Subito!", right: "Neanche se mi paghi" }
     ],
-    fr: [
-      { t: "🎬 Films", left: "Je m’endors après 10 minutes", right: "Je regarde jusqu’au bout" },
-      { t: "🛏️ Lit", left: "Le lit doit être fait", right: "On s’en fiche — j’y retourne ce soir" },
-      { t: "🪥 Dentifrice", left: "Je presse par le bas", right: "Je presse au milieu" },
-      { t: "💧 Hydratation", left: "Parfois le premier verre est l’après-midi", right: "2 L par jour, pas d’excuses" },
-      { t: "🍳 Cuisine", left: "Je cuisine, et j’aime", right: "Quelqu’un cuisine pour moi, et j’aime" },
-      { t: "✉️ Emails", left: "J’écris d’un seul jet", right: "Je relis 10 fois avant d’envoyer" },
-      { t: "🧳 Bagage", left: "30 minutes avant", right: "Une semaine à l’avance" },
-      { t: "⏱️ À table", left: "Je finis en premier", right: "On m’attend" },
-      { t: "🏔️ / 🏖️ Plein air", left: "Randonnée en montagne", right: "Journée plage" },
-      { t: "💳 Shopping", left: "Je vérifie le prix d’abord", right: "Je le découvre à la caisse" },
-      { t: "😴 Sommeil", left: "Je m’endors tout de suite", right: "Je compte les moutons une heure" },
-      { t: "☎️ Appel aux parents", left: "Appel de 2 minutes (si je réponds)", right: "Appel de 2 heures" },
-      { t: "🎿 Journée ski", left: "Forfait journée + sandwichs dans le sac", right: "Forfait 2 h + déjeuner au refuge" },
-      { t: "🎢 Adrénaline", left: "Saut à l’élastique ? Pourquoi pas !", right: "Même payé, jamais" }
-    ],
+fr: [
+  { t: "Quand je regarde un film", left: "Je m’endors après 10 minutes", right: "Je le regarde jusqu’à la fin" },
+  { t: "Le lit", left: "Doit toujours être fait", right: "Inutile, je vais le défaire ce soir !" },
+  { t: "Le tube de dentifrice", left: "Je le presse du bas jusqu’à la dernière goutte", right: "Je le presse n’importe où" },
+  { t: "Combien d’eau bois-tu ?", left: "Parfois mon premier verre est l’après-midi", right: "2 L par jour, pas d’excuses" },
+  { t: "Tu cuisines ?", left: "Toujours, et j’adore ça", right: "Quelqu’un d’autre le fait pour moi" },
+  { t: "Quand j’écris un e-mail", left: "Je l’écris d’un seul jet", right: "Je le relis dix fois avant d’envoyer" },
+  { t: "La valise avant un voyage", left: "Je la fais 30 minutes avant de partir", right: "Je commence à la préparer une semaine avant" },
+  { t: "Quand je sors dîner avec des amis", left: "Je finis toujours en premier", right: "Les autres m’attendent pour finir mon assiette" },
+  { t: "Ma journée de vacances parfaite", left: "Randonnée en montagne", right: "Journée à la plage avec un livre au soleil" },
+  { t: "Quand je fais du shopping", left: "Je regarde le prix d’abord", right: "Je découvre le prix à la caisse" },
+  { t: "Quand je vais me coucher", left: "Je m’endors en 2 secondes", right: "Je compte les moutons pendant une heure" },
+  { t: "Un appel avec mes parents", left: "Dure 2 minutes en moyenne (si je réponds)", right: "Dure une heure, je dois tout leur raconter" },
+  { t: "Ma journée de ski idéale", left: "Forfait journée + sandwichs dans le sac à dos", right: "2 heures de ski + déjeuner au chalet" },
+  { t: "Tu ferais du saut à l’élastique ?", left: "Tout de suite !", right: "Même pas payé !" }
+],
+
     en: [
-      { t: "🎬 Movies", left: "I fall asleep after 10 minutes", right: "I watch it till the end" },
-      { t: "🛏️ Bed", left: "Bed must be made", right: "Who cares — I’ll get back in tonight" },
-      { t: "🪥 Toothpaste", left: "Squeeze from the bottom", right: "Squeeze from the middle" },
-      { t: "💧 Hydration", left: "First glass sometimes in the afternoon", right: "2L of water a day, no excuses" },
-      { t: "🍳 Cooking", left: "I cook, and I like it", right: "Someone else cooks for me, and I like it" },
-      { t: "✉️ Emails", left: "I write it in one go", right: "I reread it 10 times before sending" },
-      { t: "🧳 Packing", left: "30 minutes before", right: "One week ahead" },
-      { t: "⏱️ Eating pace", left: "I finish first", right: "People wait for me" },
-      { t: "🏔️ / 🏖️ Outdoors", left: "Mountain trek", right: "Beach day" },
-      { t: "💳 Shopping", left: "Check price first", right: "Discover the price when paying" },
-      { t: "😴 Sleep", left: "I fall asleep instantly", right: "I count sheep for an hour" },
-      { t: "☎️ Parents call", left: "2-minute call (if I answer)", right: "2-hour call" },
-      { t: "🎿 Ski day", left: "Full-day pass + sandwiches", right: "2-hour pass + hut lunch" },
-      { t: "🎢 Adrenaline", left: "Bungee jumping? Why not?", right: "Not even if you pay me" }
-    ]
+  { t: "When I watch a movie", left: "I fall asleep after 10 minutes", right: "I watch it till the end" },
+  { t: "The bed", left: "Must always be made", right: "Why bother, I’ll mess it up again tonight!" },
+  { t: "The toothpaste tube", left: "I squeeze it from the bottom till the very last gram", right: "I squeeze it wherever my hand lands" },
+  { t: "How much water do you drink?", left: "Sometimes my first glass is in the afternoon", right: "2L a day, no excuses" },
+  { t: "Do you cook?", left: "Always, and I love it", right: "Someone else does it for me" },
+  { t: "When I write an email", left: "I write it in one go", right: "I reread it 10 times before sending" },
+  { t: "Packing before a trip", left: "I do it 30 minutes before leaving", right: "I start a week in advance" },
+  { t: "When I go out for dinner with friends", left: "I’m the first to finish", right: "Everyone’s waiting for me to finish" },
+  { t: "My perfect vacation day is", left: "Hiking in the mountains", right: "A beach day reading under the sun" },
+  { t: "When I go shopping", left: "I check the price first", right: "I discover the price at the checkout" },
+  { t: "When I go to bed", left: "I fall asleep in 2 seconds", right: "I count sheep for an hour" },
+  { t: "A call with my parents", left: "Lasts 2 minutes on average (if I answer)", right: "Lasts an hour, I have to update them on everything" },
+  { t: "My ideal ski day is", left: "Full day + sandwiches in the backpack", right: "2-hour skipass + lunch at the chalet" },
+  { t: "Would you ever go bungee jumping?", left: "Absolutely!", right: "Not even if you paid me" }
+],
+
   };
 
   // --------------- State ---------------
