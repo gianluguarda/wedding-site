@@ -178,7 +178,13 @@
   </main>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+(function init(){
+  // Se il DOM non è pronto, registra init su DOMContentLoaded e esci.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once:true });
+    return;
+  }
+
   // -------------------- i18n strings --------------------
   const STRINGS = {
     it: {
@@ -283,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { t: "A call with my parents", left: "Lasts 2 minutes on average (if I answer)", right: "Lasts an hour, I have to update them on everything" },
       { t: "My ideal ski day is", left: "Full day + sandwiches in the backpack", right: "2-hour skipass + lunch at the chalet" },
       { t: "Would you ever go bungee jumping?", left: "Absolutely!", right: "Not even if you paid me" }
-    ],
+    ]
   };
 
   // --------------- State ---------------
@@ -300,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function tkey() { return STRINGS[LANG] || STRINGS.en; }
 
   function shuffle(arr){
-    for (let i = arr.length - 1; i > 0; i++) {
+    for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
@@ -350,7 +356,8 @@ document.addEventListener('DOMContentLoaded', () => {
     cont.appendChild(leftBtn);
     cont.appendChild(rightBtn);
 
-    $('#prevBtn').disabled = index === 0;
+    const prevBtn = $('#prevBtn');
+    if (prevBtn) prevBtn.disabled = index === 0;
     updateProgress();
   }
 
@@ -377,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < QUESTIONS.length; i++){
       const pickSide = answers[i];
       const flipped = SIDE_MAP[i] === 1;
-      // Mapping: left = Gianlu, right = Cha (con flip casuale in UI)
+      // Mapping: left = Gianlu, right = Cha (flip visuale casuale)
       const pickedIsGianlu = flipped ? (pickSide === 1) : (pickSide === 0);
       if (pickedIsGianlu) g++; else c++;
     }
@@ -403,12 +410,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function applyUIStrings(){
-    $('#subtitle').textContent = tkey().subtitle;
-    $('#prevBtn').textContent = tkey().back;
-    $('#resultTitle').textContent = tkey().resultTitle;
-    $('#shareBtn').textContent = tkey().share;
-    $('#restartBtn').textContent = tkey().playAgain;
-    $('#exitBtn').textContent = tkey().exit;
+    const s = tkey();
+    $('#subtitle').textContent = s.subtitle;
+    const prevBtn = $('#prevBtn'); if (prevBtn) prevBtn.textContent = s.back;
+    $('#resultTitle').textContent = s.resultTitle;
+    $('#shareBtn').textContent = s.share;
+    $('#restartBtn').textContent = s.playAgain;
+    $('#exitBtn').textContent = s.exit;
     document.documentElement.lang = LANG;
   }
 
@@ -423,9 +431,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     applyUIStrings();
     shuffleOrder();
-    document.getElementById('result').style.display = 'none';
-    document.getElementById('quiz').classList.remove('hidden');
-    document.getElementById('shareFeedback').textContent = '';
+    $('#result').style.display = 'none';
+    $('#quiz').classList.remove('hidden');
+    $('#shareFeedback').textContent = '';
     renderQuestion();
   }
 
@@ -433,20 +441,25 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.lang-btn').forEach(btn=>{
     btn.addEventListener('click', (e)=>{
       const lang = e.currentTarget.dataset.lang || 'en';
-      document.getElementById('langOverlay').classList.add('hidden');
+      const overlay = document.getElementById('langOverlay');
+      if (overlay){
+        overlay.classList.add('hidden');
+        overlay.style.display = 'none'; // doppia sicurezza
+      }
       startGameWithLanguage(lang);
-    });
+    }, { once:false });
   });
 
-  document.getElementById('prevBtn').addEventListener('click', goPrev);
+  const prevBtn = document.getElementById('prevBtn');
+  if (prevBtn) prevBtn.addEventListener('click', goPrev);
 
   document.getElementById('restartBtn').addEventListener('click', () => {
     index = 0;
     for (let i=0;i<answers.length;i++) answers[i] = null;
     shuffleOrder();
-    document.getElementById('result').style.display = 'none';
-    document.getElementById('quiz').classList.remove('hidden');
-    document.getElementById('shareFeedback').textContent = '';
+    $('#result').style.display = 'none';
+    $('#quiz').classList.remove('hidden');
+    $('#shareFeedback').textContent = '';
     renderQuestion();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
@@ -482,7 +495,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowLeft') { answers[index] = 0; goNext(); }
     if (e.key === 'ArrowRight'){ answers[index] = 1; goNext(); }
   });
-});
+
+})(); // fine init IIFE
 </script>
+
 </body>
 </html>
