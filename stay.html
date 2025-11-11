@@ -58,18 +58,36 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
 .lang-toc a{text-decoration:none; color:var(--ink); border:1px solid #ddd; background:#fff; padding:8px 12px; border-radius:12px; font-size:17px; line-height:1.2}
 .lang-toc a:hover{border-color:var(--accent); color:var(--accent)}
 
-.langblock{margin-top:36px}
-.lang-sep{margin:40px 0 24px; position:relative; text-align:center;}
-.lang-sep::before{
-  content:""; display:block; height:2px; background:linear-gradient(90deg,transparent, rgba(116,101,173,.35), transparent);
-}
-.lang-chip{
-  display:inline-block; margin-top:-18px; background:#fff; color:var(--accent);
-  border:1px solid rgba(116,101,173,.25); padding:6px 14px; border-radius:999px;
-  font-family:"Allura",cursive; font-size:26px; box-shadow:0 4px 16px rgba(0,0,0,.06)
+.lang-sep{
+  position: relative;
+  text-align: center;
+  padding: 12px 0;        /* spazio verticale attorno al chip */
 }
 
-.langtitle{ text-align:center; font-size:32px; line-height:1.2; font-family:"Allura",cursive; color:var(--accent); font-weight:400; margin:28px 0 12px }
+.lang-sep::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%); /* centra verticalmente */
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(116,101,173,.35), transparent);
+}
+
+.lang-chip{
+  position: relative;
+  z-index: 1;             /* sta sopra la linea */
+  display: inline-block;
+  background: #fff;       /* copre la linea sotto il chip */
+  color: var(--accent);
+  border: 1px solid rgba(116,101,173,.25);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-family: "Allura", cursive;
+  font-size: 26px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.06);
+}
 
 .card{background:#fff; border:1px solid #eee; border-radius:18px; padding:18px 20px; box-shadow:0 8px 30px rgba(0,0,0,.04)}
 .card h3{margin:0 0 10px; font-size:22px; line-height:1.3; font-weight:600; color:var(--ink)}
