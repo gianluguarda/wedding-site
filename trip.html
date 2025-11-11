@@ -72,14 +72,36 @@ nav li.cta a:hover{ opacity:.95; transform:translateY(-1px) }
 }
 
 /* blocchi lingua */
-.langblock{ max-width:900px; margin:34px auto 0; padding:0 20px }
-.lang-chip{
-  display:inline-block; background:#fff; color:var(--accent); border:1px solid rgba(116,101,173,.25);
-  padding:6px 14px; border-radius:999px; font-family:"Allura",cursive; font-size:26px; box-shadow:0 4px 16px rgba(0,0,0,.06)
+
+.lang-sep{
+  position: relative;
+  text-align: center;
+  padding: 12px 0;        /* spazio verticale attorno al chip */
 }
-.lang-sep{ margin:10px 0 14px; text-align:center; position:relative }
+
 .lang-sep::before{
-  content:""; display:block; height:2px; background:linear-gradient(90deg,transparent, rgba(116,101,173,.35), transparent);
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%); /* centra verticalmente */
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(116,101,173,.35), transparent);
+}
+
+.lang-chip{
+  position: relative;
+  z-index: 1;             /* sta sopra la linea */
+  display: inline-block;
+  background: #fff;       /* copre la linea sotto il chip */
+  color: var(--accent);
+  border: 1px solid rgba(116,101,173,.25);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-family: "Allura", cursive;
+  font-size: 26px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.06);
 }
 
 /* intro e box contributo */
