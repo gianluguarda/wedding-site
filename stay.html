@@ -710,7 +710,9 @@ function submitGuest(){
     if(err){ err.innerHTML="Please enter both fields.<br>Veuillez remplir les deux champs.<br>Inserisci nome e cognome."; err.style.display="block"; }
     return;
   }
-  const vip = VIP_LIST.includes(norm);
+  const VIP_SET = new Set(VIP_LIST.map(n => normalizeName(n)));
+const vip = VIP_SET.has(norm);
+
   localStorage.setItem("guestName", full.trim());
   localStorage.setItem("isVIP", vip ? "true" : "false");
   closeLogin(); applyVIPVisibility();
