@@ -1,286 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Team Cha vs Team Gianlu</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Team Cha vs Team Gianlu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --lavender:#bca9e0;
+      --lavender-600:#9d87d1;
+      --beige:#f7f3eb;
+      --ink:#2a2438;
+      --muted:#7b6f8e;
+      --white:#ffffff;
+    }
+    *{ box-sizing: border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0; background:var(--beige);
+      color:var(--ink);
+      font-family:'Cormorant', serif;
+      display:flex; align-items:center; justify-content:center; padding:24px;
+    }
+    .card{
+      width:min(880px, 100%);
+      background:var(--white);
+      border-radius:24px; box-shadow:0 10px 30px rgba(42,36,56,.12);
+      overflow:hidden; border:1px solid rgba(157,135,209,.18);
+      position:relative;
+    }
+    header{
+      padding:28px 28px 16px;
+      background:linear-gradient(135deg, var(--beige), #fff 40%, var(--beige));
+    }
+    .title{
+      font-family:'Allura', cursive; font-size:48px; line-height:1; margin:0 0 8px;
+      color:var(--lavender-600);
+      text-align:center;
+    }
+    .subtitle{ text-align:center; margin:0; color:var(--muted); font-size:20px; }
 
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant:wght@400;500;600&display=swap" rel="stylesheet">
+    .progress-wrap{ padding:12px 28px 0; }
+    .progress{
+      width:100%; height:10px; background:#efeaf8; border-radius:999px; overflow:hidden; position:relative;
+    }
+    .progress > span{ display:block; height:100%; width:0%; background:var(--lavender-600); transition:width .35s ease; }
+    .progress-text{ text-align:right; font-size:14px; color:var(--muted); margin-top:6px; }
 
-<style>
-:root{
-  --accent:#7465ad;
-  --lavender:#bca9e0;
-  --lavender-600:#9d87d1;
-  --beige:#f7f3eb;
-  --ink:#2a2438;
-  --muted:#7b6f8e;
-  --white:#ffffff;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  background:var(--beige);
-  font-family:"Cormorant",serif;
-  color:var(--ink);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-}
-.card{
-  width:min(880px,100%);
-  background:#fff;
-  border-radius:24px;
-  box-shadow:0 10px 30px rgba(0,0,0,.12);
-  overflow:hidden;
-  border:1px solid rgba(157,135,209,.18);
-}
-header{
-  padding:28px 28px 16px;
-  background:linear-gradient(135deg,var(--beige),#fff 40%,var(--beige));
-}
-.title{
-  font-family:"Allura",cursive;
-  font-size:48px;
-  text-align:center;
-  margin:0 0 8px;
-  color:var(--lavender-600);
-}
-.subtitle{
-  text-align:center;
-  color:var(--muted);
-  font-size:20px;
-  margin:0;
-}
-.content{padding:24px 28px 32px}
+    .content{ padding:24px 28px 32px; }
 
-.question{
-  font-size:28px;
-  font-weight:600;
-  text-align:center;
-  margin:10px 0 22px;
-}
-.options{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-  max-width:720px;
-  margin:0 auto;
-}
-@media(max-width:720px){.options{grid-template-columns:1fr}}
+    .qmeta{ text-align:center; font-size:28px; color:var(--ink); margin-bottom:10px; }
+    .question{ font-size:28px; margin:8px 0 18px; text-align:center; font-weight:600; color:var(--ink); }
+    .options{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:720px; margin:14px auto 8px; }
+    @media (max-width:719px){ .options{ grid-template-columns:1fr; } }
 
-.btn{
-  border:none;
-  border-radius:16px;
-  padding:20px;
-  font-size:18px;
-  cursor:pointer;
-  background:#faf7ff;
-  box-shadow:0 4px 14px rgba(157,135,209,.18);
-  border:1px solid rgba(157,135,209,.22);
-}
-.btn:hover{background:#f3edff}
-.btn.selected{
-  outline:3px solid var(--lavender-600);
-  background:#efeaf8;
-}
+    .btn{
+      appearance:none; border:none; cursor:pointer; border-radius:16px; padding:18px 16px; font-size:18px; line-height:1.2;
+      background:#faf7ff; color:var(--ink); box-shadow:0 4px 14px rgba(157,135,209,.18);
+      transition: transform .06s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+      border:1px solid rgba(157,135,209,.22);
+    }
+    .btn.half{ min-height:100px; }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(157,135,209,.22); background:#f7f1ff; }
+    .btn:active{ transform:translateY(0); }
+    .btn.selected{ outline:3px solid var(--lavender-600); box-shadow:0 0 0 4px rgba(157,135,209,.15); background:#efeaf8; border-color: var(--lavender-600); }
 
-.nav{
-  display:flex;
-  justify-content:space-between;
-  margin-top:24px;
-}
-.nav button{
-  padding:12px 16px;
-  border-radius:14px;
-  border:1px solid rgba(157,135,209,.35);
-  background:#fff;
-  cursor:pointer;
-}
-.nav button.primary{
-  background:var(--lavender-600);
-  color:#fff;
-  border:none;
-}
-.nav button:disabled{opacity:.4;cursor:not-allowed}
+    @keyframes shake { 10%, 90% {transform: translateX(-1px);} 20%,80% {transform: translateX(2px);} 30%,50%,70% {transform: translateX(-4px);} 40%,60% {transform: translateX(4px);} }
+    .need-pick { animation: shake .4s; }
 
-/* ================= LOGIN MODAL ================= */
+    .nav{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:18px; }
+    .nav button{
+      padding:12px 16px; border-radius:14px; border:1px solid rgba(157,135,209,.35);
+      background:var(--white); font-size:16px; cursor:pointer; color:var(--ink);
+    }
+    .nav button.primary{ background:var(--lavender-600); color:#fff; border-color:transparent; }
+    .nav button[disabled]{ opacity:.45; cursor:not-allowed; }
 
-#guestLoginOverlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.45);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-}
-#guestLoginModal{
-  background:#fff;
-  max-width:360px;
-  width:100%;
-  border-radius:16px;
-  padding:24px 20px;
-  text-align:center;
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
-}
-#guestLoginModal h2{
-  font-family:"Allura",cursive;
-  font-size:32px;
-  color:var(--accent);
-  margin:0 0 10px;
-}
-#guestLoginModal p{
-  font-style:italic;
-  margin-bottom:16px;
-}
-.guest-field{text-align:left;margin-bottom:14px}
-.guest-field label{font-size:16px;color:var(--muted)}
-.guest-field input{
-  width:100%;
-  padding:10px;
-  font-size:18px;
-  border-radius:10px;
-  border:1px solid #ccc;
-}
-#guestConfirmBtn{
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:12px;
-  background:var(--accent);
-  color:#fff;
-  font-size:18px;
-  cursor:pointer;
-}
-#guestError{
-  display:none;
-  color:#b00020;
-  margin-top:10px;
-  font-size:16px;
-}
-</style>
+    .footer-note{ text-align:center; color:var(--muted); font-size:16px; margin-top:8px; }
+
+    .result{ display:none; text-align:center; padding:8px 0; }
+    .score-wrap{ display:flex; align-items:center; gap:8px; margin:18px auto; max-width:520px; }
+    .bar{ height:16px; width:100%; background:#efeaf8; border-radius:999px; overflow:hidden; display:flex; }
+    .bar .cha{ background:#f3d8ee; height:100%; width:50%; transition:width .6s ease; }
+    .bar .gianlu{ background:#cfd4ff; height:100%; width:50%; transition:width .6s ease; }
+    .legend{ display:flex; justify-content:space-between; font-size:18px; color:var(--muted); }
+    .pill{ display:inline-block; padding:6px 10px; background:#efeaf8; border-radius:999px; font-size:16px; color:var(--muted); margin:4px; }
+
+    .share{ margin-top:14px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .share button{
+      padding:10px 16px; border-radius:999px; border:1px solid rgba(157,135,209,.35);
+      background:#fff; color:var(--lavender-600); font-weight:600; cursor:pointer; transition:.2s;
+      box-shadow:0 4px 10px rgba(157,135,209,.12);
+    }
+    #shareBtn{ background:var(--lavender-600); color:#fff; border-color:transparent; }
+    .share button:hover{ transform:translateY(-1px); background:#f7f1ff; }
+    #shareBtn:hover{ background:var(--lavender); }
+
+    .hidden{ display:none !important; }
+
+    /* Language overlay */
+    .lang-overlay{
+      position:fixed; inset:0; background:rgba(247,243,235,.92);
+      display:flex; align-items:center; justify-content:center; padding:24px; z-index:50;
+      backdrop-filter: blur(2px);
+    }
+    .lang-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+    .lang-btn{
+      border:1px solid rgba(157,135,209,.35); background:#faf7ff; border-radius:14px; padding:14px 16px;
+      font-size:18px; cursor:pointer; transition:.2s; box-shadow:0 4px 10px rgba(157,135,209,.15);
+    }
+    .lang-btn:hover{ background:#f7f1ff; transform:translateY(-1px); }
+
+    .exit-wrap{ display:flex; justify-content:center; padding:0 0 28px; }
+    .exit-btn{
+      background:#fff; border:1px solid rgba(157,135,209,.35); border-radius:14px;
+      padding:8px 16px; font-size:16px; color:var(--muted); cursor:pointer;
+      transition:all .2s ease; box-shadow:0 2px 6px rgba(157,135,209,.1); margin-bottom:0;
+    }
+    .exit-btn:hover{ background:#f7f1ff; color:var(--ink); box-shadow:0 4px 12px rgba(157,135,209,.15); }
+  </style>
 </head>
-
 <body>
-
-<!-- LOGIN -->
-<div id="guestLoginOverlay">
-  <div id="guestLoginModal">
-    <h2>Welcome</h2>
-    <p>Please enter your first and last name</p>
-
-    <div class="guest-field">
-      <label>Name</label>
-      <input id="guestFirst">
-    </div>
-    <div class="guest-field">
-      <label>Surname</label>
-      <input id="guestLast">
-    </div>
-
-    <button id="guestConfirmBtn">OK</button>
-    <div id="guestError">Name not recognized</div>
-  </div>
-</div>
-
-<div class="card">
-  <header>
-    <h1 class="title">Team Cha vs Team Gianlu</h1>
-    <p class="subtitle">This or That</p>
-  </header>
-
-  <div class="content">
-    <div class="question" id="question"></div>
-    <div class="options">
-      <button class="btn" id="optA"></button>
-      <button class="btn" id="optB"></button>
-    </div>
-
-    <div class="nav">
-      <button id="prevBtn" disabled>Back</button>
-      <button id="nextBtn" class="primary" disabled>Next</button>
+  <!-- Language chooser -->
+  <div id="langOverlay" class="lang-overlay" role="dialog" aria-modal="true">
+    <div class="lang-grid">
+      <button class="lang-btn" data-lang="it" aria-label="Italiano">🇮🇹 Italiano</button>
+      <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 Français</button>
+      <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 English</button>
     </div>
   </div>
-</div>
 
-<script>
-/* ================= LOGIN ================= */
-
-const VIP_LIST = [
-  "Charlotte Francis","Gianluca Guardalà","Fabio Tarricone"
-];
-
-function normalize(s){
-  return (s||"").toLowerCase().trim()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-}
-
-function isVipName(f,l){
-  const full = normalize(f+" "+l);
-  return VIP_LIST.map(normalize).includes(full);
-}
-
-function requireLogin(){
-  if(!localStorage.getItem("guestName")){
-    document.getElementById("guestLoginOverlay").style.display="flex";
-  }
-}
-
-document.getElementById("guestConfirmBtn").onclick = ()=>{
-  const f = guestFirst.value;
-  const l = guestLast.value;
-  if(!f||!l){
-    guestError.style.display="block";
-    return;
-  }
-  localStorage.setItem("guestName",f+" "+l);
-  localStorage.setItem("isVIP", isVipName(f,l));
-  guestLoginOverlay.style.display="none";
-};
-
-requireLogin();
-
-/* ================= QUIZ ================= */
-
-const QUESTIONS = [
-  {q:"Morning person or night owl?", a:"Morning ☀️", b:"Night 🌙"},
-  {q:"Mountains or sea?", a:"Mountains ⛰️", b:"Sea 🌊"},
-  {q:"Wine or cocktail?", a:"Wine 🍷", b:"Cocktail 🍸"},
-  {q:"Plan everything or improvise?", a:"Plan 📋", b:"Improvise 🎲"}
-];
-
-let idx = 0;
-let answers = [];
-
-const qEl = document.getElementById("question");
-const aEl = document.getElementById("optA");
-const bEl = document.getElementById("optB");
-const nextBtn = document.getElementById("nextBtn");
-const prevBtn = document.getElementById("prevBtn");
-
-function render(){
-  const q = QUESTIONS[idx];
-  qEl.textContent = q.q;
-  aEl.textContent = q.a;
-  bEl.textContent = q.b;
-
-  aEl.classList.toggle("selected", answers[idx]==="A");
-  bEl.classList.toggle("selected", answers[idx]==="B");
-
-  prevBtn.disabled = idx===0;
-  nextBtn.disabled = answers[idx]==null;
-}
-
-aEl.onclick = ()=>{answers[idx]="A";render();}
-bEl.onclick = ()=>{answers[idx]="B";render();}
-nextBtn.onclick = ()=>{ if(idx<QUESTIONS.length-1){idx++;render();}}
-prevBtn.onclick = ()=>{ if(idx>0){idx--;render();}}
-
-render();
-</script>
-
-</body>
-</html>
+  <main class="card" role="main" aria-labelledby="game-title">
+    <header>
+      <h1 id="game-title" class="title">Vibe Cha vs Vibe Gianlu</h1>
+      <p id="subtitle" class="subtitle">This or That — Pick your vibe. Discover your team at the end!</p>
+    </header>
