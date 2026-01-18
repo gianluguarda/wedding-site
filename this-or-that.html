@@ -1,499 +1,285 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Team Cha vs Team Gianlu</title>
-  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --lavender:#bca9e0;
-      --lavender-600:#9d87d1;
-      --beige:#f7f3eb;
-      --ink:#2a2438;
-      --muted:#7b6f8e;
-      --white:#ffffff;
-    }
-    *{ box-sizing: border-box; }
-    html, body{ height:100%; }
-    body{
-      margin:0; background:var(--beige);
-      color:var(--ink);
-      font-family:'Cormorant', serif;
-      display:flex; align-items:center; justify-content:center; padding:24px;
-    }
-    .card{
-      width:min(880px, 100%);
-      background:var(--white);
-      border-radius:24px; box-shadow:0 10px 30px rgba(42,36,56,.12);
-      overflow:hidden; border:1px solid rgba(157,135,209,.18);
-      position:relative;
-    }
-    header{
-      padding:28px 28px 16px;
-      background:linear-gradient(135deg, var(--beige), #fff 40%, var(--beige));
-    }
-    .title{
-      font-family:'Allura', cursive; font-size:48px; line-height:1; margin:0 0 8px;
-      color:var(--lavender-600);
-      text-align:center;
-    }
-    .subtitle{ text-align:center; margin:0; color:var(--muted); font-size:20px; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Team Cha vs Team Gianlu</title>
 
-    .progress-wrap{ padding:12px 28px 0; }
-    .progress{
-      width:100%; height:10px; background:#efeaf8; border-radius:999px; overflow:hidden; position:relative;
-    }
-    .progress > span{ display:block; height:100%; width:0%; background:var(--lavender-600); transition:width .35s ease; }
-    .progress-text{ text-align:right; font-size:14px; color:var(--muted); margin-top:6px; }
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant:wght@400;500;600&display=swap" rel="stylesheet">
 
-    .content{ padding:24px 28px 32px; }
+<style>
+:root{
+  --accent:#7465ad;
+  --lavender:#bca9e0;
+  --lavender-600:#9d87d1;
+  --beige:#f7f3eb;
+  --ink:#2a2438;
+  --muted:#7b6f8e;
+  --white:#ffffff;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--beige);
+  font-family:"Cormorant",serif;
+  color:var(--ink);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+.card{
+  width:min(880px,100%);
+  background:#fff;
+  border-radius:24px;
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
+  overflow:hidden;
+  border:1px solid rgba(157,135,209,.18);
+}
+header{
+  padding:28px 28px 16px;
+  background:linear-gradient(135deg,var(--beige),#fff 40%,var(--beige));
+}
+.title{
+  font-family:"Allura",cursive;
+  font-size:48px;
+  text-align:center;
+  margin:0 0 8px;
+  color:var(--lavender-600);
+}
+.subtitle{
+  text-align:center;
+  color:var(--muted);
+  font-size:20px;
+  margin:0;
+}
+.content{padding:24px 28px 32px}
 
-    .qmeta{ text-align:center; font-size:28px; color:var(--ink); margin-bottom:10px; }
-    .question{ font-size:28px; margin:8px 0 18px; text-align:center; font-weight:600; color:var(--ink); }
-    .options{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:720px; margin:14px auto 8px; }
-    @media (max-width:719px){ .options{ grid-template-columns:1fr; } }
+.question{
+  font-size:28px;
+  font-weight:600;
+  text-align:center;
+  margin:10px 0 22px;
+}
+.options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  max-width:720px;
+  margin:0 auto;
+}
+@media(max-width:720px){.options{grid-template-columns:1fr}}
 
-    .btn{
-      appearance:none; border:none; cursor:pointer; border-radius:16px; padding:18px 16px; font-size:18px; line-height:1.2;
-      background:#faf7ff; color:var(--ink); box-shadow:0 4px 14px rgba(157,135,209,.18);
-      transition: transform .06s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
-      border:1px solid rgba(157,135,209,.22);
-    }
-    .btn.half{ min-height:100px; }
-    .btn:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(157,135,209,.22); background:#f7f1ff; }
-    .btn:active{ transform:translateY(0); }
-    .btn.selected{ outline:3px solid var(--lavender-600); box-shadow:0 0 0 4px rgba(157,135,209,.15); background:#efeaf8; border-color: var(--lavender-600); }
+.btn{
+  border:none;
+  border-radius:16px;
+  padding:20px;
+  font-size:18px;
+  cursor:pointer;
+  background:#faf7ff;
+  box-shadow:0 4px 14px rgba(157,135,209,.18);
+  border:1px solid rgba(157,135,209,.22);
+}
+.btn:hover{background:#f3edff}
+.btn.selected{
+  outline:3px solid var(--lavender-600);
+  background:#efeaf8;
+}
 
-    @keyframes shake { 10%, 90% {transform: translateX(-1px);} 20%,80% {transform: translateX(2px);} 30%,50%,70% {transform: translateX(-4px);} 40%,60% {transform: translateX(4px);} }
-    .need-pick { animation: shake .4s; }
+.nav{
+  display:flex;
+  justify-content:space-between;
+  margin-top:24px;
+}
+.nav button{
+  padding:12px 16px;
+  border-radius:14px;
+  border:1px solid rgba(157,135,209,.35);
+  background:#fff;
+  cursor:pointer;
+}
+.nav button.primary{
+  background:var(--lavender-600);
+  color:#fff;
+  border:none;
+}
+.nav button:disabled{opacity:.4;cursor:not-allowed}
 
-    .nav{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:18px; }
-    .nav button{
-      padding:12px 16px; border-radius:14px; border:1px solid rgba(157,135,209,.35);
-      background:var(--white); font-size:16px; cursor:pointer; color:var(--ink);
-    }
-    .nav button.primary{ background:var(--lavender-600); color:#fff; border-color:transparent; }
-    .nav button[disabled]{ opacity:.45; cursor:not-allowed; }
+/* ================= LOGIN MODAL ================= */
 
-    .footer-note{ text-align:center; color:var(--muted); font-size:16px; margin-top:8px; }
-
-    .result{ display:none; text-align:center; padding:8px 0; }
-    .score-wrap{ display:flex; align-items:center; gap:8px; margin:18px auto; max-width:520px; }
-    .bar{ height:16px; width:100%; background:#efeaf8; border-radius:999px; overflow:hidden; display:flex; }
-    .bar .cha{ background:#f3d8ee; height:100%; width:50%; transition:width .6s ease; }
-    .bar .gianlu{ background:#cfd4ff; height:100%; width:50%; transition:width .6s ease; }
-    .legend{ display:flex; justify-content:space-between; font-size:18px; color:var(--muted); }
-    .pill{ display:inline-block; padding:6px 10px; background:#efeaf8; border-radius:999px; font-size:16px; color:var(--muted); margin:4px; }
-
-    .share{ margin-top:14px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-    .share button{
-      padding:10px 16px; border-radius:999px; border:1px solid rgba(157,135,209,.35);
-      background:#fff; color:var(--lavender-600); font-weight:600; cursor:pointer; transition:.2s;
-      box-shadow:0 4px 10px rgba(157,135,209,.12);
-    }
-    #shareBtn{ background:var(--lavender-600); color:#fff; border-color:transparent; }
-    .share button:hover{ transform:translateY(-1px); background:#f7f1ff; }
-    #shareBtn:hover{ background:var(--lavender); }
-
-    .hidden{ display:none !important; }
-
-    /* Language overlay */
-    .lang-overlay{
-      position:fixed; inset:0; background:rgba(247,243,235,.92);
-      display:flex; align-items:center; justify-content:center; padding:24px; z-index:50;
-      backdrop-filter: blur(2px);
-    }
-    .lang-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
-    .lang-btn{
-      border:1px solid rgba(157,135,209,.35); background:#faf7ff; border-radius:14px; padding:14px 16px;
-      font-size:18px; cursor:pointer; transition:.2s; box-shadow:0 4px 10px rgba(157,135,209,.15);
-    }
-    .lang-btn:hover{ background:#f7f1ff; transform:translateY(-1px); }
-
-    .exit-wrap{ display:flex; justify-content:center; padding:0 0 28px; }
-    .exit-btn{
-      background:#fff; border:1px solid rgba(157,135,209,.35); border-radius:14px;
-      padding:8px 16px; font-size:16px; color:var(--muted); cursor:pointer;
-      transition:all .2s ease; box-shadow:0 2px 6px rgba(157,135,209,.1); margin-bottom:0;
-    }
-    .exit-btn:hover{ background:#f7f1ff; color:var(--ink); box-shadow:0 4px 12px rgba(157,135,209,.15); }
-  </style>
+#guestLoginOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+#guestLoginModal{
+  background:#fff;
+  max-width:360px;
+  width:100%;
+  border-radius:16px;
+  padding:24px 20px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+#guestLoginModal h2{
+  font-family:"Allura",cursive;
+  font-size:32px;
+  color:var(--accent);
+  margin:0 0 10px;
+}
+#guestLoginModal p{
+  font-style:italic;
+  margin-bottom:16px;
+}
+.guest-field{text-align:left;margin-bottom:14px}
+.guest-field label{font-size:16px;color:var(--muted)}
+.guest-field input{
+  width:100%;
+  padding:10px;
+  font-size:18px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+#guestConfirmBtn{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:var(--accent);
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
+}
+#guestError{
+  display:none;
+  color:#b00020;
+  margin-top:10px;
+  font-size:16px;
+}
+</style>
 </head>
+
 <body>
-  <!-- Language chooser -->
-  <div id="langOverlay" class="lang-overlay" role="dialog" aria-modal="true">
-    <div class="lang-grid">
-      <button class="lang-btn" data-lang="it" aria-label="Italiano">🇮🇹 Italiano</button>
-      <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 Français</button>
-      <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 English</button>
+
+<!-- LOGIN -->
+<div id="guestLoginOverlay">
+  <div id="guestLoginModal">
+    <h2>Welcome</h2>
+    <p>Please enter your first and last name</p>
+
+    <div class="guest-field">
+      <label>Name</label>
+      <input id="guestFirst">
+    </div>
+    <div class="guest-field">
+      <label>Surname</label>
+      <input id="guestLast">
+    </div>
+
+    <button id="guestConfirmBtn">OK</button>
+    <div id="guestError">Name not recognized</div>
+  </div>
+</div>
+
+<div class="card">
+  <header>
+    <h1 class="title">Team Cha vs Team Gianlu</h1>
+    <p class="subtitle">This or That</p>
+  </header>
+
+  <div class="content">
+    <div class="question" id="question"></div>
+    <div class="options">
+      <button class="btn" id="optA"></button>
+      <button class="btn" id="optB"></button>
+    </div>
+
+    <div class="nav">
+      <button id="prevBtn" disabled>Back</button>
+      <button id="nextBtn" class="primary" disabled>Next</button>
     </div>
   </div>
-
-  <main class="card" role="main" aria-labelledby="game-title">
-    <header>
-      <h1 id="game-title" class="title">Vibe Cha vs Vibe Gianlu</h1>
-      <p id="subtitle" class="subtitle">This or That — Pick your vibe. Discover your team at the end!</p>
-    </header>
-
-    <div class="progress-wrap">
-      <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
-      <div class="progress-text" id="progressText">Question 1 of 14</div>
-    </div>
-
-    <section class="content" id="quiz" aria-live="polite">
-      <div class="qmeta" id="qMeta"></div>
-      <div class="question" id="questionText"></div>
-      <div class="options" id="options"></div>
-      <div class="nav">
-        <button id="prevBtn" aria-label="Previous question">⟵ Back</button>
-      </div>
-    </section>
-
-    <section class="content result" id="result">
-      <h2 id="resultTitle" class="question" style="margin-top:0">Your Result</h2>
-      <div class="score-wrap">
-        <div class="bar" aria-hidden="true">
-          <div class="gianlu" id="gBar" title="Gianlu"></div>
-          <div class="cha" id="cBar" title="Cha"></div>
-        </div>
-      </div>
-      <div class="legend">
-        <span>Gianlu: <strong id="gPct">50%</strong></span>
-        <span>Cha: <strong id="cPct">50%</strong></span>
-      </div>
-      <p id="summaryText" style="font-size:22px; margin-top:10px"></p>
-      <div id="traits" style="margin:8px 0 2px"></div>
-
-      <div class="share">
-        <button id="shareBtn" class="primary">Share result</button>
-        <button id="restartBtn">Play again</button>
-      </div>
-      <div id="shareFeedback" class="footer-note" aria-live="polite" style="margin-top:8px; min-height:1.2em"></div>
-    </section>
-
-    <div class="exit-wrap">
-      <button id="exitBtn" class="exit-btn" aria-label="Exit game">EXIT</button>
-    </div>
-  </main>
+</div>
 
 <script>
-(function init(){
-  // Se il DOM non è pronto, registra init su DOMContentLoaded e esci.
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, { once:true });
+/* ================= LOGIN ================= */
+
+const VIP_LIST = [
+  "Charlotte Francis","Gianluca Guardalà","Fabio Tarricone"
+];
+
+function normalize(s){
+  return (s||"").toLowerCase().trim()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+}
+
+function isVipName(f,l){
+  const full = normalize(f+" "+l);
+  return VIP_LIST.map(normalize).includes(full);
+}
+
+function requireLogin(){
+  if(!localStorage.getItem("guestName")){
+    document.getElementById("guestLoginOverlay").style.display="flex";
+  }
+}
+
+document.getElementById("guestConfirmBtn").onclick = ()=>{
+  const f = guestFirst.value;
+  const l = guestLast.value;
+  if(!f||!l){
+    guestError.style.display="block";
     return;
   }
+  localStorage.setItem("guestName",f+" "+l);
+  localStorage.setItem("isVIP", isVipName(f,l));
+  guestLoginOverlay.style.display="none";
+};
 
-  // -------------------- i18n strings --------------------
-  const STRINGS = {
-    it: {
-      progress: (i,n) => `Domanda ${i} di ${n}`,
-      back: "⟵ Indietro",
-      resultTitle: "Il tuo risultato",
-      moreG: "Sei più Team Gianlu",
-      moreC: "Sei più Team Cha",
-      tie: "Parità perfetta!",
-      share: "Condividi risultato",
-      playAgain: "Rigioca",
-      allDone: "Tutto fatto!",
-      exit: "ESCI",
-      shared: "Condiviso!",
-      copied: "Copiato negli appunti!",
-      shareFail: "Condivisione non riuscita. Copia manualmente.",
-      shareText: (g,c,summary,url) => `Ho ottenuto ${g}% Gianlu e ${c}% Cha in “Team Cha vs Team Gianlu”. ${summary} ${url}`
-    },
-    fr: {
-      progress: (i,n) => `Question ${i} sur ${n}`,
-      back: "⟵ Retour",
-      resultTitle: "Ton résultat",
-      moreG: "Tu es plutôt Team Gianlu",
-      moreC: "Tu es plutôt Team Cha",
-      tie: "Égalité parfaite !",
-      share: "Partager le résultat",
-      playAgain: "Rejouer",
-      allDone: "C'est terminé !",
-      exit: "QUITTER",
-      shared: "Partagé !",
-      copied: "Copié dans le presse-papiers !",
-      shareFail: "Partage impossible. Copie manuelle.",
-      shareText: (g,c,summary,url) => `J’ai eu ${g}% Gianlu et ${c}% Cha sur “Team Cha vs Team Gianlu”. ${summary} ${url}`
-    },
-    en: {
-      progress: (i,n) => `Question ${i} of ${n}`,
-      back: "⟵ Back",
-      resultTitle: "Your Result",
-      moreG: "You’re more Team Gianlu",
-      moreC: "You’re more Team Cha",
-      tie: "It’s a perfect tie!",
-      share: "Share result",
-      playAgain: "Play again",
-      allDone: "All done!",
-      exit: "EXIT",
-      shared: "Shared!",
-      copied: "Copied to clipboard!",
-      shareFail: "Could not share. Try copying manually.",
-      shareText: (g,c,summary,url) => `I got ${g}% Gianlu and ${c}% Cha on “Team Cha vs Team Gianlu”. ${summary} ${url}`
-    }
-  };
+requireLogin();
 
-  // -------------------- Questions by language --------------------
-  const QUESTIONS_BY_LANG = {
-    it: [
-      { t: "Quando guardo un film", left: "Mi addormento dopo 10 minuti", right: "Lo guardo fino alla fine" },
-      { t: "Il letto", left: "Va sempre rifatto", right: "Non lo rifaccio, tanto stasera lo devo disfo di nuovo!" },
-      { t: "Il tubetto di dentifricio", left: "Lo spremo dal fondo fino all'ultimo grammo", right: "Lo spremo come capita" },
-      { t: "Quanta acqua bevi?", left: "A volte bevo il primo bicchiere nel pomeriggio", right: "2L al giorno, no scuse" },
-      { t: "Cucini?", left: "Sempre, e mi piace", right: "Qualcun altro lo fa per me" },
-      { t: "Quando scrivo una email", left: "La scrivo di getto", right: "La rileggo 10 volte prima di inviare" },
-      { t: "La valigia prima di un viaggio", left: "La faccio 30 minuti prima", right: "Inizio a prepararla una settimana prima" },
-      { t: "Quando vado a cena con amici", left: "Sono il primo a finire", right: "Gli altri mi guardano finire il mio piatto" },
-      { t: "La mia giornata di vacanza perfetta è", left: "Hiking in montagna", right: "Giornata in spiaggia a prendere il sole con un libro" },
-      { t: "Quando vado a fare shopping", left: "Guardo prima il prezzo", right: "Scopro il prezzo alla cassa" },
-      { t: "Quando vado a letto", left: "Mi addormento in 2 secondi", right: "Conto le pecore per un’ora" },
-      { t: "Una chiamata con i miei genitori", left: "Dura in media 2 minuti (se rispondo)", right: "Dura un'ora, ci aggiorniamo su tutto" },
-      { t: "La mia giornata ideale sugli sci è", left: "Giornaliero + panini nello zaino", right: "2 ore di skipass + pranzo in baita" },
-      { t: "Faresti mai bungee jumping?", left: "Subito!", right: "Neanche se mi paghi" }
-    ],
-    fr: [
-      { t: "Quand je regarde un film", left: "Je m’endors après 10 minutes", right: "Je le regarde jusqu’à la fin" },
-      { t: "Le lit", left: "Doit toujours être fait", right: "Pas besoin de le faire, je vais le defaire ce soir" },
-      { t: "Le tube de dentifrice", left: "Je le presse du bas jusqu’à la dernière gramme", right: "Je le presse n’importe où" },
-      { t: "Combien d’eau bois-tu ?", left: "Parfois je bois mon premier verre l'après-midi", right: "2L par jour, pas d’excuses" },
-      { t: "Tu cuisines ?", left: "Toujours, et j’adore ça", right: "Quelqu’un d’autre le fait pour moi" },
-      { t: "Quand j’écris un e-mail", left: "Je l’écris d’un seul jet", right: "Je le relis dix fois avant d’envoyer" },
-      { t: "La valise avant un voyage", left: "Je la fais 30 minutes avant de partir", right: "Je commence à la préparer une semaine avant" },
-      { t: "Quand je sors dîner avec des amis", left: "Je finis toujours en premier", right: "Les autres me regardent finir mon assiette" },
-      { t: "Ma journée de vacances parfaite", left: "Randonnée en montagne", right: "Journée à la plage avec un livre au soleil" },
-      { t: "Quand je fais du shopping", left: "Je regarde d'abord le prix", right: "Je découvre le prix à la caisse" },
-      { t: "Quand je vais me coucher", left: "Je m’endors en 2 secondes", right: "Je compte les moutons pendant une heure" },
-      { t: "Un appel avec mes parents", left: "Dure 2 minutes en moyenne (si je réponds)", right: "Dure une heure, on se raconte tout" },
-      { t: "Ma journée de ski idéale", left: "Forfait journée + sandwich dans le sac à dos", right: "2 heures de ski + déjeuner dans un chalet" },
-      { t: "Tu ferais du saut à l’élastique ?", left: "Tout de suite !", right: "Même pas si on me paye " }
-    ],
-    en: [
-      { t: "When I watch a movie", left: "I fall asleep after 10 minutes", right: "I watch it till the end" },
-      { t: "The bed", left: "Must always be made", right: "Why bother, I’ll mess it up again tonight!" },
-      { t: "The toothpaste tube", left: "I squeeze it from the bottom till the very last gram", right: "I squeeze it wherever my hand lands" },
-      { t: "How much water do you drink?", left: "Sometimes my first glass is in the afternoon", right: "2L a day, no excuses" },
-      { t: "Do you cook?", left: "Always, and I love it", right: "Someone else does it for me" },
-      { t: "When I write an email", left: "I write it in one go", right: "I reread it 10 times before sending" },
-      { t: "Packing before a trip", left: "I do it 30 minutes before leaving", right: "I start a week in advance" },
-      { t: "When I go out for dinner with friends", left: "I’m the first to finish", right: "Everyone’s waiting for me to finish" },
-      { t: "My perfect vacation day is", left: "Hiking in the mountains", right: "A beach day reading under the sun" },
-      { t: "When I go shopping", left: "I check the price first", right: "I discover the price at the checkout" },
-      { t: "When I go to bed", left: "I fall asleep in 2 seconds", right: "I count sheep for an hour" },
-      { t: "A call with my parents", left: "Lasts 2 minutes on average (if I answer)", right: "Lasts an hour, I have to update them on everything" },
-      { t: "My ideal ski day is", left: "Full day + sandwiches in the backpack", right: "2-hour skipass + lunch at the chalet" },
-      { t: "Would you ever go bungee jumping?", left: "Absolutely!", right: "Not even if you paid me" }
-    ]
-  };
+/* ================= QUIZ ================= */
 
-  // --------------- State ---------------
-  let LANG = null;
-  let QUESTIONS = [];
-  let index = 0;
-  let QUESTION_ORDER = [];
-  let SIDE_MAP = [];
-  const answers = [];
-  let currentShareText = '';
+const QUESTIONS = [
+  {q:"Morning person or night owl?", a:"Morning ☀️", b:"Night 🌙"},
+  {q:"Mountains or sea?", a:"Mountains ⛰️", b:"Sea 🌊"},
+  {q:"Wine or cocktail?", a:"Wine 🍷", b:"Cocktail 🍸"},
+  {q:"Plan everything or improvise?", a:"Plan 📋", b:"Improvise 🎲"}
+];
 
-  // Helpers
-  const $ = sel => document.querySelector(sel);
-  function tkey() { return STRINGS[LANG] || STRINGS.en; }
+let idx = 0;
+let answers = [];
 
-  function shuffle(arr){
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }
-  function shuffleOrder(){
-    QUESTION_ORDER = Array.from({length: QUESTIONS.length}, (_, i) => i);
-    shuffle(QUESTION_ORDER);
-    SIDE_MAP = QUESTION_ORDER.map(() => Math.random() < 0.5 ? 0 : 1);
-  }
-  function currentIndex(){ return QUESTION_ORDER[index]; }
-  function currentQuestion(){ return QUESTIONS[currentIndex()]; }
+const qEl = document.getElementById("question");
+const aEl = document.getElementById("optA");
+const bEl = document.getElementById("optB");
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
 
-  function updateProgress(){
-    const pct = (index / QUESTIONS.length) * 100;
-    $('#progressBar').style.width = pct + '%';
-    $('#progressText').textContent = tkey().progress(index+1, QUESTIONS.length);
-  }
+function render(){
+  const q = QUESTIONS[idx];
+  qEl.textContent = q.q;
+  aEl.textContent = q.a;
+  bEl.textContent = q.b;
 
-  function renderQuestion(){
-    const data = currentQuestion();
-    const flip = SIDE_MAP[index] === 1;
+  aEl.classList.toggle("selected", answers[idx]==="A");
+  bEl.classList.toggle("selected", answers[idx]==="B");
 
-    $('#qMeta').textContent = data.t || '';
-    $('#questionText').textContent = '';
+  prevBtn.disabled = idx===0;
+  nextBtn.disabled = answers[idx]==null;
+}
 
-    const cont = $('#options');
-    cont.innerHTML = '';
+aEl.onclick = ()=>{answers[idx]="A";render();}
+bEl.onclick = ()=>{answers[idx]="B";render();}
+nextBtn.onclick = ()=>{ if(idx<QUESTIONS.length-1){idx++;render();}}
+prevBtn.onclick = ()=>{ if(idx>0){idx--;render();}}
 
-    const leftBtn = document.createElement('button');
-    leftBtn.className = 'btn half left';
-    leftBtn.type = 'button';
-
-    const rightBtn = document.createElement('button');
-    rightBtn.className = 'btn half right';
-    rightBtn.type = 'button';
-
-    leftBtn.textContent  = flip ? data.right : data.left;
-    rightBtn.textContent = flip ? data.left  : data.right;
-
-    if (answers[index] === 0) leftBtn.classList.add('selected');
-    if (answers[index] === 1) rightBtn.classList.add('selected');
-
-    leftBtn.addEventListener('click', () => { answers[index] = 0; goNext(); });
-    rightBtn.addEventListener('click', () => { answers[index] = 1; goNext(); });
-
-    cont.appendChild(leftBtn);
-    cont.appendChild(rightBtn);
-
-    const prevBtn = $('#prevBtn');
-    if (prevBtn) prevBtn.disabled = index === 0;
-    updateProgress();
-  }
-
-  function goNext(){
-    if (answers[index] == null) {
-      const cont = $('#options');
-      cont.classList.remove('need-pick'); void cont.offsetWidth; cont.classList.add('need-pick');
-      return;
-    }
-    if (index < QUESTIONS.length - 1){
-      index++;
-      renderQuestion();
-    } else {
-      finish();
-    }
-  }
-
-  function goPrev(){
-    if (index > 0){ index--; renderQuestion(); }
-  }
-
-  function finish(){
-    let g = 0, c = 0;
-    for (let i = 0; i < QUESTIONS.length; i++){
-      const pickSide = answers[i];
-      const flipped = SIDE_MAP[i] === 1;
-      // Mapping: left = Gianlu, right = Cha (flip visuale casuale)
-      const pickedIsGianlu = flipped ? (pickSide === 1) : (pickSide === 0);
-      if (pickedIsGianlu) g++; else c++;
-    }
-
-    const total = g + c;
-    const gPct = Math.round((g/total)*100);
-    const cPct = 100 - gPct;
-
-    $('#gPct').textContent = gPct + '%';
-    $('#cPct').textContent = cPct + '%';
-    $('#gBar').style.width = gPct + '%';
-    $('#cBar').style.width = cPct + '%';
-
-    const summary = gPct > cPct ? tkey().moreG : gPct < cPct ? tkey().moreC : tkey().tie;
-    $('#summaryText').textContent = summary;
-
-    currentShareText = tkey().shareText(gPct, cPct, summary, window.location.href);
-
-    $('#quiz').classList.add('hidden');
-    $('#result').style.display = 'block';
-    $('#progressBar').style.width = '100%';
-    $('#progressText').textContent = tkey().allDone;
-  }
-
-  function applyUIStrings(){
-    const s = tkey();
-    $('#subtitle').textContent = s.subtitle;
-    const prevBtn = $('#prevBtn'); if (prevBtn) prevBtn.textContent = s.back;
-    $('#resultTitle').textContent = s.resultTitle;
-    $('#shareBtn').textContent = s.share;
-    $('#restartBtn').textContent = s.playAgain;
-    $('#exitBtn').textContent = s.exit;
-    document.documentElement.lang = LANG;
-  }
-
-  function startGameWithLanguage(lang){
-    LANG = (STRINGS[lang] ? lang : 'en');
-    QUESTIONS = QUESTIONS_BY_LANG[LANG].slice();
-    index = 0;
-    QUESTION_ORDER = [];
-    SIDE_MAP = [];
-    answers.length = QUESTIONS.length;
-    for (let i=0;i<answers.length;i++) answers[i] = null;
-
-    applyUIStrings();
-    shuffleOrder();
-    $('#result').style.display = 'none';
-    $('#quiz').classList.remove('hidden');
-    $('#shareFeedback').textContent = '';
-    renderQuestion();
-  }
-
-  // -------------------- Events --------------------
-  document.querySelectorAll('.lang-btn').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      const lang = e.currentTarget.dataset.lang || 'en';
-      const overlay = document.getElementById('langOverlay');
-      if (overlay){
-        overlay.classList.add('hidden');
-        overlay.style.display = 'none'; // doppia sicurezza
-      }
-      startGameWithLanguage(lang);
-    }, { once:false });
-  });
-
-  const prevBtn = document.getElementById('prevBtn');
-  if (prevBtn) prevBtn.addEventListener('click', goPrev);
-
-  document.getElementById('restartBtn').addEventListener('click', () => {
-    index = 0;
-    for (let i=0;i<answers.length;i++) answers[i] = null;
-    shuffleOrder();
-    $('#result').style.display = 'none';
-    $('#quiz').classList.remove('hidden');
-    $('#shareFeedback').textContent = '';
-    renderQuestion();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  document.getElementById('shareBtn').addEventListener('click', async () => {
-    const feedback = document.getElementById('shareFeedback');
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: 'Team Cha vs Team Gianlu', text: currentShareText, url: window.location.href });
-        feedback.textContent = tkey().shared;
-      } else if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(currentShareText);
-        feedback.textContent = tkey().copied;
-      } else {
-        const ta = document.createElement('textarea');
-        ta.value = currentShareText; document.body.appendChild(ta); ta.select();
-        document.execCommand('copy'); document.body.removeChild(ta);
-        feedback.textContent = tkey().copied;
-      }
-    } catch {
-      feedback.textContent = tkey().shareFail;
-    }
-    setTimeout(() => { feedback.textContent = ''; }, 3200);
-  });
-
-  document.getElementById('exitBtn').addEventListener('click', () => {
-    window.location.href = 'https://www.charlottegianluca.it/home.html';
-  });
-
-  // Tastiera (opzionale)
-  document.addEventListener('keydown', (e)=>{
-    if (document.getElementById('quiz').classList.contains('hidden')) return;
-    if (e.key === 'ArrowLeft') { answers[index] = 0; goNext(); }
-    if (e.key === 'ArrowRight'){ answers[index] = 1; goNext(); }
-  });
-
-})(); // fine init IIFE
+render();
 </script>
 
 </body>
