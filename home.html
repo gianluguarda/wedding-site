@@ -123,6 +123,27 @@
   line-height: 1.4;
   font-family: "Cormorant", serif;
 }
+
+
+/*  style tasto logout */  
+.footer-logout{
+  display:inline-block;
+  margin-top:6px;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#6b6b6b;
+  opacity:.6;
+  text-decoration:none;
+}
+
+.footer-logout:hover{
+  opacity:1;
+  text-decoration:underline;
+}
+
+
+  
 </style>
 
   
@@ -451,6 +472,8 @@ footer{
   </div>
 </div>
 
+  
+
 
 <header>
   <div class="nav">
@@ -549,8 +572,10 @@ footer{
 </main>
 
 <footer>
-  <small>© Charlotte &amp; Gianluca — 2026</small>
+  <small>© Charlotte &amp; Gianluca — 2026</small><br>
+  <a href="#" id="footerLogout" class="footer-logout">Log out</a>
 </footer>
+
 
 <script>
 // ========================
@@ -803,6 +828,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   applyVIPVisibility();
+
+  const footerLogout = document.getElementById("footerLogout");
+  if(footerLogout){
+    footerLogout.addEventListener("click", (e)=>{
+      e.preventDefault();
+      doLogout();
+    });
+  }
+
+  
 });
 </script>
 
