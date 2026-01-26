@@ -719,6 +719,8 @@ const VIP_LIST = [
   "Benedetta Pintus"
 ];
 
+  
+
 // ========================
 // 3. FUNZIONI UTILI
 // ========================
@@ -807,7 +809,8 @@ function submitGuestData(){
   }
 
   // Sei VIP?
-  const guestIsVIP = VIP_LIST.includes(normFullName);
+  const guestIsVIP = VIP_LIST_NORMALIZED.includes(normFullName);
+
 
   // Salvo
   localStorage.setItem("guestName", rawFullName.trim());
