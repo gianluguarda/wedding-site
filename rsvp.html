@@ -7,6 +7,9 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Allura&display=swap" rel="stylesheet">
 
+<!-- VIP & login (centralizzato) -->
+<script src="/assets/js/vip.js" defer></script>
+
 <!-- === GLOBAL LOGIN STYLE & MODAL (popup) === -->
 <style>
 /* Overlay scuro dietro al popup */
@@ -512,7 +515,7 @@ iframe{width:100%; border:0; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,
         <li><a href="/story.html">Our story</a></li>
         <li><a href="/stay.html">Plan your trip</a></li>
         <li><a href="/trip.html">Honeymoon</a></li>
-        <li><a href="/this-or-that.html">Test</a></li>
+        <li><a href="/this-or-that.html">Test ✨</a></li>
         <li class="cta"><a href="/rsvp.html">RSVP</a></li>
       </ul>
     </nav>
@@ -523,7 +526,7 @@ iframe{width:100%; border:0; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,
     <a href="/story.html">Our story</a>
     <a href="/stay.html">Plan your trip</a>
     <a href="/trip.html">Honeymoon</a>
-    <a href="/this-or-that.html">Test</a>
+    <a href="/this-or-that.html">Test ✨</a>
     <a href="/rsvp.html"><strong>RSVP</strong></a>
   </div>
 </header>
@@ -608,7 +611,6 @@ iframe{width:100%; border:0; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,
     Loading…
   </iframe>
   -->
-</section>
 
  
 
@@ -620,9 +622,7 @@ iframe{width:100%; border:0; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,
 </footer>
 
 <script>
-// ========================
-// 1. MENU MOBILE
-// ========================
+/* MENU MOBILE — login & VIP gestiti da /assets/js/vip.js */
 (function(){
   const btn = document.getElementById('hambBtn');
   const menu = document.getElementById('mobileMenu');
@@ -638,240 +638,6 @@ iframe{width:100%; border:0; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,
     });
   }
 })();
-
-
-// ========================
-// 2. LISTA VIP
-// ========================
-const VIP_LIST = [
-  "Charlotte Francis",
-  "Yves Francis",
-  "Laurence Hoppe",
-  "Chloé Francis",
-  "Maya Mertens",
-  "Chiara Regalia",
-  "Matteo Biroli",
-  "Chiara Sestini",
-  "Riccardo Magri",
-  "Marta Vitro",
-  "Mattia Marco",
-  "Andrea Rodriguez",
-  "Piero Giuriolo",
-  "Pietro Favari",
-  "Elisa Ferrantelli",
-  "Francesco Santermosi",
-  "Viviana Serdoz",
-  "Francesca Garoia",
-  "Malve Malvestio",
-  "Attilia La Vecchia",
-  "Stefano de Looper",
-  "Clara Simon",
-  "Marine Lesage",
-  "Thomas Hulet",
-  "Nicola delle Foglie",
-  "Baptiste Charvat",
-  "Liza Bibakova",
-  "Iphigénie Loukakis",
-  "Sara Nyssen",
-  "Koen Slingerland",
-  "Gianluca Guardalà",
-  "Francesca Arduini",
-  "Benedikt Fritz",
-  "Isidoro Guardalà",
-  "Simona Guardalà",
-  "Alessando Guardalà",
-  "Irene Guardalà",
-  "Patrick",
-  "Emanuela Zannetti",
-  "Andrea Perozziello",
-  "Chiara",
-  "Fabio Tarricone",
-  "Gisella Martino Capeda",
-  "Gisella Martino",
-  "Edoardo Cutolo",
-  "Giorgia Piras",
-  "Edoardo Papini",
-  "Vittorio Corti",
-  "Benedetta Barbaresi",
-  "Giacomo Gussoni",
-  "Matteo Rossi",
-  "Lucrezia Piracci",
-  "Davide Bellotto",
-  "Silvia Oltrabella",
-  "Ludovico SIbani",
-  "Silvia Pignotti",
-  "Benedetta Testoni",
-  "Giovanni De Maria",
-  "Edoardo Ferrario",
-  "Alessandro Bianchi",
-  "Beatrice Villa",
-  "Luca Caravaggi",
-  "Mara Moschino",
-  "Marzia Campanile",
-  "Nikola Calic",
-  "Filippo Suglia",
-  "Camilla Russo",
-  "Laerte Adami",
-  "Noemi",
-  "Alberto Garlaschelli",
-  "Jacopo Guarneri",
-  "Lorenzo Cederna",
-  "Benedetta Pintus"
-];
-
-  
-
-// ========================
-// 3. FUNZIONI UTILI
-// ========================
-function normalizeName(str){
-  if(!str) return "";
-  return str
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g,"") // rimuove accenti
-    .replace(/\s+/g," ");           // compatta spazi
-}
-
-function isVIP(){
-  return localStorage.getItem("isVIP") === "true";
-}
-
-function hasIdentification(){
-  return !!localStorage.getItem("guestName");
-}
-
-function applyVIPVisibility(){
-  const vipBlocks = document.querySelectorAll(".vip-only");
-  const nonVipBlocks = document.querySelectorAll(".non-vip-only");
-
-  if(isVIP()){
-    vipBlocks.forEach(el => el.style.display = "");
-    nonVipBlocks.forEach(el => el.style.display = "none");
-  } else {
-    vipBlocks.forEach(el => el.style.display = "none");
-    nonVipBlocks.forEach(el => el.style.display = "");
-  }
-}
-
-  const VIP_LIST_NORMALIZED = VIP_LIST.map(n => normalizeName(n));
-
-
-// ========================
-// 4. MODAL CONTROL
-//    (ATTENZIONE: qui uso i TUOI ID reali nel DOM!)
-// ========================
-function openLoginModal(){
-  const overlay = document.getElementById("guestLoginOverlay");
-  if(overlay){
-    overlay.style.display = "flex";
-  }
-}
-
-function closeLoginModal(){
-  const overlay = document.getElementById("guestLoginOverlay");
-  if(overlay){
-    overlay.style.display = "none";
-  }
-}
-
-// Logout: cancella i dati e riapre il popup
-function doLogout(){
-  localStorage.removeItem("guestName");
-  localStorage.removeItem("isVIP");
-  // mostro di nuovo popup per forzare re-identificazione
-  openLoginModal();
-  // dopo logout, i blocchi tornano allo stato "non loggato" (che per noi è non VIP finché non rifanno login)
-  applyVIPVisibility();
-  // nel popup ora nascondiamo il bottone logout perché non ha senso prima di reinserire
-  const logoutBtn = document.getElementById("guestLogoutBtn");
-  if(logoutBtn){
-    logoutBtn.style.display = "none";
-  }
-}
-
-// Salvataggio quando cliccano OK
-function submitGuestData(){
-  const firstEl = document.getElementById("guestFirst");
-  const lastEl  = document.getElementById("guestLast");
-  const errEl   = document.getElementById("guestError");
-
-  if(!firstEl || !lastEl) return;
-
-  const rawFullName = (firstEl.value || "") + " " + (lastEl.value || "");
-  const normFullName = normalizeName(rawFullName);
-
-  if(!firstEl.value.trim() || !lastEl.value.trim()){
-    // se lasciano vuoto
-    if(errEl){
-      errEl.innerHTML = "Please enter both fields.<br>Veuillez remplir les deux champs.<br>Inserisci nome e cognome.";
-      errEl.style.display = "block";
-    }
-    return;
-  }
-
-  // Sei VIP?
-  const guestIsVIP = VIP_LIST_NORMALIZED.includes(normFullName);
-
-
-  // Salvo
-  localStorage.setItem("guestName", rawFullName.trim());
-  localStorage.setItem("isVIP", guestIsVIP ? "true" : "false");
-
-  // Chiudo popup
-  closeLoginModal();
-
-  // Aggiorna visibilità dei blocchi subito
-  applyVIPVisibility();
-}
-
-
-// ========================
-// 5. INIT
-// ========================
-document.addEventListener("DOMContentLoaded", () => {
-  // Riferimenti bottoni e overlay
-  const confirmBtn = document.getElementById("guestConfirmBtn");
-  const logoutBtn  = document.getElementById("guestLogoutBtn");
-  const overlay    = document.getElementById("guestLoginOverlay");
-  const errEl      = document.getElementById("guestError");
-
-  // Se già identificato:
-  if(hasIdentification()){
-    // nascondo popup
-    if(overlay) overlay.style.display = "none";
-
-    // mostro il bottone logout nel popup (se riaperto)
-    if(logoutBtn){
-      logoutBtn.style.display = "inline-block";
-      logoutBtn.addEventListener("click", doLogout);
-    }
-  } else {
-    // se NON identificato: apri popup subito
-    if(overlay) overlay.style.display = "flex";
-
-    // nascondo eventuali errori
-    if(errEl) errEl.style.display = "none";
-
-    // logout in questa fase non serve
-    if(logoutBtn){
-      logoutBtn.style.display = "none";
-      logoutBtn.addEventListener("click", doLogout);
-    }
-  }
-
-  // collega il pulsante OK → salva nome, salva VIP, chiudi popup
-  if(confirmBtn){
-    confirmBtn.addEventListener("click", (e)=>{
-      e.preventDefault();
-      submitGuestData();
-    });
-  }
-
-  // Applica subito visibilità dei blocchi giusti
-  applyVIPVisibility();
-});
 </script>
 
 
