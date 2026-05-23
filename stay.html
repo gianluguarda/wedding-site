@@ -7,6 +7,9 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Allura&display=swap" rel="stylesheet">
 
+<!-- VIP & login (centralizzato) -->
+<script src="/assets/js/vip.js" defer></script>
+
 <style>
 :root{
   --accent:#7465ad; --beige:#f7f4ef; --ink:#242424; --muted:#6b6b6b; --card-bg:#ffffff;
@@ -130,7 +133,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
 #guestLoginActions{display:flex; flex-direction:column; gap:10px; margin-top:18px}
 #guestConfirmBtn{background:var(--accent); color:#fff; border:none; border-radius:12px; font-size:18px; font-weight:600; padding:12px; cursor:pointer}
 #guestConfirmBtn:hover{opacity:.95}
-#guestLogoutBtn{background:none; border:none; color:#muted; font-size:16px; text-decoration:underline; cursor:pointer}
+#guestLogoutBtn{background:none; border:none; color:var(--muted); font-size:16px; text-decoration:underline; cursor:pointer}
 #guestError{color:#b00020; font-size:16px; text-align:center; display:none; margin-top:8px; line-height:1.4}
 </style>
 </head>
@@ -170,7 +173,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <li><a href="/story.html">Our story</a></li>
         <li><a href="/stay.html">Plan your trip</a></li>
         <li><a href="/trip.html">Honeymoon</a></li>
-        <li><a href="/this-or-that.html">Test</a></li>
+        <li><a href="/this-or-that.html">Test ✨</a></li>
         <li class="cta"><a href="/rsvp.html">RSVP</a></li>
       </ul>
     </nav>
@@ -181,7 +184,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
     <a href="/story.html">Our story</a>
     <a href="/stay.html">Plan your trip</a>
     <a href="/trip.html">Honeymoon</a>
-    <a href="/this-or-that.html">Test</a>
+    <a href="/this-or-that.html">Test ✨</a>
     <a href="/rsvp.html"><strong>RSVP</strong></a>
   </div>
 </header>
@@ -208,9 +211,10 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <img src="/assets/stay/terre-ugo.jpg" class="card-img" alt="Terre Ugo">
         <h3>Welcome Dinner — Venerdì 19 giugno</h3>
         <ul>
-          <li><strong>Orario</strong>: 19:00–23:00</li>
+          <li><strong>Orario</strong>: 18:30–23:00</li>
           <li><strong>Luogo</strong>: <a class="link" href="https://maps.app.goo.gl/EfaRfCRqPdVTzZKaA" target="_blank">Terre Ugo</a></li>
           <li><strong>Indirizzo</strong>: 1885 Rte du Puy Sainte-Réparade, 13540 Aix-en-Provence</li>
+          <li><strong>Come arrivare</strong>: in auto o taxi, oppure con la <strong>linea 12</strong> (attenzione: ultimo bus di ritorno alle 21:30).</li>
           <li><strong>Dress code</strong>: summer cocktail. Donne: evitare il bianco. Salva-tacchi a disposizione.</li>
         </ul>
       </div>
@@ -220,7 +224,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <img src="/assets/chateau.jpg" class="card-img" alt="Château de Pradines">
         <h3>Cerimonia &amp; Ricevimento — Sabato 20 giugno</h3>
         <ul>
-          <li><strong>Orario</strong>: 16:30 (TBC) — festa fino alle 4:00</li>
+          <li><strong>Orario</strong>: 16:00 — festa fino alle 3:30 (ultima navetta)</li>
           <li><strong>Luogo</strong>: <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Château de Pradines, Grambois</a></li>
           <li><strong>Indirizzo</strong>: 1 Chem. des Faysses, 84240 Grambois</li>
           <li><strong>Dress code</strong>: formale. Evitare il bianco e il lilla. Salva-tacchi a disposizione.</li>
@@ -232,7 +236,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <img src="/assets/stay/brunch.jpg" class="card-img" alt="Brunch in piscina">
         <h3>Brunch — Domenica 21 giugno</h3>
         <ul>
-          <li><strong>Orario</strong>: TBC</li>
+          <li><strong>Orario</strong>: dalle 11:00</li>
           <li><strong>Luogo</strong>: Piscina dello Château de Pradines</li>
           <li><strong>Dress code</strong>: rilassato e/o da piscina; portare un asciugamano</li>
         </ul>
@@ -244,7 +248,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <img src="/assets/chateau.jpg" class="card-img" alt="Château de Pradines">
         <h3>Cerimonia &amp; Ricevimento — Sabato 20 giugno</h3>
         <ul>
-          <li><strong>Orario</strong>: 16:30 (TBC) — festa fino alle 4:00</li>
+          <li><strong>Orario</strong>: 16:00 — festa fino alle 3:30 (ultima navetta)</li>
           <li><strong>Luogo</strong>: <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Château de Pradines, Grambois</a></li>
           <li><strong>Indirizzo</strong>: 1 Chem. des Faysses, 84240 Grambois</li>
           <li><strong>Dress code</strong>: formale. Uomini: gradita la cravatta. Donne: gradito vestito lungo. Evitare bianco e lilla. Salva-tacchi a disposizione.</li>
@@ -264,7 +268,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
   </div>
   <div class="card">
     <h3>🚗 In auto</h3>
-    <p><strong>Da Milano</strong>: ~5h30 via Liguria.</p>
+    <p><strong>Da Milano</strong>: ~6h via Liguria (costa) oppure ~5h45 via Piemonte e Briançon (più scorrevole, evita il traffico estivo della costa).</p>
     <p><strong>Da Belgio/Lussemburgo</strong>: ~10–11h via Lione.</p>
     <p>Parcheggio gratuito in location.</p>
   </div>
@@ -293,8 +297,8 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <h3>🚌 Navetta (20 giugno)</h3>
         <ul>
           <p>Per permettervi di godervi la giornata senza pensieri.</p>
-          <p> <strong>Tappe principali</strong>: Aix-en-Provence, Pertuis, La Tour d’Aigues.</p>
-         <p>  Per favore <strong>confermate nel form RSVP</strong> se siete interessati a usufruirne.</p>
+          <p> <strong>Fermate</strong>: Aix-en-Provence, Pertuis, La Tour d’Aigues.</p>
+         <p>Navette confermate (seguiranno informazioni sul gruppo).</p>
         </ul>
       </div>
     </div>
@@ -335,9 +339,10 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <img src="/assets/stay/terre-ugo.jpg" class="card-img" alt="Terre Ugo">
         <h3>Dîner de bienvenue — Vendredi 19 juin</h3>
         <ul>
-          <li><strong>Horaires</strong> : 19h00–23h00</li>
+          <li><strong>Horaires</strong> : 18h30–23h00</li>
           <li><strong>Lieu</strong> : <a class="link" href="https://maps.app.goo.gl/EfaRfCRqPdVTzZKaA" target="_blank">Terre Ugo</a></li>
           <li><strong>Adresse</strong> : 1885 Rte du Puy Sainte-Réparade, 13540 Aix-en-Provence</li>
+          <li><strong>Pour s'y rendre</strong> : en voiture ou taxi, ou avec la <strong>ligne 12</strong> (attention : dernier bus retour à 21h30).</li>
           <li><strong>Tenue</strong> : summer cocktail. Femmes : éviter le blanc. Protège-talons fournis.</li>
         </ul>
       </div>
@@ -345,7 +350,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <img src="/assets/chateau.jpg" class="card-img" alt="Château de Pradines">
         <h3>Cérémonie &amp; Réception — Samedi 20 juin</h3>
         <ul>
-          <li><strong>Horaires</strong> : 16h30 (TBC) — fête jusqu’à 4h00</li>
+          <li><strong>Horaires</strong> : 16h00 — fête jusqu’à 3h30 (dernière navette)</li>
           <li><strong>Lieu</strong> : <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Château de Pradines, Grambois</a></li>
           <li><strong>Adresse</strong> : 1 Chem. des Faysses, 84240 Grambois</li>
           <li><strong>Tenue</strong> : formelle. Femmes : éviter le blanc et le lilas. Protège-talons fournis.</li>
@@ -355,7 +360,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <img src="/assets/stay/brunch.jpg" class="card-img" alt="Brunch piscine">
         <h3>Brunch — Dimanche 21 juin</h3>
         <ul>
-          <li><strong>Horaires</strong> : à confirmer</li>
+          <li><strong>Horaires</strong> : à partir de 11h00</li>
           <li><strong>Lieu</strong> : piscine du Château</li>
           <li><strong>Tenue</strong> : relax et/ou de piscine ; merci d’apporter une serviette</li>
         </ul>
@@ -367,7 +372,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <img src="/assets/chateau.jpg" class="card-img" alt="Château de Pradines">
         <h3>Cérémonie &amp; Réception — Samedi 20 juin</h3>
         <ul>
-          <li><strong>Horaires</strong> : 16h30 (TBC) — fête jusqu’à 4h00</li>
+          <li><strong>Horaires</strong> : 16h00 — fête jusqu’à 3h30 (dernière navette)</li>
           <li><strong>Lieu</strong> : <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Château de Pradines, Grambois</a></li>
           <li><strong>Adresse</strong> : 1 Chem. des Faysses, 84240 Grambois</li>
           <li><strong>Tenue</strong> : formelle. Femmes : éviter le blanc et le lilas. Protège-talons fournis.</li>
@@ -386,7 +391,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
   </div>
   <div class="card">
     <h3>🚗 En voiture</h3>
-    <p><strong>Depuis Milan</strong> : ~5h30 via la Ligurie.</p>
+    <p><strong>Depuis Milan</strong> : ~6h via la Ligurie (côte) ou ~5h45 via le Piémont et Briançon (plus fluide, évite les bouchons estivaux de la côte).</p>
     <p><strong>Depuis la Belgique/le Luxembourg</strong> : ~10–11h via Lyon.</p>
     <p>Parking gratuit sur place.</p>
   </div>
@@ -415,8 +420,8 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <h3>🚌 Navette (20 juin)</h3>
         <ul>
            <p>Pour profiter sereinement de la journée.</p>
-           <p><strong>Arrêts principaux</strong> : Aix-en-Provence, Pertuis, La Tour d’Aigues.</p>
-           <p>Merci de <strong>confirmer dans le formulaire RSVP</strong> si vous vous désirez utiliser ce service.</p>
+           <p><strong>Arrêts</strong> : Aix-en-Provence, Pertuis, La Tour d’Aigues.</p>
+           <p>Navettes confirmées (les informations sur les groupes suivront).</p>
         </ul>
       </div>
     </div>
@@ -457,9 +462,10 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <img src="/assets/stay/terre-ugo.jpg" class="card-img" alt="Terre Ugo">
         <h3>Welcome Dinner — Friday, June 19</h3>
         <ul>
-          <li><strong>Time</strong>: 7:00–11:00 PM</li>
+          <li><strong>Time</strong>: 6:30–11:00 PM</li>
           <li><strong>Place</strong>: <a class="link" href="https://maps.app.goo.gl/EfaRfCRqPdVTzZKaA" target="_blank">Terre Ugo</a></li>
           <li><strong>Address</strong>: 1885 Rte du Puy Sainte-Réparade, 13540 Aix-en-Provence</li>
+          <li><strong>Getting there</strong>: by car or taxi, or by <strong>bus line 12</strong> (note: last return bus at 9:30 PM).</li>
           <li><strong>Dress code</strong>: summer cocktail. Women: please avoid white. Heel-savers provided.</li>
         </ul>
       </div>
@@ -467,7 +473,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <img src="/assets/chateau.jpg" class="card-img" alt="Château de Pradines">
         <h3>Ceremony &amp; Reception — Saturday, June 20</h3>
         <ul>
-          <li><strong>Time</strong>: 4:30 PM (TBC) — party until 4:00 AM</li>
+          <li><strong>Time</strong>: 4:00 PM — party until 3:30 AM (last shuttle)</li>
           <li><strong>Place</strong>: <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Château de Pradines, Grambois</a></li>
           <li><strong>Address</strong>: 1 Chem. des Faysses, 84240 Grambois</li>
           <li><strong>Dress code</strong>: formal. Please avoid white and lilac. Heel-savers provided.</li>
@@ -477,7 +483,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <img src="/assets/stay/brunch.jpg" class="card-img" alt="Pool brunch">
         <h3>Brunch — Sunday, June 21</h3>
         <ul>
-          <li><strong>Time</strong>: TBC</li>
+          <li><strong>Time</strong>: from 11:00 AM</li>
           <li><strong>Where</strong>: Château pool</li>
           <li><strong>Dress code</strong>: relax and/or pool attire; please bring a towel</li>
         </ul>
@@ -489,7 +495,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <img src="/assets/chateau.jpg" class="card-img" alt="Château de Pradines">
         <h3>Ceremony &amp; Reception — Saturday, June 20</h3>
         <ul>
-          <li><strong>Time</strong>: 4:30 PM (TBC) — party until 4:00 AM</li>
+          <li><strong>Time</strong>: 4:00 PM — party until 3:30 AM (last shuttle)</li>
           <li><strong>Place</strong>: <a class="link" href="https://maps.app.goo.gl/auCG1A2ywwBSrx8A7" target="_blank">Château de Pradines, Grambois</a></li>
           <li><strong>Address</strong>: 1 Chem. des Faysses, 84240 Grambois</li>
           <li><strong>Dress code</strong>: formal. Please avoid white and lilac. Heel-savers provided.</li>
@@ -508,7 +514,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
   </div>
   <div class="card">
     <h3>🚗 By car</h3>
-    <p><strong>From Milan</strong>: ~5h30 via Liguria.</p>
+    <p><strong>From Milan</strong>: ~6h via Liguria (coastal) or ~5h45 via Piedmont and Briançon (smoother, avoids summer coastal traffic).</p>
     <p><strong>From Belgium/Luxembourg</strong>: ~10–11h via Lyon.</p>
     <p>Free parking at the venue.</p>
   </div>
@@ -535,8 +541,8 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
         <h3>🚌 Shuttle (June 20)</h3>
         <ul>
            <p>To help you enjoy the day worry-free.</p>
-           <p><strong>Main stops</strong>: Aix-en-Provence, Pertuis, La Tour d’Aigues.</p>
-           <p>Please <strong>confirm in the RSVP form</strong> if you’d like to use it.</p>
+           <p><strong>Stops</strong>: Aix-en-Provence, Pertuis, La Tour d’Aigues.</p>
+           <p>Shuttles confirmed (group details will follow).</p>
         </ul>
       </div>
     </div>
@@ -562,7 +568,6 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
   <li><strong>Sainte-Victoire Mountain</strong> — hiking and panoramic views.</li>
   <li><strong>Wineries</strong> — e.g. Château du Seuil, Château La Coste (art+wine), Domaine Pey Blanc.</li>
 </ul>
-  </ul>
 </div>
 
   </section>
@@ -575,7 +580,7 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
 </footer>
 
 <script>
-/* Mobile menu */
+/* Mobile menu — login & VIP gestiti da /assets/js/vip.js */
 (function(){
   const btn = document.getElementById('hambBtn');
   const menu = document.getElementById('mobileMenu');
@@ -591,152 +596,6 @@ nav li.cta a:hover{opacity:.95; transform:translateY(-1px)}
     });
   }
 })();
-
-/* VIP + login */
-const VIP_LIST = [
-  "Charlotte Francis",
-  "Yves Francis",
-  "Laurence Hoppe",
-  "Chloé Francis",
-  "Maya Mertens",
-  "Chiara Regalia",
-  "Matteo Biroli",
-  "Chiara Sestini",
-  "Riccardo Magri",
-  "Marta Vitro",
-  "Mattia Marco",
-  "Andrea Rodriguez",
-  "Piero Giuriolo",
-  "Pietro Favari",
-  "Elisa Ferrantelli",
-  "Francesco Santermosi",
-  "Viviana Serdoz",
-  "Francesca Garoia",
-  "Malve Malvestio",
-  "Attilia La Vecchia",
-  "Stefano de Looper",
-  "Clara Simon",
-  "Marine Lesage",
-  "Thomas Hulet",
-  "Nicola delle Foglie",
-  "Baptiste Charvat",
-  "Liza Bibakova",
-  "Iphigénie Loukakis",
-  "Sara Nyssen",
-  "Koen Slingerland",
-  "Gianluca Guardalà",
-  "Francesca Arduini",
-  "Benedikt Fritz",
-  "Isidoro Guardalà",
-  "Simona Guardalà",
-  "Alessando Guardalà",
-  "Irene Guardalà",
-  "Patrick",
-  "Emanuela Zannetti",
-  "Andrea Perozziello",
-  "Chiara",
-  "Fabio Tarricone",
-  "Gisella Martino Capeda",
-  "Gisella Martino",
-  "Edoardo Cutolo",
-  "Giorgia Piras",
-  "Edoardo Papini",
-  "Vittorio Corti",
-  "Benedetta Barbaresi",
-  "Giacomo Gussoni",
-  "Matteo Rossi",
-  "Lucrezia Piracci",
-  "Davide Bellotto",
-  "Silvia Oltrabella",
-  "Ludovico SIbani",
-  "Silvia Pignotti",
-  "Benedetta Testoni",
-  "Giovanni De Maria",
-  "Edoardo Ferrario",
-  "Alessandro Bianchi",
-  "Beatrice Villa",
-  "Luca Caravaggi",
-  "Mara Moschino",
-  "Marzia Campanile",
-  "Nikola Calic",
-  "Filippo Suglia",
-  "Camilla Russo",
-  "Laerte Adami",
-  "Noemi",
-  "Alberto Garlaschelli",
-  "Jacopo Guarneri",
-  "Lorenzo Cederna",
-  "Benedetta Pintus"
-];
-
-function normalizeName(str){
-  if(!str) return "";
-  return str.trim().toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
-    .replace(/\s+/g," ");
-}
-function isVIP(){ return localStorage.getItem("isVIP")==="true"; }
-function hasIdentification(){ return !!localStorage.getItem("guestName"); }
-
-function applyVIPVisibility(){
-  const vipBlocks = document.querySelectorAll(".vip-only");
-  const nonVipBlocks = document.querySelectorAll(".non-vip-only");
-  if(isVIP()){
-    vipBlocks.forEach(el=>el.style.display="");
-    nonVipBlocks.forEach(el=>el.style.display="none");
-  }else{
-    vipBlocks.forEach(el=>el.style.display="none");
-    nonVipBlocks.forEach(el=>el.style.display="");
-  }
-}
-
-function openLogin(){ const o=document.getElementById("guestLoginOverlay"); if(o) o.style.display="flex"; }
-function closeLogin(){ const o=document.getElementById("guestLoginOverlay"); if(o) o.style.display="none"; }
-function doLogout(){
-  localStorage.removeItem("guestName");
-  localStorage.removeItem("isVIP");
-  openLogin(); applyVIPVisibility();
-  const logoutBtn=document.getElementById("guestLogoutBtn"); if(logoutBtn) logoutBtn.style.display="none";
-}
-function submitGuest(){
-  const first = document.getElementById("guestFirst");
-  const last  = document.getElementById("guestLast");
-  const err   = document.getElementById("guestError");
-  if(!first || !last) return;
-
-  const full = (first.value||"")+" "+(last.value||"");
-  const norm = normalizeName(full);
-
-  if(!first.value.trim() || !last.value.trim()){
-    if(err){ err.innerHTML="Please enter both fields.<br>Veuillez remplir les deux champs.<br>Inserisci nome e cognome."; err.style.display="block"; }
-    return;
-  }
-  const VIP_SET = new Set(VIP_LIST.map(n => normalizeName(n)));
-const vip = VIP_SET.has(norm);
-
-  localStorage.setItem("guestName", full.trim());
-  localStorage.setItem("isVIP", vip ? "true" : "false");
-  closeLogin(); applyVIPVisibility();
-}
-
-document.addEventListener("DOMContentLoaded",()=>{
-  const confirmBtn=document.getElementById("guestConfirmBtn");
-  const logoutBtn =document.getElementById("guestLogoutBtn");
-  const overlay   =document.getElementById("guestLoginOverlay");
-  const err       =document.getElementById("guestError");
-
-  if(hasIdentification()){
-    if(overlay) overlay.style.display="none";
-    if(logoutBtn){ logoutBtn.style.display="inline-block"; logoutBtn.addEventListener("click", doLogout); }
-  }else{
-    if(overlay) overlay.style.display="flex";
-    if(err) err.style.display="none";
-    if(logoutBtn){ logoutBtn.style.display="none"; logoutBtn.addEventListener("click", doLogout); }
-  }
-  if(confirmBtn){ confirmBtn.addEventListener("click", e=>{ e.preventDefault(); submitGuest(); }); }
-
-  applyVIPVisibility();
-});
 </script>
 </body>
 </html>
